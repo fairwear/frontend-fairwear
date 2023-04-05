@@ -1,6 +1,6 @@
 :root {
   font-family: font "Inter", sans-serif !important;
-
+  
   color-scheme: light dark;
   color: rgba(36, 36, 36, 0.87) !important;
   background-color: #e9e9e9;
@@ -11,7 +11,7 @@
   -webkit-text-size-adjust: 100%;
 }
 
-li {
+/* li {
   font-family: font "Inter", sans-serif !important;
 }
 
@@ -57,4 +57,4 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
-}
+} */

@@ -1,26 +1,27 @@
-.Header-label {
-  font-size: 5em;
-  font-weight: 700;
-  margin: 0;
-  padding: 0;
-  text-align: center;
-  text-transform: uppercase;
-  letter-spacing: 5px;
+.slider-content {
+  font-family: "Inter";
+  font-size: 2em;
+  font-weight: 300;
+  color: rgba(36, 36, 36, 0.87);
 }
 
-.Header {
-  margin-top: 12px;
-  width: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  display: flex;
-  gap: 30px;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+.header-text {
+  font-family: "Inter";
+  font-size: 1.2em;
+  color: rgba(36, 36, 36, 0.87);
+  font-weight: 400;
 }
-.fw {
-  background-image: url(./FW200.svg);
-  width: 100%;
+
+@media screen and (max-width: 900px) {
+  .slider-content,
+  .header-text {
+    font-size: 1.2em;
+  }
+}
+
+@media screen and (max-width: 545px) {
+  .slider-content,
+  .header-text {
+    font-size: 1em;
+  }
 }
