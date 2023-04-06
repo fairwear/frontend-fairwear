@@ -1,0 +1,27 @@
+.slider-content {
+  font-family: "Inter";
+  font-size: 2em;
+  font-weight: 300;
+  color: rgba(36, 36, 36, 0.87);
+}
+
+.header-text {
+  font-family: "Inter";
+  font-size: 1.2em;
+  color: rgba(36, 36, 36, 0.87);
+  font-weight: 400;
+}
+
+@media screen and (max-width: 900px) {
+  .slider-content,
+  .header-text {
+    font-size: 1.2em;
+  }
+}
+
+@media screen and (max-width: 545px) {
+  .slider-content,
+  .header-text {
+    font-size: 1em;
+  }
+}

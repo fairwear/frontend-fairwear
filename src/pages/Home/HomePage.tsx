@@ -1,35 +1,18 @@
-import { useState } from "react";
-import reactLogo from "@assets/svg/react.svg";
+import React from "react";
 import "./HomePage.css";
+import Header from "../../components/header";
+import MovingText from '../../components/MovingText';
+import fw from '../../components/FW200.svg'
 
 const HomePage = () => {
-	const [count, setCount] = useState(0);
 	return (
 		<div className='App'>
-			<div>
-				<a href='https://vitejs.dev' target='_blank'>
-					<img src='/vite.svg' className='logo' alt='Vite logo' />
-				</a>
-				<a href='https://reactjs.org' target='_blank'>
-					<img
-						src={reactLogo}
-						className='logo react'
-						alt='React logo'
-					/>
-				</a>
+			<Header />
+			<div className="image-container">
+				<img src={fw} alt='fw' className="logo-pic" />
 			</div>
-			<h1>Vite + React</h1>
-			<div className='card'>
-				<button onClick={() => setCount((count) => count + 1)}>
-					count is {count}
-				</button>
-				<p>
-					Edit <code>src/HomePage.tsx</code> and save to test HMR
-				</p>
-			</div>
-			<p className='read-the-docs'>
-				Click on the Vite and React logos to learn more
-			</p>
+			<MovingText />
+
 		</div>
 	);
 };
