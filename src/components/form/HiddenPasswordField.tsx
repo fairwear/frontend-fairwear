@@ -1,0 +1,49 @@
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import { IconButton } from "@mui/material";
+import { useState } from "react";
+import FormTextField from "./FormTextField";
+
+interface HiddenPasswordFieldProps {
+    title?: string;
+    autoComplete?: string;
+    name: string;
+    className?: string;
+    enableEnterSubmit?: boolean;
+    enterSubmitAction?: () => void;
+    inputRef?: React.RefObject<HTMLInputElement>;
+}
+
+const HiddenPasswordField = ({
+    inputRef,
+    title,
+    autoComplete = "off",
+    name,
+    className,
+    enableEnterSubmit,
+    enterSubmitAction,
+}: HiddenPasswordFieldProps) => {
+    const [hidden, setHidden] = useState<boolean>(true);
+    const changeVisibility = () => setHidden(!hidden);
+
+    return (
+        <FormTextField
+            title={title}
+            name={name}
+            inputRef={inputRef}
+            label={hidden ? "Password" : "Password (visible)"}
+            type={hidden ? "password" : "text"}
+            autoComplete={autoComplete}
+            enableEnterSubmit={enableEnterSubmit}
+            enterSubmitAction={enterSubmitAction}
+            className={className}
+            endIcon={
+                <IconButton onClick={changeVisibility}>
+                    {hidden ? <VisibilityIcon /> : <VisibilityOffIcon />}
+                </IconButton>
+            }
+        />
+    );
+};
+
+export default HiddenPasswordField;
