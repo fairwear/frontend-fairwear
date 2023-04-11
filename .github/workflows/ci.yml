@@ -15,7 +15,7 @@ env:
   REMOTE_PORT: 12579
   REMOTE_USERNAME: ${{ secrets.REMOTE_USERNAME }}
   REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
-  REMOTE_PRIVATE_KEY : ${{ secrets.REMOTE_PRIVATE_KEY }}
+  REMOTE_PRIVATE_KEY: ${{ secrets.REMOTE_PRIVATE_KEY }}
   DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
   DOCKER_ACCESS_TOKEN: ${{ secrets.DOCKER_ACCESS_TOKEN }}
 
@@ -46,9 +46,9 @@ jobs:
           sh build.sh
 
   deploy:
-    # if: ${{ github.event_name != 'pull_request' }}
+    if: ${{ github.event_name != 'pull_request' }}
     runs-on: ubuntu-latest
-    needs: [ build ]
+    needs: [build]
 
     steps:
       - name: Check out source code
@@ -70,6 +70,6 @@ jobs:
           host: ${{env.REMOTE_HOST}}
           username: ${{env.REMOTE_USERNAME}}
           port: ${{env.REMOTE_PORT}}
-          key: ${{env.REMOTE_KEY}}
+          key: ${{env.REMOTE_PRIVATE_KEY}}
           script: |
             sh start.sh
