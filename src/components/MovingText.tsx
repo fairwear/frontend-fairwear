@@ -4,8 +4,6 @@ import { Splide, SplideSlide } from "@splidejs/react-splide";
 import { AutoScroll } from "@splidejs/splide-extension-auto-scroll";
 import "./Components.css";
 export default function MovingText() {
-
-
   return (
     <div
       style={{
@@ -28,27 +26,19 @@ export default function MovingText() {
             speed: 0.78,
           },
         }}
-        extensions={{ AutoScroll }}>
+        extensions={{ AutoScroll }}
+      >
         <SplideSlide>
-          <h2
-            className="slider-content" >
-            - Scan bar codes -
-          </h2>
+          <h2 className="slider-content">- Scan bar codes -</h2>
         </SplideSlide>
         <SplideSlide>
-          <h2 className="slider-content" >
-            - Get information -
-          </h2>
+          <h2 className="slider-content">- Get information -</h2>
         </SplideSlide>
         <SplideSlide>
-          <h2 className="slider-content" >
-            - Save your time -
-          </h2>
+          <h2 className="slider-content">- Save your time -</h2>
         </SplideSlide>
         <SplideSlide>
-          <h2 className="slider-content" >
-            - Save the planet -
-          </h2>
+          <h2 className="slider-content">- Save the planet -</h2>
         </SplideSlide>
       </Splide>
     </div>
