@@ -18,15 +18,15 @@ const BrandSection = () => {
 	};
 
 	return (
-		<div className='brand-section-container'>
-			<div className='title-container'>
-				<Typography variant='h1'>Top Brands</Typography>
-				<Typography variant='subtitle1'>
+		<div className="brand-section-container">
+			<div className="title-container">
+				<Typography variant="h1">Top Brands</Typography>
+				<Typography variant="subtitle1">
 					Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 				</Typography>
 			</div>
 			{brands.map((brand) => (
-				<div key={brand.id} className='brand-container'>
+				<div key={brand.id} className="brand-container">
 					{/* temp solution */}
 					{brand.id}
 				</div>
