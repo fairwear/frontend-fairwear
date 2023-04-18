@@ -3,7 +3,7 @@ import "@fontsource/inter/400.css";
 import "@fontsource/inter/500.css";
 import "@fontsource/inter/600.css";
 import "@fontsource/inter/700.css";
-import { colors, createTheme } from "@mui/material";
+import { createTheme } from "@mui/material";
 
 const AppTheme = createTheme({
   components: {
@@ -53,52 +53,44 @@ const AppTheme = createTheme({
     fontWeightBold: "600",
     h1: {
       fontSize: "36px",
-      lineHeight: "140%",
+      lineHeight: "120%",
       fontWeight: "700",
-      color: "#181D2B",
     },
     h2: {
       fontSize: "28px",
-      lineHeight: "140%",
+      lineHeight: "120%",
       fontWeight: "700",
-      color: "#181D2B",
     },
     h3: {
       fontSize: "18px",
-      lineHeight: "140%",
+      lineHeight: "120%",
       fontWeight: "500",
-      color: "#181D2B",
     },
     h5: {
       fontSize: "15px",
-      lineHeight: "140%",
+      lineHeight: "120%",
       fontWeight: "500",
-      color: "#181D2B",
     },
     h6: {
-      fontSize: "13px",
-      lineHeight: "140%",
+      fontSize: "14px",
+      lineHeight: "120%",
       fontWeight: "500",
-      color: "#181D2B",
     },
     body1: {
       fontSize: "16px",
-      lineHeight: "140%",
+      lineHeight: "120%",
       fontWeight: "400",
-      color: "#181D2B",
     },
     body2: {
       fontSize: "14px",
-      lineHeight: "140%",
+      lineHeight: "120%",
       fontWeight: "400",
-      color: "#181D2B",
     },
 
     subtitle1: {
       fontSize: "12px",
-      lineHeight: "140%",
+      lineHeight: "120%",
       fontWeight: "400",
-      color: "#181D2B",
     },
   },
 });

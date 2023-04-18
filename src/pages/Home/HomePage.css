@@ -12,7 +12,6 @@
 }
 
 .logo-pic {
-  background-image: url(./FW200.svg);
   max-width: calc(100vw - 2em);
   margin-top: 80px;
 }
