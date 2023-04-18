@@ -141,12 +141,14 @@ export default function PrimarySearchAppBar() {
       onClose={handleMobileMenuClose}
     >
       {/* <MenuItem onClick={handleProfileMenuOpen}> */}
-      <Button>
-        <h2 className="header-text">Login</h2>
+      <Button onClick={handleLoginDialog}>
+        <h2 className="header-text">Log in</h2>
       </Button>
       {/* </MenuItem> */}
       {/* <MenuItem onClick={handleProfileMenuOpen}> */}
-      <h2 className="header-text">Sign Up</h2>
+      <Button onClick={handleSignUpDialog}>
+        <h2 className="header-text">Sign Up</h2>
+      </Button>
       {/* </MenuItem> */}
     </Menu>
   );

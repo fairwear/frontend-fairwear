@@ -51,41 +51,38 @@ export default function SignUpDialog(props: Props) {
             <Typography variant="h1" className="dialog-box-label">Sign Up
             </Typography>
             <FormTextField
-              title="Name"
+              label="Name"
               name="name"
-              placeholder="Name"
               value={formik.values.name}
             />
 
             <FormTextField
-              title="Surname"
+              label="Surname"
               name="surname"
-              placeholder="Surname"
               value={formik.values.surname}
             />
 
             <FormTextField
-              title="Username"
+              label="Username"
               name="username"
-              placeholder="Username"
+
               value={formik.values.username}
             />
 
             <FormTextField
-              title="Email"
+              label="Email"
               name="email"
-              placeholder="Email"
               value={formik.values.email}
             />
 
             <HiddenPasswordField
-              title="Password"
-              name="password"
-            />
+              label="Password"
+              name="password" variant={"outlined"} />
 
             <HiddenPasswordField
-              title="Re-enter Password"
+              label="Re-enter password"
               name="reEnterPassword"
+              variant={"outlined"}
             />
 
             <div className="button-container">

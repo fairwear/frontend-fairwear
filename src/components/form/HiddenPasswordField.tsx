@@ -1,10 +1,10 @@
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
-import { IconButton } from "@mui/material";
+import { IconButton, OutlinedTextFieldProps } from "@mui/material";
 import { useState } from "react";
 import FormTextField from "./FormTextField";
 
-interface HiddenPasswordFieldProps {
+interface HiddenPasswordFieldProps extends OutlinedTextFieldProps {
     title?: string;
     autoComplete?: string;
     name: string;
@@ -22,6 +22,7 @@ const HiddenPasswordField = ({
     className,
     enableEnterSubmit,
     enterSubmitAction,
+    ...props
 }: HiddenPasswordFieldProps) => {
     const [hidden, setHidden] = useState<boolean>(true);
     const changeVisibility = () => setHidden(!hidden);
@@ -31,7 +32,7 @@ const HiddenPasswordField = ({
             title={title}
             name={name}
             inputRef={inputRef}
-            label={hidden ? "Password" : "Password (visible)"}
+            label={props.label || "Password"}
             type={hidden ? "password" : "text"}
             autoComplete={autoComplete}
             enableEnterSubmit={enableEnterSubmit}
