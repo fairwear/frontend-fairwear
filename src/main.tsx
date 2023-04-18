@@ -3,11 +3,13 @@ import ReactDOM from "react-dom/client";
 import App from "./AppRouter";
 import "./index.css";
 import { BrowserRouter } from "react-router-dom";
+import { ThemeProvider } from "@emotion/react";
+import AppTheme from "./AppTheme";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-  <React.StrictMode>
-    <BrowserRouter>
+  <BrowserRouter>
+    <ThemeProvider theme={AppTheme}>
       <App />
-    </BrowserRouter>
-  </React.StrictMode>
+    </ThemeProvider>
+  </BrowserRouter>
 );

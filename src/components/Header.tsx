@@ -12,6 +12,9 @@ import Toolbar from "@mui/material/Toolbar";
 import { alpha, styled } from "@mui/material/styles";
 import * as React from "react";
 import "./Components.css";
+import { Button } from "@mui/material";
+import LoginDialog from "./LoginDialog";
+import SignUpDialog from "./SignUpDialog";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -32,7 +35,6 @@ const Search = styled("div")(({ theme }) => ({
 const SearchIconWrapper = styled("div")(({ theme }) => ({
   padding: theme.spacing(0, 2),
   height: "100%",
-
   position: "absolute",
   pointerEvents: "none",
   display: "flex",
@@ -56,6 +58,8 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function PrimarySearchAppBar() {
+  const [loginDialog, setLoginDialog] = React.useState(false);
+  const [signUpDialog, setSignUpDialog] = React.useState(false);
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
     React.useState<null | HTMLElement>(null);
@@ -69,6 +73,23 @@ export default function PrimarySearchAppBar() {
 
   const handleMobileMenuClose = () => {
     setMobileMoreAnchorEl(null);
+  };
+
+  const handleLoginDialog = () => {
+    setLoginDialog(true);
+  };
+
+  const handleLoginDialogClose = () => {
+    setLoginDialog(false);
+    console.log("Login Dialog Closed");
+  };
+
+  const handleSignUpDialog = () => {
+    setSignUpDialog(true);
+  };
+  const handleSignUpDialogClose = () => {
+    setSignUpDialog(false);
+    console.log("Sign Up Dialog Closed");
   };
 
   const handleMenuClose = () => {
@@ -119,12 +140,16 @@ export default function PrimarySearchAppBar() {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem onClick={handleProfileMenuOpen}>
-        <h2 className="header-text">Login</h2>
-      </MenuItem>
-      <MenuItem onClick={handleProfileMenuOpen}>
+      {/* <MenuItem onClick={handleProfileMenuOpen}> */}
+      <Button onClick={handleLoginDialog}>
+        <h2 className="header-text">Log in</h2>
+      </Button>
+      {/* </MenuItem> */}
+      {/* <MenuItem onClick={handleProfileMenuOpen}> */}
+      <Button onClick={handleSignUpDialog}>
         <h2 className="header-text">Sign Up</h2>
-      </MenuItem>
+      </Button>
+      {/* </MenuItem> */}
     </Menu>
   );
 
@@ -169,8 +194,22 @@ export default function PrimarySearchAppBar() {
               marginRight: "16px",
             }}
           >
-            <h2 className="header-text">Login</h2>
-            <h2 className="header-text">Sign Up</h2>
+            <Button onClick={handleLoginDialog}>
+              <h2 className="header-text">Login</h2>
+            </Button>
+            <LoginDialog
+              toSignUp={handleSignUpDialog}
+              open={loginDialog}
+              handleClose={handleLoginDialogClose}
+            />
+            <Button onClick={handleSignUpDialog}>
+              <h2 className="header-text">Sign Up</h2>
+            </Button>
+            <SignUpDialog
+              toLogin={handleLoginDialog}
+              open={signUpDialog}
+              handleClose={handleSignUpDialogClose}
+            />
           </Box>
           <Box sx={{ display: { xs: "flex", md: "none" } }}>
             <IconButton
