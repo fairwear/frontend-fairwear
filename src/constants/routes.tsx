@@ -1,6 +1,6 @@
 import { HomeRounded } from "@mui/icons-material";
 import RouteGroup from "../models/routes/RouteGroup";
-import HomePage from "../pages/home/HomePage";
+import HomePage from "@pages/home/HomePage";
 
 const routes: RouteGroup[] = [
 	{
