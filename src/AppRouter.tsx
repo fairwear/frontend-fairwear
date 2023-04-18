@@ -2,7 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import "./AppRouter.css";
 import routes from "./constants/routes";
 import RouteItem from "./models/routes/RouteItem";
-import Header from "./components/Header";
+import Header from "./components/common/Header";
 
 function App() {
   return (

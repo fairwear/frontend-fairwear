@@ -2,7 +2,7 @@ import React from "react";
 import "@splidejs/splide/css/skyblue";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import { AutoScroll } from "@splidejs/splide-extension-auto-scroll";
-import "./Components.css";
+import "../Components.css";
 export default function MovingText() {
   return (
     <div
