@@ -1,0 +1,21 @@
+.brand-component-container {
+	display: flex;
+	gap: 32px;
+	width: 100%;
+}
+
+.brand-component-container .brand-component-image {
+	width: 100%;
+}
+
+.brand-component-container .brand-component-text-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.brand-component-container .brand-component-text {
+	display: flex;
+	gap: 16px;
+	width: 100%;
+}

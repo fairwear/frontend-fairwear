@@ -1,23 +1,47 @@
 .App {
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 100%;
 }
 @media screen and (max-width: 900px) {
-  .logo-pic {
-    max-width: calc(100vw - 5em) !important;
-  }
+	.logo-pic {
+		max-width: calc(100vw - 5em) !important;
+	}
 }
 
 .logo-pic {
-  max-width: calc(100vw - 2em);
-  margin-top: 80px;
+	max-width: calc(100vw - 2em);
+	margin-top: 80px;
 }
 .image-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+}
+
+.brand-section-container {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	box-sizing: border-box;
+	padding: 64px;
+	margin: 48px 0px;
+	gap: 80px;
+	width: 100%;
+}
+
+.brand-section-container .title-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 16px;
+	width: 100%;
+}
+
+.title-container > * {
+  color: #222222;
 }
