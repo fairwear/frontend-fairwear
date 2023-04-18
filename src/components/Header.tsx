@@ -204,7 +204,7 @@ export default function PrimarySearchAppBar() {
             />
             <Button onClick={handleSignUpDialog}>
               <h2 className="header-text">Sign Up</h2>
-            </Button >
+            </Button>
             <SignUpDialog
               toLogin={handleLoginDialog}
               open={signUpDialog}

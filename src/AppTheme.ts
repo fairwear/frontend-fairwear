@@ -103,20 +103,20 @@ const AppTheme = createTheme({
   },
 });
 declare module "@mui/material/styles/createPalette" {
-	interface Palette {
-		specific: Palette["primary"];
-		neutral: Palette["primary"];
-		error: Palette["primary"];
-		red: Palette["grey"];
-		green: Palette["grey"];
-	}
+  interface Palette {
+    specific: Palette["primary"];
+    neutral: Palette["primary"];
+    error: Palette["primary"];
+    red: Palette["grey"];
+    green: Palette["grey"];
+  }
 
-	interface PaletteOptions {
-		specific?: PaletteOptions["primary"];
-		neutral?: PaletteOptions["primary"];
-		error?: PaletteOptions["primary"];
-		red?: PaletteOptions["grey"];
-		green?: PaletteOptions["grey"];
+  interface PaletteOptions {
+    specific?: PaletteOptions["primary"];
+    neutral?: PaletteOptions["primary"];
+    error?: PaletteOptions["primary"];
+    red?: PaletteOptions["grey"];
+    green?: PaletteOptions["grey"];
   }
 }
 

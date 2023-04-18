@@ -48,7 +48,8 @@ export default function SignUpDialog(props: Props) {
       >
         {(formik: FormikProps<SignUpRequest>) => (
           <Form className="login-form">
-            <Typography variant="h1" className="dialog-box-label">Sign Up
+            <Typography variant="h1" className="dialog-box-label">
+              Sign Up
             </Typography>
             <FormTextField
               label="Name"
@@ -65,7 +66,6 @@ export default function SignUpDialog(props: Props) {
             <FormTextField
               label="Username"
               name="username"
-
               value={formik.values.username}
             />
 
@@ -77,7 +77,9 @@ export default function SignUpDialog(props: Props) {
 
             <HiddenPasswordField
               label="Password"
-              name="password" variant={"outlined"} />
+              name="password"
+              variant={"outlined"}
+            />
 
             <HiddenPasswordField
               label="Re-enter password"
@@ -91,9 +93,7 @@ export default function SignUpDialog(props: Props) {
                 variant="outlined"
                 onClick={handleSwitch}
               >
-                <Typography
-                  className="button-text"
-                >Log in</Typography>
+                <Typography className="button-text">Log in</Typography>
               </Button>
               <Button className="login" variant="contained" type="submit">
                 <Typography className="login button-text">Sign Up</Typography>
