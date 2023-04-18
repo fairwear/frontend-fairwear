@@ -25,7 +25,7 @@
 			"@models/*": ["src/models/*"],
 			"@pages/*": ["src/pages/*"],
 			"@redux/*": ["src/redux/*"],
-			"@utils/*": ["src/util"],
+			"@utils/*": ["src/util/*"],
 			"@services/*": ["src/services/*"]
 		}
 	},
