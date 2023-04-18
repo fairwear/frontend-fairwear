@@ -5,11 +5,18 @@ import "./index.css";
 import { BrowserRouter } from "react-router-dom";
 import { ThemeProvider } from "@emotion/react";
 import AppTheme from "./AppTheme";
+import setupAxiosInterceptors from "@services/axiosInterceptors";
 
-ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-  <BrowserRouter>
-    <ThemeProvider theme={AppTheme}>
-      <App />
-    </ThemeProvider>
-  </BrowserRouter>
+const root = ReactDOM.createRoot(
+	document.getElementById("root") as HTMLElement
+);
+
+setupAxiosInterceptors();
+
+root.render(
+	<BrowserRouter>
+		<ThemeProvider theme={AppTheme}>
+			<App />
+		</ThemeProvider>
+	</BrowserRouter>
 );
