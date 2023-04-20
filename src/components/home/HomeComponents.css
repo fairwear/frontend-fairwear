@@ -13,7 +13,7 @@
 		url(../../assets/images/fairwear-home-bg.jpg);
 
 	box-sizing: border-box;
-	padding: 0px 64px;
+	padding: 0px 72px;
 	width: 100vw;
 	height: 900px;
 }
@@ -27,7 +27,7 @@
 }
 
 .cta-container .cta-title {
-	max-width: 50% !important;
+	max-width: 40% !important;
 	color: #ffffff;
 }
 
@@ -60,4 +60,34 @@
 
 	text-transform: none;
 	padding: 12px 16px;
+}
+
+.brand-container {
+	display: flex;
+	justify-content: center;
+	max-width: 1400px;
+	flex-wrap: wrap;
+	/* width: 100%; */
+	gap: 32px;
+}
+
+@media (max-width: 768px) {
+	.brand-container {
+		flex-direction: column;
+		align-items: center;
+	}
+
+	.brand-container > * {
+		flex-direction: row;
+		width: 100% !important;
+	}
+	.brand-container > * > * {
+		flex-direction: row !important;
+	}
+}
+
+.brand-component-outer-container {
+	display: flex;
+	flex-wrap: wrap;
+	width: 45%;
 }

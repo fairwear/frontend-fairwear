@@ -88,6 +88,11 @@ const AppTheme = createTheme({
 		},
 
 		subtitle1: {
+			fontSize: "14px",
+			lineHeight: "120%",
+			fontWeight: "400",
+		},
+		subtitle2: {
 			fontSize: "12px",
 			lineHeight: "120%",
 			fontWeight: "400",
