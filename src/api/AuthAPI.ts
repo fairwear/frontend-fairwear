@@ -13,7 +13,7 @@ const AuthAPI = {
 		} = await axios.post(`${baseUrl}/login`, request);
 
 		let access_token = res.accessToken;
-        console.log(access_token);
+		console.log(access_token);
 
 		if (access_token) {
 			localStorage.setItem("token", access_token);

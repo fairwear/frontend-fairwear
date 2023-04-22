@@ -100,8 +100,7 @@ export default function SignUpDialog(props: Props) {
 							>
 								<Typography className="button-text">Log in</Typography>
 							</Button>
-							<Button className="login" variant="contained" type="submit"
-							>
+							<Button className="login" variant="contained" type="submit">
 								<Typography className="login button-text">Sign Up</Typography>
 							</Button>
 						</div>

@@ -12,7 +12,7 @@ const getStatus =
 		if (status.isLoggedIn) {
 			let response = await AuthAPI.getProfile();
 			dispatch(commonActions.setStatus(status));
-            console.log(response);
+			console.log(response);
 			dispatch(commonActions.setUserInfo({ userInfo: response }));
 		} else {
 			dispatch(commonActions.setStatus(status));
