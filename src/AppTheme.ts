@@ -7,6 +7,27 @@ import { createTheme } from "@mui/material";
 
 const AppTheme = createTheme({
 	components: {
+		MuiAccordion: {
+			styleOverrides: {
+				root: {
+					width: "100%",
+					borderRadius: "4px",
+					"::before": {
+						backgroundColor: "transparent",
+					},
+					"&.stage-accordion-container": {
+						display: "flex",
+						width: "100%",
+						"&.MuiCollapse-entered": {
+							display: "flex",
+						},
+					},
+					"&.MuiAccordionSummary-content": {
+						margin: "10px",
+					},
+				},
+			},
+		},
 		MuiButton: {
 			styleOverrides: {
 				contained: {
