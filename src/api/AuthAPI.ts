@@ -1,6 +1,7 @@
 import apiEndpoints from "@constants/apiEndpoints";
 import LoginRequest from "@models/auth/LoginRequest";
 import SignUpRequest from "@models/auth/SignUpRequest";
+import StatusResponse from "@models/auth/StatusResponse";
 import axios from "axios";
 
 const baseUrl = apiEndpoints.auth;
