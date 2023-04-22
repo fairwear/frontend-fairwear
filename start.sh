@@ -1,3 +1,5 @@
 #!/bin/bash
-docker build  -t fairwear/fairwear-frontend --platform linux/amd64 .
-docker push fairwear/fairwear-frontend
+
+docker pull fairwear/fairwear-backend
+docker pull fairwear/fairwear-frontend
+docker-compose up -d
