@@ -1,0 +1,62 @@
+.brand-component-container {
+	display: flex;
+	gap: 32px;
+
+	flex: 1 0 21%; /* explanation below */
+	border: 1px solid #000000;
+	border-radius: 8px;
+	padding: 16px;
+	box-sizing: border-box;
+}
+
+@media (max-width: 1048px) {
+	.brand-component-container {
+		flex: 1 0 100%;
+		flex-direction: column;
+		align-items: center;
+	}
+
+	.brand-component-container
+		.brand-component-text-container
+		.brand-component-button-container {
+		justify-content: center;
+	}
+
+	.brand-component-container
+		.brand-component-text-container
+		.brand-component-image {
+		min-width: 20%;
+	}
+}
+
+.brand-component-container .brand-component-image {
+	/* width: 100%; */
+	max-width: 200px;
+	min-width: 40%;
+}
+
+.brand-component-container .brand-component-text-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	gap: 16px;
+}
+
+.brand-component-container .brand-component-text {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+	width: 100%;
+}
+
+.brand-component-text-container .brand-component-button {
+	width: fit-content;
+	text-transform: none;
+	padding: 8px 16px;
+}
+
+.brand-component-text-container .brand-component-button-container {
+	display: flex;
+	justify-content: flex-end;
+	width: 100%;
+}
