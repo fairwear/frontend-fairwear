@@ -16,6 +16,7 @@
 		"@fontsource/inter": "^4.5.15",
 		"@mui/icons-material": "^5.11.16",
 		"@mui/material": "^5.11.10",
+		"@reduxjs/toolkit": "^1.9.5",
 		"@splidejs/react-splide": "^0.7.12",
 		"@splidejs/splide": "^4.1.4",
 		"@splidejs/splide-extension-auto-scroll": "^0.5.3",
@@ -25,6 +26,7 @@
 		"http-proxy-middleware": "^2.0.6",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
+		"react-redux": "^8.0.5",
 		"react-router-dom": "^6.8.1",
 		"yup": "^1.0.2"
 	},

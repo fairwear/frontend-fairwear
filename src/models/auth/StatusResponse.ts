@@ -1,0 +1,3 @@
+interface StatusResponse {
+	isLoggedIn: boolean;
+}

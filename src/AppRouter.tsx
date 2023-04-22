@@ -1,11 +1,25 @@
+import common from "@redux/common";
+import { useAppSelector } from "@redux/store/hooks";
+import { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import "./AppRouter.css";
-import routes from "./constants/routes";
-import RouteItem from "./models/routes/RouteItem";
 import Header from "./components/common/Header";
 import SubHeader from "./components/common/SubHeader";
+import routes from "./constants/routes";
+import RouteItem from "./models/routes/RouteItem";
 
 function App() {
+	const isLoggedIn = useAppSelector((state) => state.common.isLoggedIn);
+	useEffect(() => {
+		common.getStatus();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
+
+	useEffect(() => {
+		common.getStatus();
+		console.log(isLoggedIn);
+	}, [isLoggedIn]);
+
 	return (
 		<div
 			style={{

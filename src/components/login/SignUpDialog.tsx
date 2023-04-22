@@ -5,6 +5,7 @@ import { Form, Formik, FormikProps } from "formik";
 import * as yup from "yup";
 import FormTextField from "../form/FormTextField";
 import "../Components.css";
+import AuthAPI from "@api/AuthAPI";
 interface Props {
 	open: boolean;
 	handleClose: () => void;
@@ -19,7 +20,7 @@ export default function SignUpDialog(props: Props) {
 		toLogin();
 	};
 
-	const handleSubmit = (values: SignUpRequest) => {
+	const handleSubmit = async (values: SignUpRequest) => {
 		let request: SignUpRequest = {
 			username: values.username,
 			password: values.password,
@@ -28,9 +29,13 @@ export default function SignUpDialog(props: Props) {
 			name: values.name,
 			surname: values.surname,
 		};
-		console.log(request);
-		console.log(values);
-		handleClose();
+		let res = await AuthAPI.signup(request);
+		console.log(res);
+
+		// handleClose();
+		// setTimeout(() => {
+		// 	window.location.reload();
+		// }, 300);
 	};
 
 	return (
@@ -95,7 +100,8 @@ export default function SignUpDialog(props: Props) {
 							>
 								<Typography className="button-text">Log in</Typography>
 							</Button>
-							<Button className="login" variant="contained" type="submit">
+							<Button className="login" variant="contained" type="submit"
+							>
 								<Typography className="login button-text">Sign Up</Typography>
 							</Button>
 						</div>
