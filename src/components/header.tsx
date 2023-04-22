@@ -11,6 +11,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Toolbar from '@mui/material/Toolbar';
 import { alpha, styled } from '@mui/material/styles';
 import * as React from 'react';
+import {AuthAPI} from '@api/AuthAPI'
 import './Components.css';
 
 const Search = styled('div')(({ theme }) => ({
@@ -63,6 +64,12 @@ export default function PrimarySearchAppBar() {
 
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+    const isLoggedIn = useAppSelector((state)=>state.common.isLoggedIn)
+    
+    const handleLogout = async () => {
+        await AuthAPI.logout()
+        window.location.reload()
+    }
 
     const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorEl(event.currentTarget);
@@ -104,7 +111,7 @@ export default function PrimarySearchAppBar() {
     );
 
     const mobileMenuId = 'primary-search-account-menu-mobile';
-    const renderMobileMenu = (
+    const   renderMobileMenu = (
         <Menu
             anchorEl={mobileMoreAnchorEl}
             anchorOrigin={{
@@ -194,3 +201,7 @@ export default function PrimarySearchAppBar() {
         </Box>
     );
 }
+function useAppSelector(arg0: (state: any) => any) {
+    throw new Error('Function not implemented.');
+}
+
