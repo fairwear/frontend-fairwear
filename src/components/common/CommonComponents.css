@@ -1,7 +1,7 @@
 .subheader-container {
 	margin: 32px 0px;
 }
-.menu-container{
+.menu-container {
 	display: flex;
 	flex-direction: column;
 }

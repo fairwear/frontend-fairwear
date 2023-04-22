@@ -14,12 +14,11 @@ import * as React from "react";
 import LoginDialog from "@components/login/LoginDialog";
 import SignUpDialog from "@components/login/SignUpDialog";
 import "../Components.css";
-import "./CommonComponents.css"
+import "./CommonComponents.css";
 import AuthAPI from "@api/AuthAPI";
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { useAppSelector } from "@redux/store/hooks";
 import { Opacity } from "@mui/icons-material";
-
 
 const Search = styled("div")(({ theme }) => ({
 	position: "relative",
@@ -138,7 +137,6 @@ export default function PrimarySearchAppBar() {
 	const mobileMenuId = "primary-search-account-menu-mobile";
 	const renderMobileMenu = (
 		<Menu
-
 			anchorEl={mobileMoreAnchorEl}
 			anchorOrigin={{
 				vertical: "top",
@@ -153,39 +151,36 @@ export default function PrimarySearchAppBar() {
 			open={isMobileMenuOpen}
 			onClose={handleMobileMenuClose}
 		>
-
 			{!isLoggedIn ? (
-				<div className="menu-container" >
-					<Button sx={{ textTransform: 'none' }} onClick={handleLoginDialog}>
+				<div className="menu-container">
+					<Button sx={{ textTransform: "none" }} onClick={handleLoginDialog}>
 						<h2 className="header-text">Log in</h2>
 					</Button>
 					<LoginDialog
 						toSignUp={handleSignUpDialog}
 						open={loginDialog}
-						handleClose={handleLoginDialogClose} />
+						handleClose={handleLoginDialogClose}
+					/>
 
-					<Button sx={{ textTransform: 'none' }}
-						onClick={handleSignUpDialog}>
+					<Button sx={{ textTransform: "none" }} onClick={handleSignUpDialog}>
 						<h2 className="header-text">Sign Up</h2>
 					</Button>
 					<SignUpDialog
 						toLogin={handleLoginDialog}
 						open={signUpDialog}
-						handleClose={handleSignUpDialogClose} />
+						handleClose={handleSignUpDialogClose}
+					/>
 				</div>
 			) : (
-				<div className="menu-container" >
+				<div className="menu-container">
 					<Button onClick={handleLogout}>
 						<h2 className="header-text">Log out</h2>
 					</Button>
 					<Button onClick={handleProfileMenuOpen}>
 						<AccountCircleIcon sx={{ color: "#222222" }} />
 					</Button>
-
 				</div>
-			)
-			}
-
+			)}
 		</Menu>
 	);
 
@@ -221,7 +216,6 @@ export default function PrimarySearchAppBar() {
 						/>
 					</Search>
 
-
 					<Box sx={{ flexGrow: 1 }} />
 					<Box
 						sx={{
@@ -233,22 +227,30 @@ export default function PrimarySearchAppBar() {
 						}}
 					>
 						{!isLoggedIn ? (
-							<><Button
-								style={{ textTransform: "none" }}
-								onClick={handleLoginDialog}>
-								<h2 className="header-text">Login</h2>
-							</Button>
+							<>
+								<Button
+									style={{ textTransform: "none" }}
+									onClick={handleLoginDialog}
+								>
+									<h2 className="header-text">Login</h2>
+								</Button>
 								<LoginDialog
 									toSignUp={handleSignUpDialog}
 									open={loginDialog}
-									handleClose={handleLoginDialogClose} /><Button
-										style={{ textTransform: "none" }}
-										onClick={handleSignUpDialog}>
+									handleClose={handleLoginDialogClose}
+								/>
+								<Button
+									style={{ textTransform: "none" }}
+									onClick={handleSignUpDialog}
+								>
 									<h2 className="header-text">Sign Up</h2>
-								</Button><SignUpDialog
+								</Button>
+								<SignUpDialog
 									toLogin={handleLoginDialog}
 									open={signUpDialog}
-									handleClose={handleSignUpDialogClose} /></>
+									handleClose={handleSignUpDialogClose}
+								/>
+							</>
 						) : (
 							<Box
 								sx={{
@@ -257,20 +259,24 @@ export default function PrimarySearchAppBar() {
 									alignItems: "center",
 									justifyContent: "space-evenly",
 									gap: "16px",
-
 								}}
 							>
-									<AccountCircleIcon sx={{
-										fontSize: '38px',
+								<AccountCircleIcon
+									sx={{
+										fontSize: "38px",
 										color: "#222222",
-										opacity: "0.87,"
-									}} />
-								<Button className="login" variant="contained" >
-									<Typography className="login button-text">Contribute</Typography>
+										opacity: "0.87,",
+									}}
+								/>
+								<Button className="login" variant="contained">
+									<Typography className="login button-text">
+										Contribute
+									</Typography>
 								</Button>
 								<Button
 									style={{ textTransform: "none" }}
-									onClick={handleLogout}>
+									onClick={handleLogout}
+								>
 									<h2 className="header-text">Logout</h2>
 								</Button>
 							</Box>
@@ -288,8 +294,6 @@ export default function PrimarySearchAppBar() {
 							<MoreIcon />
 						</IconButton>
 					</Box>
-
-
 				</Toolbar>
 			</AppBar>
 			{renderMobileMenu}
