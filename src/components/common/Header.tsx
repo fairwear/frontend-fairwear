@@ -1,7 +1,7 @@
 import MenuIcon from "@mui/icons-material/Menu";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import SearchIcon from "@mui/icons-material/Search";
-import { Button } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
@@ -14,6 +14,11 @@ import * as React from "react";
 import LoginDialog from "@components/login/LoginDialog";
 import SignUpDialog from "@components/login/SignUpDialog";
 import "../Components.css";
+import "./CommonComponents.css";
+import AuthAPI from "@api/AuthAPI";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import { useAppSelector } from "@redux/store/hooks";
+import { Opacity } from "@mui/icons-material";
 
 const Search = styled("div")(({ theme }) => ({
 	position: "relative",
@@ -65,6 +70,13 @@ export default function PrimarySearchAppBar() {
 
 	const isMenuOpen = Boolean(anchorEl);
 	const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+
+	const handleLogout = async () => {
+		let res = await AuthAPI.logout();
+		window.location.reload();
+	};
+
+	const isLoggedIn = useAppSelector((state) => state.common.isLoggedIn);
 
 	const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
 		setAnchorEl(event.currentTarget);
@@ -139,16 +151,36 @@ export default function PrimarySearchAppBar() {
 			open={isMobileMenuOpen}
 			onClose={handleMobileMenuClose}
 		>
-			{/* <MenuItem onClick={handleProfileMenuOpen}> */}
-			<Button onClick={handleLoginDialog}>
-				<h2 className="header-text">Log in</h2>
-			</Button>
-			{/* </MenuItem> */}
-			{/* <MenuItem onClick={handleProfileMenuOpen}> */}
-			<Button onClick={handleSignUpDialog}>
-				<h2 className="header-text">Sign Up</h2>
-			</Button>
-			{/* </MenuItem> */}
+			{!isLoggedIn ? (
+				<div className="menu-container">
+					<Button sx={{ textTransform: "none" }} onClick={handleLoginDialog}>
+						<h2 className="header-text">Log in</h2>
+					</Button>
+					<LoginDialog
+						toSignUp={handleSignUpDialog}
+						open={loginDialog}
+						handleClose={handleLoginDialogClose}
+					/>
+
+					<Button sx={{ textTransform: "none" }} onClick={handleSignUpDialog}>
+						<h2 className="header-text">Sign Up</h2>
+					</Button>
+					<SignUpDialog
+						toLogin={handleLoginDialog}
+						open={signUpDialog}
+						handleClose={handleSignUpDialogClose}
+					/>
+				</div>
+			) : (
+				<div className="menu-container">
+					<Button onClick={handleLogout}>
+						<h2 className="header-text">Log out</h2>
+					</Button>
+					<Button onClick={handleProfileMenuOpen}>
+						<AccountCircleIcon sx={{ color: "#222222" }} />
+					</Button>
+				</div>
+			)}
 		</Menu>
 	);
 
@@ -183,6 +215,7 @@ export default function PrimarySearchAppBar() {
 							inputProps={{ "aria-label": "search" }}
 						/>
 					</Search>
+
 					<Box sx={{ flexGrow: 1 }} />
 					<Box
 						sx={{
@@ -193,22 +226,61 @@ export default function PrimarySearchAppBar() {
 							marginRight: "16px",
 						}}
 					>
-						<Button onClick={handleLoginDialog}>
-							<h2 className="header-text">Login</h2>
-						</Button>
-						<LoginDialog
-							toSignUp={handleSignUpDialog}
-							open={loginDialog}
-							handleClose={handleLoginDialogClose}
-						/>
-						<Button onClick={handleSignUpDialog}>
-							<h2 className="header-text">Sign Up</h2>
-						</Button>
-						<SignUpDialog
-							toLogin={handleLoginDialog}
-							open={signUpDialog}
-							handleClose={handleSignUpDialogClose}
-						/>
+						{!isLoggedIn ? (
+							<>
+								<Button
+									style={{ textTransform: "none" }}
+									onClick={handleLoginDialog}
+								>
+									<h2 className="header-text">Login</h2>
+								</Button>
+								<LoginDialog
+									toSignUp={handleSignUpDialog}
+									open={loginDialog}
+									handleClose={handleLoginDialogClose}
+								/>
+								<Button
+									style={{ textTransform: "none" }}
+									onClick={handleSignUpDialog}
+								>
+									<h2 className="header-text">Sign Up</h2>
+								</Button>
+								<SignUpDialog
+									toLogin={handleLoginDialog}
+									open={signUpDialog}
+									handleClose={handleSignUpDialogClose}
+								/>
+							</>
+						) : (
+							<Box
+								sx={{
+									display: { xs: "none", md: "flex" },
+									flexDirection: "row",
+									alignItems: "center",
+									justifyContent: "space-evenly",
+									gap: "16px",
+								}}
+							>
+								<AccountCircleIcon
+									sx={{
+										fontSize: "38px",
+										color: "#222222",
+										opacity: "0.87,",
+									}}
+								/>
+								<Button className="login" variant="contained">
+									<Typography className="login button-text">
+										Contribute
+									</Typography>
+								</Button>
+								<Button
+									style={{ textTransform: "none" }}
+									onClick={handleLogout}
+								>
+									<h2 className="header-text">Logout</h2>
+								</Button>
+							</Box>
+						)}
 					</Box>
 					<Box sx={{ display: { xs: "flex", md: "none" } }}>
 						<IconButton

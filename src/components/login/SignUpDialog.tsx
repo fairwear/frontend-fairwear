@@ -32,10 +32,10 @@ export default function SignUpDialog(props: Props) {
 		let res = await AuthAPI.signup(request);
 		console.log(res);
 
-		// handleClose();
-		// setTimeout(() => {
-		// 	window.location.reload();
-		// }, 300);
+		handleClose();
+		setTimeout(() => {
+			window.location.reload();
+		}, 300);
 	};
 
 	return (
