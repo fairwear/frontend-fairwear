@@ -32,11 +32,12 @@ const AppTheme = createTheme({
 			styleOverrides: {
 				contained: {
 					backgroundColor: "#222222",
+					opacity: 0.87,
 					color: "#e9e9e9",
 					"&:hover": {
 						backgroundColor: "#222222",
 						color: "#e9e9e9",
-						opacity: 0.8,
+						opacity: 0.5,
 					},
 				},
 				outlined: {

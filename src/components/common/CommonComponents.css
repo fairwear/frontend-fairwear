@@ -2,3 +2,7 @@
 	margin: 32px 0px;
 	max-width: 100%;
 }
+.menu-container {
+	display: flex;
+	flex-direction: column;
+}

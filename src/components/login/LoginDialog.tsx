@@ -23,7 +23,7 @@ export default function LoginDialog(props: Props) {
 		handleClose();
 
 		setTimeout(() => {
-			// window.location.reload();
+			window.location.reload();
 		}, 300);
 	};
 
