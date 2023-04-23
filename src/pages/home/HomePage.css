@@ -45,3 +45,7 @@
 .title-container > * {
 	color: #222222;
 }
+
+.home-page-container {
+	width: 100%;
+}
