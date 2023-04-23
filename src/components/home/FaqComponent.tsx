@@ -28,20 +28,13 @@ const FaqComponent = (props: FaqComponentProps) => {
 					}
 				>
 					<div className="question-container">
-						<Typography
-							fontWeight="bold"
-							style={{
-								color: "#202020",
-								fontSize: "18px",
-								lineHeight: "22px",
-							}}
-						>
+						<Typography fontWeight="bold" variant="h5">
 							{props.question}
 						</Typography>
 					</div>
 				</AccordionSummary>
 			</div>
-			<AccordionDetails style={{ backgroundColor: "#F4F4F4" }}>
+			<AccordionDetails className="faq-accordion-details">
 				<div className="answer-container">
 					<Typography>{props.answer}</Typography>
 				</div>
