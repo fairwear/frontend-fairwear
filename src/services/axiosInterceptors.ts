@@ -20,7 +20,6 @@ const setupAxiosInterceptors = () => {
 			console.log(error.response?.data || error.message);
 
 			// store.dispatch(alertActions.addAlert(mapErrorToAlert(error)));
-
 		}
 		return Promise.reject(error);
 	};
