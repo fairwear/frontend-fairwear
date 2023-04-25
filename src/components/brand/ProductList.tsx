@@ -92,8 +92,11 @@ export default function ProductList() {
   ]
 
   let Products = products.map((product) => {
-    return (<Product key={product.id} img={product.image} name={product.name} />)
+    return (
+      <Product key={product.id} img={product.image} name={product.name} />
+    )
   })
+  
   return (
     <div className='product-section-container'>
       <div className='product-section-header'>
