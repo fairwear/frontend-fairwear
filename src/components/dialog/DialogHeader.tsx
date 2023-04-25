@@ -55,12 +55,7 @@ const DialogHeader = (props: DialogHeaderProps) => {
 							padding: "8px 16px",
 						}}
 					>
-						<Typography
-							variant="h6"
-							style={{
-
-							}}
-						>
+						<Typography variant="h6" style={{}}>
 							{returnButtonLabel}
 						</Typography>
 					</Button>

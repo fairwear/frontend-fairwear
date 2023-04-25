@@ -1,7 +1,7 @@
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Button, Card, Dialog, Typography } from "@mui/material";
 import AppTheme from "../../AppTheme";
-import ConfirmDeleteIcon  from "assets/svg/deletion-confirmation-icon.svg";
+import ConfirmDeleteIcon from "assets/svg/deletion-confirmation-icon.svg";
 import "./Dialog.css";
 interface DeleteConfirmationDialogProps {
 	open: boolean;
