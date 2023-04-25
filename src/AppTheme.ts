@@ -30,6 +30,13 @@ const AppTheme = createTheme({
 		},
 		MuiButton: {
 			styleOverrides: {
+				root: {
+					textTransform: "none",
+					boxShadow: "none",
+					":hover": {
+						boxShadow: "none",
+					},
+				},
 				contained: {
 					backgroundColor: "#222222",
 					opacity: 0.87,
@@ -48,10 +55,51 @@ const AppTheme = createTheme({
 						color: "#222222",
 					},
 				},
+				text: {
+					color: "#1F2B31",
+				},
 			},
+			variants: [
+				{
+					props: { variant: "danger" },
+					style: {
+						background: "#E53935",
+						color: "#FFFFFF",
+						"&.MuiButton-root": {
+							":hover": {
+								background: "#B71C1C !important",
+								backgroundColor: "#B71C1C !important",
+							},
+						},
+					},
+				},
+				{
+					props: { variant: "grey" },
+					style: {
+						background: "#EEEEEE",
+						color: "#171440",
+						"&.MuiButton-root": {
+							":hover": {
+								background: "#e0e0e0",
+								backgroundColor: "#e0e0e0",
+							},
+						},
+					},
+				},
+				{
+					props: { color: "error" },
+					style: {
+						"&.MuiButton-root": {
+							":hover": {
+								background: "inherit",
+							},
+						},
+						color: "#E53935",
+					},
+				},
+			],
 		},
 	},
-
 	palette: {
 		red: {
 			50: "#FEEBEE",
@@ -136,6 +184,12 @@ declare module "@mui/material/styles/createPalette" {
 		error?: PaletteOptions["primary"];
 		red?: PaletteOptions["grey"];
 		green?: PaletteOptions["grey"];
+	}
+}
+declare module "@mui/material/Button" {
+	interface ButtonPropsVariantOverrides {
+		danger: true;
+		grey: true;
 	}
 }
 

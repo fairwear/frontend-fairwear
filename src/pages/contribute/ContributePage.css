@@ -1,0 +1,13 @@
+.contribute-page-container {
+	padding: 64px;
+	width: 100%;
+	box-sizing: border-box;
+}
+
+.contribute-page-container .add-brand-button {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-transform: none;
+	padding: 8px 16px;
+}

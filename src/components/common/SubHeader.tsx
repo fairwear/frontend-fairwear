@@ -1,5 +1,5 @@
 import MovingText from "./MovingText";
-import fw from "@assets/svg/FW200.svg";
+import fw from "@assets/svg/graffinity logo_adobe_express.svg";
 import "./CommonComponents.css";
 
 const SubHeader = () => {
