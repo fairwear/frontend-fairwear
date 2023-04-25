@@ -1,5 +1,6 @@
 import { Typography } from "@mui/material";
 import "./BrandComponents.css";
+import TopicResponse from "@models/topic/TopicResponse";
 
 export default function Topics() {
 	const topics: TopicResponse[] = [
