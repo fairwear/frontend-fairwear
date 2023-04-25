@@ -1,5 +1,5 @@
-import BannerComponent from "@components/common/BannerComponent";
-import ToastComponent from "@components/common/ToastComponent";
+import BannerComponent from "@components/alert/BannerComponent";
+import ToastComponent from "@components/alert/ToastComponent";
 import alerts from "@redux/alerts";
 import { AlertValue } from "@redux/store/alert/AlertState";
 

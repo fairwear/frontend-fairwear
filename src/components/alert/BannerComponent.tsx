@@ -11,6 +11,7 @@ import {
 	Typography,
 } from "@mui/material";
 import AppTheme from "src/AppTheme";
+import "./AlertComponents.css";
 
 interface BannerComponentProps extends AlertProps {
 	alertMessage: string;
@@ -47,7 +48,7 @@ const BannerComponent = (props: BannerComponentProps) => {
 	} = props;
 	return (
 		<Alert
-			className="druskininkai-banner"
+			className="fairwear-banner"
 			{...other}
 			closeText="Uždaryti"
 			variant="filled"
@@ -68,7 +69,7 @@ const BannerComponent = (props: BannerComponentProps) => {
 			<div className="content">
 				<div className="text-and-logo-container">
 					<AlertTitle
-						className="druskininkai-banner-title"
+						className="fairwear-banner-title"
 						{...other.AlertTitleProps}
 					>
 						{AlertMessageComponent ? (
@@ -92,7 +93,7 @@ const BannerComponent = (props: BannerComponentProps) => {
 						{actionTitle && alertAction && (
 							<Button
 								variant="contained"
-								className="druskininkai-banner-action-button"
+								className="fairwear-banner-action-button"
 								onClick={alertAction}
 							>
 								<Typography
@@ -109,7 +110,7 @@ const BannerComponent = (props: BannerComponentProps) => {
 								size="small"
 								color="secondary"
 								onClick={() => (closeAlert ? closeAlert() : null)}
-								className="druskininkai-banner-close-button"
+								className="fairwear-banner-close-button"
 							>
 								<Typography variant="h6">Uždaryti</Typography>
 							</Button>

@@ -3,6 +3,7 @@ import MarkunreadMailboxOutlinedIcon from "@mui/icons-material/MarkunreadMailbox
 import NotInterestedIcon from "@mui/icons-material/NotInterested";
 import PaymentIcon from "@mui/icons-material/Payment";
 import { Chip, ChipProps, Typography } from "@mui/material";
+import "./AlertComponents.css";
 
 interface TagComponentProps extends ChipProps {
 	type: "success" | "error" | "info" | "default" | "warning";

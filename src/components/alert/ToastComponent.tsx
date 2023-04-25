@@ -31,7 +31,7 @@ const ToastComponent = (props: ToastComponentProps) => {
 			open={true}
 			onClose={() => closeAlert()}
 			autoHideDuration={12000}
-			className="druskininkai-toast"
+			className="fairwear-toast"
 		>
 			<Alert
 				{...other}
@@ -53,7 +53,7 @@ const ToastComponent = (props: ToastComponentProps) => {
 				<div className="content">
 					<div className="text-and-logo-container">
 						<AlertTitle
-							className="druskininkai-banner-title"
+							className="fairwear-banner-title"
 							{...other.AlertTitleProps}
 						>
 							<Typography
@@ -72,7 +72,7 @@ const ToastComponent = (props: ToastComponentProps) => {
 						{actionTitle && alertAction && (
 							<Button
 								variant="contained"
-								className="druskininkai-banner-action-button"
+								className="fairwear-banner-action-button"
 								onClick={alertAction}
 							>
 								<Typography
@@ -87,7 +87,7 @@ const ToastComponent = (props: ToastComponentProps) => {
 							size="small"
 							color="secondary"
 							onClick={() => closeAlert()}
-							className="druskininkai-banner-close-button"
+							className="fairwear-banner-close-button"
 						>
 							<CloseRoundedIcon
 								style={{

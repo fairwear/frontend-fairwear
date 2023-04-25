@@ -1,8 +1,10 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { commonSlice } from "./common/commonSlice";
+import alertSlice from "@redux/store/alert/alertSlice";
 
 export const rootReducer = combineReducers({
 	common: commonSlice.reducer,
+	alerts: alertSlice.reducer,
 });
 
 export const store = configureStore({
