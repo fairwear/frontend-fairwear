@@ -24,8 +24,9 @@ export default defineConfig({
 			"@assets": path.resolve(__dirname, "./src/assets"),
 			"@redux": path.resolve(__dirname, "./src/redux"),
 			"@services": path.resolve(__dirname, "./src/services"),
-			AppTheme: path.resolve(__dirname, "./src/AppTheme.tsx"),
+			"@AppTheme": path.resolve(__dirname, "./src/AppTheme.tsx"),
 		},
 	},
+	base: "./",
 	plugins: [react()],
 });

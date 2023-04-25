@@ -27,9 +27,9 @@
 			"@redux/*": ["src/redux/*"],
 			"@utils/*": ["src/util/*"],
 			"@services/*": ["src/services/*"],
-			"AppTheme": ["src/AppTheme.tsx"]
+			"@AppTheme": ["src/AppTheme.tsx"]
 		}
 	},
-	"include": ["src"],
+	"include": ["src/**/*"],
 	"references": [{ "path": "./tsconfig.node.json" }]
 }

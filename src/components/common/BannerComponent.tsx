@@ -10,14 +10,13 @@ import {
 	Button,
 	Typography,
 } from "@mui/material";
-import AppTheme from "AppTheme";
+import AppTheme from "src/AppTheme";
 
 interface BannerComponentProps extends AlertProps {
 	alertMessage: string;
 	alertMessageFontVariant?:
-		| "body"
-		| "button"
-		| "caption"
+		| "body1"
+		| "body2"
 		| "h1"
 		| "h2"
 		| "h3"
@@ -25,10 +24,8 @@ interface BannerComponentProps extends AlertProps {
 		| "h5"
 		| "h6"
 		| "inherit"
-		| "subtitle2"
-		| "body2"
-		| "hyperlink"
-		| "subtitle";
+		| "subtitle1"
+		| "subtitle2";
 	AlertMessageComponent?: JSX.Element;
 	hasCloseButton?: boolean;
 	closeAlert?: () => void;

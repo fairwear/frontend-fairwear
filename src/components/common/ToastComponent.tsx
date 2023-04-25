@@ -13,7 +13,7 @@ import {
 	Snackbar,
 	Typography,
 } from "@mui/material";
-import AppTheme from "AppTheme";
+import AppTheme from "src/AppTheme";
 
 interface ToastComponentProps extends AlertProps {
 	alertMessage: string;
