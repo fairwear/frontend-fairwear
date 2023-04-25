@@ -17,7 +17,6 @@ function App() {
 
 	useEffect(() => {
 		common.getStatus();
-		console.log(isLoggedIn);
 	}, [isLoggedIn]);
 
 	return (

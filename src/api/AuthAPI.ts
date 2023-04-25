@@ -14,7 +14,6 @@ const AuthAPI = {
 		} = await axios.post(`${baseUrl}/login`, request);
 
 		let access_token = res.accessToken;
-		console.log(access_token);
 
 		if (access_token) {
 			localStorage.setItem("token", access_token);
@@ -41,8 +40,8 @@ const AuthAPI = {
 		return res;
 	},
 
-	logout: (): Promise<StatusResponse> => {
-		axios.post(`${baseUrl}/logout`);
+	logout: async (): Promise<StatusResponse> => {
+		await axios.post(`${baseUrl}/logout`);
 		localStorage.removeItem("token");
 		axios.defaults.headers.common["Authorization"] = "";
 		return axios.get(`${baseUrl}/status`);
