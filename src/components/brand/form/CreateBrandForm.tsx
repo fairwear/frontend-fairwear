@@ -1,12 +1,12 @@
 import DialogFooter from "@components/dialog/DialogFooter";
 
+import DragOnFileInput from "@components/button/DragOnFileInput";
 import FormTextField from "@components/form/FormTextField";
-import { DialogContent, Divider } from "@mui/material";
+import { DialogContent } from "@mui/material";
 import { Form, Formik, FormikProps } from "formik";
 import { ChangeEvent, useRef, useState } from "react";
 import * as yup from "yup";
 import "./BrandFormComponents.css";
-import DragOnFileInput from "@components/button/DragOnFileInput";
 
 interface CreateBrandFormProps {
 	handleFormSubmit: (values: CreateBrandFormValues) => void;
