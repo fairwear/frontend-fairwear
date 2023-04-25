@@ -93,3 +93,118 @@
 .brandpost-container .brandpost-info-container {
 	display: flex;
 }
+
+.image {
+	max-width: 400px;
+}
+.brand-banner {
+	display: flex;
+	align-items: center;
+	flex-direction: row;
+	width: 90%;
+	border: 1px solid #222222;
+	border-radius: 8px;
+	background-color: #f4f4f4;
+	padding: 16px;
+}
+.image-container {
+	display: flex;
+	justify-content: center;
+}
+.info-container {
+	display: flex;
+	justify-content: left;
+	gap: 16px;
+	width: 100%;
+	flex-direction: column;
+	text-align: left !important;
+}
+.button-container {
+	display: flex;
+	flex-direction: row;
+	justify-content: left;
+	width: 100%;
+	gap: 16px;
+}
+.topic-section-header-container {
+	display: flex;
+	flex-direction: column;
+	align-items: left;
+	gap: 16px;
+	text-align: left !important;
+	width: 90%;
+}
+.topic-section-header {
+	font-weight: 700 !important;
+}
+
+.topic-component {
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	width: 90%;
+}
+.topic-container {
+	margin-top: 16px;
+	display: flex;
+	justify-content: center;
+	align-items: flex-start;
+	width: 100%;
+	border: 1px solid #222222;
+	border-radius: 8px;
+	flex-direction: column;
+	gap: 12px;
+	background-color: #f4f4f4;
+	padding: 16px;
+}
+.posts-header-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 24px;
+}
+.post-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	gap: 48px;
+	padding: 64px;
+}
+.grid-container {
+	width: 100%;
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	grid-row-gap: 60px;
+	grid-column-gap: 12px;
+}
+.product-section-container {
+	width: 90%;
+}
+.product-section-header {
+	display: flex;
+	align-items: flex-start;
+	margin-top: 64px;
+	margin-bottom: 32px;
+}
+.product-name-container {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	margin-top: 8px;
+	margin-bottom: 8px;
+}
+/* On smaller screens, show only 2 items per row */
+@media (max-width: 768px) {
+	.grid-container {
+		grid-template-columns: repeat(
+			2,
+			1fr
+		); /* 2 items per row on smaller screens */
+	}
+}
+
+.product-image,
+.extended {
+	width: 100%;
+}

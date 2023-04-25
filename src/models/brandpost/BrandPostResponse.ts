@@ -1,5 +1,6 @@
 import BrandResponse from "@models/brand/BrandResponse";
 import VoteEnum from "@models/brandpost/VoteEnum";
+import ItemResponse from "@models/item/ItemResponse";
 
 interface BrandPostResponse {
 	id: number;
@@ -7,6 +8,7 @@ interface BrandPostResponse {
 	createdAt: Date;
 	deletedAt: Date | null;
 	brand: BrandResponse;
+	// item: ItemResponse;
 	votes: VoteEnum[];
 }
 

@@ -18,7 +18,7 @@ import "./CommonComponents.css";
 import AuthAPI from "@api/AuthAPI";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { useAppSelector } from "@redux/store/hooks";
-import { Opacity } from "@mui/icons-material";
+import ContributeButton from "./ContributeButton";
 
 const Search = styled("div")(({ theme }) => ({
 	position: "relative",
@@ -173,6 +173,7 @@ export default function PrimarySearchAppBar() {
 				</div>
 			) : (
 				<div className="menu-container">
+					<ContributeButton />
 					<Button onClick={handleLogout}>
 						<h2 className="header-text">Log out</h2>
 					</Button>
@@ -268,11 +269,7 @@ export default function PrimarySearchAppBar() {
 										opacity: "0.87,",
 									}}
 								/>
-								<Button className="login" variant="contained">
-									<Typography className="login button-text">
-										Contribute
-									</Typography>
-								</Button>
+								<ContributeButton />
 								<Button
 									style={{ textTransform: "none" }}
 									onClick={handleLogout}
