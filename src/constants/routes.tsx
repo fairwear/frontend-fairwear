@@ -1,9 +1,8 @@
 import { HomeRounded } from "@mui/icons-material";
-import TokenRoundedIcon from '@mui/icons-material/TokenRounded';
+import TokenRoundedIcon from "@mui/icons-material/TokenRounded";
 import RouteGroup from "../models/routes/RouteGroup";
 import HomePage from "@pages/home/HomePage";
 import BrandPage from "@pages/brand/BrandPage";
-
 
 const routes: RouteGroup[] = [
 	{

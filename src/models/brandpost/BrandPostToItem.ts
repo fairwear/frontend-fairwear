@@ -1,4 +1,4 @@
 interface BrandPostToItem {
-    postId: number;
-    itemId: number;
+	postId: number;
+	itemId: number;
 }
