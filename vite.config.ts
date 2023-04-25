@@ -14,7 +14,7 @@ export default defineConfig({
 	},
 	resolve: {
 		alias: {
-			"@": path.resolve(__dirname, "./src"),
+			"@src": path.resolve(__dirname, "./src"),
 			"@api": path.resolve(__dirname, "./src/api"),
 			"@components": path.resolve(__dirname, "./src/components"),
 			"@pages": path.resolve(__dirname, "./src/pages"),
@@ -24,9 +24,8 @@ export default defineConfig({
 			"@assets": path.resolve(__dirname, "./src/assets"),
 			"@redux": path.resolve(__dirname, "./src/redux"),
 			"@services": path.resolve(__dirname, "./src/services"),
-			"@AppTheme": path.resolve(__dirname, "./src/AppTheme.tsx"),
 		},
 	},
-	base: "./",
+	base: "./src",
 	plugins: [react()],
 });

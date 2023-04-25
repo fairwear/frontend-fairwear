@@ -1,9 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
 import AlertState, { AlertValue } from "./AlertState";
-import AlertUtils from "src/utils/AlertUtils";
+import AlertUtils from "@utils/AlertUtils";
+
+let tempAlert = AlertUtils.createNewAlert(
+	true,
+	"Test alert",
+	"success",
+	"toast"
+);
 
 export const initialState: AlertState = {
-	alerts: [],
+	alerts: [tempAlert],
 };
 
 export const alertSlice = createSlice({

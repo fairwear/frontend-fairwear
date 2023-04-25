@@ -10,7 +10,7 @@ import {
 	Button,
 	Typography,
 } from "@mui/material";
-import AppTheme from "src/AppTheme";
+import AppTheme from "../../AppTheme";
 import "./AlertComponents.css";
 
 interface BannerComponentProps extends AlertProps {

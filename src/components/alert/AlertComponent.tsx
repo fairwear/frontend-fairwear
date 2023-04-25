@@ -3,14 +3,14 @@ import ToastComponent from "@components/alert/ToastComponent";
 import alerts from "@redux/alerts";
 import { AlertValue } from "@redux/store/alert/AlertState";
 
-interface DruskininkaiAlertProps {
+interface AlertComponentProps {
 	alertValue: AlertValue;
 	bannerStyle?: React.CSSProperties;
 	toastStyle?: React.CSSProperties;
-	AlertMessageComponent?: JSX.Element;
+	alertMessageComponent?: JSX.Element;
 }
 
-const DruskinikaiAlert = (props: DruskininkaiAlertProps) => {
+const AlertComponent = (props: AlertComponentProps) => {
 	const { alertValue } = props;
 
 	return (
@@ -19,7 +19,7 @@ const DruskinikaiAlert = (props: DruskininkaiAlertProps) => {
 				<BannerComponent
 					key={alertValue.message + alertValue.alertSeverity}
 					alertMessage={alertValue.message}
-					AlertMessageComponent={props.AlertMessageComponent}
+					AlertMessageComponent={props.alertMessageComponent}
 					severity={alertValue.alertSeverity}
 					actionTitle={alertValue.actionTitle}
 					alertAction={alertValue.alertAction}
@@ -42,4 +42,4 @@ const DruskinikaiAlert = (props: DruskininkaiAlertProps) => {
 	);
 };
 
-export default DruskinikaiAlert;
+export default AlertComponent;
