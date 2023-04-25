@@ -31,7 +31,6 @@ function App() {
 			className="App"
 		>
 			<Header />
-			<SubHeader />
 			<Routes>
 				{[...routes[0].items, ...routes[1].items].map((route: RouteItem) => (
 					<Route key={route.key} path={route.path} element={route.element} />
