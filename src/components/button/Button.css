@@ -1,0 +1,200 @@
+.crop-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	padding: 16px;
+	box-sizing: border-box;
+	width: 100%;
+}
+
+.like-button-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.like-button-container .button-container {
+	display: flex;
+	align-items: center;
+	margin-bottom: 24px;
+}
+
+.like-button {
+	border: none;
+	color: #fff;
+	font-size: 0.8rem;
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	background-color: #404044;
+	border-radius: 4px;
+	padding: 6px 15px;
+	margin: 0 10px;
+}
+
+.like-button-active {
+	background-color: #f6307c;
+}
+
+.like-button-neutral {
+	background-color: #214b81;
+}
+
+@import url("https://fonts.googleapis.com/css?family=Montserrat:600&display=swap");
+.heart-btn {
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	width: max-content;
+	margin-bottom: -16px;
+}
+.content {
+	animation: reverse-color-change 0.2s 1;
+	display: flex;
+	border: 1px solid #eae2e1;
+	border-radius: 5px;
+	cursor: pointer;
+}
+.content.heart-active {
+	animation: color-change 0.15s 1;
+	border-color: #e57373;
+	background: #ef9a9a;
+}
+@keyframes color-change {
+	0% {
+		background: transparent;
+		border-color: #eae2e1;
+	}
+	100% {
+		background: #ef9a9a;
+		border-color: #e57373;
+	}
+}
+@keyframes reverse-color-change {
+	0% {
+		background: #ef9a9a;
+		border-color: #e57373;
+	}
+	100% {
+		background: transparent;
+		border-color: #eae2e1;
+	}
+}
+
+.heart {
+	background: url("../../assets/images/animation.png") no-repeat;
+	background-position: left;
+	background-size: 2900%;
+	height: 72px;
+	width: 72px;
+	margin: -16px;
+}
+.text {
+	color: #9c9496;
+	font-family: "Inter";
+}
+.numb:before {
+	color: #9c9496;
+	font-family: "Inter";
+}
+.numb.heart-active:before {
+	color: #000;
+}
+.text.heart-active {
+	color: #000;
+}
+.heart.heart-active {
+	animation: animate 0.8s steps(28) 1;
+	background-position: right;
+}
+@keyframes animate {
+	0% {
+		background-position: left;
+	}
+	100% {
+		background-position: right;
+	}
+}
+
+/*** Add icon effect ***/
+
+/* Base CSS */
+.base-icon {
+	font-size: 0px;
+	cursor: pointer;
+	border-radius: 50%;
+	text-align: center;
+	position: relative;
+	color: #fff;
+}
+
+.base-icon:after {
+	pointer-events: none;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	border-radius: 50%;
+	content: "";
+	-webkit-box-sizing: content-box;
+	-moz-box-sizing: content-box;
+	box-sizing: content-box;
+}
+
+.base-icon:before {
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	display: block;
+	-webkit-font-smoothing: antialiased;
+}
+.hover-icon-effect .base-icon {
+	-webkit-transition: box-shadow 0.2s;
+	-moz-transition: box-shadow 0.2s;
+	transition: box-shadow 0.2s;
+}
+
+/* Hover effect CSS */
+.hover-icon-effect .base-icon:after {
+	top: 0;
+	left: 0;
+	padding: 0;
+	box-shadow: 0 0 0 3px #fff;
+	-webkit-transition: -webkit-transform 0.2s, opacity 0.2s;
+	-moz-transition: -moz-transform 0.2s, opacity 0.2s;
+	transition: transform 0.2s, opacity 0.2s;
+}
+
+.hover-icon-effect .base-icon:hover:after {
+	-webkit-transform: scale(0.85);
+	-moz-transform: scale(0.85);
+	-ms-transform: scale(0.85);
+	transform: scale(0.85);
+}
+
+.hover-icon-effect .base-icon:hover {
+	box-shadow: 0 0 0 10px rgba(255, 255, 255, 0.4);
+	color: #fff;
+}
+
+.add-file-button-container {
+	display: flex;
+	flex-direction: row;
+	gap: 10px;
+	align-items: center;
+}
+.add-file-button-container .add-file-button {
+	display: flex;
+}
+
+.add-file-button-container .filenames-text {
+	padding: 5px 0px;
+	font-style: normal;
+	font-weight: 600;
+	color: black;
+	font-size: 12px;
+	line-height: 18px;
+	letter-spacing: 0px;
+}

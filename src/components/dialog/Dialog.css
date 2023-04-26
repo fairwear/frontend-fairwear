@@ -1,0 +1,92 @@
+.dialog-container {
+	display: flex;
+	flex-direction: column;
+
+	align-items: center;
+	gap: 32px;
+	width: 100%;
+}
+
+.dialog {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 32px;
+	width: 100%;
+}
+
+.dialog .dialog-header {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	width: 100%;
+	background: #f5f5f5;
+	box-sizing: border-box;
+	padding: 8px 32px;
+}
+
+.dialog-header .button {
+	text-transform: none;
+	padding: 8px;
+	border-radius: 5px;
+}
+
+.dialog .dialog-body-text {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 100%;
+	gap: 10px;
+	max-width: 500px;
+}
+
+.dialog .dialog-footer {
+	display: flex;
+	align-items: center;
+	width: 100%;
+	box-sizing: border-box;
+	padding: 24px 32px;
+	gap: 24px;
+	background: #f5f5f5;
+}
+
+.dialog-footer .cancel-button {
+	padding: 16px 40px;
+	background: #eeeeee;
+	box-shadow: none;
+	text-transform: none;
+	border-radius: 5px;
+	width: 100%;
+}
+
+.cancel-button:hover {
+	background-color: #e0e0e0 !important;
+}
+
+.dialog-footer .delete-button {
+	padding: 16px 40px;
+	text-transform: none;
+	border-radius: 5px;
+	width: 100%;
+}
+
+.dialog-header-container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 24px;
+	width: 100%;
+}
+
+.dialog-header-text {
+	display: flex;
+	flex-direction: column;
+	align-self: center;
+	flex-grow: 1;
+}
+
+.dialog-header-button-or-state {
+	display: flex;
+	flex-direction: column;
+	align-self: center;
+}

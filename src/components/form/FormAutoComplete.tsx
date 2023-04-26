@@ -34,6 +34,9 @@ interface OtherProps extends OutlinedTextFieldProps {
 	textInputPriority?: boolean;
 	initialValue?: string | null;
 	inputstyle?: React.CSSProperties;
+	getOptionLabel?: (option: any) => string;
+	isOptionEqualToValue?: (option: any, value: any) => boolean;
+	renderOption?: (props: any, option: any) => JSX.Element;
 }
 
 function FormAutocomplete(prop: OtherProps & FieldHookConfig<string>) {
@@ -51,15 +54,20 @@ function FormAutocomplete(prop: OtherProps & FieldHookConfig<string>) {
 		textInputPriority,
 		initialValue,
 		titleRightClickableIconAction = () => {},
+		variant = "outlined",
+		getOptionLabel = defaultGetOptionLabel,
+		isOptionEqualToValue = defaultIsOptionEqualToValue,
+		renderOption = defaultRenderOption,
 		...other
 	} = prop;
 
 	const formikContext = useFormikContext();
 
 	const [open, setOpen] = useState(false);
-	const [value, setValue] = useState<string | undefined | null>(field.value);
+	// const [value, setValue] = useState<string | undefined | null>(field.value);
+	const [value, setValue] = useState<any | undefined | null>(field.value);
 
-	const handleChange = (newValue: string | undefined) => {
+	const handleChange = (newValue: any | undefined) => {
 		setValue(newValue);
 		formikContext.setFieldTouched(prop.name, true);
 		formikContext.setFieldValue(prop.name, newValue);
@@ -89,9 +97,11 @@ function FormAutocomplete(prop: OtherProps & FieldHookConfig<string>) {
 				</div>
 			)}
 			<Autocomplete
+				id="form-autocomplete"
 				open={open}
 				value={value ? value : field.value}
 				disableClearable={disableClearable}
+				autoHighlight
 				disabled={disabled}
 				key={field.name}
 				onOpen={() => {
@@ -119,7 +129,7 @@ function FormAutocomplete(prop: OtherProps & FieldHookConfig<string>) {
 					setOpen(false);
 				}}
 				onFocus={() => {
-					if (!field.value && field.value.length <= 0) {
+					if (!field.value || field.value.length <= 0) {
 						setOpen(true);
 					}
 				}}
@@ -148,25 +158,9 @@ function FormAutocomplete(prop: OtherProps & FieldHookConfig<string>) {
 						},
 					},
 				}}
-				getOptionLabel={(option) => option.toString()}
-				isOptionEqualToValue={(option, value) =>
-					option.toString() === value.toString()
-				}
-				renderOption={(props, option) => (
-					<div key={option}>
-						{option ? (
-							<Box component="li" {...props} key={option}>
-								<ListItemText
-									style={{
-										padding: "0px",
-									}}
-								>
-									<Typography variant="body1">{option}</Typography>
-								</ListItemText>
-							</Box>
-						) : null}
-					</div>
-				)}
+				getOptionLabel={getOptionLabel}
+				isOptionEqualToValue={isOptionEqualToValue}
+				renderOption={renderOption}
 				renderInput={(params) => (
 					<TextField
 						{...field}
@@ -216,8 +210,25 @@ function FormAutocomplete(prop: OtherProps & FieldHookConfig<string>) {
 	);
 }
 
-FormAutocomplete.defaultProps = {
-	variant: "outlined",
-};
-
 export default FormAutocomplete;
+
+const defaultRenderOption = (props: any, option: any) => (
+	<div key={option}>
+		{option ? (
+			<Box component="li" {...props} key={option}>
+				<ListItemText
+					style={{
+						padding: "0px",
+					}}
+				>
+					<Typography variant="body1">{option}</Typography>
+				</ListItemText>
+			</Box>
+		) : null}
+	</div>
+);
+
+const defaultGetOptionLabel = (option: any) => option.toString();
+
+const defaultIsOptionEqualToValue = (option: any, value: any) =>
+	option.toString() === value.toString();

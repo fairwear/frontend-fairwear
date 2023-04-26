@@ -5,7 +5,6 @@ import { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import "./AppRouter.css";
 import Header from "./components/common/Header";
-import SubHeader from "./components/common/SubHeader";
 import routes from "./constants/routes";
 import RouteItem from "./models/routes/RouteItem";
 
@@ -32,7 +31,6 @@ function App() {
 			className="App"
 		>
 			<Header />
-			<SubHeader />
 			<>
 				{appAlerts.length > 0 && (
 					<>

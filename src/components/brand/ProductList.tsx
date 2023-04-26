@@ -2,13 +2,15 @@ import ItemResponse from "@models/item/ItemResponse";
 import Product from "./Product";
 import "./BrandComponents.css";
 import { Typography } from "@mui/material";
+// import prductImage from "@assets/images/Product_Img.jpeg";
+import productImage from "@assets/images/clothing_item.png";
 export default function ProductList() {
 	const products: ItemResponse[] = [
 		{
 			id: 1,
 			userId: 1,
 			name: "Product 1",
-			image: "src/assets/images/Product_Img.jpeg",
+			image: productImage,
 			brandId: {
 				id: 1,
 				name: "Brand 1",
@@ -24,7 +26,7 @@ export default function ProductList() {
 			id: 2,
 			userId: 1,
 			name: "Product 2",
-			image: "src/assets/images/Product_Img.jpeg",
+			image: productImage,
 			brandId: {
 				id: 1,
 				name: "Brand 1",
@@ -40,7 +42,7 @@ export default function ProductList() {
 			id: 3,
 			userId: 1,
 			name: "Product 3",
-			image: "src/assets/images/Product_Img.jpeg",
+			image: productImage,
 			brandId: {
 				id: 1,
 				name: "Brand 2",
@@ -56,7 +58,7 @@ export default function ProductList() {
 			id: 4,
 			userId: 1,
 			name: "Product 4",
-			image: "src/assets/images/Product_Img.jpeg",
+			image: productImage,
 			brandId: {
 				id: 1,
 				name: "Brand 2",
@@ -72,7 +74,7 @@ export default function ProductList() {
 			id: 5,
 			userId: 1,
 			name: "Product 5",
-			image: "src/assets/images/Product_Img.jpeg",
+			image: productImage,
 			brandId: {
 				id: 1,
 				name: "Brand 1",

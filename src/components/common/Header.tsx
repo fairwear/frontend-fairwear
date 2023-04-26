@@ -1,3 +1,7 @@
+import AuthAPI from "@api/AuthAPI";
+import LoginDialog from "@components/login/LoginDialog";
+import SignUpDialog from "@components/login/SignUpDialog";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import MenuIcon from "@mui/icons-material/Menu";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import SearchIcon from "@mui/icons-material/Search";
@@ -10,15 +14,12 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Toolbar from "@mui/material/Toolbar";
 import { alpha, styled } from "@mui/material/styles";
+import { useAppSelector } from "@redux/store/hooks";
 import * as React from "react";
-import LoginDialog from "@components/login/LoginDialog";
-import SignUpDialog from "@components/login/SignUpDialog";
 import "../Components.css";
 import "./CommonComponents.css";
-import AuthAPI from "@api/AuthAPI";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import { useAppSelector } from "@redux/store/hooks";
 import ContributeButton from "./ContributeButton";
+import { useNavigate } from "react-router-dom";
 
 const Search = styled("div")(({ theme }) => ({
 	position: "relative",
@@ -72,9 +73,11 @@ export default function PrimarySearchAppBar() {
 	const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
 	const handleLogout = async () => {
-		let res = await AuthAPI.logout();
+		await AuthAPI.logout();
 		window.location.reload();
 	};
+
+	const navigate = useNavigate();
 
 	const isLoggedIn = useAppSelector((state) => state.common.isLoggedIn);
 
@@ -92,7 +95,6 @@ export default function PrimarySearchAppBar() {
 
 	const handleLoginDialogClose = () => {
 		setLoginDialog(false);
-		console.log("Login Dialog Closed");
 	};
 
 	const handleSignUpDialog = () => {
@@ -100,7 +102,6 @@ export default function PrimarySearchAppBar() {
 	};
 	const handleSignUpDialogClose = () => {
 		setSignUpDialog(false);
-		console.log("Sign Up Dialog Closed");
 	};
 
 	const handleMenuClose = () => {
@@ -154,7 +155,9 @@ export default function PrimarySearchAppBar() {
 			{!isLoggedIn ? (
 				<div className="menu-container">
 					<Button sx={{ textTransform: "none" }} onClick={handleLoginDialog}>
-						<h2 className="header-text">Log in</h2>
+						<Typography variant="h4" className="header-text">
+							Log in
+						</Typography>
 					</Button>
 					<LoginDialog
 						toSignUp={handleSignUpDialog}
@@ -162,8 +165,8 @@ export default function PrimarySearchAppBar() {
 						handleClose={handleLoginDialogClose}
 					/>
 
-					<Button sx={{ textTransform: "none" }} onClick={handleSignUpDialog}>
-						<h2 className="header-text">Sign Up</h2>
+					<Button className="signup-button" onClick={handleSignUpDialog}>
+						<Typography variant="h4">Sign Up</Typography>
 					</Button>
 					<SignUpDialog
 						toLogin={handleLoginDialog}
@@ -173,12 +176,14 @@ export default function PrimarySearchAppBar() {
 				</div>
 			) : (
 				<div className="menu-container">
-					<ContributeButton />
+					<ContributeButton handleClick={() => navigate("/contribute")} />
 					<Button onClick={handleLogout}>
-						<h2 className="header-text">Log out</h2>
+						<Typography variant="h4" className="logout-button">
+							Logout
+						</Typography>
 					</Button>
 					<Button onClick={handleProfileMenuOpen}>
-						<AccountCircleIcon sx={{ color: "#222222" }} />
+						<AccountCircleIcon style={{ color: "rgba(34, 34, 34, 0.5)" }} />
 					</Button>
 				</div>
 			)}
@@ -186,115 +191,99 @@ export default function PrimarySearchAppBar() {
 	);
 
 	return (
-		<Box>
-			<AppBar sx={{ boxShadow: "none" }}>
-				<Toolbar sx={{ backgroundColor: "#e9e9e9" }}>
-					<IconButton
-						size="large"
-						edge="start"
-						color="inherit"
-						aria-label="open drawer"
+		<AppBar
+			// position="static"
+			className="header-appbar"
+			position="sticky"
+		>
+			<Toolbar>
+				<IconButton
+					size="large"
+					edge="start"
+					color="inherit"
+					aria-label="open drawer"
+					className="header-menu-icon"
+				>
+					<MenuIcon />
+				</IconButton>
+
+				<Search
+					style={{
+						flex: 1,
+						width: "100%",
+					}}
+				>
+					<SearchIconWrapper>
+						<SearchIcon sx={{ color: "#222222" }} />
+					</SearchIconWrapper>
+					<StyledInputBase
 						sx={{
 							color: "#222222",
-							mr: 2,
+							width: "100%",
+							fontFamily: "Inter",
 						}}
-					>
-						<MenuIcon />
-					</IconButton>
-
-					<Search>
-						<SearchIconWrapper>
-							<SearchIcon sx={{ color: "#222222" }} />
-						</SearchIconWrapper>
-						<StyledInputBase
-							sx={{
-								color: "#222222",
-								width: "100%",
-								fontFamily: "Inter",
-							}}
-							placeholder="Search…"
-							inputProps={{ "aria-label": "search" }}
-						/>
-					</Search>
-
-					<Box sx={{ flexGrow: 1 }} />
-					<Box
-						sx={{
-							display: { xs: "none", md: "flex" },
-							flexDirection: "row",
-							justifyContent: "space-evenly",
-							width: "20%",
-							marginRight: "16px",
-						}}
-					>
-						{!isLoggedIn ? (
-							<>
-								<Button
-									style={{ textTransform: "none" }}
-									onClick={handleLoginDialog}
-								>
-									<h2 className="header-text">Login</h2>
-								</Button>
-								<LoginDialog
-									toSignUp={handleSignUpDialog}
-									open={loginDialog}
-									handleClose={handleLoginDialogClose}
-								/>
-								<Button
-									style={{ textTransform: "none" }}
-									onClick={handleSignUpDialog}
-								>
-									<h2 className="header-text">Sign Up</h2>
-								</Button>
-								<SignUpDialog
-									toLogin={handleLoginDialog}
-									open={signUpDialog}
-									handleClose={handleSignUpDialogClose}
-								/>
-							</>
-						) : (
-							<Box
-								sx={{
-									display: { xs: "none", md: "flex" },
-									flexDirection: "row",
-									alignItems: "center",
-									justifyContent: "space-evenly",
-									gap: "16px",
-								}}
+						placeholder="Search…"
+						inputProps={{ "aria-label": "search" }}
+					/>
+				</Search>
+				<Box
+					className="header-auth-button-container"
+					display={{ xs: "none", md: "flex" }}
+				>
+					{!isLoggedIn ? (
+						<div className="header-auth-buttons">
+							<Button className="login-button" onClick={handleLoginDialog}>
+								<Typography variant="h4">Login</Typography>
+							</Button>
+							<LoginDialog
+								toSignUp={handleSignUpDialog}
+								open={loginDialog}
+								handleClose={handleLoginDialogClose}
+							/>
+							<Button
+								variant="contained"
+								className="signup-button"
+								onClick={handleSignUpDialog}
 							>
-								<AccountCircleIcon
-									sx={{
-										fontSize: "38px",
-										color: "#222222",
-										opacity: "0.87,",
-									}}
-								/>
-								<ContributeButton />
-								<Button
-									style={{ textTransform: "none" }}
-									onClick={handleLogout}
-								>
-									<h2 className="header-text">Logout</h2>
-								</Button>
-							</Box>
-						)}
-					</Box>
-					<Box sx={{ display: { xs: "flex", md: "none" } }}>
-						<IconButton
-							size="large"
-							aria-label="show more"
-							aria-controls={mobileMenuId}
-							aria-haspopup="true"
-							onClick={handleMobileMenuOpen}
-							sx={{ color: "#222222" }}
-						>
-							<MoreIcon />
-						</IconButton>
-					</Box>
-				</Toolbar>
-			</AppBar>
-			{renderMobileMenu}
-			{renderMenu}
-		</Box>
+								<Typography variant="h4">Sign Up</Typography>
+							</Button>
+							<SignUpDialog
+								toLogin={handleLoginDialog}
+								open={signUpDialog}
+								handleClose={handleSignUpDialogClose}
+							/>
+						</div>
+					) : (
+						<div className="header-auth-buttons logged-in">
+							<IconButton>
+								<AccountCircleIcon className="account-icon" />
+							</IconButton>
+							<ContributeButton
+								handleClick={() => {
+									navigate("/contribute");
+								}}
+							/>
+							<Button className="logout-button" onClick={handleLogout}>
+								<Typography variant="h4">Logout</Typography>
+							</Button>
+						</div>
+					)}
+				</Box>
+				<Box display={{ xs: "flex", md: "none" }}>
+					<IconButton
+						size="large"
+						aria-label="show more"
+						aria-controls={mobileMenuId}
+						aria-haspopup="true"
+						onClick={handleMobileMenuOpen}
+						sx={{ color: "#222222" }}
+					>
+						<MoreIcon />
+					</IconButton>
+				</Box>
+				{renderMobileMenu}
+				{renderMenu}
+			</Toolbar>
+		</AppBar>
 	);
 }

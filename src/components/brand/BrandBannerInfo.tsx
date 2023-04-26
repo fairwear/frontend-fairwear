@@ -1,15 +1,26 @@
-import { Button, Typography } from "@mui/material";
-import "./BrandComponents.css";
+import brandLogo from "@assets/images/versace_logo.png";
 import ContributeButton from "@components/common/ContributeButton";
+import BrandResponse from "@models/brand/BrandResponse";
+import { Button, Typography } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import "../Components.css";
-export default function BrandBannerInfo() {
+import "./BrandComponents.css";
+
+interface BrandBannerInfoProps {
+	brand: BrandResponse;
+}
+
+export default function BrandBannerInfo(props: BrandBannerInfoProps) {
+	const { brand } = props;
+	const navigate = useNavigate();
+
 	return (
 		<div className="brand-banner">
 			<div className="image-container">
-				<img className="image" src="src/assets/images/versace_logo.png" />
+				<img className="image" src={brandLogo} />
 			</div>
 			<div className="info-container">
-				<Typography variant="h2">Brand Name</Typography>
+				<Typography variant="h2">{brand.name}</Typography>
 				<Typography variant="h6" className="description">
 					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
 					eiusmod tempor incididunt ut labore et dolore magna aliqua. Faucibus
@@ -22,8 +33,18 @@ export default function BrandBannerInfo() {
 					elementum sagittis.
 				</Typography>
 				<div className="button-container">
-					<ContributeButton />
-					<Button className="signup-button" variant="outlined">
+					<ContributeButton
+						handleClick={() => {
+							navigate("/contribute");
+						}}
+					/>
+					<Button
+						className="signup-button"
+						variant="outlined"
+						style={{
+							minWidth: "fit-content",
+						}}
+					>
 						<Typography className="button-text">View Items</Typography>
 					</Button>
 				</div>

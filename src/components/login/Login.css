@@ -1,0 +1,45 @@
+.not-logged-in-component-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 60%;
+	margin-top: 64px;
+	margin-bottom: 96px;
+	padding: 36px;
+	gap: 24px;
+	border: 1px solid #ffffff;
+	box-sizing: border-box;
+	border-radius: 16px;
+}
+
+.not-logged-in-component-outside-container {
+	display: flex;
+	flex-direction: column;
+	width: 80%;
+	padding: 24px;
+	box-sizing: border-box;
+}
+
+.not-logged-in-component-inner-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 36px;
+	padding: 32px;
+	box-sizing: border-box;
+}
+
+.not-logged-in-component-inner-container .login-button {
+	border-color: #222222;
+	padding: 8px 32px;
+	width: 50%;
+	text-transform: none;
+}
+
+.not-logged-in-component-inner-container .register {
+	border-color: #222222;
+	padding: 8px 24px;
+	width: 50%;
+	text-transform: none;
+}

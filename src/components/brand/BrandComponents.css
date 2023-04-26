@@ -61,39 +61,6 @@
 	width: 100%;
 }
 
-.brandpost-container {
-	display: flex;
-
-	width: 100%;
-	padding: 16px;
-	box-sizing: border-box;
-	gap: 16px;
-
-	border: 1px solid #202020;
-	border-radius: 8px;
-}
-
-.voted {
-	background-color: #f2f2f2;
-}
-
-.brandpost-container .vote-count-container {
-	display: flex;
-	flex-direction: column;
-	justify-content: flex-start;
-	margin-top: 12px;
-}
-
-.brandpost-container .brandpost-content-container {
-	display: flex;
-	flex-direction: column;
-	gap: 8px;
-}
-
-.brandpost-container .brandpost-info-container {
-	display: flex;
-}
-
 .image {
 	max-width: 400px;
 }
@@ -163,7 +130,7 @@
 	align-items: center;
 	gap: 24px;
 }
-.post-container {
+.posts-container {
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -171,6 +138,11 @@
 	gap: 48px;
 	padding: 64px;
 }
+
+.posts-inner-container {
+	max-width: 100% !important;
+}
+
 .grid-container {
 	width: 100%;
 	display: grid;

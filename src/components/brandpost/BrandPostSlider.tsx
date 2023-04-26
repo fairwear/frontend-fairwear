@@ -1,4 +1,4 @@
-import BrandPostComponent from "@components/brand/BrandPostComponent";
+import BrandPostComponent from "@components/brandpost/BrandPostComponent";
 import BrandPostResponse from "@models/brandpost/BrandPostResponse";
 import { Splide, SplideSlide, SplideTrack } from "@splidejs/react-splide";
 import { useEffect, useRef, useState } from "react";
@@ -29,7 +29,6 @@ const BrandPostSlider = (props: BrandPostSliderProps) => {
 	return (
 		<Splide
 			ref={slideRef}
-			className="product-slider"
 			hasTrack={false}
 			options={{
 				arrows: false,

@@ -30,6 +30,13 @@ const AppTheme = createTheme({
 		},
 		MuiButton: {
 			styleOverrides: {
+				root: {
+					textTransform: "none",
+					boxShadow: "none",
+					":hover": {
+						boxShadow: "none",
+					},
+				},
 				contained: {
 					backgroundColor: "#222222",
 					opacity: 0.87,
@@ -37,7 +44,7 @@ const AppTheme = createTheme({
 					"&:hover": {
 						backgroundColor: "#222222",
 						color: "#e9e9e9",
-						opacity: 0.5,
+						opacity: 0.8,
 					},
 				},
 				outlined: {
@@ -47,6 +54,86 @@ const AppTheme = createTheme({
 						borderColor: "#222222",
 						color: "#222222",
 					},
+				},
+				text: {
+					color: "#1F2B31",
+				},
+			},
+			variants: [
+				{
+					props: { variant: "danger" },
+					style: {
+						background: "#E53935",
+						color: "#FFFFFF",
+						"&.MuiButton-root": {
+							":hover": {
+								background: "#B71C1C !important",
+								backgroundColor: "#B71C1C !important",
+							},
+						},
+					},
+				},
+				{
+					props: { variant: "grey" },
+					style: {
+						background: "#EEEEEE",
+						color: "#171440",
+						"&.MuiButton-root": {
+							":hover": {
+								background: "#e0e0e0",
+								backgroundColor: "#e0e0e0",
+							},
+						},
+					},
+				},
+				{
+					props: { color: "error" },
+					style: {
+						"&.MuiButton-root": {
+							":hover": {
+								background: "inherit",
+							},
+						},
+						color: "#E53935",
+					},
+				},
+			],
+		},
+		MuiToolbar: {
+			styleOverrides: {
+				root: {
+					minHeight: "70px",
+					backgroundColor: "#e9e9e9",
+					"&.MuiToolbar-gutters": {
+						paddingLeft: "48px",
+						paddingRight: "48px",
+					},
+				},
+			},
+			variants: [
+				{
+					props: {
+						className: "footer-toolbar",
+					},
+					style: {
+						"&.MuiToolbar-root": {
+							background: "#F7F8FC",
+						},
+					},
+				},
+			],
+		},
+		MuiAppBar: {
+			styleOverrides: {
+				root: {
+					minHeight: "70px",
+					backgroundColor: "#e9e9e9",
+					// Adds a shadow to the appbar
+					boxShadow: "none",
+					// boxShadow:
+					// 	"0px 6px 12px -6px rgba(0, 43, 0, 0.05), 0px 8px 22px -4px rgba(0, 43, 0, 0.05)",
+					// Makes the appbar fixed
+					// position: "relative",
 				},
 			},
 		},
@@ -125,7 +212,6 @@ const AppTheme = createTheme({
 			],
 		},
 	},
-
 	palette: {
 		red: {
 			50: "#FEEBEE",
@@ -158,6 +244,11 @@ const AppTheme = createTheme({
 			fontWeight: "700",
 		},
 		h3: {
+			fontSize: "22px",
+			lineHeight: "120%",
+			fontWeight: "500",
+		},
+		h4: {
 			fontSize: "18px",
 			lineHeight: "120%",
 			fontWeight: "500",
@@ -210,6 +301,12 @@ declare module "@mui/material/styles/createPalette" {
 		error?: PaletteOptions["primary"];
 		red?: PaletteOptions["grey"];
 		green?: PaletteOptions["grey"];
+	}
+}
+declare module "@mui/material/Button" {
+	interface ButtonPropsVariantOverrides {
+		danger: true;
+		grey: true;
 	}
 }
 
