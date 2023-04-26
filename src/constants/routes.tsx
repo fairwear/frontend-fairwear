@@ -27,9 +27,9 @@ const routes: RouteGroup[] = [
 				path: "/brandlist",
 				key: "brandList",
 				pageTitle: "Brand List",
-				element: <BrandListPage/>,
+				element: <BrandListPage />,
 				icon: <TokenRoundedIcon />,
-			}
+			},
 		],
 	},
 	{
