@@ -1,13 +1,12 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import App from "./AppRouter";
-import "./index.css";
-import { BrowserRouter } from "react-router-dom";
 import { ThemeProvider } from "@emotion/react";
-import AppTheme from "./AppTheme";
-import setupAxiosInterceptors from "@services/axiosInterceptors";
+import { store } from "./redux/store/rootReducer";
+import setupAxiosInterceptors from "./services/axiosInterceptors";
+import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
-import { store } from "@redux/store/rootReducer";
+import { BrowserRouter } from "react-router-dom";
+import App from "./AppRouter";
+import AppTheme from "./AppTheme";
+import "./index.css";
 import ScrollToTop from "@services/ScrollToTop";
 
 const root = ReactDOM.createRoot(

@@ -1,3 +1,4 @@
+import AlertComponent from "@components/alert/AlertComponent";
 import common from "@redux/common";
 import { useAppSelector } from "@redux/store/hooks";
 import { useEffect } from "react";
@@ -9,6 +10,7 @@ import RouteItem from "./models/routes/RouteItem";
 
 function App() {
 	const isLoggedIn = useAppSelector((state) => state.common.isLoggedIn);
+	const appAlerts = useAppSelector((state) => state.alerts.alerts);
 	useEffect(() => {
 		common.getStatus();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
@@ -16,7 +18,6 @@ function App() {
 
 	useEffect(() => {
 		common.getStatus();
-		console.log(isLoggedIn);
 	}, [isLoggedIn]);
 
 	return (
@@ -30,6 +31,19 @@ function App() {
 			className="App"
 		>
 			<Header />
+			<SubHeader />
+			<>
+				{appAlerts.length > 0 && (
+					<>
+						{appAlerts.map((alertValue) => (
+							<AlertComponent
+								key={alertValue.message}
+								alertValue={alertValue}
+							/>
+						))}
+					</>
+				)}
+			</>
 			<Routes>
 				{[...routes[0].items, ...routes[1].items].map((route: RouteItem) => (
 					<Route key={route.key} path={route.path} element={route.element} />
