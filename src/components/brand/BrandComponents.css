@@ -204,7 +204,32 @@
 	}
 }
 
+.brand-list-container {
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+	width: 100%;
+	gap: 32px;
+}
+
 .product-image,
 .extended {
 	width: 100%;
+}
+.subheader-container {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+	margin-top: 16px;
+	width: 100% !important;
+}
+@media screen and (max-width: 900px) {
+	.logo-pic {
+		max-width: calc(100vw - 5em) !important;
+	}
+}
+
+.logo-pic {
+	max-width: calc(100vw - 2em);
+	margin-top: 80px;
 }

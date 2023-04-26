@@ -3,6 +3,7 @@ import TokenRoundedIcon from "@mui/icons-material/TokenRounded";
 import RouteGroup from "../models/routes/RouteGroup";
 import HomePage from "@pages/home/HomePage";
 import BrandPage from "@pages/brand/BrandPage";
+import BrandListPage from "@pages/brand_list/BrandListPage";
 
 const routes: RouteGroup[] = [
 	{
@@ -20,6 +21,13 @@ const routes: RouteGroup[] = [
 				key: "brand",
 				pageTitle: "Brand",
 				element: <BrandPage />,
+				icon: <TokenRoundedIcon />,
+			},
+			{
+				path: "/brandlist",
+				key: "brandList",
+				pageTitle: "Brand List",
+				element: <BrandListPage />,
 				icon: <TokenRoundedIcon />,
 			},
 		],
