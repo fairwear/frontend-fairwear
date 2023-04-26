@@ -1,4 +1,4 @@
-import BrandPostSlider from "@components/brand/BrandPostSlider";
+import BrandPostSlider from "@components/brandpost/BrandPostSlider";
 import BrandPostResponse from "@models/brandpost/BrandPostResponse";
 import { Typography } from "@mui/material";
 

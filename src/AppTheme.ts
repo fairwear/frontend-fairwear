@@ -99,6 +99,44 @@ const AppTheme = createTheme({
 				},
 			],
 		},
+		MuiToolbar: {
+			styleOverrides: {
+				root: {
+					minHeight: "70px",
+					backgroundColor: "#e9e9e9",
+					"&.MuiToolbar-gutters": {
+						paddingLeft: "48px",
+						paddingRight: "48px",
+					},
+				},
+			},
+			variants: [
+				{
+					props: {
+						className: "footer-toolbar",
+					},
+					style: {
+						"&.MuiToolbar-root": {
+							background: "#F7F8FC",
+						},
+					},
+				},
+			],
+		},
+		MuiAppBar: {
+			styleOverrides: {
+				root: {
+					minHeight: "70px",
+					backgroundColor: "#e9e9e9",
+					// Adds a shadow to the appbar
+					boxShadow: "none",
+					// boxShadow:
+					// 	"0px 6px 12px -6px rgba(0, 43, 0, 0.05), 0px 8px 22px -4px rgba(0, 43, 0, 0.05)",
+					// Makes the appbar fixed
+					// position: "relative",
+				},
+			},
+		},
 	},
 	palette: {
 		red: {

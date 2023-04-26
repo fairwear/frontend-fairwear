@@ -4,7 +4,7 @@ import { ThumbDown, ThumbUp } from "@mui/icons-material";
 import { Typography } from "@mui/material";
 import moment from "moment";
 import { useEffect, useState } from "react";
-import "./BrandComponents.css";
+import "./BrandPost.css";
 
 interface BrandPostComponentProps {
 	brandPost: BrandPostResponse;

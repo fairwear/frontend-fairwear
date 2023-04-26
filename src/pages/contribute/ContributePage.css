@@ -1,10 +1,19 @@
 .contribute-page-container {
 	padding: 64px;
-	width: 100%;
 	box-sizing: border-box;
+	width: 100%;
 }
 
 .contribute-page-container .add-brand-button {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-transform: none;
+	padding: 8px 16px;
+}
+
+.contribute-page-container .add-brandpost-button {
+	/* TODO: Style these buttons differently */
 	display: flex;
 	justify-content: center;
 	align-items: center;

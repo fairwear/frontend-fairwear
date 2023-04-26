@@ -1,7 +1,11 @@
+import AuthAPI from "@api/AuthAPI";
+import LoginDialog from "@components/login/LoginDialog";
+import SignUpDialog from "@components/login/SignUpDialog";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import MenuIcon from "@mui/icons-material/Menu";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import SearchIcon from "@mui/icons-material/Search";
-import { Button, Typography } from "@mui/material";
+import { Button } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
@@ -10,14 +14,10 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Toolbar from "@mui/material/Toolbar";
 import { alpha, styled } from "@mui/material/styles";
+import { useAppSelector } from "@redux/store/hooks";
 import * as React from "react";
-import LoginDialog from "@components/login/LoginDialog";
-import SignUpDialog from "@components/login/SignUpDialog";
 import "../Components.css";
 import "./CommonComponents.css";
-import AuthAPI from "@api/AuthAPI";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import { useAppSelector } from "@redux/store/hooks";
 import ContributeButton from "./ContributeButton";
 
 const Search = styled("div")(({ theme }) => ({
@@ -72,7 +72,7 @@ export default function PrimarySearchAppBar() {
 	const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
 	const handleLogout = async () => {
-		let res = await AuthAPI.logout();
+		await AuthAPI.logout();
 		window.location.reload();
 	};
 
@@ -92,7 +92,6 @@ export default function PrimarySearchAppBar() {
 
 	const handleLoginDialogClose = () => {
 		setLoginDialog(false);
-		console.log("Login Dialog Closed");
 	};
 
 	const handleSignUpDialog = () => {
@@ -100,7 +99,6 @@ export default function PrimarySearchAppBar() {
 	};
 	const handleSignUpDialogClose = () => {
 		setSignUpDialog(false);
-		console.log("Sign Up Dialog Closed");
 	};
 
 	const handleMenuClose = () => {
@@ -186,115 +184,113 @@ export default function PrimarySearchAppBar() {
 	);
 
 	return (
-		<Box>
-			<AppBar sx={{ boxShadow: "none" }}>
-				<Toolbar sx={{ backgroundColor: "#e9e9e9" }}>
-					<IconButton
-						size="large"
-						edge="start"
-						color="inherit"
-						aria-label="open drawer"
+		<AppBar
+			// position="static"
+			position="sticky"
+		>
+			<Toolbar>
+				<IconButton
+					size="large"
+					edge="start"
+					color="inherit"
+					aria-label="open drawer"
+					sx={{
+						color: "#222222",
+						mr: 2,
+					}}
+				>
+					<MenuIcon />
+				</IconButton>
+
+				<Search>
+					<SearchIconWrapper>
+						<SearchIcon sx={{ color: "#222222" }} />
+					</SearchIconWrapper>
+					<StyledInputBase
 						sx={{
 							color: "#222222",
-							mr: 2,
+							width: "100%",
+							fontFamily: "Inter",
 						}}
-					>
-						<MenuIcon />
-					</IconButton>
+						placeholder="Search…"
+						inputProps={{ "aria-label": "search" }}
+					/>
+				</Search>
 
-					<Search>
-						<SearchIconWrapper>
-							<SearchIcon sx={{ color: "#222222" }} />
-						</SearchIconWrapper>
-						<StyledInputBase
-							sx={{
-								color: "#222222",
-								width: "100%",
-								fontFamily: "Inter",
-							}}
-							placeholder="Search…"
-							inputProps={{ "aria-label": "search" }}
-						/>
-					</Search>
-
-					<Box sx={{ flexGrow: 1 }} />
-					<Box
-						sx={{
-							display: { xs: "none", md: "flex" },
-							flexDirection: "row",
-							justifyContent: "space-evenly",
-							width: "20%",
-							marginRight: "16px",
-						}}
-					>
-						{!isLoggedIn ? (
-							<>
-								<Button
-									style={{ textTransform: "none" }}
-									onClick={handleLoginDialog}
-								>
-									<h2 className="header-text">Login</h2>
-								</Button>
-								<LoginDialog
-									toSignUp={handleSignUpDialog}
-									open={loginDialog}
-									handleClose={handleLoginDialogClose}
-								/>
-								<Button
-									style={{ textTransform: "none" }}
-									onClick={handleSignUpDialog}
-								>
-									<h2 className="header-text">Sign Up</h2>
-								</Button>
-								<SignUpDialog
-									toLogin={handleLoginDialog}
-									open={signUpDialog}
-									handleClose={handleSignUpDialogClose}
-								/>
-							</>
-						) : (
-							<Box
-								sx={{
-									display: { xs: "none", md: "flex" },
-									flexDirection: "row",
-									alignItems: "center",
-									justifyContent: "space-evenly",
-									gap: "16px",
-								}}
+				<Box sx={{ flexGrow: 1 }} />
+				<Box
+					sx={{
+						display: { xs: "none", md: "flex" },
+						flexDirection: "row",
+						justifyContent: "space-evenly",
+						width: "20%",
+						marginRight: "16px",
+					}}
+				>
+					{!isLoggedIn ? (
+						<>
+							<Button
+								style={{ textTransform: "none" }}
+								onClick={handleLoginDialog}
 							>
-								<AccountCircleIcon
-									sx={{
-										fontSize: "38px",
-										color: "#222222",
-										opacity: "0.87,",
-									}}
-								/>
-								<ContributeButton />
-								<Button
-									style={{ textTransform: "none" }}
-									onClick={handleLogout}
-								>
-									<h2 className="header-text">Logout</h2>
-								</Button>
-							</Box>
-						)}
-					</Box>
-					<Box sx={{ display: { xs: "flex", md: "none" } }}>
-						<IconButton
-							size="large"
-							aria-label="show more"
-							aria-controls={mobileMenuId}
-							aria-haspopup="true"
-							onClick={handleMobileMenuOpen}
-							sx={{ color: "#222222" }}
+								<h2 className="header-text">Login</h2>
+							</Button>
+							<LoginDialog
+								toSignUp={handleSignUpDialog}
+								open={loginDialog}
+								handleClose={handleLoginDialogClose}
+							/>
+							<Button
+								style={{ textTransform: "none" }}
+								onClick={handleSignUpDialog}
+							>
+								<h2 className="header-text">Sign Up</h2>
+							</Button>
+							<SignUpDialog
+								toLogin={handleLoginDialog}
+								open={signUpDialog}
+								handleClose={handleSignUpDialogClose}
+							/>
+						</>
+					) : (
+						<Box
+							sx={{
+								display: { xs: "none", md: "flex" },
+								flexDirection: "row",
+								alignItems: "center",
+								justifyContent: "space-evenly",
+								gap: "16px",
+							}}
 						>
-							<MoreIcon />
-						</IconButton>
-					</Box>
-				</Toolbar>
-			</AppBar>
-			{renderMobileMenu}
-			{renderMenu}
-		</Box>
+							<AccountCircleIcon
+								sx={{
+									fontSize: "38px",
+									color: "#222222",
+									opacity: "0.87,",
+								}}
+							/>
+							<ContributeButton />
+							<Button style={{ textTransform: "none" }} onClick={handleLogout}>
+								<h2 className="header-text">Logout</h2>
+							</Button>
+						</Box>
+					)}
+				</Box>
+				<Box sx={{ display: { xs: "flex", md: "none" } }}>
+					<IconButton
+						size="large"
+						aria-label="show more"
+						aria-controls={mobileMenuId}
+						aria-haspopup="true"
+						onClick={handleMobileMenuOpen}
+						sx={{ color: "#222222" }}
+					>
+						<MoreIcon />
+					</IconButton>
+				</Box>
+				{renderMobileMenu}
+				{renderMenu}
+			</Toolbar>
+		</AppBar>
 	);
 }

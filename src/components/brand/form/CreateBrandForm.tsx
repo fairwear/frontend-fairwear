@@ -42,16 +42,10 @@ const CreateBrandForm = (props: CreateBrandFormProps) => {
 		}
 	};
 
-	const handleSubmit = async (values: CreateBrandFormValues) => {
-		console.log(values);
-
-		handleFormSubmit(values);
-	};
-
 	return (
 		<Formik
 			initialValues={initialValues}
-			onSubmit={handleSubmit}
+			onSubmit={handleFormSubmit}
 			validationSchema={validationSchema}
 			enableReinitialize
 		>

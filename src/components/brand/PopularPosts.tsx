@@ -1,6 +1,6 @@
 import { Typography } from "@mui/material";
 import "./BrandComponents.css";
-import BrandPostSlider from "./BrandPostSlider";
+import BrandPostSlider from "../brandpost/BrandPostSlider";
 import BrandPostResponse from "@models/brandpost/BrandPostResponse";
 export default function PopularPosts() {
 	const brandPosts: BrandPostResponse[] = [
