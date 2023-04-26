@@ -42,7 +42,7 @@ export default function Topics() {
 			</div>
 			<div className="topic-container">
 				{topics.map((topic) => (
-					<div className="topic">
+					<div key={topic.id} className="topic">
 						<Typography variant="body1" className="topic-name">
 							{topic.name}
 						</Typography>

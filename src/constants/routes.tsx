@@ -19,7 +19,7 @@ const routes: RouteGroup[] = [
 				icon: <HomeRounded />,
 			},
 			{
-				path: "/brand",
+				path: "/brand/:brandId",
 				key: "brand",
 				pageTitle: "Brand Page",
 				element: <BrandPage />,

@@ -1,10 +1,17 @@
-import { Button, Typography } from "@mui/material";
-import "./BrandComponents.css";
-import ContributeButton from "@components/common/ContributeButton";
 import brandLogo from "@assets/images/versace_logo.png";
-import "../Components.css";
+import ContributeButton from "@components/common/ContributeButton";
+import BrandResponse from "@models/brand/BrandResponse";
+import { Button, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-export default function BrandBannerInfo() {
+import "../Components.css";
+import "./BrandComponents.css";
+
+interface BrandBannerInfoProps {
+	brand: BrandResponse;
+}
+
+export default function BrandBannerInfo(props: BrandBannerInfoProps) {
+	const { brand } = props;
 	const navigate = useNavigate();
 
 	return (
@@ -13,7 +20,7 @@ export default function BrandBannerInfo() {
 				<img className="image" src={brandLogo} />
 			</div>
 			<div className="info-container">
-				<Typography variant="h2">Brand Name</Typography>
+				<Typography variant="h2">{brand.name}</Typography>
 				<Typography variant="h6" className="description">
 					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
 					eiusmod tempor incididunt ut labore et dolore magna aliqua. Faucibus
