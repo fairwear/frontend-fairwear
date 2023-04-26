@@ -5,7 +5,7 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import MenuIcon from "@mui/icons-material/Menu";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import SearchIcon from "@mui/icons-material/Search";
-import { Button } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
@@ -152,7 +152,9 @@ export default function PrimarySearchAppBar() {
 			{!isLoggedIn ? (
 				<div className="menu-container">
 					<Button sx={{ textTransform: "none" }} onClick={handleLoginDialog}>
-						<h2 className="header-text">Log in</h2>
+						<Typography variant="h4" className="header-text">
+							Log in
+						</Typography>
 					</Button>
 					<LoginDialog
 						toSignUp={handleSignUpDialog}
@@ -160,8 +162,8 @@ export default function PrimarySearchAppBar() {
 						handleClose={handleLoginDialogClose}
 					/>
 
-					<Button sx={{ textTransform: "none" }} onClick={handleSignUpDialog}>
-						<h2 className="header-text">Sign Up</h2>
+					<Button className="signup-button" onClick={handleSignUpDialog}>
+						<Typography variant="h4">Sign Up</Typography>
 					</Button>
 					<SignUpDialog
 						toLogin={handleLoginDialog}
@@ -173,10 +175,12 @@ export default function PrimarySearchAppBar() {
 				<div className="menu-container">
 					<ContributeButton />
 					<Button onClick={handleLogout}>
-						<h2 className="header-text">Log out</h2>
+						<Typography variant="h4" className="logout-button">
+							Logout
+						</Typography>
 					</Button>
 					<Button onClick={handleProfileMenuOpen}>
-						<AccountCircleIcon sx={{ color: "#222222" }} />
+						<AccountCircleIcon style={{ color: "rgba(34, 34, 34, 0.5)" }} />
 					</Button>
 				</div>
 			)}
@@ -186,6 +190,7 @@ export default function PrimarySearchAppBar() {
 	return (
 		<AppBar
 			// position="static"
+			className="header-appbar"
 			position="sticky"
 		>
 			<Toolbar>
@@ -194,15 +199,17 @@ export default function PrimarySearchAppBar() {
 					edge="start"
 					color="inherit"
 					aria-label="open drawer"
-					sx={{
-						color: "#222222",
-						mr: 2,
-					}}
+					className="header-menu-icon"
 				>
 					<MenuIcon />
 				</IconButton>
 
-				<Search>
+				<Search
+					style={{
+						flex: 1,
+						width: "100%",
+					}}
+				>
 					<SearchIconWrapper>
 						<SearchIcon sx={{ color: "#222222" }} />
 					</SearchIconWrapper>
@@ -216,24 +223,14 @@ export default function PrimarySearchAppBar() {
 						inputProps={{ "aria-label": "search" }}
 					/>
 				</Search>
-
-				<Box sx={{ flexGrow: 1 }} />
 				<Box
-					sx={{
-						display: { xs: "none", md: "flex" },
-						flexDirection: "row",
-						justifyContent: "space-evenly",
-						width: "20%",
-						marginRight: "16px",
-					}}
+					className="header-auth-button-container"
+					display={{ xs: "none", md: "flex" }}
 				>
 					{!isLoggedIn ? (
-						<>
-							<Button
-								style={{ textTransform: "none" }}
-								onClick={handleLoginDialog}
-							>
-								<h2 className="header-text">Login</h2>
+						<div className="header-auth-buttons">
+							<Button className="login-button" onClick={handleLoginDialog}>
+								<Typography variant="h4">Login</Typography>
 							</Button>
 							<LoginDialog
 								toSignUp={handleSignUpDialog}
@@ -241,42 +238,31 @@ export default function PrimarySearchAppBar() {
 								handleClose={handleLoginDialogClose}
 							/>
 							<Button
-								style={{ textTransform: "none" }}
+								variant="contained"
+								className="signup-button"
 								onClick={handleSignUpDialog}
 							>
-								<h2 className="header-text">Sign Up</h2>
+								<Typography variant="h4">Sign Up</Typography>
 							</Button>
 							<SignUpDialog
 								toLogin={handleLoginDialog}
 								open={signUpDialog}
 								handleClose={handleSignUpDialogClose}
 							/>
-						</>
+						</div>
 					) : (
-						<Box
-							sx={{
-								display: { xs: "none", md: "flex" },
-								flexDirection: "row",
-								alignItems: "center",
-								justifyContent: "space-evenly",
-								gap: "16px",
-							}}
-						>
-							<AccountCircleIcon
-								sx={{
-									fontSize: "38px",
-									color: "#222222",
-									opacity: "0.87,",
-								}}
-							/>
+						<div className="header-auth-buttons logged-in">
+							<IconButton>
+								<AccountCircleIcon className="account-icon" />
+							</IconButton>
 							<ContributeButton />
-							<Button style={{ textTransform: "none" }} onClick={handleLogout}>
-								<h2 className="header-text">Logout</h2>
+							<Button className="logout-button" onClick={handleLogout}>
+								<Typography variant="h4">Logout</Typography>
 							</Button>
-						</Box>
+						</div>
 					)}
 				</Box>
-				<Box sx={{ display: { xs: "flex", md: "none" } }}>
+				<Box display={{ xs: "flex", md: "none" }}>
 					<IconButton
 						size="large"
 						aria-label="show more"

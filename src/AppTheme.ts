@@ -44,7 +44,7 @@ const AppTheme = createTheme({
 					"&:hover": {
 						backgroundColor: "#222222",
 						color: "#e9e9e9",
-						opacity: 0.5,
+						opacity: 0.8,
 					},
 				},
 				outlined: {
@@ -170,6 +170,11 @@ const AppTheme = createTheme({
 			fontWeight: "700",
 		},
 		h3: {
+			fontSize: "22px",
+			lineHeight: "120%",
+			fontWeight: "500",
+		},
+		h4: {
 			fontSize: "18px",
 			lineHeight: "120%",
 			fontWeight: "500",

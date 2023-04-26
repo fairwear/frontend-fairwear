@@ -1,11 +1,10 @@
 import { Button, Typography } from "@mui/material";
-import React from "react";
-import "../Components.css";
+import "@components/Components.css";
 
 function ContributeButton() {
 	return (
-		<Button className="login" variant="contained">
-			<Typography className="login button-text">Contribute</Typography>
+		<Button className="contribute-button" variant="contained">
+			<Typography variant="h4">Contribute</Typography>
 		</Button>
 	);
 }
