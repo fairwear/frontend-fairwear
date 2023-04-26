@@ -1,6 +1,7 @@
 import BrandResponse from "@models/brand/BrandResponse";
 import { Button, Typography } from "@mui/material";
 import "./BrandComponents.css";
+import { useNavigate } from "react-router-dom";
 
 interface BrandComponentProps {
 	brand: BrandResponse;
@@ -8,6 +9,10 @@ interface BrandComponentProps {
 }
 
 const BrandComponent = (props: BrandComponentProps) => {
+	const navigate = useNavigate();
+	const handleNavigateToBrand = () => {
+		navigate(`/brand/${props.brand.id}`);
+	};
 	return (
 		<div className="brand-component-container">
 			<img
@@ -15,6 +20,7 @@ const BrandComponent = (props: BrandComponentProps) => {
 				src={props.imageUrl}
 				alt={props.brand.name}
 				style={{
+					//TODO: Export style to css file
 					// width: "100%",
 					// width: "100px",
 
@@ -30,7 +36,11 @@ const BrandComponent = (props: BrandComponentProps) => {
 					</Typography>
 				</div>
 				<div className="brand-component-button-container">
-					<Button variant="outlined" className="brand-component-button">
+					<Button
+						variant="outlined"
+						className="brand-component-button"
+						onClick={handleNavigateToBrand}
+					>
 						<Typography variant="h6">View {props.brand.name}</Typography>
 					</Button>
 				</div>
