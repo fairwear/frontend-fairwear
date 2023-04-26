@@ -31,7 +31,6 @@ function App() {
 			className="App"
 		>
 			<Header />
-			<SubHeader />
 			<>
 				{appAlerts.length > 0 && (
 					<>
