@@ -5,6 +5,7 @@ import RouteGroup from "../models/routes/RouteGroup";
 import HomePage from "@pages/home/HomePage";
 import BrandPage from "@pages/brand/BrandPage";
 import ContributePage from "@pages/contribute/ContributePage";
+import BrandListPage from "@pages/brand_list/BrandListPage";
 
 const routes: RouteGroup[] = [
 	{
@@ -30,6 +31,13 @@ const routes: RouteGroup[] = [
 				pageTitle: "Contribute Page",
 				element: <ContributePage />,
 				icon: <AddCircleOutlineOutlinedIcon />,
+			},
+			{
+				path: "/brandlist",
+				key: "brandList",
+				pageTitle: "Brand List",
+				element: <BrandListPage />,
+				icon: <TokenRoundedIcon />,
 			},
 		],
 	},
