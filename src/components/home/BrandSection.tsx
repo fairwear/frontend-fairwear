@@ -1,48 +1,11 @@
 import BrandAPI from "@api/BrandAPI";
+import brandLogo from "@assets/images/versace_logo.png";
 import BrandComponent from "@components/brand/BrandComponent";
 import BrandResponse from "@models/brand/BrandResponse";
-import { Button, ButtonProps, Typography } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
-import "./HomeComponents.css";
 import { useNavigate } from "react-router-dom";
-import brandLogo from "@assets/images/versace_logo.png";
-
-interface props extends ButtonProps {
-	question: string;
-	answer: string;
-}
-
-//TODO: Connect to backend and remove mock data
-const brandResponses: BrandResponse[] = [
-	{
-		id: 1,
-		name: "Brand 1",
-		createdAt: new Date(),
-		updatedAt: null,
-		deletedAt: null,
-	},
-	{
-		id: 2,
-		name: "Brand 2",
-		createdAt: new Date(),
-		updatedAt: null,
-		deletedAt: null,
-	},
-	{
-		id: 3,
-		name: "Brand 3",
-		createdAt: new Date(),
-		updatedAt: new Date(),
-		deletedAt: null,
-	},
-	{
-		id: 4,
-		name: "Brand 4",
-		createdAt: new Date(),
-		updatedAt: null,
-		deletedAt: null,
-	},
-];
+import "./HomeComponents.css";
 
 const BrandSection = () => {
 	const [brands, setBrands] = useState<BrandResponse[]>([]);
@@ -50,7 +13,7 @@ const BrandSection = () => {
 	const navigate = useNavigate();
 
 	const handleNavigateToBrandList = () => {
-		navigate("/brand-list");
+		navigate("/brandlist");
 	};
 
 	useEffect(() => {
@@ -59,10 +22,8 @@ const BrandSection = () => {
 
 	const getBrands = async () => {
 		let brands = await BrandAPI.findAll();
-		let splitBrands = brands.slice(0, 4); // deepscan-disable-line
-		// TODO: Uncomment this line when the database is ready
-		// setBrands(splitBrands);
-		setBrands(brandResponses);
+		let splitBrands = brands.slice(0, 4);
+		setBrands(splitBrands);
 	};
 
 	return (

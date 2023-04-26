@@ -8,6 +8,7 @@ import AppTheme from "./AppTheme";
 import setupAxiosInterceptors from "@services/axiosInterceptors";
 import { Provider } from "react-redux";
 import { store } from "@redux/store/rootReducer";
+import ScrollToTop from "@services/ScrollToTop";
 
 const root = ReactDOM.createRoot(
 	document.getElementById("root") as HTMLElement
@@ -17,6 +18,7 @@ setupAxiosInterceptors();
 
 root.render(
 	<BrowserRouter>
+		<ScrollToTop />
 		<Provider store={store}>
 			<ThemeProvider theme={AppTheme}>
 				<App />

@@ -1,85 +1,30 @@
-import { Typography } from "@mui/material";
-import "./BrandComponents.css";
-import BrandPostSlider from "../brandpost/BrandPostSlider";
+import BrandPostAPI from "@api/BrandPostAPI";
 import BrandPostResponse from "@models/brandpost/BrandPostResponse";
-export default function PopularPosts() {
-	const brandPosts: BrandPostResponse[] = [
-		{
-			id: 1,
-			body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare.",
-			brand: {
-				id: 1,
-				name: "Brand 1",
-				createdAt: new Date(),
-				updatedAt: new Date(),
-				deletedAt: null,
-			},
-			createdAt: new Date(),
-			deletedAt: null,
-			votes: [],
-		},
-		{
-			id: 2,
+import { Typography } from "@mui/material";
+import { useEffect, useState } from "react";
+import BrandPostSlider from "../brandpost/BrandPostSlider";
+import "./BrandComponents.css";
 
-			body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare.",
-			brand: {
-				id: 2,
-				name: "Brand 2",
-				createdAt: new Date(),
-				updatedAt: new Date(),
-				deletedAt: null,
-			},
-			createdAt: new Date(),
-			deletedAt: null,
-			votes: [],
-		},
+interface PopularPostsProps {
+	brandId: number;
+}
 
-		{
-			id: 3,
+export default function PopularPosts(props: PopularPostsProps) {
+	// TODO: Implement this, currently not used
+	// const { brandId } = props;
 
-			body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare.",
-			brand: {
-				id: 3,
-				name: "Brand 3",
-				createdAt: new Date(),
-				updatedAt: new Date(),
-				deletedAt: null,
-			},
-			createdAt: new Date(),
-			deletedAt: null,
-			votes: [],
-		},
+	const [brandPosts, setBrandPosts] = useState<BrandPostResponse[]>([]);
 
-		{
-			id: 4,
-			body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare.",
-			brand: {
-				id: 4,
-				name: "Brand 4",
-				createdAt: new Date(),
-				updatedAt: new Date(),
-				deletedAt: null,
-			},
-			createdAt: new Date(),
-			deletedAt: null,
-			votes: [],
-		},
+	useEffect(() => {
+		getBrandPosts();
+	}, []);
 
-		{
-			id: 5,
-			body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare.",
-			brand: {
-				id: 5,
-				name: "Brand 5",
-				createdAt: new Date(),
-				updatedAt: null,
-				deletedAt: null,
-			},
-			createdAt: new Date(),
-			deletedAt: null,
-			votes: [],
-		},
-	];
+	const getBrandPosts = async () => {
+		// TODO: Temp solution, Fix this
+		const response = await BrandPostAPI.findAll();
+		setBrandPosts(response);
+	};
+
 	return (
 		<div className="posts-container">
 			<div className="posts-header-container">

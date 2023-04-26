@@ -14,6 +14,10 @@ export default function BrandPage() {
 
 	useEffect(() => {
 		getBrand();
+	}, []);
+
+	useEffect(() => {
+		getBrand();
 	}, [brandId]);
 
 	const getBrand = async () => {
@@ -25,7 +29,7 @@ export default function BrandPage() {
 	return (
 		<div className="page-container">
 			{brand && <BrandBannerInfo brand={brand} />}
-			<PopularPosts />
+			{brandId && <PopularPosts brandId={+brandId} />}
 			<Topics />
 			<ProductList />
 		</div>
