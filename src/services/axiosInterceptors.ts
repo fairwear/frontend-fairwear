@@ -13,20 +13,19 @@ const setupAxiosInterceptors = () => {
 	const handleResponseError = async (error: AxiosError) => {
 		if (error.response?.status === 401 || error.response?.status === 403) {
 			// If forbidden or unauthorized, then move user to login page
-			console.error(error.message);
+			if (window.location.pathname !== "/") {
+				window.location.assign("/");
+			}
 		} else {
-			console.error(error.response?.data || error.message);
-
-			return await Promise.reject(error.message);
+			console.log(error.response?.data || error.message);
 
 			// store.dispatch(alertActions.addAlert(mapErrorToAlert(error)));
-
-			// return Promise.reject(error);
 		}
+		return Promise.reject(error);
 	};
 
 	const handleRequestError = async (error: AxiosError) => {
-		console.error(error.message);
+		console.log(error.message);
 		return await Promise.reject(error.message);
 	};
 

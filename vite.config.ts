@@ -14,7 +14,7 @@ export default defineConfig({
 	},
 	resolve: {
 		alias: {
-			"@": path.resolve(__dirname, "./src"),
+			"@src": path.resolve(__dirname, "./src"),
 			"@api": path.resolve(__dirname, "./src/api"),
 			"@components": path.resolve(__dirname, "./src/components"),
 			"@pages": path.resolve(__dirname, "./src/pages"),
@@ -26,5 +26,6 @@ export default defineConfig({
 			"@services": path.resolve(__dirname, "./src/services"),
 		},
 	},
+	base: "./src",
 	plugins: [react()],
 });

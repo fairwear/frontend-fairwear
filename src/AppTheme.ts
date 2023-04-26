@@ -50,6 +50,80 @@ const AppTheme = createTheme({
 				},
 			},
 		},
+		MuiAlert: {
+			styleOverrides: {
+				root: {
+					color: "#FFFFFF !important",
+					borderRadius: "0px",
+				},
+				icon: {
+					color: "#FFFFFF !important",
+				},
+				message: {
+					width: "100%",
+				},
+			},
+			variants: [
+				{
+					props: { severity: "success" },
+					style: {
+						background: "#388E3C",
+					},
+				},
+				{
+					props: { severity: "error" },
+					style: {
+						background: "#D32F2F",
+					},
+				},
+				{
+					props: { severity: "warning" },
+					style: {
+						background: "#FFC107",
+					},
+				},
+				{
+					props: { severity: "info" },
+					style: {
+						background: "#7A8BC7",
+					},
+				},
+			],
+		},
+		MuiChip: {
+			styleOverrides: {
+				label: {
+					padding: "4.5px 12px",
+				},
+			},
+			variants: [
+				{
+					props: { color: "success" },
+					style: {
+						color: "#388E3C",
+						background: "#388E3C",
+						borderRadius: "30px",
+					},
+				},
+				{
+					props: { color: "error" },
+					style: {
+						color: "#D32F2F",
+						background: "#D32F2F",
+						border: "1px solid #D50000",
+						borderRadius: "30px",
+					},
+				},
+				{
+					props: { color: "info" },
+					style: {
+						color: "#B99F83",
+						background: "#B99F83",
+						borderRadius: "30px",
+					},
+				},
+			],
+		},
 	},
 
 	palette: {
