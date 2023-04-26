@@ -1,12 +1,16 @@
 import { Button, Typography } from "@mui/material";
 import "./BrandComponents.css";
 import ContributeButton from "@components/common/ContributeButton";
+import brandLogo from "@assets/images/versace_logo.png";
 import "../Components.css";
+import { useNavigate } from "react-router-dom";
 export default function BrandBannerInfo() {
+	const navigate = useNavigate();
+
 	return (
 		<div className="brand-banner">
 			<div className="image-container">
-				<img className="image" src="src/assets/images/versace_logo.png" />
+				<img className="image" src={brandLogo} />
 			</div>
 			<div className="info-container">
 				<Typography variant="h2">Brand Name</Typography>
@@ -22,8 +26,18 @@ export default function BrandBannerInfo() {
 					elementum sagittis.
 				</Typography>
 				<div className="button-container">
-					<ContributeButton />
-					<Button className="signup-button" variant="outlined">
+					<ContributeButton
+						handleClick={() => {
+							navigate("/contribute");
+						}}
+					/>
+					<Button
+						className="signup-button"
+						variant="outlined"
+						style={{
+							minWidth: "fit-content",
+						}}
+					>
 						<Typography className="button-text">View Items</Typography>
 					</Button>
 				</div>

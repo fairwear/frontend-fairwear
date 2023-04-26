@@ -26,5 +26,12 @@ export default defineConfig({
 			"@services": path.resolve(__dirname, "./src/services"),
 		},
 	},
+	build: {
+		outDir: "dist",
+	},
+	preview: {
+		port: 3000,
+		open: true,
+	},
 	plugins: [react()],
 });

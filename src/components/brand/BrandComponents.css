@@ -130,7 +130,7 @@
 	align-items: center;
 	gap: 24px;
 }
-.post-container {
+.posts-container {
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -138,6 +138,11 @@
 	gap: 48px;
 	padding: 64px;
 }
+
+.posts-inner-container {
+	max-width: 100% !important;
+}
+
 .grid-container {
 	width: 100%;
 	display: grid;

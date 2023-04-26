@@ -5,6 +5,7 @@ import { Button, ButtonProps, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import "./HomeComponents.css";
 import { useNavigate } from "react-router-dom";
+import brandLogo from "@assets/images/versace_logo.png";
 
 interface props extends ButtonProps {
 	question: string;
@@ -77,11 +78,7 @@ const BrandSection = () => {
 			<div className="brand-container">
 				{brands.map((brand) => (
 					<div key={brand.id} className="brand-component-outer-container">
-						<BrandComponent
-							key={brand.id}
-							brand={brand}
-							imageUrl={"src/assets/images/versace_logo.png"}
-						/>
+						<BrandComponent key={brand.id} brand={brand} imageUrl={brandLogo} />
 					</div>
 				))}
 			</div>

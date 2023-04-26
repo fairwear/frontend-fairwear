@@ -1,9 +1,18 @@
-import { Button, Typography } from "@mui/material";
 import "@components/Components.css";
+import { Button, Typography } from "@mui/material";
 
-function ContributeButton() {
+interface Props {
+	handleClick: () => void;
+}
+
+function ContributeButton(props: Props) {
+	const { handleClick } = props;
 	return (
-		<Button className="contribute-button" variant="contained">
+		<Button
+			onClick={handleClick}
+			className="contribute-button"
+			variant="contained"
+		>
 			<Typography variant="h4">Contribute</Typography>
 		</Button>
 	);

@@ -19,6 +19,7 @@ import * as React from "react";
 import "../Components.css";
 import "./CommonComponents.css";
 import ContributeButton from "./ContributeButton";
+import { useNavigate } from "react-router-dom";
 
 const Search = styled("div")(({ theme }) => ({
 	position: "relative",
@@ -75,6 +76,8 @@ export default function PrimarySearchAppBar() {
 		await AuthAPI.logout();
 		window.location.reload();
 	};
+
+	const navigate = useNavigate();
 
 	const isLoggedIn = useAppSelector((state) => state.common.isLoggedIn);
 
@@ -173,7 +176,7 @@ export default function PrimarySearchAppBar() {
 				</div>
 			) : (
 				<div className="menu-container">
-					<ContributeButton />
+					<ContributeButton handleClick={() => navigate("/contribute")} />
 					<Button onClick={handleLogout}>
 						<Typography variant="h4" className="logout-button">
 							Logout
@@ -255,7 +258,11 @@ export default function PrimarySearchAppBar() {
 							<IconButton>
 								<AccountCircleIcon className="account-icon" />
 							</IconButton>
-							<ContributeButton />
+							<ContributeButton
+								handleClick={() => {
+									navigate("/contribute");
+								}}
+							/>
 							<Button className="logout-button" onClick={handleLogout}>
 								<Typography variant="h4">Logout</Typography>
 							</Button>
