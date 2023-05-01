@@ -6,6 +6,7 @@ import HomePage from "@pages/home/HomePage";
 import BrandPage from "@pages/brand/BrandPage";
 import ContributePage from "@pages/contribute/ContributePage";
 import BrandListPage from "@pages/brand_list/BrandListPage";
+import UserPage from "@pages/user_page/UserPage";
 
 const routes: RouteGroup[] = [
 	{
@@ -39,6 +40,12 @@ const routes: RouteGroup[] = [
 				element: <BrandListPage />,
 				icon: <TokenRoundedIcon />,
 			},
+			{
+				path: "/user/:username",
+				key: "user",
+				pageTitle: "User Page",
+				element: <UserPage />,
+			}
 		],
 	},
 	{
