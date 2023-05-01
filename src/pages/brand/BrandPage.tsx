@@ -30,7 +30,6 @@ export default function BrandPage() {
 		<div className="page-container">
 			{brand && <BrandBannerInfo brand={brand} />}
 			{brandId && <PopularPosts brandId={+brandId} />}
-			<Topics />
 			<ProductList />
 		</div>
 	);

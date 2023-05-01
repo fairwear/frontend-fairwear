@@ -1,7 +1,7 @@
 import BrandResponse from "@models/brand/BrandResponse";
 import { Button, Typography } from "@mui/material";
-import "./BrandComponents.css";
 import { useNavigate } from "react-router-dom";
+import "./BrandComponents.css";
 
 interface BrandComponentProps {
 	brand: BrandResponse;
@@ -42,6 +42,7 @@ const BrandComponent = (props: BrandComponentProps) => {
 						onClick={handleNavigateToBrand}
 					>
 						<Typography variant="h6">View {props.brand.name}</Typography>
+
 					</Button>
 				</div>
 			</div>

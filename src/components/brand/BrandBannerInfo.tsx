@@ -3,8 +3,10 @@ import ContributeButton from "@components/common/ContributeButton";
 import BrandResponse from "@models/brand/BrandResponse";
 import { Button, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import ProductList from "./ProductList";
 import "../Components.css";
 import "./BrandComponents.css";
+import Topics from "./Topics";
 
 interface BrandBannerInfoProps {
 	brand: BrandResponse;
@@ -13,6 +15,9 @@ interface BrandBannerInfoProps {
 export default function BrandBannerInfo(props: BrandBannerInfoProps) {
 	const { brand } = props;
 	const navigate = useNavigate();
+
+
+
 
 	return (
 		<div className="brand-banner">
@@ -39,16 +44,18 @@ export default function BrandBannerInfo(props: BrandBannerInfoProps) {
 						}}
 					/>
 					<Button
-						className="signup-button"
-						variant="outlined"
-						style={{
-							minWidth: "fit-content",
-						}}
+					
+					className="signup-button"
+					variant="outlined"
+					style={{
+						minWidth: "fit-content",
+					}}
 					>
-						<Typography className="button-text">View Items</Typography>
-					</Button>
-				</div>
+					<Typography className="button-text">View Items</Typography>
+				</Button>
 			</div>
+			<Topics />
 		</div>
+		</div >
 	);
 }

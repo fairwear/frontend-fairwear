@@ -93,11 +93,11 @@ export default function ProductList() {
 	});
 
 	return (
-		<div className="product-section-container">
+		<div className="product-section-container" >
 			<div className="product-section-header">
 				<Typography variant="h1">Products</Typography>
 			</div>
-			<div className="grid-container">{Products}</div>
+			<div className="grid-container" >{Products}</div>
 		</div>
 	);
 }
