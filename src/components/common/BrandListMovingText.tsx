@@ -8,15 +8,17 @@ const getWindowDimensions: any = () => {
 	return {
 		width,
 	};
-}
+};
 export default function BrandListMovingText() {
-	const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions());
+	const [windowDimensions, setWindowDimensions] = useState(
+		getWindowDimensions()
+	);
 	useEffect(() => {
 		function handleResize() {
 			setWindowDimensions(getWindowDimensions());
 		}
-		window.addEventListener('resize', handleResize);
-		return () => window.removeEventListener('resize', handleResize);
+		window.addEventListener("resize", handleResize);
+		return () => window.removeEventListener("resize", handleResize);
 	}, []);
 	return (
 		<div

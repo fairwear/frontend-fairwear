@@ -36,7 +36,7 @@ export default function Topics() {
 					dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
 					incididunt ut labore et dolore magna aliqua. Faucibus ornare
 					suspendisse sed nisi lacus sed viverra. Vitae justo eget magna
-					fermentum iaculis eu. {" "}
+					fermentum iaculis eu.{" "}
 				</Typography>
 			</div>
 			<div className="topic-container">

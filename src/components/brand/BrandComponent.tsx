@@ -42,7 +42,6 @@ const BrandComponent = (props: BrandComponentProps) => {
 						onClick={handleNavigateToBrand}
 					>
 						<Typography variant="h6">View {props.brand.name}</Typography>
-
 					</Button>
 				</div>
 			</div>

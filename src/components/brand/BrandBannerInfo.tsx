@@ -16,9 +16,6 @@ export default function BrandBannerInfo(props: BrandBannerInfoProps) {
 	const { brand } = props;
 	const navigate = useNavigate();
 
-
-
-
 	return (
 		<div className="brand-banner">
 			<div className="image-container">
@@ -44,18 +41,17 @@ export default function BrandBannerInfo(props: BrandBannerInfoProps) {
 						}}
 					/>
 					<Button
-					
-					className="signup-button"
-					variant="outlined"
-					style={{
-						minWidth: "fit-content",
-					}}
+						className="signup-button"
+						variant="outlined"
+						style={{
+							minWidth: "fit-content",
+						}}
 					>
-					<Typography className="button-text">View Items</Typography>
-				</Button>
+						<Typography className="button-text">View Items</Typography>
+					</Button>
+				</div>
+				<Topics />
 			</div>
-			<Topics />
 		</div>
-		</div >
 	);
 }

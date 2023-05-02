@@ -2,7 +2,7 @@ import BrandPostComponent from "@components/brandpost/BrandPostComponent";
 import BrandPostResponse from "@models/brandpost/BrandPostResponse";
 import { Splide, SplideSlide, SplideTrack } from "@splidejs/react-splide";
 import { useEffect, useRef, useState } from "react";
-import "./BrandPost.css"
+import "./BrandPost.css";
 interface BrandPostSliderProps {
 	brandPosts: BrandPostResponse[];
 }
@@ -12,16 +12,18 @@ const getWindowDimensions: any = () => {
 	return {
 		width,
 	};
-}
+};
 
 const BrandPostSlider = (props: BrandPostSliderProps) => {
-	const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions());
+	const [windowDimensions, setWindowDimensions] = useState(
+		getWindowDimensions()
+	);
 	useEffect(() => {
 		function handleResize() {
 			setWindowDimensions(getWindowDimensions());
 		}
-		window.addEventListener('resize', handleResize);
-		return () => window.removeEventListener('resize', handleResize);
+		window.addEventListener("resize", handleResize);
+		return () => window.removeEventListener("resize", handleResize);
 	}, []);
 
 	const { brandPosts } = props;
@@ -29,7 +31,7 @@ const BrandPostSlider = (props: BrandPostSliderProps) => {
 	const slideRef = useRef<any | null>(null);
 
 	const [padding, setPadding] = useState({ right: "5%", left: "0" });
-	
+
 	useEffect(() => {
 		slideRef?.current?.splide.on("moved", () => {
 			const currentIndex = slideRef?.current?.splide.index;

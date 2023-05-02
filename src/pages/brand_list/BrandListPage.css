@@ -1,9 +1,9 @@
-.brand-list-page-container{
-    display: flex;
-    width: 100%;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    gap: 16px;
+.brand-list-page-container {
+	display: flex;
+	width: 100%;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	gap: 16px;
 }
