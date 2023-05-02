@@ -1,9 +1,25 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "@splidejs/splide/css/skyblue";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import { AutoScroll } from "@splidejs/splide-extension-auto-scroll";
 import "../Components.css";
+
+const getWindowDimensions: any = () => {
+	const { innerWidth: width } = window;
+	return {
+		width,
+	};
+}
+
 export default function MovingText() {
+	const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions());
+	useEffect(() => {
+		function handleResize() {
+			setWindowDimensions(getWindowDimensions());
+		}
+		window.addEventListener('resize', handleResize);
+		return () => window.removeEventListener('resize', handleResize);
+	}, []);
 	return (
 		<div
 			style={{
@@ -14,11 +30,11 @@ export default function MovingText() {
 			<Splide
 				options={{
 					type: "loop",
-					gap: "15px",
+					gap: "5px",
 					drag: false,
 					arrows: false,
 					pagination: false,
-					perPage: 4,
+					perPage: windowDimensions.width > 600 ? 3 : 2,
 					autoScroll: {
 						pauseOnHover: false,
 						pauseOnFocus: false,

@@ -89,7 +89,7 @@
 
 @media screen and (max-width: 900px) {
 	.slider-content {
-		font-size: 1.2em;
+		font-size: 1em;
 	}
 	.dialog-box-label {
 		font-size: 2em;
@@ -97,9 +97,6 @@
 }
 
 @media screen and (max-width: 1545px) {
-	.slider-content {
-		font-size: 16px;
-	}
 
 	.login-button > * {
 		font-size: 16px !important;

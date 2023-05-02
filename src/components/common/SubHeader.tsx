@@ -1,14 +1,20 @@
 import MovingText from "./MovingText";
 import fw from "@assets/svg/FW200.svg";
-import "./CommonComponents.css";
+import '../brand/BrandComponents.css';
+import { Typography } from "@mui/material";
 
 const SubHeader = () => {
 	return (
 		<div className="subheader-container">
-			<div className="image-container">
-				<img src={fw} alt="fw" className="logo-pic" />
+			<div>
+				<img src={fw} alt="fw" className="logo-image" />
 			</div>
-			<MovingText />
+			<Typography variant="h1"> Welcome:)</Typography>
+			<div
+				style={{ width: "80%" }}
+			>
+				<MovingText />
+			</div>
 		</div>
 	);
 };
