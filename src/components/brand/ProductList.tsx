@@ -10,7 +10,7 @@ export default function ProductList() {
 			id: 1,
 			userId: 1,
 			name: "Product 1",
-			image: productImage,
+			imageUrl: productImage,
 			brandId: {
 				id: 1,
 				name: "Brand 1",
@@ -26,7 +26,7 @@ export default function ProductList() {
 			id: 2,
 			userId: 1,
 			name: "Product 2",
-			image: productImage,
+			imageUrl: productImage,
 			brandId: {
 				id: 1,
 				name: "Brand 1",
@@ -42,7 +42,7 @@ export default function ProductList() {
 			id: 3,
 			userId: 1,
 			name: "Product 3",
-			image: productImage,
+			imageUrl: productImage,
 			brandId: {
 				id: 1,
 				name: "Brand 2",
@@ -58,7 +58,7 @@ export default function ProductList() {
 			id: 4,
 			userId: 1,
 			name: "Product 4",
-			image: productImage,
+			imageUrl: productImage,
 			brandId: {
 				id: 1,
 				name: "Brand 2",
@@ -74,7 +74,7 @@ export default function ProductList() {
 			id: 5,
 			userId: 1,
 			name: "Product 5",
-			image: productImage,
+			imageUrl: productImage,
 			brandId: {
 				id: 1,
 				name: "Brand 1",
@@ -89,7 +89,13 @@ export default function ProductList() {
 	];
 
 	let Products = products.map((product) => {
-		return <Product key={product.id} img={product.image} name={product.name} />;
+		return (
+			<Product
+				key={product.id}
+				imageUrl={product.imageUrl}
+				name={product.name}
+			/>
+		);
 	});
 
 	return (
