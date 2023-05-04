@@ -13,8 +13,7 @@ export default function BrandList() {
 	}, []);
 	const getBrands = async () => {
 		let brands = await BrandAPI.findAll();
-		let splitBrands = brands.slice(0, 4);
-		setBrands(splitBrands);
+		setBrands(brands);
 	};
 
 	const renderBrands = brands.map((brand) => {

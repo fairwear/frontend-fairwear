@@ -29,6 +29,7 @@ export default function PopularPosts(props: PopularPostsProps) {
 		<div className="posts-container">
 			<div className="posts-header-container">
 				<Typography variant="h1">Popular Posts About The Brand</Typography>
+
 				<Typography variant="body1" className="posts-description">
 					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
 					eiusmod tempor incididunt ut labore et dolore magna aliqua.
