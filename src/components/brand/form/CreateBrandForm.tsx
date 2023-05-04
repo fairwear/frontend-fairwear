@@ -1,6 +1,5 @@
-import DialogFooter from "@components/dialog/DialogFooter";
-
 import DragOnFileInput from "@components/button/DragOnFileInput";
+import DialogFooter from "@components/dialog/DialogFooter";
 import FormTextField from "@components/form/FormTextField";
 import { DialogContent } from "@mui/material";
 import { Form, Formik, FormikProps } from "formik";
@@ -91,7 +90,7 @@ const CreateBrandForm = (props: CreateBrandFormProps) => {
 						/>
 					</DialogContent>
 					<DialogFooter
-						confirmButtonAction={() => console.log("Submit")}
+						confirmButtonAction={() => console.log("Submitting...")}
 						confirmButtonType="submit"
 						confirmButtonLabel={
 							formik.isSubmitting ? "Submitting..." : "Submit"

@@ -17,11 +17,9 @@ export default function LoginDialog(props: Props) {
 	const { open, handleClose, toSignUp } = props;
 
 	const handleSubmit = async (values: LoginRequest) => {
-		let res = await AuthAPI.login(values);
-		console.log(res);
+		await AuthAPI.login(values);
 
 		handleClose();
-
 		setTimeout(() => {
 			window.location.reload();
 		}, 300);
