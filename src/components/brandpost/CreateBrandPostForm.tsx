@@ -78,7 +78,7 @@ const CreateBrandPostForm = (props: CreateBrandPostFormProps) => {
 						/>
 					</DialogContent>
 					<DialogFooter
-						confirmButtonAction={() => console.log("Submit")}
+						confirmButtonAction={() => console.log("Submitting...")}
 						confirmButtonType="submit"
 						confirmButtonLabel={
 							formik.isSubmitting ? "Submitting..." : "Submit"

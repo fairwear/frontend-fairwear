@@ -130,7 +130,7 @@ const DragOnFileInput = (props: DragOnFileInputProps) => {
 											if (removedImage) {
 												handleImageChange(removedImage);
 											} else {
-												console.log("Image not found");
+												console.error("Image not found");
 											}
 
 											// handleImageChange(filteredImages);

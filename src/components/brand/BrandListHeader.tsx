@@ -6,7 +6,7 @@ export default function BrandListHeader() {
 	return (
 		<div>
 			<div>
-				<img src={fw} alt="fw" className="logo-pic" />
+				<img src={fw} alt="fw" className="logo-image " />
 			</div>
 			<Typography variant="h1"> Brand List</Typography>
 		</div>

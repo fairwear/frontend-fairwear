@@ -2,12 +2,30 @@ import BrandPostComponent from "@components/brandpost/BrandPostComponent";
 import BrandPostResponse from "@models/brandpost/BrandPostResponse";
 import { Splide, SplideSlide, SplideTrack } from "@splidejs/react-splide";
 import { useEffect, useRef, useState } from "react";
-
+import "./BrandPost.css";
 interface BrandPostSliderProps {
 	brandPosts: BrandPostResponse[];
 }
 
+const getWindowDimensions: any = () => {
+	const { innerWidth: width } = window;
+	return {
+		width,
+	};
+};
+
 const BrandPostSlider = (props: BrandPostSliderProps) => {
+	const [windowDimensions, setWindowDimensions] = useState(
+		getWindowDimensions()
+	);
+	useEffect(() => {
+		function handleResize() {
+			setWindowDimensions(getWindowDimensions());
+		}
+		window.addEventListener("resize", handleResize);
+		return () => window.removeEventListener("resize", handleResize);
+	}, []);
+
 	const { brandPosts } = props;
 
 	const slideRef = useRef<any | null>(null);
@@ -34,7 +52,7 @@ const BrandPostSlider = (props: BrandPostSliderProps) => {
 				arrows: false,
 				type: "slide",
 				gap: "16px",
-				perPage: 3,
+				perPage: windowDimensions.width > 600 ? 3 : 1,
 				pagination: false,
 				perMove: 1,
 				wheel: false,
@@ -44,7 +62,7 @@ const BrandPostSlider = (props: BrandPostSliderProps) => {
 		>
 			<SplideTrack>
 				{brandPosts.map((brandPost) => (
-					<SplideSlide key={brandPost.id}>
+					<SplideSlide className="slide-component" key={brandPost.id}>
 						<BrandPostComponent brandPost={brandPost} />
 					</SplideSlide>
 				))}
