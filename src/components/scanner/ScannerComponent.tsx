@@ -1,4 +1,6 @@
+import ItemAPI from "@api/ItemAPI";
 import PermissionNotice from "@components/scanner/PermissionNotice";
+import ItemResponse from "@models/item/ItemResponse";
 import { ErrorRounded, InfoOutlined } from "@mui/icons-material";
 import { Box, CircularProgress, Typography } from "@mui/material";
 import alerts from "@redux/alerts";
@@ -14,10 +16,29 @@ const ScannerComponent = (props: ScannerComponentProps) => {
 	const [isLoaded, setIsLoaded] = useState<boolean>(false);
 	const [scannerResult, setScannerResult] = useState<string | undefined>();
 	const [errorMessage, setErrorMessage] = useState<string | undefined>();
+	const [item, setItem] = useState<ItemResponse | undefined>();
 
 	useEffect(() => {
 		handleAskCameraPermission();
 	}, []);
+
+	const handleSuccessfulScan = async (result: string) => {
+		setScannerResult(result);
+		try {
+			const response = await ItemAPI.findByBarcode(result);
+			setItem(response);
+			setScannerOpen(false);
+		} catch (error) {
+			console.error(error);
+			const notFoundAlert: AlertValue = {
+				isOpen: true,
+				message: "Item with this barcode was not found.",
+				alertSeverity: "error",
+				alertType: "toast",
+			};
+			alerts.addAlert(notFoundAlert);
+		}
+	};
 
 	const handlePermissionError = (error: Error) => {
 		setScannerOpen(false);
@@ -68,7 +89,7 @@ const ScannerComponent = (props: ScannerComponentProps) => {
 						videoStyle={{
 							width: "100%",
 						}}
-						onDecode={(result) => setScannerResult(result)}
+						onDecode={(result) => handleSuccessfulScan(result)}
 						onError={(error) => setErrorMessage(error.message)}
 						scanDelay={500}
 					/>
@@ -78,7 +99,6 @@ const ScannerComponent = (props: ScannerComponentProps) => {
 						handleAskCameraPermission={handleAskCameraPermission}
 					/>
 				)}
-				T
 			</div>
 			{errorMessage && (
 				<Box className="scanner-error-container">
