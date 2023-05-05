@@ -1,15 +1,14 @@
 import brandLogo from "@assets/images/versace_logo.png";
-import ContributeButton from "@components/common/ContributeButton";
 import BrandResponse from "@models/brand/BrandResponse";
 import { Button, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import ProductList from "./ProductList";
 import "../Components.css";
 import "./BrandComponents.css";
 import Topics from "./Topics";
 
 interface BrandBannerInfoProps {
 	brand: BrandResponse;
+	handleScrollToItems: () => void;
 }
 
 export default function BrandBannerInfo(props: BrandBannerInfoProps) {
@@ -35,19 +34,22 @@ export default function BrandBannerInfo(props: BrandBannerInfoProps) {
 					elementum sagittis.
 				</Typography>
 				<div className="button-container">
-					<ContributeButton
-						handleClick={() => {
-							navigate("/contribute");
-						}}
-					/>
 					<Button
+						onClick={() => navigate("/contribute")}
+						className="contribute-button"
+						variant="contained"
+					>
+						<Typography variant="h4">Contribute</Typography>
+					</Button>
+					<Button
+						onClick={props.handleScrollToItems}
 						className="signup-button"
 						variant="outlined"
 						style={{
 							minWidth: "fit-content",
 						}}
 					>
-						<Typography className="button-text">View Items</Typography>
+						<Typography variant="h5">View Items</Typography>
 					</Button>
 				</div>
 				<Topics />

@@ -1,33 +1,48 @@
 import AuthAPI from "@api/AuthAPI";
+import DialogHeader from "@components/dialog/DialogHeader";
+import ErrorBanner from "@components/form/ErrorBanner";
 import FormTextField from "@components/form/FormTextField";
 import HiddenPasswordField from "@components/form/HiddenPasswordField";
 import LoginRequest from "@models/auth/LoginRequest";
 import { Button, Dialog, Typography } from "@mui/material";
-import { Formik, FormikProps } from "formik";
+import { Form, Formik, FormikProps } from "formik";
+import { useState } from "react";
 import * as yup from "yup";
 import "../Components.css";
+import "./Login.css";
 
 interface Props {
 	open: boolean;
 	handleClose: () => void;
-	toSignUp: () => void;
 }
 
 export default function LoginDialog(props: Props) {
-	const { open, handleClose, toSignUp } = props;
+	const { open } = props;
+	const [error, setError] = useState<string | undefined>();
 
 	const handleSubmit = async (values: LoginRequest) => {
-		await AuthAPI.login(values);
-
-		handleClose();
-		setTimeout(() => {
-			window.location.reload();
-		}, 300);
+		try {
+			setTimeout(() => {
+				setError(undefined);
+			}, 200);
+			await AuthAPI.login(values);
+			handleClose();
+			setTimeout(() => {
+				window.location.reload();
+			}, 300);
+		} catch (error: any) {
+			console.log(error.response);
+			if (error.response.status === 404) {
+				setTimeout(() => {
+					setError("Username or password is incorrect");
+				}, 300);
+			}
+		}
 	};
 
-	const handleSwitch = () => {
-		handleClose();
-		toSignUp();
+	const handleClose = () => {
+		setError(undefined);
+		props.handleClose();
 	};
 
 	return (
@@ -35,49 +50,50 @@ export default function LoginDialog(props: Props) {
 			open={open}
 			onClose={handleClose}
 			PaperProps={{
-				className: "dialog-section",
+				className: "authentication-dialog",
 			}}
 		>
+			<DialogHeader
+				title="Login"
+				titleTypographyVariant="h1"
+				containerStyle={{
+					padding: "24px 0px",
+				}}
+			/>
 			<Formik
 				onSubmit={handleSubmit}
 				initialValues={initialValues}
 				validationSchema={validationSchema}
 			>
 				{(formik: FormikProps<LoginRequest>) => (
-					<form className="login-form">
-						<Typography variant="h1" className="dialog-box-label">
-							Login
-						</Typography>
-						<FormTextField
-							className="input"
-							label="Username"
-							name="username"
-							value={formik.values.username}
-						/>
+					<Form className="authentication-form">
+						<FormTextField className="input" label="Username" name="username" />
 						<HiddenPasswordField
 							className="input"
 							label="Password"
 							name="password"
-							variant={"outlined"}
 						/>
-						<div className="button-container">
+						{error && <ErrorBanner errorMessage={error} />}
+
+						<div className="authentication-dialog-button-container">
 							<Button
-								className="signup-button"
+								className="cancel-dialog-action-button"
 								variant="outlined"
-								onClick={handleSwitch}
+								onClick={handleClose}
 							>
-								<Typography>Sign Up</Typography>
+								<Typography variant="button" fontWeight={400}>
+									Cancel
+								</Typography>
 							</Button>
 							<Button
-								className="login-button"
+								className="main-dialog-action-button"
 								variant="contained"
-								// type="submit"
-								onClick={() => handleSubmit(formik.values)}
+								type="submit"
 							>
-								<Typography className="login">Login</Typography>
+								<Typography variant="button">Login</Typography>
 							</Button>
 						</div>
-					</form>
+					</Form>
 				)}
 			</Formik>
 		</Dialog>

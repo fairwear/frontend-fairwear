@@ -159,16 +159,14 @@ export default function PrimarySearchAppBar() {
 						</Typography>
 					</Button>
 					<LoginDialog
-						toSignUp={handleSignUpDialog}
 						open={loginDialog}
 						handleClose={handleLoginDialogClose}
 					/>
 
 					<Button className="signup-button" onClick={handleSignUpDialog}>
-						<Typography variant="h4">Sign Up</Typography>
+						<Typography variant="h4">Sign up</Typography>
 					</Button>
 					<SignUpDialog
-						toLogin={handleLoginDialog}
 						open={signUpDialog}
 						handleClose={handleSignUpDialogClose}
 					/>
@@ -235,7 +233,6 @@ export default function PrimarySearchAppBar() {
 								<Typography variant="h4">Login</Typography>
 							</Button>
 							<LoginDialog
-								toSignUp={handleSignUpDialog}
 								open={loginDialog}
 								handleClose={handleLoginDialogClose}
 							/>
@@ -244,10 +241,9 @@ export default function PrimarySearchAppBar() {
 								className="signup-button"
 								onClick={handleSignUpDialog}
 							>
-								<Typography variant="h4">Sign Up</Typography>
+								<Typography variant="h4">Sign up</Typography>
 							</Button>
 							<SignUpDialog
-								toLogin={handleLoginDialog}
 								open={signUpDialog}
 								handleClose={handleSignUpDialogClose}
 							/>

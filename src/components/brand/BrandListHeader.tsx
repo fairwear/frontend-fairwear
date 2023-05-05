@@ -4,7 +4,7 @@ import "./BrandComponents.css";
 
 export default function BrandListHeader() {
 	return (
-		<div>
+		<div className="brand-list-subheader">
 			<div>
 				<img src={fw} alt="fw" className="logo-image " />
 			</div>

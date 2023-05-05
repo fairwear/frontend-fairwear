@@ -60,12 +60,10 @@ const NotLoggedInComponent = () => {
 				<LoginDialog
 					open={loginDialogOpen}
 					handleClose={handleLoginDialogClose}
-					toSignUp={handleRegisterDialogOpen}
 				/>
 				<SignUpDialog
 					open={registerDialogOpen}
 					handleClose={handleRegisterDialogClose}
-					toLogin={handleLoginDialogOpen}
 				/>
 			</div>
 		</div>

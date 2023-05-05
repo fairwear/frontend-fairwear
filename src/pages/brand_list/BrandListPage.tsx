@@ -6,7 +6,7 @@ export default function BrandListPage() {
 	return (
 		<div className="brand-list-page-container">
 			<BrandListHeader />
-			<div style={{ width: "80%" }}>
+			<div style={{ width: "100%" }}>
 				<BrandListMovingText />
 			</div>
 			<BrandList />

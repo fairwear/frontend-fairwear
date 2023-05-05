@@ -4,17 +4,17 @@ import {
 	Box,
 	Button,
 	InputAdornment,
-	OutlinedTextFieldProps,
+	StandardTextFieldProps,
 	TextField,
 	Tooltip,
 	Typography,
 	TypographyProps,
 } from "@mui/material";
-import AppTheme from "../../AppTheme";
 import { FieldHookConfig, useField } from "formik";
+import AppTheme from "../../AppTheme";
 import "./FormComponents.css";
 
-interface OtherProps extends OutlinedTextFieldProps {
+interface OtherProps extends StandardTextFieldProps {
 	title?: string;
 	titleInfoIconLabel?: string;
 	titleButtonLabel?: string;
@@ -145,10 +145,6 @@ function FormTextField(props: OtherProps & FieldHookConfig<string>) {
 		</div>
 	);
 }
-
-FormTextField.defaultProps = {
-	variant: "outlined",
-};
 
 export default FormTextField;
 
