@@ -43,3 +43,43 @@
 	width: 50%;
 	text-transform: none;
 }
+
+/* ------------------------ Login & Signup ------------------------ */
+
+.authentication-dialog {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	padding: 24px 36px;
+	box-sizing: border-box;
+	width: 100%;
+}
+
+.authentication-form {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	gap: 16px;
+}
+
+.authentication-dialog-button-container {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-top: 12px;
+	gap: 24px;
+	width: 100%;
+}
+
+.authentication-dialog-button-container .main-dialog-action-button {
+	padding: 8px 32px;
+	width: 55%;
+}
+
+.authentication-dialog-button-container .cancel-dialog-action-button {
+	padding: 7px 24px;
+	width: 40%;
+}

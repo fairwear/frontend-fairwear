@@ -211,6 +211,26 @@ const AppTheme = createTheme({
 				},
 			],
 		},
+		MuiInputBase: {
+			styleOverrides: {
+				input: {
+					"&.MuiOutlinedInput-input": {
+						padding: "13.5px 16px",
+						height: "21px",
+					},
+				},
+				root: {
+					"& .MuiOutlinedInput-root": {
+						"& .Mui-focused .MuiOutlinedInput-notchedOutline": {
+							border: "2px solid #4A5E96",
+						},
+						"& fieldset": {
+							border: "none",
+						},
+					},
+				},
+			},
+		},
 	},
 	palette: {
 		red: {
@@ -273,7 +293,12 @@ const AppTheme = createTheme({
 			lineHeight: "120%",
 			fontWeight: "400",
 		},
-
+		button: {
+			fontSize: "20px",
+			lineHeight: "120%",
+			fontWeight: "500",
+			textTransform: "none",
+		},
 		subtitle1: {
 			fontSize: "14px",
 			lineHeight: "120%",

@@ -1,12 +1,11 @@
+import BrandAPI from "@api/BrandAPI";
 import BrandBannerInfo from "@components/brand/BrandBannerInfo";
-import "./BrandPage.css";
-import Topics from "@components/brand/Topics";
 import PopularPosts from "@components/brand/PopularPosts";
 import ProductList from "@components/brand/ProductList";
-import { useParams } from "react-router-dom";
-import BrandAPI from "@api/BrandAPI";
-import { useEffect, useState } from "react";
 import BrandResponse from "@models/brand/BrandResponse";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import "./BrandPage.css";
 export default function BrandPage() {
 	const { brandId } = useParams();
 
