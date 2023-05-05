@@ -11,12 +11,13 @@ interface BrandPostComponentProps {
 }
 
 const BrandPostComponent = (props: BrandPostComponentProps) => {
+	console.log(props.brandPost);
 	const [isVoted, setIsVoted] = useState<boolean>(false);
 	const upvotes = props.brandPost.votes.filter(
-		(vote) => vote === VoteEnum.UPVOTE
+		(vote) => vote.vote === VoteEnum.UPVOTE
 	);
 	const downvotes = props.brandPost.votes.filter(
-		(vote) => vote === VoteEnum.DOWNVOTE
+		(vote) => vote.vote === VoteEnum.DOWNVOTE
 	);
 	useEffect(() => {
 		getIsVoted();

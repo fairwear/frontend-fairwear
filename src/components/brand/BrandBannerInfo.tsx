@@ -8,6 +8,7 @@ import Topics from "./Topics";
 
 interface BrandBannerInfoProps {
 	brand: BrandResponse;
+	handleScrollToItems: () => void;
 }
 
 export default function BrandBannerInfo(props: BrandBannerInfoProps) {
@@ -41,6 +42,7 @@ export default function BrandBannerInfo(props: BrandBannerInfoProps) {
 						<Typography variant="h4">Contribute</Typography>
 					</Button>
 					<Button
+						onClick={props.handleScrollToItems}
 						className="signup-button"
 						variant="outlined"
 						style={{
