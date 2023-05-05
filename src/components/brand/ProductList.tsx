@@ -19,7 +19,11 @@ const ProductList = forwardRef(
 				</div>
 				<div className="grid-container">
 					{products.map((product) => (
-						<Product key={product.id} imageUrl={product.imageUrl} name={product.name} />
+						<Product
+							key={product.id}
+							imageUrl={product.imageUrl}
+							name={product.name}
+						/>
 					))}
 				</div>
 			</div>
