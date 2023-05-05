@@ -64,7 +64,7 @@
 .brand-container {
 	display: flex;
 	justify-content: center;
-	max-width: 1400px;
+	max-width: 1800px;
 	flex-wrap: wrap;
 	gap: 32px;
 }
@@ -122,6 +122,10 @@
 @media (max-width: 768px) {
 	.faq-section-container {
 		padding: 48px;
+	}
+
+	.brand-component-outer-container {
+		width: 100%;
 	}
 }
 

@@ -1,11 +1,9 @@
-import BrandResponse from "@models/brand/BrandResponse";
-
 interface ItemResponse {
 	id: number;
 	userId: number;
 	name: string;
 	image: string;
-	brandId: BrandResponse;
+	brandId: number;
 	createdAt: Date;
 	updatedAt: Date | null;
 	deletedAt: Date | null;

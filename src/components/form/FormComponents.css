@@ -39,6 +39,25 @@
 	color: #c62828;
 }
 
+.error-banner-container {
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	gap: 12px;
+	padding: 6px 16px;
+	background: #feebee;
+	border-radius: 12px;
+	margin: 0px 24px;
+	padding: 8px 16px;
+	width: 100%;
+	box-sizing: border-box;
+}
+
+.error-banner-container .error-banner-icon {
+	width: 22px;
+	color: #c62828;
+}
+
 .textField-showInstead {
 	display: flex;
 	flex-direction: column;

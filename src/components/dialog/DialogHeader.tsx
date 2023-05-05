@@ -4,6 +4,8 @@ import "./Dialog.css";
 
 interface DialogHeaderProps {
 	title?: string;
+	titleTypographyVariant?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
+	titleStyle?: React.CSSProperties;
 	subtitle?: string;
 	stateText?: string;
 	returnButtonLabel?: string;
@@ -14,8 +16,10 @@ interface DialogHeaderProps {
 const DialogHeader = (props: DialogHeaderProps) => {
 	const {
 		title,
+		titleTypographyVariant = "h2",
+		titleStyle,
 		subtitle,
-		stateText = "Editing",
+		stateText,
 		returnButtonLabel = "Cancel",
 		returnButtonAction,
 	} = props;
@@ -28,7 +32,11 @@ const DialogHeader = (props: DialogHeaderProps) => {
 		>
 			{title && (
 				<div className="dialog-header-text">
-					<Typography variant="h2" color={AppTheme.palette.text.primary}>
+					<Typography
+						variant={titleTypographyVariant}
+						color={AppTheme.palette.text.primary}
+						style={titleStyle}
+					>
 						{title}
 					</Typography>
 					{subtitle && (

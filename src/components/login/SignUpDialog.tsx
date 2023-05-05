@@ -1,35 +1,23 @@
+import AuthAPI from "@api/AuthAPI";
+import DialogHeader from "@components/dialog/DialogHeader";
 import HiddenPasswordField from "@components/form/HiddenPasswordField";
 import SignUpRequest from "@models/auth/SignUpRequest";
 import { Button, Dialog, Typography } from "@mui/material";
 import { Form, Formik, FormikProps } from "formik";
 import * as yup from "yup";
-import FormTextField from "../form/FormTextField";
 import "../Components.css";
-import AuthAPI from "@api/AuthAPI";
+import FormTextField from "../form/FormTextField";
+import "./Login.css";
 interface Props {
 	open: boolean;
 	handleClose: () => void;
-	toLogin: () => void;
 }
 
 export default function SignUpDialog(props: Props) {
-	const { open, handleClose, toLogin } = props;
-
-	const handleSwitch = () => {
-		handleClose();
-		toLogin();
-	};
+	const { open, handleClose } = props;
 
 	const handleSubmit = async (values: SignUpRequest) => {
-		let request: SignUpRequest = {
-			username: values.username,
-			password: values.password,
-			reEnterPassword: values.reEnterPassword,
-			email: values.email,
-			name: values.name,
-			surname: values.surname,
-		};
-		let res = await AuthAPI.signup(request);
+		let res = await AuthAPI.signup(values);
 		console.log(res);
 
 		handleClose();
@@ -41,67 +29,65 @@ export default function SignUpDialog(props: Props) {
 	return (
 		<Dialog
 			open={open}
-			onClose={handleClose}
 			PaperProps={{
-				className: "dialog-section",
+				className: "authentication-dialog",
 			}}
 		>
+			<DialogHeader
+				title="Sign up"
+				titleTypographyVariant="h1"
+				containerStyle={{
+					padding: "24px 0px",
+				}}
+			/>
 			<Formik
 				onSubmit={handleSubmit}
 				initialValues={initialValues}
 				validationSchema={validationSchema}
 			>
 				{(formik: FormikProps<SignUpRequest>) => (
-					<Form className="login-form">
-						<Typography variant="h1" className="dialog-box-label">
-							Sign Up
-						</Typography>
+					<Form className="authentication-form">
 						<FormTextField
 							label="Name"
 							name="name"
 							value={formik.values.name}
 						/>
-
 						<FormTextField
 							label="Surname"
 							name="surname"
 							value={formik.values.surname}
 						/>
-
 						<FormTextField
 							label="Username"
 							name="username"
 							value={formik.values.username}
 						/>
-
 						<FormTextField
 							label="Email"
 							name="email"
 							value={formik.values.email}
 						/>
-
-						<HiddenPasswordField
-							label="Password"
-							name="password"
-							variant={"outlined"}
-						/>
-
+						<HiddenPasswordField label="Password" name="password" />
 						<HiddenPasswordField
 							label="Re-enter password"
 							name="reEnterPassword"
-							variant={"outlined"}
 						/>
-
-						<div className="button-container">
+						<div className="authentication-dialog-button-container">
 							<Button
-								className="signup-button"
+								className="cancel-dialog-action-button"
 								variant="outlined"
-								onClick={handleSwitch}
+								onClick={handleClose}
 							>
-								<Typography className="button-text">Log in</Typography>
+								<Typography variant="button" fontWeight={400}>
+									Cancel
+								</Typography>
 							</Button>
-							<Button className="login" variant="contained" type="submit">
-								<Typography className="login button-text">Sign Up</Typography>
+							<Button
+								className="main-dialog-action-button"
+								variant="contained"
+								type="submit"
+							>
+								<Typography variant="button">Sign up</Typography>
 							</Button>
 						</div>
 					</Form>
