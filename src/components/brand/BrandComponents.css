@@ -2,14 +2,16 @@
 	display: flex;
 	gap: 32px;
 
-	flex: 1 0 21%; /* explanation below */
+	flex: 1 0 21%;
 	border: 1px solid #000000;
 	border-radius: 8px;
 	padding: 16px;
 	box-sizing: border-box;
+	min-width: 250px;
+	width: 100%;
 }
 
-@media (max-width: 1048px) {
+@media (max-width: 1048px) and (min-width: 768px) {
 	.brand-component-container {
 		flex: 1 0 100%;
 		flex-direction: column;
@@ -64,6 +66,7 @@
 .image {
 	max-width: 400px;
 }
+
 .brand-banner {
 	display: flex;
 	align-items: center;
@@ -74,10 +77,12 @@
 	background-color: #f4f4f4;
 	padding: 16px;
 }
+
 .image-container {
 	display: flex;
 	justify-content: center;
 }
+
 .info-container {
 	display: flex;
 	justify-content: left;
@@ -86,6 +91,7 @@
 	flex-direction: column;
 	text-align: left !important;
 }
+
 .button-container {
 	display: flex;
 	flex-direction: row;
@@ -93,6 +99,7 @@
 	width: 100%;
 	gap: 16px;
 }
+
 .topic-section-header-container {
 	display: flex;
 	flex-direction: column;
@@ -101,6 +108,7 @@
 	text-align: left !important;
 	width: 90%;
 }
+
 .topic-section-header {
 	font-weight: 700 !important;
 }
@@ -111,6 +119,7 @@
 	flex-direction: column;
 	width: 90%;
 }
+
 .topic-container {
 	margin-top: 16px;
 	display: flex;
@@ -124,6 +133,7 @@
 	background-color: #f4f4f4;
 	padding: 16px;
 }
+
 .posts-header-container {
 	width: 100%;
 	display: flex;
@@ -131,6 +141,7 @@
 	text-align: left !important;
 	gap: 24px;
 }
+
 .posts-container {
 	width: 90%;
 	display: flex;
@@ -166,6 +177,7 @@
 	margin-top: 8px;
 	margin-bottom: 8px;
 }
+
 /* On smaller screens, show only 2 items per row */
 @media (max-width: 768px) {
 	.grid-container {
@@ -174,11 +186,13 @@
 			1fr
 		); /* 2 items per row on smaller screens */
 	}
+
 	.brand-list-container {
 		width: 100%;
 		flex-direction: column;
-		gap: 32px !important;
 		align-items: center;
+		padding: 24px;
+		gap: 32px;
 	}
 }
 
@@ -186,7 +200,10 @@
 	display: flex;
 	justify-content: center;
 	flex-wrap: wrap;
-	width: 90%;
+	padding: 32px;
+	box-sizing: border-box;
+	max-width: 1800px;
+	width: 100%;
 	gap: 32px;
 }
 
@@ -208,4 +225,11 @@
 	.brand-banner {
 		flex-direction: column !important;
 	}
+}
+
+.brand-list-subheader {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 16px;
 }

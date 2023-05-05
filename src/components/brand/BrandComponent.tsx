@@ -10,9 +10,11 @@ interface BrandComponentProps {
 
 const BrandComponent = (props: BrandComponentProps) => {
 	const navigate = useNavigate();
+
 	const handleNavigateToBrand = () => {
 		navigate(`/brand/${props.brand.id}`);
 	};
+
 	return (
 		<div className="brand-component-container">
 			<img
@@ -20,10 +22,6 @@ const BrandComponent = (props: BrandComponentProps) => {
 				src={props.imageUrl}
 				alt={props.brand.name}
 				style={{
-					//TODO: Export style to css file
-					// width: "100%",
-					// width: "100px",
-
 					aspectRatio: "1/1 !important",
 					objectFit: "contain",
 				}}
