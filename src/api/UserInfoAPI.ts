@@ -11,5 +11,10 @@ const UserAPI = {
 		axios.get(`${baseUrl}/exist/${username}`),
 	existsByEmail: (email: string): Promise<boolean> =>
 		axios.get(`${baseUrl}/exist/${email}`),
+	findByUsername: (username: string): Promise<UserInfoResponse> =>
+		axios.get(`${baseUrl}/username/${username}`),
+	findByEmail: (email: string): Promise<UserInfoResponse> =>
+		axios.get(`${baseUrl}/email/${email}`),
+	
 };
 export default UserAPI;

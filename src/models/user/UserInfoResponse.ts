@@ -1,9 +1,9 @@
 interface UserInfoResponse {
-	userId: number;
+	name: string;
+	surname: string;
 	username: string;
 	email: string;
-	isAdmin: boolean;
-	isLoggedIn: boolean;
+	userTrustScore: number;
 }
 
 export default UserInfoResponse;
