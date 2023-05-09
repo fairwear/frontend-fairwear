@@ -51,7 +51,7 @@ const BrandPostComponent = (props: BrandPostComponentProps) => {
 	const url = props.brandPost.references.map((url) => {
 		return url.sourceUrl;
 	});
-	
+
 	const getUserName = () => {
 		if (props.userPost) {
 			return props.userPost.username;
@@ -64,7 +64,7 @@ const BrandPostComponent = (props: BrandPostComponentProps) => {
 			<div className="vote-count-container">
 				<IconButton onClick={() => vote(VoteEnum.UPVOTE)}>
 					<ThumbUp
-						color={isVoted?.vote === "UPVOTE" ? "error": "inherit" } />
+						color={isVoted?.vote === "UPVOTE" ? "error" : "inherit"} />
 				</IconButton>
 				<Typography variant="h6">
 					{voteCount}
@@ -75,27 +75,32 @@ const BrandPostComponent = (props: BrandPostComponentProps) => {
 				</IconButton>
 			</div>
 			<div className="brandpost-content-container">
-				<Typography align="left" variant="h5">
-					{
-						getUserName()
-					}
-				</Typography>
-				<Typography align="left" variant="h6">
-					{props.brandPost.brand.name}
-				</Typography>
+				<div className="brandpost-name-container">
+					<Typography align='left' variant="h6">
+						{props.brandPost.brand.name}
+					</Typography>
+
+					<Typography align="right" variant="h6">
+						{getUserName()}
+					</Typography>
+				</div>
+				<div className="brandpost-desc-container">
 				<Typography align="left" variant="h3">
 					{props.brandPost.title}
 				</Typography>
 				<Typography align="left" variant="body1">
 					{props.brandPost.body}
-				</Typography>
+					|Lorem, ipsum dolor sit amet consectetur adipisicing elit. Mollitia temporibus laboriosam soluta eum! Perspiciatis rerum, reiciendis repellendus, fugit dignissimos numquam quasi in ab vel consectetur eveniet dolorum consequuntur, error atque.
+					Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consectetur ad veniam temporibus! Neque iusto error architecto consectetur commodi amet quia accusantium, qui iure eos porro deleniti magni cumque voluptatibus soluta?
+					</Typography>
+				</div>
 				<div className="brandpost-info-container">
 					{url.map((url) => (
 						<Typography variant="subtitle1">
-							Reference url:<a href={url}>{url}</a>	
+							Reference url:<a href={url}>{url}</a>
 						</Typography>
-						))}
-						
+					))}
+
 					<Typography variant="subtitle1">
 						{moment(props.brandPost.createdAt).format("YYYY-MM-DD")}
 					</Typography>
