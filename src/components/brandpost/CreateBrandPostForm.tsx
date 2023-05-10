@@ -1,10 +1,14 @@
 import BrandAPI from "@api/BrandAPI";
+import TopicAPI from "@api/TopicAPI";
 import DialogFooter from "@components/dialog/DialogFooter";
 import FormAutocomplete from "@components/form/FormAutoComplete";
 import FormTextField from "@components/form/FormTextField";
+import TopicFormComponent from "@components/topic/TopicFormComponent";
 import BrandResponse from "@models/brand/BrandResponse";
 import BrandPostToTopicEntry from "@models/brandpost/BrandPostToTopicEntry";
 import BrandPostReferenceCreateRequest from "@models/brandpostreference/BrandPostReferenceCreateRequest";
+import TopicResponse from "@models/topic/TopicResponse";
+import { HelpRounded } from "@mui/icons-material";
 import {
 	Autocomplete,
 	Box,
@@ -18,13 +22,9 @@ import {
 import { Form, Formik, FormikHelpers, FormikProps } from "formik";
 import { useEffect, useState } from "react";
 import * as yup from "yup";
-import "./BrandPost.css";
-import TopicAPI from "@api/TopicAPI";
-import TopicResponse from "@models/topic/TopicResponse";
-import TopicFormComponent from "@components/topic/TopicFormComponent";
 import AppTheme from "../../AppTheme";
-import { HelpRounded } from "@mui/icons-material";
 import "../form/FormComponents.css";
+import "./BrandPost.css";
 
 interface CreateBrandPostFormProps {
 	handleFormSubmit: (values: CreateBrandPostFormValues) => void;
@@ -60,18 +60,22 @@ const CreateBrandPostForm = (props: CreateBrandPostFormProps) => {
 		setTopics(topics);
 	};
 
+	useEffect(() => {
+		console.log("Chosen topics: ", selectedTopics);
+	}, [selectedTopics]);
+
 	const handleTopicChange = (newValue: BrandPostToTopicEntry) => {
-		console.log(selectedTopics);
 		const existingTopic = selectedTopics.find(
 			(topic) => topic.topicId === newValue.topicId
 		);
 		if (!existingTopic) {
 			setSelectedTopics((prevTopics) => [...prevTopics, newValue]);
 		} else {
-			const filteredTopics = selectedTopics.filter(
-				(topic) => topic.topicId !== newValue.topicId
+			setSelectedTopics((prevTopics) =>
+				prevTopics.map((topic) =>
+					topic.topicId === newValue.topicId ? newValue : topic
+				)
 			);
-			setSelectedTopics([...filteredTopics, newValue]);
 		}
 	};
 
@@ -87,6 +91,19 @@ const CreateBrandPostForm = (props: CreateBrandPostFormProps) => {
 
 	const handleChange = (newValue: TopicResponse[]) => {
 		setChosenTopics(newValue);
+		if (newValue.length > selectedTopics.length) {
+			const newTopic = newValue.filter(
+				(topic) =>
+					!selectedTopics.find(
+						(selectedTopic) => selectedTopic.topicId === topic.id
+					)
+			)[0];
+			const newBrandPostToTopicEntry: BrandPostToTopicEntry = {
+				topicId: newTopic.id,
+				isBad: false,
+			};
+			handleTopicChange(newBrandPostToTopicEntry);
+		}
 	};
 
 	const brandNames = brands.map((brand) => brand.name);
@@ -155,6 +172,7 @@ const CreateBrandPostForm = (props: CreateBrandPostFormProps) => {
 								</Tooltip>
 							</div>
 							<Autocomplete
+								//TODO: Handle backspace to remove topic
 								id="topics"
 								options={topics}
 								multiple={true}
@@ -171,6 +189,7 @@ const CreateBrandPostForm = (props: CreateBrandPostFormProps) => {
 											variant="outlined"
 											label={option.name}
 											{...getTagProps({ index })}
+											onDelete={() => handleRemoveTopic(option.id, formik)}
 										/>
 									))
 								}
@@ -196,7 +215,7 @@ const CreateBrandPostForm = (props: CreateBrandPostFormProps) => {
 									<TextField
 										{...params}
 										value={formik.values.topicNames}
-										name="topicNames"
+										name="topics"
 										fullWidth
 										placeholder="What topics are you talking about?"
 										error={
@@ -253,7 +272,6 @@ export interface CreateBrandPostFormValues {
 	body: string;
 	brandId: number;
 	brandName: string;
-	topicNames: TopicResponse[];
 	topics: TopicResponse[];
 	selectedTopics: BrandPostToTopicEntry[];
 	references: BrandPostReferenceCreateRequest[];
@@ -266,7 +284,6 @@ const initialValues: CreateBrandPostFormValues = {
 	brandId: -1,
 	brandName: "",
 	topics: [],
-	topicNames: [],
 	selectedTopics: [],
 	references: [],
 	itemIds: [],
@@ -278,7 +295,6 @@ const validationSchema = yup.object({
 	brandId: yup.number().nullable(),
 	brandName: yup.string().required("Please choose a brand"),
 	topics: yup.array().required("Please choose at least one topic"),
-	topicNames: yup.array().required("Please choose at least one topic"),
 	selectedTopics: yup.array().optional(),
 	references: yup.array().optional(),
 	itemIds: yup.array().optional(),

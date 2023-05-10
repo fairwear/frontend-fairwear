@@ -60,6 +60,9 @@ const ContributePage = () => {
 		};
 
 		await BrandPostAPI.create(request);
+		setTimeout(() => {
+			handleBrandDialogClose();
+		}, 350);
 	};
 
 	return (
