@@ -15,6 +15,5 @@ const UserAPI = {
 		axios.get(`${baseUrl}/username/${username}`),
 	findByEmail: (email: string): Promise<UserInfoResponse> =>
 		axios.get(`${baseUrl}/email/${email}`),
-	
 };
 export default UserAPI;

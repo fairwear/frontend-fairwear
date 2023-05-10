@@ -14,7 +14,6 @@ interface BrandPostComponentProps {
 	userPost: UserInfoResponse;
 }
 
-
 const BrandPostComponent = (props: BrandPostComponentProps) => {
 	const [isVoted, setIsVoted] = useState<IsVoted | undefined>(undefined);
 	const [voteCount, setVoteCount] = useState<number>(0);
@@ -30,11 +29,10 @@ const BrandPostComponent = (props: BrandPostComponentProps) => {
 
 	useEffect(() => {
 		countVotes();
-
 	}, []);
 
 	const getIsVoted = async () => {
-		const response = await BrandPostAPI.getIsVoted(props.brandPost.id)
+		const response = await BrandPostAPI.getIsVoted(props.brandPost.id);
 		console.log("getIsVoted");
 		console.log(response);
 		setIsVoted(response);
@@ -63,20 +61,18 @@ const BrandPostComponent = (props: BrandPostComponentProps) => {
 		<div className="brandpost-container">
 			<div className="vote-count-container">
 				<IconButton onClick={() => vote(VoteEnum.UPVOTE)}>
-					<ThumbUp
-						color={isVoted?.vote === "UPVOTE" ? "error" : "inherit"} />
+					<ThumbUp color={isVoted?.vote === "UPVOTE" ? "error" : "inherit"} />
 				</IconButton>
-				<Typography variant="h6">
-					{voteCount}
-				</Typography>
+				<Typography variant="h6">{voteCount}</Typography>
 				<IconButton onClick={() => vote(VoteEnum.DOWNVOTE)}>
 					<ThumbDown
-						color={isVoted?.vote === "DOWNVOTE" ? "error" : "inherit"} />
+						color={isVoted?.vote === "DOWNVOTE" ? "error" : "inherit"}
+					/>
 				</IconButton>
 			</div>
 			<div className="brandpost-content-container">
 				<div className="brandpost-name-container">
-					<Typography align='left' variant="h6">
+					<Typography align="left" variant="h6">
 						{props.brandPost.brand.name}
 					</Typography>
 
@@ -85,13 +81,19 @@ const BrandPostComponent = (props: BrandPostComponentProps) => {
 					</Typography>
 				</div>
 				<div className="brandpost-desc-container">
-				<Typography align="left" variant="h3">
-					{props.brandPost.title}
-				</Typography>
-				<Typography align="left" variant="body1">
-					{props.brandPost.body}
-					|Lorem, ipsum dolor sit amet consectetur adipisicing elit. Mollitia temporibus laboriosam soluta eum! Perspiciatis rerum, reiciendis repellendus, fugit dignissimos numquam quasi in ab vel consectetur eveniet dolorum consequuntur, error atque.
-					Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consectetur ad veniam temporibus! Neque iusto error architecto consectetur commodi amet quia accusantium, qui iure eos porro deleniti magni cumque voluptatibus soluta?
+					<Typography align="left" variant="h3">
+						{props.brandPost.title}
+					</Typography>
+					<Typography align="left" variant="body1">
+						{props.brandPost.body}
+						|Lorem, ipsum dolor sit amet consectetur adipisicing elit. Mollitia
+						temporibus laboriosam soluta eum! Perspiciatis rerum, reiciendis
+						repellendus, fugit dignissimos numquam quasi in ab vel consectetur
+						eveniet dolorum consequuntur, error atque. Lorem ipsum dolor, sit
+						amet consectetur adipisicing elit. Consectetur ad veniam temporibus!
+						Neque iusto error architecto consectetur commodi amet quia
+						accusantium, qui iure eos porro deleniti magni cumque voluptatibus
+						soluta?
 					</Typography>
 				</div>
 				<div className="brandpost-info-container">

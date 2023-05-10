@@ -54,26 +54,26 @@ const BrandPostSlider = (props: BrandPostSliderProps) => {
 				arrows: false,
 				perPage: 1,
 				rewind: false,
-				direction: 'ttb',
+				direction: "ttb",
 				height: windowDimensions.width > 768 ? 500 : 300,
 				gap: 24,
 			}}
 		>
-			<SplideTrack
-		
-			>
-
+			<SplideTrack>
 				{brandPosts.map((brandPost) => (
 					<SplideSlide className="slide-component" key={brandPost.id}>
-						<div style={{
-							display: "flex",
-							justifyContent: "center",
-							alignContent: "center",
-							alignItems: "center",
-						}}>
-						<BrandPostComponent
-
-								brandPost={brandPost} userPost={props.userPost} />
+						<div
+							style={{
+								display: "flex",
+								justifyContent: "center",
+								alignContent: "center",
+								alignItems: "center",
+							}}
+						>
+							<BrandPostComponent
+								brandPost={brandPost}
+								userPost={props.userPost}
+							/>
 						</div>
 					</SplideSlide>
 				))}

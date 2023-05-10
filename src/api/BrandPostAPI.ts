@@ -16,9 +16,10 @@ const BrandPostAPI = {
 	delete: (id: number) => axios.delete(`${baseURL}/${id}`),
 	vote: (id: number, voteEntry: VoteEntry) =>
 		axios.post(`${baseURL}/${id}/vote`, voteEntry),
-	getVotes: (id: number): Promise<VoteCountResponse> => axios.get(`${baseURL}/${id}/votes`),
-	getIsVoted: (id: number): Promise<IsVoted> => axios.get(`${baseURL}/${id}/is-voted`),
-
+	getVotes: (id: number): Promise<VoteCountResponse> =>
+		axios.get(`${baseURL}/${id}/votes`),
+	getIsVoted: (id: number): Promise<IsVoted> =>
+		axios.get(`${baseURL}/${id}/is-voted`),
 };
 
 export default BrandPostAPI;

@@ -1,6 +1,6 @@
 interface VoteCountResponse {
-    upvotes: number;
-    downvotes: number;
-};
+	upvotes: number;
+	downvotes: number;
+}
 
 export default VoteCountResponse;
