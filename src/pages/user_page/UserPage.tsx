@@ -1,4 +1,4 @@
-import UserAPI from "@api/UserAPI";
+import UserAPI from "@api/UserInfoAPI";
 import UserInfoResponse from "@models/user/UserInfoResponse";
 import { Email } from "@mui/icons-material";
 import { useState } from "react";

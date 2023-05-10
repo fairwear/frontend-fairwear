@@ -3,6 +3,7 @@ import BrandPostResponse from "@models/brandpost/BrandPostResponse";
 import { Splide, SplideSlide, SplideTrack } from "@splidejs/react-splide";
 import { useEffect, useRef, useState } from "react";
 import "./BrandPost.css";
+
 interface BrandPostSliderProps {
 	brandPosts: BrandPostResponse[];
 }
@@ -50,20 +51,26 @@ const BrandPostSlider = (props: BrandPostSliderProps) => {
 			hasTrack={false}
 			options={{
 				arrows: false,
-				type: "slide",
-				gap: "16px",
-				perPage: windowDimensions.width > 600 ? 3 : 1,
-				pagination: false,
-				perMove: 1,
-				wheel: false,
-				padding: { right: "7%" },
-				speed: 800,
+				perPage: 1,
+				rewind: false,
+				direction: "ttb",
+				height: windowDimensions.width > 768 ? 500 : 300,
+				gap: 24,
 			}}
 		>
 			<SplideTrack>
 				{brandPosts.map((brandPost) => (
 					<SplideSlide className="slide-component" key={brandPost.id}>
-						<BrandPostComponent brandPost={brandPost} />
+						<div
+							style={{
+								display: "flex",
+								justifyContent: "center",
+								alignContent: "center",
+								alignItems: "center",
+							}}
+						>
+							<BrandPostComponent brandPost={brandPost} />
+						</div>
 					</SplideSlide>
 				))}
 			</SplideTrack>

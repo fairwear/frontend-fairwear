@@ -190,7 +190,7 @@ export default function PrimarySearchAppBar() {
 	return (
 		<AppBar
 			// position="static"
-			className="header-appbar"
+			className="header-app-bar"
 			position="sticky"
 		>
 			<Toolbar>
