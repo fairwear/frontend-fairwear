@@ -7,6 +7,7 @@ import "./AppRouter.css";
 import Header from "./components/common/Header";
 import routes from "./constants/routes";
 import RouteItem from "./models/routes/RouteItem";
+import Footer from "@components/common/Footer";
 
 function App() {
 	const isLoggedIn = useAppSelector((state) => state.common.isLoggedIn);
@@ -48,6 +49,7 @@ function App() {
 					<Route key={route.key} path={route.path} element={route.element} />
 				))}
 			</Routes>
+			<Footer />
 		</div>
 	);
 }
