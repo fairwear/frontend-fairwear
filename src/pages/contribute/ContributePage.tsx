@@ -7,7 +7,6 @@ import { CreateBrandPostFormValues } from "@components/brandpost/CreateBrandPost
 import BrandCreateRequest from "@models/brand/BrandCreateRequest";
 import BrandPostCreateRequest from "@models/brandpost/BrandPostCreateRequest";
 import { Button, Typography } from "@mui/material";
-import axios from "axios";
 import { useState } from "react";
 import "./ContributePage.css";
 
@@ -24,9 +23,6 @@ const ContributePage = () => {
 	const handleBrandDialogClose = () => {
 		setBrandDialogOpen(false);
 	};
-
-	const imageUrl =
-		"http://localhost:8080/api/v1/file/uploads/f44f57cb-598b-4f64-a686-9f60a9a66ec1.png";
 
 	const handleBrandPostDialogOpen = () => {
 		setBrandPostDialogOpen(true);
@@ -54,10 +50,13 @@ const ContributePage = () => {
 
 	const handleSubmitBrandPost = async (values: CreateBrandPostFormValues) => {
 		let request: BrandPostCreateRequest = {
+			title: values.title,
 			body: values.body,
 			brandId: +values.brandId,
-			topics: values.selectedTopics,
 			itemIds: values.itemIds.map((item) => +item),
+			topics: values.selectedTopics,
+			references: values.references,
+			createdAt: new Date(),
 		};
 
 		await BrandPostAPI.create(request);
@@ -89,8 +88,7 @@ const ContributePage = () => {
 				handleDialogClose={handleBrandPostDialogClose}
 				handleSubmit={handleSubmitBrandPost}
 			/>
-			<img src={imageUrl} />
-			<Button
+			{/* <Button
 				onClick={() => {
 					let formData = new FormData();
 					let file = new File(["foo"], "foo.txt", {
@@ -106,7 +104,7 @@ const ContributePage = () => {
 				}}
 			>
 				Bruh
-			</Button>
+			</Button> */}
 		</div>
 	);
 };
