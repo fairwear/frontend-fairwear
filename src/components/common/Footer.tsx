@@ -1,5 +1,5 @@
 import React from "react";
-import footer from "./footer.css";
+import "./Footer.css";
 import instagram from "../../assets/images/instagram_logo.png";
 
 const Footer = () => {
@@ -34,7 +34,21 @@ const Footer = () => {
                         </div>
 					</div>
 				</div>
+
          <hr></hr>
+
+         <div className="sb__footer-bellow">
+            <div className="sb__footer-bellow-copyright">
+                <p>
+                @{new Date().getFullYear()} FairWear. All right reserved.
+                </p>
+            </div>
+            <div className="sb__footer-bellow-links">
+                <a href="/idk"><div><p>I HAVE NO FUCKING IDEA WHAT IM DOING</p></div></a>
+                <a href="/help"><div><p>SEND HELP</p></div></a>
+            </div>
+
+         </div>
 			</div>
         </div>
 	);
