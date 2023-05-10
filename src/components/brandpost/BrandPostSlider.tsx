@@ -3,10 +3,9 @@ import BrandPostResponse from "@models/brandpost/BrandPostResponse";
 import { Splide, SplideSlide, SplideTrack } from "@splidejs/react-splide";
 import { useEffect, useRef, useState } from "react";
 import "./BrandPost.css";
-import UserInfoResponse from "@models/user/UserInfoResponse";
+
 interface BrandPostSliderProps {
 	brandPosts: BrandPostResponse[];
-	userPost: UserInfoResponse;
 }
 
 const getWindowDimensions: any = () => {
@@ -70,10 +69,7 @@ const BrandPostSlider = (props: BrandPostSliderProps) => {
 								alignItems: "center",
 							}}
 						>
-							<BrandPostComponent
-								brandPost={brandPost}
-								userPost={props.userPost}
-							/>
+							<BrandPostComponent brandPost={brandPost} />
 						</div>
 					</SplideSlide>
 				))}

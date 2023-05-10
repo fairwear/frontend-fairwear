@@ -1,17 +1,15 @@
+import BrandPostAPI from "@api/BrandPostAPI";
 import BrandPostResponse from "@models/brandpost/BrandPostResponse";
+import IsVoted from "@models/brandpost/IsVoted";
 import VoteEnum from "@models/brandpost/VoteEnum";
 import { ThumbDown, ThumbUp } from "@mui/icons-material";
 import { IconButton, Typography } from "@mui/material";
 import moment from "moment";
 import { useEffect, useState } from "react";
 import "./BrandPost.css";
-import BrandPostAPI from "@api/BrandPostAPI";
-import IsVoted from "@models/brandpost/IsVoted";
-import UserInfoResponse from "@models/user/UserInfoResponse";
 
 interface BrandPostComponentProps {
 	brandPost: BrandPostResponse;
-	userPost: UserInfoResponse;
 }
 
 const BrandPostComponent = (props: BrandPostComponentProps) => {
@@ -51,8 +49,8 @@ const BrandPostComponent = (props: BrandPostComponentProps) => {
 	});
 
 	const getUserName = () => {
-		if (props.userPost) {
-			return props.userPost.username;
+		if (props.brandPost.author.name) {
+			return props.brandPost.author.name;
 		}
 		return "Anonymous";
 	};
@@ -98,7 +96,7 @@ const BrandPostComponent = (props: BrandPostComponentProps) => {
 				</div>
 				<div className="brandpost-info-container">
 					{url.map((url) => (
-						<Typography variant="subtitle1">
+						<Typography key={url} variant="subtitle1">
 							Reference url:<a href={url}>{url}</a>
 						</Typography>
 					))}
