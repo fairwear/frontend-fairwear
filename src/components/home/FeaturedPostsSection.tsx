@@ -12,7 +12,6 @@ const FeaturedPostsSection = () => {
 	}, []);
 
 	const getBrandPosts = async () => {
-		// TODO: Temp solution, Fix this
 		const response = await BrandPostAPI.findAll();
 		setBrandPosts(response);
 	};

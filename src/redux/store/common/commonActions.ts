@@ -1,5 +1,5 @@
 import AuthAPI from "@api/AuthAPI";
-import UserAPI from "@api/UserAPI";
+import UserAPI from "@api/UserInfoAPI";
 import commonSlice from "@redux/store/common/commonSlice";
 import { RootState } from "@redux/store/rootReducer";
 import { AnyAction, ThunkAction } from "@reduxjs/toolkit";
