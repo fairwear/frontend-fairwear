@@ -72,6 +72,6 @@ jobs:
           username: ${{env.REMOTE_USERNAME}}
           port: ${{env.REMOTE_PORT}}
           key: ${{env.REMOTE_PRIVATE_KEY}}
-          remote_key_pass: ${{env.REMOTE_PASSPHRASE}}
+          passphrase: ${{env.REMOTE_PASSPHRASE}}
           script: |
             sh start.sh
