@@ -20,6 +20,8 @@ const ItemAPI = {
 		axios.put(apiEndpoint, request),
 	delete: (id: number): Promise<ItemResponse> =>
 		axios.delete(`${apiEndpoint}/${id}`),
+	search: (query: string): Promise<ItemResponse[]> =>
+		axios.get(`${apiEndpoint}/search/${query}`),
 };
 
 export default ItemAPI;

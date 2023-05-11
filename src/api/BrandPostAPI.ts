@@ -20,6 +20,8 @@ const BrandPostAPI = {
 		axios.get(`${baseURL}/${id}/votes`),
 	getIsVoted: (id: number): Promise<IsVoted> =>
 		axios.get(`${baseURL}/${id}/is-voted`),
+	search: (query: string): Promise<BrandPostResponse[]> =>
+		axios.get(`${baseURL}/search/${query}`),
 };
 
 export default BrandPostAPI;
