@@ -1,9 +1,10 @@
 interface ItemResponse {
 	id: number;
-	userId: number;
 	name: string;
-	image: string;
+	barcode?: string;
+	imageUrl?: string;
 	brandId: number;
+	userId: number;
 	createdAt: Date;
 	updatedAt: Date | null;
 	deletedAt: Date | null;
