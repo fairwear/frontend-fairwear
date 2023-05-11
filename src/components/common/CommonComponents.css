@@ -6,3 +6,40 @@
 	display: flex;
 	flex-direction: column;
 }
+
+.contribute-component-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	padding: 24px;
+	box-sizing: border-box;
+	border: 0.5px solid rgba(0, 0, 0, 0.3);
+	border-radius: 16px;
+	box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+	width: 100%;
+	gap: 24px;
+}
+
+.contribute-component-container .contribute-component-icon-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	margin-top: 12px;
+}
+
+.contribute-component-container .contribute-component-content {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	gap: 12px;
+}
+
+.contribute-component-container .contribute-component-button {
+	text-transform: none;
+	padding: 10px 16px;
+	width: 80%;
+	align-self: center;
+}

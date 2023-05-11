@@ -1,7 +1,26 @@
 .contribute-page-container {
-	padding: 64px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	padding: 48px;
+	margin-bottom: 96px;
 	box-sizing: border-box;
 	width: 100%;
+}
+
+.contribute-page-container .contribute-components {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 24px;
+	width: 100%;
+	justify-content: center;
+	
+}
+
+.contribute-components > * {
+	flex: 0 0 30%;
+	margin: 8px;
 }
 
 .contribute-page-container .add-brand-button {

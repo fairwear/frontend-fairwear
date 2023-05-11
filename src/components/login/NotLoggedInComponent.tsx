@@ -26,30 +26,35 @@ const NotLoggedInComponent = () => {
 
 	return (
 		<div className="not-logged-in-component-container">
-			<Typography variant="h3" color="white" align="center">
+			<Typography variant="h3" align="center">
 				This action is only available to logged in users
 			</Typography>
-			<Typography variant="h5" color="white" align="center">
+			<Typography variant="h5" align="center">
 				Please log in or sign up to continue...
 			</Typography>
 			<div className="not-logged-in-component-outside-container">
 				<div className="not-logged-in-component-inner-container">
 					<Button
 						onClick={handleLoginDialogOpen}
-						variant="outlined"
-						className="login-button"
+						variant="contained"
+						style={{
+							padding: "12px 32px",
+							width: "75%",
+						}}
 					>
 						<Typography variant="h5">Login</Typography>
 					</Button>
 					<Button
 						onClick={handleRegisterDialogOpen}
 						variant="outlined"
-						className="register-button"
+						style={{
+							padding: "10px 32px",
+							width: "70%",
+						}}
 					>
 						<Typography
 							variant="h5"
 							style={{
-								color: "white",
 								textTransform: "none",
 							}}
 						>
