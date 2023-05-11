@@ -49,7 +49,7 @@ function App() {
 					<Route key={route.key} path={route.path} element={route.element} />
 				))}
 			</Routes>
-			<Footer/>
+			<Footer />
 		</div>
 	);
 }
