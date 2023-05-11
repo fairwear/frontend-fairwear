@@ -70,12 +70,8 @@ const BrandPostComponent = (props: BrandPostComponentProps) => {
 			</div>
 			<div className="brandpost-content-container">
 				<div className="brandpost-name-container">
-					<Typography align="left" variant="h6">
+					<Typography align="left" variant="h2">
 						{props.brandPost.brand.name}
-					</Typography>
-
-					<Typography align="right" variant="h6">
-						{getUserName()}
 					</Typography>
 				</div>
 				<div className="brandpost-desc-container">
@@ -103,6 +99,10 @@ const BrandPostComponent = (props: BrandPostComponentProps) => {
 
 					<Typography variant="subtitle1">
 						{moment(props.brandPost.createdAt).format("YYYY-MM-DD")}
+					</Typography>
+
+					<Typography align="right" variant="subtitle1" fontStyle="italic">
+						- {getUserName()}
 					</Typography>
 				</div>
 			</div>
