@@ -14,10 +14,13 @@ const HeroSection = (props: HeroSectionProps) => {
 				</Typography>
 				<Typography variant="body1" align="left" className="cta-description">
 					Describe exactly what the company does and what a customer can expect
-					when working with the company. Try scanning a barcode with your camera!
+					when working with the company. Try scanning a barcode with your
+					camera!
 				</Typography>
-				<Button variant="contained" className="hero-section-button"
-				onClick={() => navigate("/scan")}
+				<Button
+					variant="contained"
+					className="hero-section-button"
+					onClick={() => navigate("/scan")}
 				>
 					<Typography variant="h5">Let me scan!</Typography>
 				</Button>
