@@ -16,6 +16,8 @@ const BrandAPI = {
 		axios.put(apiEndpoint, request),
 	delete: (id: number): Promise<BrandResponse> =>
 		axios.delete(`${apiEndpoint}/${id}`),
+	search: (query: string): Promise<BrandResponse[]> =>
+		axios.get(`${apiEndpoint}/search/${query}`),
 };
 
 export default BrandAPI;
