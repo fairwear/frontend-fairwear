@@ -7,6 +7,7 @@ import BrandPage from "@pages/brand/BrandPage";
 import ContributePage from "@pages/contribute/ContributePage";
 import BrandListPage from "@pages/brand_list/BrandListPage";
 import UserPage from "@pages/user_page/UserPage";
+import ScannerComponent from "@components/scanner/ScannerComponent";
 
 const routes: RouteGroup[] = [
 	{
@@ -45,6 +46,12 @@ const routes: RouteGroup[] = [
 				key: "user",
 				pageTitle: "User Page",
 				element: <UserPage />,
+			},
+			{
+				path: "/scan",
+				key: "scan",
+				pageTitle: "Scanner Page",
+				element: <ScannerComponent />,
 			},
 		],
 	},

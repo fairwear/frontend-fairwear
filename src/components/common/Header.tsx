@@ -1,8 +1,8 @@
 import AuthAPI from "@api/AuthAPI";
+import fw from "@assets/svg/FW200.svg";
 import LoginDialog from "@components/login/LoginDialog";
 import SignUpDialog from "@components/login/SignUpDialog";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import MenuIcon from "@mui/icons-material/Menu";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import SearchIcon from "@mui/icons-material/Search";
 import { Button, Typography } from "@mui/material";
@@ -16,10 +16,10 @@ import Toolbar from "@mui/material/Toolbar";
 import { alpha, styled } from "@mui/material/styles";
 import { useAppSelector } from "@redux/store/hooks";
 import * as React from "react";
+import { useNavigate } from "react-router-dom";
 import "../Components.css";
 import "./CommonComponents.css";
 import ContributeButton from "./ContributeButton";
-import { useNavigate } from "react-router-dom";
 
 const Search = styled("div")(({ theme }) => ({
 	position: "relative",
@@ -200,8 +200,14 @@ export default function PrimarySearchAppBar() {
 					color="inherit"
 					aria-label="open drawer"
 					className="header-menu-icon"
+					sx={{
+						"&:hover": {
+							backgroundColor: "transparent",
+						},
+					}}
+					onClick={() => navigate("/")}
 				>
-					<MenuIcon />
+					<img width="100px" src={fw} />
 				</IconButton>
 
 				<Search

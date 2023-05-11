@@ -4,6 +4,7 @@ import HelpRoundedIcon from "@mui/icons-material/HelpRounded";
 import {
 	Autocomplete,
 	Box,
+	Chip,
 	IconButton,
 	ListItemText,
 	OutlinedTextFieldProps,
@@ -37,6 +38,8 @@ interface OtherProps extends OutlinedTextFieldProps {
 	getOptionLabel?: (option: any) => string;
 	isOptionEqualToValue?: (option: any, value: any) => boolean;
 	renderOption?: (props: any, option: any) => JSX.Element;
+	customHandleChange?: (newValue: any, setValue?: React.Dispatch<any>) => void;
+	multiple?: boolean;
 }
 
 function FormAutocomplete(prop: OtherProps & FieldHookConfig<string>) {
@@ -58,6 +61,8 @@ function FormAutocomplete(prop: OtherProps & FieldHookConfig<string>) {
 		getOptionLabel = defaultGetOptionLabel,
 		isOptionEqualToValue = defaultIsOptionEqualToValue,
 		renderOption = defaultRenderOption,
+		customHandleChange,
+		multiple = false,
 		...other
 	} = prop;
 
@@ -65,12 +70,19 @@ function FormAutocomplete(prop: OtherProps & FieldHookConfig<string>) {
 
 	const [open, setOpen] = useState(false);
 	// const [value, setValue] = useState<string | undefined | null>(field.value);
-	const [value, setValue] = useState<any | undefined | null>(field.value);
+	const [value, setValue] = useState<any>(field.value);
 
-	const handleChange = (newValue: any | undefined) => {
-		setValue(newValue);
-		formikContext.setFieldTouched(prop.name, true);
-		formikContext.setFieldValue(prop.name, newValue);
+	const handleChange = (newValue: any) => {
+		if (customHandleChange) {
+			customHandleChange(newValue, setValue);
+			setValue(newValue);
+			formikContext.setFieldTouched(prop.name, true);
+			formikContext.setFieldValue(prop.name, newValue);
+		} else {
+			setValue(newValue);
+			formikContext.setFieldTouched(prop.name, true);
+			formikContext.setFieldValue(prop.name, newValue);
+		}
 	};
 
 	return (
@@ -99,11 +111,21 @@ function FormAutocomplete(prop: OtherProps & FieldHookConfig<string>) {
 			<Autocomplete
 				id="form-autocomplete"
 				open={open}
+				multiple={multiple}
 				value={value ? value : field.value}
 				disableClearable={disableClearable}
 				autoHighlight
 				disabled={disabled}
 				key={field.name}
+				renderTags={(value: any, getTagProps: any) =>
+					value.map((option: string, index: number) => (
+						<Chip
+							variant="outlined"
+							label={option}
+							{...getTagProps({ index })}
+						/>
+					))
+				}
 				onOpen={() => {
 					if (textInputPriority) {
 						if (!open && field.value && field.value.length <= 0) {
@@ -133,7 +155,7 @@ function FormAutocomplete(prop: OtherProps & FieldHookConfig<string>) {
 						setOpen(true);
 					}
 				}}
-				onChange={(event: any, newValue: string | undefined) => {
+				onChange={(event: any, newValue: any) => {
 					if (textInputPriority) {
 						setOpen(false);
 					}

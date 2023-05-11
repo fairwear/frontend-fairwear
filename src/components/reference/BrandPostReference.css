@@ -1,0 +1,13 @@
+.create-brandpost-reference-form {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+}
+
+.create-brandpost-form .dialog-content {
+	display: flex;
+	flex-direction: column;
+	padding: 24px 32px;
+	box-sizing: border-box;
+	gap: 32px;
+}

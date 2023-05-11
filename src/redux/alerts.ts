@@ -25,6 +25,9 @@ const alerts = {
 		} as AlertValue;
 		store.dispatch(addAlert(newAlert));
 	},
+	addAlert: (newAlert: AlertValue): void => {
+		store.dispatch(addAlert(newAlert));
+	},
 	remove: (alertToRemove: AlertValue): void => {
 		store.dispatch(removeAlert(alertToRemove));
 	},

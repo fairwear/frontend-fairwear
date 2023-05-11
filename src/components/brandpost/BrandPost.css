@@ -69,13 +69,23 @@
 	gap: 32px;
 }
 
-@media screen (max-width: 768px) {
+@media (max-width: 768px) {
 	.brandpost-container {
 		flex-direction: column !important;
 	}
+
 	.vote-count-container {
 		margin: 0px;
 		display: flexbox;
 		flex-direction: row !important;
 	}
+}
+
+.selected-topics-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	gap: 16px;
 }
