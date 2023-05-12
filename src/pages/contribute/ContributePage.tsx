@@ -15,6 +15,7 @@ import FlagRoundedIcon from "@mui/icons-material/FlagRounded";
 import { useAppSelector } from "@redux/store/hooks";
 import { useState } from "react";
 import "./ContributePage.css";
+import CreateItemDialog from "@components/item/CreateItemDialog";
 
 const ContributePage = () => {
 	const isUserLoggedIn = useAppSelector((state) => state.common.isLoggedIn);
@@ -134,6 +135,13 @@ const ContributePage = () => {
 				open={brandPostDialogOpen}
 				handleDialogClose={handleBrandPostDialogClose}
 				handleSubmit={handleSubmitBrandPost}
+			/>
+			<CreateItemDialog
+				open={itemDialogOpen}
+				handleDialogClose={handleItemDialogClose}
+				handleSubmit={() => {
+					console.log("submit");
+				}}
 			/>
 		</div>
 	);

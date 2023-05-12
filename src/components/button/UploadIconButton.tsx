@@ -1,17 +1,19 @@
 import { AddCircleOutlined } from "@mui/icons-material";
-import { IconButton, Tooltip } from "@mui/material";
+import { ButtonProps, IconButton, Tooltip } from "@mui/material";
 import { useAppSelector } from "@redux/store/hooks";
 import { ChangeEvent, useRef } from "react";
 import "./Button.css";
+import { useFormikContext } from "formik";
 
-interface UploadIconButtonProps {
+interface UploadIconButtonProps extends ButtonProps {
+	name: string;
 	handleUpload: (file: FileList) => void;
 
 	disabled?: boolean;
 }
 
 const UploadIconButton = (props: UploadIconButtonProps) => {
-	const { handleUpload, disabled = false } = props;
+	const { name, handleUpload, disabled = false } = props;
 	const isLoggedIn = useAppSelector((state) => state.common.isLoggedIn);
 
 	const hiddenInputRef = useRef<HTMLInputElement | null>(null);
@@ -24,10 +26,13 @@ const UploadIconButton = (props: UploadIconButtonProps) => {
 		if (e.target.files) {
 			if (e.target.files.length > 0) {
 				let image = e.target.files;
+				formikContext.setFieldValue(name, image);
 				handleUpload(image);
 			}
 		}
 	};
+
+	const formikContext = useFormikContext();
 
 	return (
 		<>
@@ -55,7 +60,7 @@ const UploadIconButton = (props: UploadIconButtonProps) => {
 					<AddCircleOutlined
 						className="base-icon"
 						style={{
-							color: "#FFFFFF",
+							color: "#222222",
 							opacity: isLoggedIn && !disabled ? 1 : 0.5,
 							height: "32px",
 							width: "32px",
