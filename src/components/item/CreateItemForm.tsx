@@ -7,6 +7,7 @@ import BrandResponse from "@models/brand/BrandResponse";
 import { Camera, CloseOutlined } from "@mui/icons-material";
 import {
 	Button,
+	CircularProgress,
 	ClickAwayListener,
 	Divider,
 	IconButton,
@@ -15,7 +16,7 @@ import {
 } from "@mui/material";
 import alerts from "@redux/alerts";
 import { AlertValue } from "@redux/store/alert/AlertState";
-import { Form, Formik, FormikProps } from "formik";
+import { Form, Formik, FormikHelpers, FormikProps } from "formik";
 import { useEffect, useState } from "react";
 import * as yup from "yup";
 import "./Items.css";
@@ -61,7 +62,6 @@ const CreateItemForm = (props: ItemCreateFormProps) => {
 				setIsLoaded(false);
 			}, 300);
 		}
-		console.log(track);
 	}, [mediaStream?.getVideoTracks()]);
 
 	const getBrands = async () => {
@@ -98,9 +98,8 @@ const CreateItemForm = (props: ItemCreateFormProps) => {
 		alerts.addAlert(permissionAlert);
 	};
 
-	const handleImageUpload = (file: FileList) => {
-		setImage(file[0]);
-		console.log(file[0]);
+	const handleImageUpload = (file: File) => {
+		setImage(file);
 	};
 
 	const handleRemoveImage = () => {
@@ -109,11 +108,43 @@ const CreateItemForm = (props: ItemCreateFormProps) => {
 
 	const brandNames = brands.map((brand) => brand.name);
 
+	const handleFormSubmit = (
+		values: CreateItemFormValues,
+		formikHelpers: FormikHelpers<any>
+	) => {
+		const findBrandId = brands.find(
+			(brand) => brand.name === values.brandName
+		)?.id;
+		if (findBrandId) {
+			values.brandId = findBrandId.toString();
+			handleSubmit(values);
+			formikHelpers.setSubmitting(false);
+		} else {
+			formikHelpers.setFieldError(
+				"brandName",
+				`Brand with name ${values.brandName} was  not found`
+			);
+			formikHelpers.setSubmitting(false);
+			throw new Error(`Brand with name ${values.brandName} not found`);
+		}
+	};
+
+	const validationSchema = yup.object({
+		name: yup.string().required("Name is required"),
+		barcode: yup.string().required("Barcode is required"),
+		brandName: yup
+			.string()
+			.required("Brand is required")
+			.nullable()
+			.oneOf(brandNames, "Please choose a valid brand from the list"),
+		image: yup.mixed().required("Image is required").nullable(),
+	});
+
 	return (
 		<Formik
 			initialValues={initialValues}
 			validationSchema={validationSchema}
-			onSubmit={handleSubmit}
+			onSubmit={handleFormSubmit}
 			enableReinitialize
 		>
 			{(formik: FormikProps<any>) => (
@@ -228,13 +259,23 @@ const CreateItemForm = (props: ItemCreateFormProps) => {
 						style={{
 							marginTop: "auto",
 							alignSelf: "flex-end !important",
-							padding: "8px 16px",
+							padding: "12px 16px",
 						}}
 						disabled={formik.isSubmitting || !formik.isValid}
 						variant="contained"
 						type="submit"
 					>
-						Submit
+						{formik.isSubmitting ? (
+							<CircularProgress
+								style={{
+									width: "24px",
+									height: "24px",
+									color: "white",
+								}}
+							/>
+						) : (
+							<Typography variant="h5">Submit Item</Typography>
+						)}
 					</Button>
 				</Form>
 			)}
@@ -246,6 +287,7 @@ export interface CreateItemFormValues {
 	name: string;
 	barcode: string;
 	brandName: string;
+	brandId: string;
 	image: File | null;
 }
 
@@ -253,14 +295,8 @@ const initialValues: CreateItemFormValues = {
 	name: "",
 	barcode: "",
 	brandName: "",
+	brandId: "",
 	image: null,
 };
-
-const validationSchema = yup.object({
-	name: yup.string().required("Name is required"),
-	barcode: yup.string().required("Barcode is required"),
-	brandName: yup.string().required("Brand is required").nullable(),
-	image: yup.mixed().required("Image is required").nullable(),
-});
 
 export default CreateItemForm;

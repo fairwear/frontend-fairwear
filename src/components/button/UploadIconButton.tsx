@@ -7,7 +7,7 @@ import { useFormikContext } from "formik";
 
 interface UploadIconButtonProps extends ButtonProps {
 	name: string;
-	handleUpload: (file: FileList) => void;
+	handleUpload: (file: File) => void;
 
 	disabled?: boolean;
 }
@@ -25,7 +25,7 @@ const UploadIconButton = (props: UploadIconButtonProps) => {
 	const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
 		if (e.target.files) {
 			if (e.target.files.length > 0) {
-				let image = e.target.files;
+				let image = e.target.files[0];
 				formikContext.setFieldValue(name, image);
 				handleUpload(image);
 			}

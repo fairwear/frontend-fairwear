@@ -14,6 +14,7 @@ import {
 	Typography,
 } from "@mui/material";
 import AppTheme from "../../AppTheme";
+import "./AlertComponents.css";
 
 interface ToastComponentProps extends AlertProps {
 	alertMessage: string;
@@ -30,7 +31,7 @@ const ToastComponent = (props: ToastComponentProps) => {
 		<Snackbar
 			open={true}
 			onClose={() => closeAlert()}
-			autoHideDuration={12000}
+			autoHideDuration={6000000}
 			className="fairwear-toast"
 		>
 			<Alert
@@ -50,7 +51,7 @@ const ToastComponent = (props: ToastComponentProps) => {
 					success: <CheckCircleOutlineRoundedIcon />,
 				}}
 			>
-				<div className="content">
+				<div className="alert-content">
 					<div className="text-and-logo-container">
 						<AlertTitle
 							className="fairwear-banner-title"
@@ -85,16 +86,10 @@ const ToastComponent = (props: ToastComponentProps) => {
 						)}
 						<IconButton
 							size="small"
-							color="secondary"
 							onClick={() => closeAlert()}
 							className="fairwear-banner-close-button"
 						>
-							<CloseRoundedIcon
-								style={{
-									color: "#171440",
-									alignSelf: "flex-end !important",
-								}}
-							/>
+							<CloseRoundedIcon className="toast-close-icon" />
 						</IconButton>
 					</div>
 				</div>
