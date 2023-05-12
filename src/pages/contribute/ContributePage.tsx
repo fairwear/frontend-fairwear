@@ -98,27 +98,44 @@ const ContributePage = () => {
 
 	const handleSubmitItem = async (values: CreateItemFormValues) => {
 		let imageRequest = new FormData();
-		const image: File | null = values.image;
+		const image: "" | File = values.itemImage;
 		if (image) {
-			imageRequest.append("file", image);
-		}
-		const imageResponse = await FileAPI.upload(imageRequest);
-		const itemRequest: ItemCreateRequest = {
-			name: values.name,
-			barcode: values.barcode,
-			brandId: +values.brandId,
-			imageUrl: imageResponse.url,
-			createdAt: new Date(),
-		};
+			if (typeof image !== "string") {
+				imageRequest.append("file", image);
 
-		const itemResponse = await ItemAPI.create(itemRequest);
-		handleItemDialogClose();
-		alerts.addAlert({
-			isOpen: true,
-			message: `Item ${itemResponse.name} created`,
-			alertSeverity: "success",
-			alertType: "toast",
-		});
+				const imageResponse = await FileAPI.upload(imageRequest);
+				const itemRequest: ItemCreateRequest = {
+					name: values.name,
+					barcode: values.barcode,
+					brandId: +values.brandId,
+					imageUrl: imageResponse.url,
+					createdAt: new Date(),
+				};
+
+				const itemResponse = await ItemAPI.create(itemRequest);
+				handleItemDialogClose();
+				alerts.addAlert({
+					isOpen: true,
+					message: `Item ${itemResponse.name} created`,
+					alertSeverity: "success",
+					alertType: "toast",
+				});
+			} else {
+				alerts.addAlert({
+					isOpen: true,
+					message: `The image you uploaded is not valid, please try again`,
+					alertSeverity: "error",
+					alertType: "toast",
+				});
+			}
+		} else {
+			alerts.addAlert({
+				isOpen: true,
+				message: `Please upload an image`,
+				alertSeverity: "error",
+				alertType: "toast",
+			});
+		}
 	};
 
 	return (
