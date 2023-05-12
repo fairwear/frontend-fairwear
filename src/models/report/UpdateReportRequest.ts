@@ -1,0 +1,3 @@
+interface UpdateReportRequest {
+    id: number;
+}
