@@ -13,26 +13,14 @@ interface CreateItemDialogProps {
 const CreateItemDialog = (props: CreateItemDialogProps) => {
 	const { open, handleDialogClose, handleSubmit } = props;
 
-	const paperScrollPaper = {
-		minHeight: "100%",
-	};
-
 	return (
 		<Dialog
 			open={open}
 			fullWidth
-			classes={{
-				paperScrollPaper: paperScrollPaper.minHeight,
-			}}
-			style={{
-				minHeight: "100%",
-			}}
 			PaperProps={{
 				style: {
 					width: "100%",
-					// height: "680px",
 					height: "100%",
-					minHeight: "min-content",
 				},
 			}}
 		>
@@ -45,7 +33,14 @@ const CreateItemDialog = (props: CreateItemDialogProps) => {
 				}}
 			/>
 
-			<DialogContent>
+			<DialogContent
+				style={{
+					overflow: "auto",
+					height: "100%",
+					// marginBottom: "48px",
+					marginBottom: "24px",
+				}}
+			>
 				<CreateItemForm handleSubmit={handleSubmit} />
 			</DialogContent>
 		</Dialog>

@@ -4,8 +4,14 @@ import FormAutocomplete from "@components/form/FormAutoComplete";
 import FormTextField from "@components/form/FormTextField";
 import ScannerPaperComponent from "@components/scanner/ScannerPaperComponent";
 import BrandResponse from "@models/brand/BrandResponse";
-import { Camera, CloseOutlined } from "@mui/icons-material";
 import {
+	AddPhotoAlternate,
+	Camera,
+	CloseOutlined,
+	ErrorRounded,
+} from "@mui/icons-material";
+import {
+	Box,
 	Button,
 	CircularProgress,
 	ClickAwayListener,
@@ -16,7 +22,7 @@ import {
 } from "@mui/material";
 import alerts from "@redux/alerts";
 import { AlertValue } from "@redux/store/alert/AlertState";
-import { Form, Formik, FormikHelpers, FormikProps } from "formik";
+import { Field, Form, Formik, FormikHelpers, FormikProps } from "formik";
 import { useEffect, useState } from "react";
 import * as yup from "yup";
 import "./Items.css";
@@ -102,8 +108,15 @@ const CreateItemForm = (props: ItemCreateFormProps) => {
 		setImage(file);
 	};
 
-	const handleRemoveImage = () => {
+	const handleRemoveImage = (formik: FormikProps<CreateItemFormValues>) => {
 		setImage(undefined);
+		formik.setFieldValue("itemImage", "");
+		formik.setFieldTouched("itemImage", true);
+		formik.setFieldError("itemlol", "Item image is required");
+		formik.setSubmitting(false);
+		setTimeout(() => {
+			formik.validateField("itemImage");
+		}, 500);
 	};
 
 	const brandNames = brands.map((brand) => brand.name);
@@ -137,7 +150,31 @@ const CreateItemForm = (props: ItemCreateFormProps) => {
 			.required("Brand is required")
 			.nullable()
 			.oneOf(brandNames, "Please choose a valid brand from the list"),
-		image: yup.mixed().required("Image is required").nullable(),
+		itemImage: yup
+			.mixed()
+			.required("Image is required")
+			.test({
+				name: "isString",
+				exclusive: false,
+				message: "Image is required",
+				test: async (value) => {
+					await new Promise((resolve) => setTimeout(resolve, 0));
+
+					if (value === "" || !value) {
+						return false;
+					}
+					return true;
+				},
+			})
+			.test({
+				name: "fileSize",
+				exclusive: false,
+				message: "Image size is too large",
+				test: async (value) => {
+					await new Promise((resolve) => setTimeout(resolve, 0));
+					return (value as File).size <= 2000000;
+				},
+			}),
 	});
 
 	return (
@@ -221,45 +258,62 @@ const CreateItemForm = (props: ItemCreateFormProps) => {
 							</IconButton>
 						}
 					/>
-					<div className="item-create-form__image-upload-container">
-						<Typography variant="h4">Image</Typography>
-						{!image && (
-							<div className="item-create-form__image-upload-actions">
-								<Typography variant="h4">Add Image</Typography>
-								<UploadIconButton
-									id="image-upload"
-									name="image"
-									handleUpload={handleImageUpload}
-								/>
-							</div>
-						)}
-						{image && (
-							<div className="item-create-form__image-preview-container">
-								<IconButton
-									className="close-button"
-									onClick={() => {
-										handleRemoveImage();
-										formik.setFieldValue("image", null);
-									}}
-									style={{
-										alignSelf: "flex-end",
-									}}
-								>
-									<CloseOutlined />
-								</IconButton>
-								<div className="item-create-form__image-preview">
-									<img src={URL.createObjectURL(image)} alt="item" />
-								</div>
-							</div>
-						)}
-					</div>
+					<Field
+						name="itemImage"
+						value={formik.values.itemImage}
+						error={formik.touched.itemImage && Boolean(formik.errors.itemImage)}
+						onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+							formik.setFieldError("itemImage", "");
+							// formik.validateField("itemImage");
+						}}
+						render={() => (
+							<div className="item-create-form__image-upload-container">
+								<Typography variant="h4">Image</Typography>
+								{!image && (
+									<UploadIconButton
+										id="image-upload"
+										name="itemImage"
+										value={formik.values.itemImage}
+										handleUpload={handleImageUpload}
+										buttonComponent={<AddPhotoButton />}
+									/>
+								)}
+								{image && (
+									<div className="item-create-form__image-preview-container">
+										<IconButton
+											className="close-button"
+											onClick={() => {
+												handleRemoveImage(formik);
+											}}
+											style={{
+												alignSelf: "flex-end",
+											}}
+										>
+											<CloseOutlined />
+										</IconButton>
+										<div className="item-create-form__image-preview">
+											<img src={URL.createObjectURL(image)} alt="item" />
+										</div>
+									</div>
+								)}
+								{Boolean(formik.errors.itemImage) && formik.touched.itemImage && (
+									<Box className="image-error-container">
+										<ErrorRounded className="image-error-icon" />
 
+										<Typography variant="body1" color={"#C62828"} align="left">
+											{formik.getFieldMeta("itemImage").error}
+										</Typography>
+									</Box>
+								)}
+							</div>
+						)}
+					/>
 					<Button
 						fullWidth
 						style={{
 							marginTop: "auto",
-							alignSelf: "flex-end !important",
 							padding: "12px 16px",
+							marginBottom: "-32px",
 						}}
 						disabled={formik.isSubmitting || !formik.isValid}
 						variant="contained"
@@ -283,12 +337,27 @@ const CreateItemForm = (props: ItemCreateFormProps) => {
 	);
 };
 
+const AddPhotoButton = () => {
+	return (
+		<div className="item-create-form__image-upload-actions">
+			<Typography variant="h4">Add Image</Typography>
+			<AddPhotoAlternate
+				style={{
+					width: "28px",
+					height: "28px",
+					color: "grey",
+				}}
+			/>
+		</div>
+	);
+};
+
 export interface CreateItemFormValues {
 	name: string;
 	barcode: string;
 	brandName: string;
 	brandId: string;
-	image: File | null;
+	itemImage: File | "";
 }
 
 const initialValues: CreateItemFormValues = {
@@ -296,7 +365,7 @@ const initialValues: CreateItemFormValues = {
 	barcode: "",
 	brandName: "",
 	brandId: "",
-	image: null,
+	itemImage: "",
 };
 
 export default CreateItemForm;
