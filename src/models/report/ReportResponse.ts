@@ -1,3 +1,4 @@
+import ReportReasonEnum from "@models/report/ReportReasonEnum";
 import ReportResultEnum from "@models/report/ReportResultEnum";
 import ReportStatusEnum from "@models/report/ReportStatusEnum";
 import UserInfoResponse from "@models/user/UserInfoResponse";

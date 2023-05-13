@@ -1,6 +1,7 @@
 import apiEndpoints from "@constants/apiEndpoints";
 import CreateReportRequest from "@models/report/CreateReportRequest";
 import ReportResponse from "@models/report/ReportResponse";
+import UpdateReportRequest from "@models/report/UpdateReportRequest";
 import axios from "axios";
 
 const baseUrl = apiEndpoints.report;
