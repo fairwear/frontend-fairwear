@@ -12,8 +12,10 @@ const BrandPostAPI = {
 	create: (brandPost: BrandPostCreateRequest): Promise<BrandPostResponse> =>
 		axios.post(baseURL, brandPost),
 	findAll: (): Promise<BrandPostResponse[]> => axios.get(baseURL),
-	findById: (id: number) => axios.get(`${baseURL}/${id}`),
-	delete: (id: number) => axios.delete(`${baseURL}/${id}`),
+	findById: (id: number): Promise<BrandPostResponse> =>
+		axios.get(`${baseURL}/${id}`),
+	delete: (id: number): Promise<BrandPostResponse> =>
+		axios.delete(`${baseURL}/${id}`),
 	vote: (id: number, voteEntry: VoteEntry) =>
 		axios.post(`${baseURL}/${id}/vote`, voteEntry),
 	getVotes: (id: number): Promise<VoteCountResponse> =>

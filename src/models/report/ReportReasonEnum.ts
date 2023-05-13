@@ -8,3 +8,5 @@ enum ReportReasonEnum {
 	INAPPROPRIATE = "INAPPROPRIATE",
 	OTHER = "OTHER",
 }
+
+export default ReportReasonEnum;

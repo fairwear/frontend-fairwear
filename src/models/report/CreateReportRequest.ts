@@ -1,10 +1,10 @@
-import ReportStatusEnum from "@models/report/ReportStatusEnum";
+import ReportReasonEnum from "@models/report/ReportReasonEnum";
 
 interface CreateReportRequest {
-	createdAt: Date;
-	reportReason: string;
+	postId: number;
+	reportReason: ReportReasonEnum | string;
 	comment?: string;
-	status: ReportStatusEnum;
+	createdAt: Date;
 }
 
 export default CreateReportRequest;

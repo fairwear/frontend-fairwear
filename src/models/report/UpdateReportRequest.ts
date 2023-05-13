@@ -1,3 +1,3 @@
 interface UpdateReportRequest {
-    id: number;
+	id: number;
 }
