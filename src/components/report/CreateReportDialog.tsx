@@ -45,7 +45,7 @@ const CreateReportDialog = (props: CreateReportDialogProps) => {
 			}}
 			PaperProps={{
 				style: {
-					height: "60%",
+					height: "90%",
 					width: "70%",
 				},
 			}}

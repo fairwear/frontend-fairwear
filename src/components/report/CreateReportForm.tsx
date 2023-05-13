@@ -65,15 +65,16 @@ const CreateReportForm = (props: CreateReportFormProps) => {
 						value={formik.values.reportReason}
 						required
 						name="reportReason"
+						title="Report Reason"
 						options={reportReasons}
 						variant="outlined"
-						label="Report Reason"
 						placeholder="Select a reason"
 					/>
 					{isReasonOther && (
 						<FormTextField
 							value={formik.values.otherReportReason}
 							name="otherReportReason"
+							title="Report Reason"
 							label="Report Reason"
 							placeholder="Please specify the reason"
 						/>
@@ -82,7 +83,7 @@ const CreateReportForm = (props: CreateReportFormProps) => {
 					<FormTextField
 						name="comment"
 						value={formik.values.comment}
-						label="Comment"
+						title="Comment"
 						placeholder="Elaborate on what's wrong with the post..."
 					/>
 					<FormikUseEffect

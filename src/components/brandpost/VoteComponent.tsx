@@ -34,8 +34,6 @@ const VoteComponent = (props: VoteComponentProps) => {
 
 	const getIsVoted = async () => {
 		const response = await BrandPostAPI.getIsVoted(brandPostId);
-		console.log("getIsVoted");
-		console.log(response);
 		if (response.vote === VoteEnum.UPVOTE) setUpvote(true);
 		else if (response.vote === VoteEnum.DOWNVOTE) setDownvote(true);
 		setIsVoted(response);
@@ -43,31 +41,25 @@ const VoteComponent = (props: VoteComponentProps) => {
 
 	const vote = async (vote: VoteEnum) => {
 		const voteEntry = { vote: vote, brandPostId: brandPostId };
-		const result = await BrandPostAPI.vote(brandPostId, voteEntry);
+		await BrandPostAPI.vote(brandPostId, voteEntry);
 		await countVotes();
 		await getIsVoted();
-
-		console.log(result);
 	};
 
 	const countVotes = async () => {
 		const response = await BrandPostAPI.getVotes(brandPostId);
-
 		const upvotes = response.upvotes;
 		const downvotes = response.downvotes;
-
 		setVoteCount(upvotes - downvotes);
 	};
 
 	const handleUpvote = () => {
-		console.log("upvote");
 		setUpvote(!upvote);
 		setDownvote(false);
 		vote(VoteEnum.UPVOTE);
 	};
 
 	const handleDownvote = () => {
-		console.log("downvote");
 		setDownvote(!downvote);
 		setUpvote(false);
 		vote(VoteEnum.DOWNVOTE);
