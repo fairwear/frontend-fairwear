@@ -4,10 +4,11 @@ import CreateReportForm, {
 	CreateReportFormValues,
 } from "@components/report/CreateReportForm";
 import BrandPostResponse from "@models/brandpost/BrandPostResponse";
-import { Dialog } from "@mui/material";
+import { CircularProgress, Dialog } from "@mui/material";
 import { useEffect, useState } from "react";
 import "./Report.css";
 import { FormikHelpers } from "formik";
+import BrandPostPreview from "@components/brandpost/BrandPostPreview";
 
 interface CreateReportDialogProps {
 	open: boolean;
@@ -60,9 +61,17 @@ const CreateReportDialog = (props: CreateReportDialogProps) => {
 			{brandPost && (
 				<div className="report-dialog__brandpost-preview-container">
 					<div className="report-dialog__brandpost-preview">
-						BrandPost Preview
+						<BrandPostPreview brandPost={brandPost} />
 					</div>
 				</div>
+			)}
+			{!brandPost && (
+				<CircularProgress
+					style={{
+						width: "32px",
+						height: "32px",
+					}}
+				/>
 			)}
 
 			<CreateReportForm handleSubmit={handleSubmit} handleClose={handleClose} />

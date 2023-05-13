@@ -24,12 +24,15 @@
 	align-items: center;
 	justify-content: center;
 	box-sizing: border-box;
+	padding: 24px 36px;
 
 	width: 100%;
 }
 
 .report-dialog__brandpost-preview {
 	display: flex;
+	justify-content: flex-start;
+	align-items: center;
 
-	width: 100%;
+	width: 80%;
 }

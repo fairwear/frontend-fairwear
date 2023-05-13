@@ -89,3 +89,32 @@
 	width: 100%;
 	gap: 16px;
 }
+
+/* ------------------------------------- BrandPost Preview -------------------------------------  */
+
+.brand-post-preview-container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+
+	border: rgb(32, 32, 32, 0.8) 1px solid;
+	border-radius: 8px;
+	padding: 16px;
+	box-sizing: border-box;
+	width: 100%;
+}
+
+.brand-post-preview {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+	width: 100%;
+}
+
+.brand-post-preview__header {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: flex-start;
+	gap: 8px;
+}
