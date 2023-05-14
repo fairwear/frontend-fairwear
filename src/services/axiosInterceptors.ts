@@ -49,3 +49,9 @@ const setupAxiosInterceptors = () => {
 };
 
 export default setupAxiosInterceptors;
+
+export interface IError {
+	message: string;
+code: number;
+
+}
