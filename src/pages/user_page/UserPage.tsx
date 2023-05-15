@@ -1,26 +1,32 @@
 import UserAPI from "@api/UserInfoAPI";
+import UserInfo from "@components/userpage/UserInfo";
 import UserInfoResponse from "@models/user/UserInfoResponse";
-import { Email } from "@mui/icons-material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
-export default function UserPage() {
-	const [user, setUser] = useState<UserInfoResponse | null>(null);
+const UserPage = () => {
 	const { username } = useParams<{ username: string }>();
+
+	const [userinfo, setUser] = useState<UserInfoResponse | undefined>();
+
 
 	const getUser = async () => {
 		if (!username) return;
-		const user = await UserAPI.getUserInfo(+username);
+		const user = await UserAPI.findByUsername(username);
 		setUser(user);
+		
 	};
-	getUser();
+
+	useEffect(() => {
+		getUser();
+	}, [username]);
+
 
 	return (
-		<div>
-			<h1>
-				{user?.username}
-				{user?.email}
-			</h1>
+		<div >
+			<UserInfo userInfo={userinfo} />
 		</div>
 	);
 }
+
+export default UserPage;
