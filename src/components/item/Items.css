@@ -1,0 +1,126 @@
+.item-create-form {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 16px;
+	width: 100%;
+	height: calc(100% - 16px);
+}
+
+.image-field-title-container {
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+
+	width: 100%;
+}
+
+.item-create-form__image-upload-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: flex-start;
+	width: 100%;
+	margin-top: 24px;
+	gap: 24px;
+}
+
+.item-create-form__image-upload-actions {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	align-self: flex-start;
+	gap: 16px;
+	width: 100%;
+
+	border: 1px dashed #ccc;
+	padding: 8px 16px;
+	box-sizing: border-box;
+	border-radius: 8px;
+}
+
+.item-create-form__image_upload_button {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	align-self: flex-start;
+	gap: 16px;
+	width: 80%;
+
+	border: 1px dashed #ccc;
+	border-radius: 8px;
+}
+
+.item-create-form__image-upload-actions:hover {
+	background-color: rgb(204, 204, 204, 0.15);
+}
+
+.item-create-form__image-preview-container {
+	display: flex;
+
+	flex-direction: column;
+	align-items: flex-end;
+	width: auto;
+}
+
+.item-create-form__image-preview {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.item-create-form__image-preview {
+	border: 1px solid #ccc;
+	border-radius: 8px;
+	overflow: hidden;
+	width: auto;
+}
+
+.item-create-form__image-preview-container .close-button {
+	margin-bottom: -46px;
+	margin-right: 4px;
+}
+
+.item-create-form__image-preview img {
+	width: 100%;
+	/* height: 100%; */
+	/* aspect-ratio: 1; */
+	object-fit: cover;
+	max-height: 200px;
+	max-width: 300px;
+
+	display: block;
+	max-width: 200px;
+	/* max-height:200px; */
+	/* width: auto; */
+	height: auto;
+}
+
+.image-error-container {
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	gap: 4px;
+	padding: 8px 24px;
+	background: #feebee;
+	border-radius: 5px;
+	width: calc(100% - 48px);
+}
+
+.image-error-icon {
+	height: 20px !important;
+	width: 16px !important;
+	color: #c62828;
+}
+
+@media (max-width: 768px) {
+	.item-create-form__image-preview {
+		width: 100%;
+		height: 100%;
+	}
+
+	.item-create-form__image-preview img {
+		width: 100%;
+		height: 100%;
+	}
+}

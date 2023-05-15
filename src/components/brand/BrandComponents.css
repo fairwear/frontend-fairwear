@@ -207,6 +207,13 @@
 	gap: 32px;
 }
 
+.product-image {
+	aspect-ratio: 1 / 1;
+	object-fit: cover;
+	border-radius: 12px;
+	opacity: 0.8;
+}
+
 .product-image,
 .extended {
 	width: 100%;

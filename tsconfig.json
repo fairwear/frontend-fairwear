@@ -2,7 +2,7 @@
 	"compilerOptions": {
 		"target": "ESNext",
 		"useDefineForClassFields": true,
-		"lib": ["es5", "es6", "dom", "dom.iterable"],
+		"lib": ["es5", "es6", "ES2018", "dom", "dom.iterable"],
 		"allowJs": false,
 		"skipLibCheck": true,
 		"esModuleInterop": true,
@@ -17,6 +17,7 @@
 		"outDir": "dist",
 		"baseUrl": "./src",
 		"jsx": "react-jsx",
+		"typeRoots": ["./node_modules/@types"],
 		"paths": {
 			"@api/*": ["api/*"],
 			"@assets/*": ["assets/*"],

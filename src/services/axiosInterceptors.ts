@@ -25,8 +25,8 @@ const setupAxiosInterceptors = () => {
 	};
 
 	const handleRequestError = async (error: AxiosError) => {
-		console.log(error.message);
-		return await Promise.reject(error.message);
+		await Promise.reject(error);
+		return Promise.resolve(error);
 	};
 
 	/* It's intercepting all responses and if there's an error, it calls the handleResponseError function. */
@@ -34,7 +34,7 @@ const setupAxiosInterceptors = () => {
 		(response) => response.data,
 		handleResponseError
 	);
-	axios.interceptors.request.use((config) => {
+	axios.interceptors.request.use(async (config) => {
 		const token = localStorage.getItem("token");
 		if (token) {
 			if (config.headers) {
@@ -44,6 +44,7 @@ const setupAxiosInterceptors = () => {
 				config.headers.Authorization = `Bearer ${token}`;
 			}
 		}
+		await Promise.resolve(config);
 		return config;
 	}, handleRequestError);
 };
