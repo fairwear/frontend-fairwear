@@ -47,7 +47,6 @@ const routes: RouteGroup[] = [
 				pageTitle: "User Page",
 				element: <UserPage />,
 				icon: <TokenRoundedIcon />,
-
 			},
 			{
 				path: "/scan",

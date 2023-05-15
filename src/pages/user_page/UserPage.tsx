@@ -9,24 +9,21 @@ const UserPage = () => {
 
 	const [userinfo, setUser] = useState<UserInfoResponse | undefined>();
 
-
 	const getUser = async () => {
 		if (!username) return;
 		const user = await UserAPI.findByUsername(username);
 		setUser(user);
-		
 	};
 
 	useEffect(() => {
 		getUser();
 	}, [username]);
 
-
 	return (
-		<div >
+		<div>
 			<UserInfo userInfo={userinfo} />
 		</div>
 	);
-}
+};
 
 export default UserPage;
