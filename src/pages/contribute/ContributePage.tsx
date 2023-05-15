@@ -22,8 +22,6 @@ import { FormikHelpers } from "formik";
 import { useState } from "react";
 import "./ContributePage.css";
 
-const dummyBrandPostId = 4;
-
 const ContributePage = () => {
 	const isUserLoggedIn = useAppSelector((state) => state.common.isLoggedIn);
 
@@ -53,7 +51,7 @@ const ContributePage = () => {
 		setItemDialogOpen(true);
 	};
 
-	/* deepscan-disable-line */ const handleItemDialogClose = () => {
+	const handleItemDialogClose = () => {
 		setItemDialogOpen(false);
 	};
 
@@ -96,6 +94,48 @@ const ContributePage = () => {
 		setTimeout(() => {
 			handleBrandDialogClose();
 		}, 350);
+	};
+
+	const handleSubmitItem = async (values: CreateItemFormValues) => {
+		let imageRequest = new FormData();
+		const image: "" | File = values.itemImage;
+		if (image) {
+			if (typeof image !== "string") {
+				imageRequest.append("file", image);
+
+				const imageResponse = await FileAPI.upload(imageRequest);
+				const itemRequest: ItemCreateRequest = {
+					name: values.name,
+					barcode: values.barcode,
+					brandId: +values.brandId,
+					imageUrl: imageResponse.url,
+					createdAt: new Date(),
+				};
+
+				const itemResponse = await ItemAPI.create(itemRequest);
+				handleItemDialogClose();
+				alerts.addAlert({
+					isOpen: true,
+					message: `Item ${itemResponse.name} created`,
+					alertSeverity: "success",
+					alertType: "toast",
+				});
+			} else {
+				alerts.addAlert({
+					isOpen: true,
+					message: `The image you uploaded is not valid, please try again`,
+					alertSeverity: "error",
+					alertType: "toast",
+				});
+			}
+		} else {
+			alerts.addAlert({
+				isOpen: true,
+				message: `Please upload an image`,
+				alertSeverity: "error",
+				alertType: "toast",
+			});
+		}
 	};
 
 	const handleSubmitReport = async (
@@ -155,9 +195,9 @@ const ContributePage = () => {
 					/>
 					<ContributeComponent
 						icon={CheckroomRoundedIcon}
-						title="Add Items // Not yet implemented"
+						title="Add Items"
 						description="Add items to the platform, relate them to brands and topics. Share how it looks and help other people find it by scanning the barcode."
-						buttonText="Add Item // Not yet implemented"
+						buttonText="Add Item"
 						handleClick={handleItemDialogOpen}
 					/>
 					<ContributeComponent
@@ -184,6 +224,11 @@ const ContributePage = () => {
 				brandPostId={dummyBrandPostId}
 				handleClose={handleReportDialogClose}
 				handleSubmit={handleSubmitReport}
+			/>
+			<CreateItemDialog
+				open={itemDialogOpen}
+				handleDialogClose={handleItemDialogClose}
+				handleSubmit={handleSubmitItem}
 			/>
 		</div>
 	);
