@@ -1,0 +1,27 @@
+.userpage-info-container {
+	width: 80% !important;
+	display: flex;
+	flex-direction: column;
+	margin-left: 10%;
+	gap: 32px;
+	align-items: flex-start;
+	justify-content: space-between;
+}
+.trustScore-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 0px;
+	margin-right: 10%;
+}
+.userinfo-page {
+	display: flex;
+	flex-direction: row;
+	gap: 16px;
+	margin-top: 16px;
+}
+.content-container {
+	border-radius: 8px;
+	border: 1px solid #222222;
+	width: 100%;
+}
