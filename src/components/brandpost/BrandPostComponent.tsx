@@ -18,7 +18,6 @@ const BrandPostComponent = (props: BrandPostComponentProps) => {
 
 	const countVotes = async () => {
 		const response = await BrandPostAPI.getVotes(props.brandPost.id);
-
 		const upvotes = response.upvotes;
 		const downvotes = response.downvotes;
 
