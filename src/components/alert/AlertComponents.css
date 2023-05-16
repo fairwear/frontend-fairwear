@@ -9,6 +9,8 @@
 	justify-content: flex-start;
 	border-radius: 0;
 	padding: 8px 32px !important;
+	box-sizing: border-box;
+	width: 100%;
 }
 
 .fairwear-banner .alert-content {

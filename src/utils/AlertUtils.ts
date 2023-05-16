@@ -1,4 +1,6 @@
 import { AlertValue } from "@redux/store/alert/AlertState";
+import { IError } from "@services/axiosInterceptors";
+import { AxiosError } from "axios";
 
 const AlertUtils = {
 	createNewAlert: (
@@ -18,6 +20,26 @@ const AlertUtils = {
 			alertAction: alertAction,
 		};
 		return newAlert;
+	},
+
+	mapAxiosErrorToIError: (error: AxiosError) => {
+		let errorData = error.response?.data as any;
+		if (errorData) {
+			let errorArray = errorData.message.toString().split(":");
+			let message = errorArray[errorArray.length - 1];
+			let iError: IError = {
+				code: errorData.statusCode,
+				message: message,
+			};
+			console.log(iError);
+			let newAlert = AlertUtils.createNewAlert(
+				true,
+				message,
+				"error",
+				"banner"
+			);
+			return newAlert;
+		}
 	},
 };
 
