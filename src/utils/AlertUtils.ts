@@ -32,7 +32,12 @@ const AlertUtils = {
 				message: message,
 			};
 			console.log(iError);
-			let newAlert = AlertUtils.createNewAlert(true, message, "error", "banner");
+			let newAlert = AlertUtils.createNewAlert(
+				true,
+				message,
+				"error",
+				"banner"
+			);
 			return newAlert;
 		}
 	},
