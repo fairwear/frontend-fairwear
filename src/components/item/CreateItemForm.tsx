@@ -296,20 +296,15 @@ const CreateItemForm = (props: ItemCreateFormProps) => {
 										</div>
 									</div>
 								)}
-								{Boolean(formik.errors.itemImage) &&
-									formik.touched.itemImage && (
-										<Box className="image-error-container">
-											<ErrorRounded className="image-error-icon" />
+								{Boolean(formik.errors.itemImage) && formik.touched.itemImage && (
+									<Box className="image-error-container">
+										<ErrorRounded className="image-error-icon" />
 
-											<Typography
-												variant="body1"
-												color={"#C62828"}
-												align="left"
-											>
-												{formik.getFieldMeta("itemImage").error}
-											</Typography>
-										</Box>
-									)}
+										<Typography variant="body1" color={"#C62828"} align="left">
+											{formik.getFieldMeta("itemImage").error}
+										</Typography>
+									</Box>
+								)}
 							</div>
 						)}
 					/>
