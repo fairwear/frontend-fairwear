@@ -1,13 +1,12 @@
 import { HomeRounded } from "@mui/icons-material";
-import TokenRoundedIcon from "@mui/icons-material/TokenRounded";
 import AddCircleOutlineOutlinedIcon from "@mui/icons-material/AddCircleOutlineOutlined";
-import RouteGroup from "../models/routes/RouteGroup";
-import HomePage from "@pages/home/HomePage";
+import TokenRoundedIcon from "@mui/icons-material/TokenRounded";
 import BrandPage from "@pages/brand/BrandPage";
-import ContributePage from "@pages/contribute/ContributePage";
 import BrandListPage from "@pages/brand_list/BrandListPage";
+import ContributePage from "@pages/contribute/ContributePage";
+import HomePage from "@pages/home/HomePage";
 import UserPage from "@pages/user_page/UserPage";
-import ScannerComponent from "@components/scanner/ScannerComponent";
+import RouteGroup from "../models/routes/RouteGroup";
 
 const routes: RouteGroup[] = [
 	{
@@ -46,12 +45,7 @@ const routes: RouteGroup[] = [
 				key: "user",
 				pageTitle: "User Page",
 				element: <UserPage />,
-			},
-			{
-				path: "/scan",
-				key: "scan",
-				pageTitle: "Scanner Page",
-				element: <ScannerComponent />,
+				icon: <TokenRoundedIcon />,
 			},
 		],
 	},

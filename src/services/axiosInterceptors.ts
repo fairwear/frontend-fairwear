@@ -34,7 +34,7 @@ const setupAxiosInterceptors = () => {
 		(response) => response.data,
 		handleResponseError
 	);
-	axios.interceptors.request.use((config) => {
+	axios.interceptors.request.use(async (config) => {
 		const token = localStorage.getItem("token");
 		if (token) {
 			if (config.headers) {
@@ -44,6 +44,7 @@ const setupAxiosInterceptors = () => {
 				config.headers.Authorization = `Bearer ${token}`;
 			}
 		}
+		await Promise.resolve(config);
 		return config;
 	}, handleRequestError);
 };

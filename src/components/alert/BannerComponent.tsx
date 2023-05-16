@@ -66,7 +66,7 @@ const BannerComponent = (props: BannerComponentProps) => {
 			}}
 			style={props.style}
 		>
-			<div className="content">
+			<div className="alert-content">
 				<div className="text-and-logo-container">
 					<AlertTitle
 						className="fairwear-banner-title"

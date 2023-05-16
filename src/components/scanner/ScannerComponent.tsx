@@ -1,47 +1,49 @@
-import ItemAPI from "@api/ItemAPI";
 import PermissionNotice from "@components/scanner/PermissionNotice";
-import ItemResponse from "@models/item/ItemResponse";
 import { ErrorRounded, InfoOutlined } from "@mui/icons-material";
 import { Box, CircularProgress, Typography } from "@mui/material";
 import alerts from "@redux/alerts";
 import { AlertValue } from "@redux/store/alert/AlertState";
 import { QrScanner } from "@yudiel/react-qr-scanner";
+import { useFormikContext } from "formik";
 import { useEffect, useState } from "react";
 import "./Scanner.css";
 
-interface ScannerComponentProps {}
+interface ScannerComponentProps {
+	name: string;
+	open: boolean;
+	handleScannerOpen: () => void;
+	handleScannerClose: () => void;
+}
 
 const ScannerComponent = (props: ScannerComponentProps) => {
-	const [scannerOpen, setScannerOpen] = useState<boolean>();
+	const { name, open, handleScannerOpen, handleScannerClose } = props;
 	const [isLoaded, setIsLoaded] = useState<boolean>(false);
 	const [scannerResult, setScannerResult] = useState<string | undefined>();
 	const [errorMessage, setErrorMessage] = useState<string | undefined>();
-	const [item, setItem] = useState<ItemResponse | undefined>();
 
 	useEffect(() => {
 		handleAskCameraPermission();
 	}, []);
 
+	const formikContext = useFormikContext();
+
 	const handleSuccessfulScan = async (result: string) => {
 		setScannerResult(result);
-		try {
-			const response = await ItemAPI.findByBarcode(result);
-			setItem(response);
-			setScannerOpen(false);
-		} catch (error) {
-			console.error(error);
-			const notFoundAlert: AlertValue = {
-				isOpen: true,
-				message: "Item with this barcode was not found.",
-				alertSeverity: "error",
-				alertType: "toast",
-			};
-			alerts.addAlert(notFoundAlert);
-		}
+		formikContext.setFieldValue(name, result);
+
+		handleScannerClose;
+
+		// const notFoundAlert: AlertValue = {
+		// 	isOpen: true,
+		// 	message: "Item with this barcode was not found.",
+		// 	alertSeverity: "error",
+		// 	alertType: "toast",
+		// };
+		// alerts.addAlert(notFoundAlert);
 	};
 
 	const handlePermissionError = (error: Error) => {
-		setScannerOpen(false);
+		handleScannerClose();
 		const permissionAlert: AlertValue = {
 			isOpen: true,
 			message: "Please allow camera access to be able to scan barcodes.",
@@ -59,7 +61,7 @@ const ScannerComponent = (props: ScannerComponentProps) => {
 				setTimeout(() => {
 					setIsLoaded(true);
 				}, 500);
-				setScannerOpen(true);
+				handleScannerOpen();
 			},
 			(error) => {
 				setIsLoaded(true);
@@ -70,7 +72,7 @@ const ScannerComponent = (props: ScannerComponentProps) => {
 
 	return (
 		<div className="scanner-outer-container">
-			<Typography variant="h1">Scan a Barcode</Typography>
+			{/* <Typography variant="h1">Scan a Barcode</Typography> */}
 			<div className="scanner-container">
 				{!isLoaded && (
 					<CircularProgress
@@ -80,8 +82,13 @@ const ScannerComponent = (props: ScannerComponentProps) => {
 						}}
 					/>
 				)}
-				{isLoaded && scannerOpen && (
+				{isLoaded && open && (
 					<QrScanner
+						constraints={{
+							sampleRate: 5,
+							frameRate: 5,
+						}}
+						tracker={false}
 						containerStyle={{
 							width: "100%",
 							padding: "50% 50%",
@@ -89,12 +96,20 @@ const ScannerComponent = (props: ScannerComponentProps) => {
 						videoStyle={{
 							width: "100%",
 						}}
-						onDecode={(result) => handleSuccessfulScan(result)}
-						onError={(error) => setErrorMessage(error.message)}
-						scanDelay={500}
+						onDecode={(result) => {
+							if (scannerResult !== result) {
+								handleSuccessfulScan(result);
+							}
+						}}
+						onError={(error) => {
+							if (errorMessage !== error.message) {
+								setErrorMessage(error.message);
+							}
+						}}
+						scanDelay={1000}
 					/>
 				)}
-				{isLoaded && !scannerOpen && (
+				{isLoaded && !open && (
 					<PermissionNotice
 						handleAskCameraPermission={handleAskCameraPermission}
 					/>

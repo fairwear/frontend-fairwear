@@ -7,6 +7,7 @@ const apiEndpoints = {
 	user: "api/v1/user",
 	userRole: "api/v1/userrole",
 	report: "api/v1/report",
+	file: "api/v1/file",
 };
 
 export default apiEndpoints;
