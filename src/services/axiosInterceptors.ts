@@ -1,3 +1,5 @@
+import alerts from "@redux/alerts";
+import AlertUtils from "@utils/AlertUtils";
 import axios, { AxiosError } from "axios";
 
 /**
@@ -6,10 +8,6 @@ import axios, { AxiosError } from "axios";
  * @param {any} store - any - this is the Redux store that we'll use to dispatch actions.
  */
 const setupAxiosInterceptors = () => {
-	// const handleResponseError = (error: AxiosError) => {
-	// 	store.dispatch(alertActions.addAlert(mapErrorToAlert(error)));
-	// 	return Promise.reject(error);
-	// };
 	const handleResponseError = async (error: AxiosError) => {
 		if (error.response?.status === 401 || error.response?.status === 403) {
 			// If forbidden or unauthorized, then move user to login page
@@ -17,15 +15,17 @@ const setupAxiosInterceptors = () => {
 				window.location.assign("/");
 			}
 		} else {
-			console.log(error.response?.data || error.message);
-
-			// store.dispatch(alertActions.addAlert(mapErrorToAlert(error)));
+			let newAlert = AlertUtils.mapAxiosErrorToIError(error);
+			if (newAlert) {
+				alerts.addAlert(newAlert);
+			}
 		}
-		return Promise.reject(error);
+		return await Promise.reject(error.message);
 	};
 
 	const handleRequestError = async (error: AxiosError) => {
-		console.log(error.message);
+		console.log(error);
+
 		return await Promise.reject(error.message);
 	};
 
@@ -52,6 +52,5 @@ export default setupAxiosInterceptors;
 
 export interface IError {
 	message: string;
-code: number;
-
+	code: number;
 }
