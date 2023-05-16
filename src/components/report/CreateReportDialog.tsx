@@ -1,14 +1,14 @@
 import BrandPostAPI from "@api/BrandPostAPI";
+import BrandPostPreview from "@components/brandpost/BrandPostPreview";
 import DialogHeader from "@components/dialog/DialogHeader";
 import CreateReportForm, {
 	CreateReportFormValues,
 } from "@components/report/CreateReportForm";
 import BrandPostResponse from "@models/brandpost/BrandPostResponse";
 import { CircularProgress, Dialog } from "@mui/material";
+import { FormikHelpers } from "formik";
 import { useEffect, useState } from "react";
 import "./Report.css";
-import { FormikHelpers } from "formik";
-import BrandPostPreview from "@components/brandpost/BrandPostPreview";
 
 interface CreateReportDialogProps {
 	open: boolean;

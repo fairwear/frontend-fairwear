@@ -21,6 +21,13 @@ import { useAppSelector } from "@redux/store/hooks";
 import { FormikHelpers } from "formik";
 import { useState } from "react";
 import "./ContributePage.css";
+import ItemCreateRequest from "@models/item/ItemCreateRequest";
+import FileAPI from "@api/FileAPI";
+import { CreateItemFormValues } from "@components/item/CreateItemForm";
+import ItemAPI from "@api/ItemAPI";
+import CreateItemDialog from "@components/item/CreateItemDialog";
+
+const dummyBrandPostId = 4;
 
 const ContributePage = () => {
 	const isUserLoggedIn = useAppSelector((state) => state.common.isLoggedIn);
