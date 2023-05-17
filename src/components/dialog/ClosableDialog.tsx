@@ -1,18 +1,18 @@
-import { Dialog, PaperProps } from "@mui/material";
+import { Dialog, DialogProps, PaperProps } from "@mui/material";
 import { useEffect, useRef } from "react";
 
-interface Props {
-	open?: boolean;
+interface Props extends DialogProps {
 	handleDialogClosing: () => void;
 	disableBackdropClick?: boolean;
 	closeWhenMouseIsOutside?: boolean;
 	paperProps?: PaperProps;
+	containerClassName?: string;
+	constainerStyle?: React.CSSProperties;
 	children: any;
 }
 
 const ClosableDialog = (props: Props) => {
 	const {
-		open = true,
 		handleDialogClosing,
 		closeWhenMouseIsOutside = true,
 		disableBackdropClick = false,
@@ -48,9 +48,17 @@ const ClosableDialog = (props: Props) => {
 		<Dialog
 			scroll={paperProps ? "paper" : undefined}
 			PaperProps={paperProps}
-			open={open}
+			{...props}
 		>
-			<div ref={wrapperRef}>{children}</div>
+			<div
+				className={props.containerClassName ? props.containerClassName : ""}
+				style={{
+					...props.constainerStyle,
+				}}
+				ref={wrapperRef}
+			>
+				{children}
+			</div>
 		</Dialog>
 	);
 };

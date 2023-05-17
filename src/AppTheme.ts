@@ -244,6 +244,11 @@ const AppTheme = createTheme({
 				},
 			],
 		},
+		MuiAutocomplete: {
+			styleOverrides: {
+				inputRoot: {},
+			},
+		},
 	},
 	palette: {
 		red: {

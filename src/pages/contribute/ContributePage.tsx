@@ -1,26 +1,33 @@
 import BrandAPI from "@api/BrandAPI";
 import BrandPostAPI from "@api/BrandPostAPI";
+import ReportAPI from "@api/ReportAPI";
 import CreateUpdateBrandDialog from "@components/brand/CreateUpdateBrandDialog";
 import { CreateBrandFormValues } from "@components/brand/form/CreateBrandForm";
 import CreateBrandPostDialog from "@components/brandpost/CreateBrandPostDialog";
 import { CreateBrandPostFormValues } from "@components/brandpost/CreateBrandPostForm";
 import ContributeComponent from "@components/common/ContributeComponent";
 import NotLoggedInComponent from "@components/login/NotLoggedInComponent";
+import CreateReportDialog from "@components/report/CreateReportDialog";
+import { CreateReportFormValues } from "@components/report/CreateReportForm";
 import BrandCreateRequest from "@models/brand/BrandCreateRequest";
 import BrandPostCreateRequest from "@models/brandpost/BrandPostCreateRequest";
+import CreateReportRequest from "@models/report/CreateReportRequest";
 import AddShoppingCartRoundedIcon from "@mui/icons-material/AddShoppingCartRounded";
 import CelebrationRoundedIcon from "@mui/icons-material/CelebrationRounded";
 import CheckroomRoundedIcon from "@mui/icons-material/CheckroomRounded";
 import FlagRoundedIcon from "@mui/icons-material/FlagRounded";
+import alerts from "@redux/alerts";
 import { useAppSelector } from "@redux/store/hooks";
+import { FormikHelpers } from "formik";
 import { useState } from "react";
 import "./ContributePage.css";
-import CreateItemDialog from "@components/item/CreateItemDialog";
-import { CreateItemFormValues } from "@components/item/CreateItemForm";
-import FileAPI from "@api/FileAPI";
 import ItemCreateRequest from "@models/item/ItemCreateRequest";
+import FileAPI from "@api/FileAPI";
+import { CreateItemFormValues } from "@components/item/CreateItemForm";
 import ItemAPI from "@api/ItemAPI";
-import alerts from "@redux/alerts";
+import CreateItemDialog from "@components/item/CreateItemDialog";
+
+const dummyBrandPostId = 4;
 
 const ContributePage = () => {
 	const isUserLoggedIn = useAppSelector((state) => state.common.isLoggedIn);
@@ -138,6 +145,42 @@ const ContributePage = () => {
 		}
 	};
 
+	const handleSubmitReport = async (
+		values: CreateReportFormValues,
+		formikHelpers: FormikHelpers<any>
+	) => {
+		const request: CreateReportRequest = {
+			postId: dummyBrandPostId,
+			reportReason: values.reportReason,
+			comment: values.comment,
+			createdAt: new Date(),
+		};
+
+		try {
+			const response = await ReportAPI.create(request);
+			console.log(response);
+
+			alerts.add("Report submitted", "success", undefined, undefined, "toast");
+			setTimeout(() => {
+				handleReportDialogClose();
+			}, 350);
+		} catch (error: any) {
+			formikHelpers.setSubmitting(false);
+			if (error.response.data.statusCode) {
+				if (error.response.data.statusCode === 409) {
+					alerts.add(
+						"You have already reported this post",
+						"error",
+						undefined,
+						undefined,
+						"toast"
+					);
+				}
+				formikHelpers.setErrors({ reportReason: "Something went wrong" });
+			}
+		}
+	};
+
 	return (
 		<div className="contribute-page-container">
 			{!isUserLoggedIn && <NotLoggedInComponent />}
@@ -182,6 +225,12 @@ const ContributePage = () => {
 				open={brandPostDialogOpen}
 				handleDialogClose={handleBrandPostDialogClose}
 				handleSubmit={handleSubmitBrandPost}
+			/>
+			<CreateReportDialog
+				open={reportDialogOpen}
+				brandPostId={dummyBrandPostId}
+				handleClose={handleReportDialogClose}
+				handleSubmit={handleSubmitReport}
 			/>
 			<CreateItemDialog
 				open={itemDialogOpen}

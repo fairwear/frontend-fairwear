@@ -13,9 +13,9 @@ import {
 	Typography,
 	TypographyProps,
 } from "@mui/material";
-import AppTheme from "../../AppTheme";
 import { FieldHookConfig, useField, useFormikContext } from "formik";
 import { useState } from "react";
+import AppTheme from "../../AppTheme";
 
 interface OtherProps extends OutlinedTextFieldProps {
 	options: any[];
@@ -189,8 +189,17 @@ function FormAutocomplete(prop: OtherProps & FieldHookConfig<string>) {
 						{...other}
 						{...params}
 						fullWidth
+						sx={{
+							"& .MuiOutlinedInput-root": {
+								paddingTop: "6px",
+								paddingBottom: "6px",
+							},
+						}}
 						error={meta.touched && Boolean(meta.error)}
 						InputLabelProps={{
+							style: {
+								marginTop: "-3px",
+							},
 							...params.InputLabelProps,
 							...prop.InputLabelProps,
 						}}

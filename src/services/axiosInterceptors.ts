@@ -12,7 +12,7 @@ const setupAxiosInterceptors = () => {
 		if (error.response?.status === 401 || error.response?.status === 403) {
 			// If forbidden or unauthorized, then move user to login page
 			if (window.location.pathname !== "/") {
-				window.location.assign("/");
+				// window.location.assign("/");
 			}
 		} else {
 			let newAlert = AlertUtils.mapAxiosErrorToIError(error);

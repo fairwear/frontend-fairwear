@@ -8,6 +8,7 @@ interface StyledClosableDialogProps {
 	footer: JSX.Element;
 	closeWhenMouseIsOutside?: boolean;
 	children: any;
+	open?: boolean;
 }
 
 const StyledClosableDialog = (props: StyledClosableDialogProps) => {
@@ -17,9 +18,11 @@ const StyledClosableDialog = (props: StyledClosableDialogProps) => {
 		footer,
 		closeWhenMouseIsOutside,
 		children,
+		open = true,
 	} = props;
 	return (
 		<ClosableDialog
+			open={open}
 			handleDialogClosing={handleDialogClosing}
 			closeWhenMouseIsOutside={closeWhenMouseIsOutside}
 		>
