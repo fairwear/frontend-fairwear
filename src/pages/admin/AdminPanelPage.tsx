@@ -1,9 +1,8 @@
-import './AdminPanelPage.css'
+import "./AdminPanelPage.css";
 
 const AdminPanelPage = () => {
 	return (
-		<div
-        >
+		<div>
 			<h1>Admin Panel</h1>
 		</div>
 	);
