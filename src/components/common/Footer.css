@@ -1,5 +1,6 @@
 .section__padding {
 	padding: 4rem 4rem;
+	box-sizing: border-box;
 }
 
 .footer {
