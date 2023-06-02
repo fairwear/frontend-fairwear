@@ -102,7 +102,8 @@ const SearchField = () => {
 				onClick={handleClickOpen}
 				style={{
 					flex: 1,
-					width: "100%",
+					width: "clamp(200px, 70%, 90%)",
+					minWidth: "200px",
 				}}
 			>
 				<SearchIconWrapper>

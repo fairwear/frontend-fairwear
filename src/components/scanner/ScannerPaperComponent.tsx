@@ -72,6 +72,7 @@ const ScannerPaperComponent = (props: ScannerPaperComponentProps) => {
 				onClick={actionButtonAction ? actionButtonAction : handleScannerClose}
 				style={{
 					margin: "6px",
+					marginRight: "12px",
 				}}
 			>
 				{actionButtonIcon ? (

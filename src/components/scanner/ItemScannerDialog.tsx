@@ -14,7 +14,7 @@ import {
 	SwipeableDrawer,
 } from "@mui/material";
 import { Form, Formik, FormikProps } from "formik";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import * as yup from "yup";
 
 interface ItemScannerDialogProps {
@@ -38,10 +38,13 @@ const ItemScannerDialog = (props: ItemScannerDialogProps) => {
 		handleScannerOpen,
 	} = props;
 
-	const [textFieldDrawerOpen, setTextFieldDrawerOpen] = useState<boolean>(true);
+	const [textFieldDrawerOpen, setTextFieldDrawerOpen] =
+		useState<boolean>(false);
 	const [itemDrawerOpen, setItemDrawerOpen] = useState<boolean>(false);
 	const [barcode, setBarcode] = useState<string | undefined>();
 	const [item, setItem] = useState<ItemResponse | undefined>();
+
+	const itemDrawerRef = useRef(null);
 
 	const getItem = async (barcode: string) => {
 		let response = await ItemAPI.findByBarcode(barcode);
@@ -110,7 +113,6 @@ const ItemScannerDialog = (props: ItemScannerDialogProps) => {
 							open={textFieldDrawerOpen}
 							anchor="bottom"
 							variant="persistent"
-							disableScrollLock
 							SlideProps={{
 								unmountOnExit: true,
 							}}
@@ -142,23 +144,25 @@ const ItemScannerDialog = (props: ItemScannerDialogProps) => {
 								}}
 							/>
 							<ClickAwayListener onClickAway={handleTextFieldDrawerClose}>
-								<FormTextField
-									name="barcode"
-									label="Barcode"
-									fullWidth
-									autoFocus
-									endIcon={
-										<IconButton onClick={() => handleSubmit(formik.values)}>
-											<SearchRoundedIcon
-												style={{
-													width: "28px",
-													height: "28px",
-													color: "grey",
-												}}
-											/>
-										</IconButton>
-									}
-								/>
+								<div>
+									<FormTextField
+										name="barcode"
+										label="Barcode"
+										fullWidth
+										autoFocus
+										endIcon={
+											<IconButton onClick={() => handleSubmit(formik.values)}>
+												<SearchRoundedIcon
+													style={{
+														width: "28px",
+														height: "28px",
+														color: "grey",
+													}}
+												/>
+											</IconButton>
+										}
+									/>
+								</div>
 							</ClickAwayListener>
 						</SwipeableDrawer>
 						<ScannerPaperComponent
@@ -172,8 +176,8 @@ const ItemScannerDialog = (props: ItemScannerDialogProps) => {
 							actionButtonIcon={
 								<TextFieldsRoundedIcon
 									style={{
-										height: "30px",
-										width: "30px",
+										height: "32px",
+										width: "32px",
 									}}
 								/>
 							}
@@ -185,6 +189,7 @@ const ItemScannerDialog = (props: ItemScannerDialogProps) => {
 				onClickAway={itemDrawerOpen ? handleItemDrawerClose : () => {}}
 			>
 				<SwipeableDrawer
+					ref={itemDrawerRef}
 					open={itemDrawerOpen}
 					anchor="bottom"
 					variant="persistent"
