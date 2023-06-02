@@ -19,15 +19,17 @@ import FlagRoundedIcon from "@mui/icons-material/FlagRounded";
 import alerts from "@redux/alerts";
 import { useAppSelector } from "@redux/store/hooks";
 import { FormikHelpers } from "formik";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./ContributePage.css";
 import ItemCreateRequest from "@models/item/ItemCreateRequest";
 import FileAPI from "@api/FileAPI";
 import { CreateItemFormValues } from "@components/item/CreateItemForm";
 import ItemAPI from "@api/ItemAPI";
 import CreateItemDialog from "@components/item/CreateItemDialog";
+import BrandPost from "@components/brandpost/BrandPost";
+import BrandPostResponse from "@models/brandpost/BrandPostResponse";
 
-const dummyBrandPostId = 4;
+const dummyBrandPostId = 3;
 
 const ContributePage = () => {
 	const isUserLoggedIn = useAppSelector((state) => state.common.isLoggedIn);
@@ -181,63 +183,89 @@ const ContributePage = () => {
 		}
 	};
 
+	// TEMPORARY ---
+	const [brandPost, setBrandPost] = useState<BrandPostResponse>();
+
+	useEffect(() => {
+		getBrandPost();
+	}, []);
+
+	const getBrandPost = async () => {
+		const response = await BrandPostAPI.findById(dummyBrandPostId);
+		setBrandPost(response);
+	};
+
+	// TEMPORARY ---
+
 	return (
-		<div className="contribute-page-container">
-			{!isUserLoggedIn && <NotLoggedInComponent />}
-			{isUserLoggedIn && (
-				<div className="contribute-components">
-					<ContributeComponent
-						icon={AddShoppingCartRoundedIcon}
-						title="Expand Brands"
-						description="Tell people about a company that is not on our platform yet"
-						buttonText="Add Brand"
-						handleClick={handleBrandDialogOpen}
-					/>
-					<ContributeComponent
-						icon={CelebrationRoundedIcon}
-						title="Spread The Truth"
-						description="Tell people more about a brand or a company"
-						buttonText="Create Brand Post"
-						handleClick={handleBrandPostDialogOpen}
-					/>
-					<ContributeComponent
-						icon={CheckroomRoundedIcon}
-						title="Add Items"
-						description="Add items to the platform, relate them to brands and topics. Share how it looks and help other people find it by scanning the barcode."
-						buttonText="Add Item"
-						handleClick={handleItemDialogOpen}
-					/>
-					<ContributeComponent
-						icon={FlagRoundedIcon}
-						title="Report // Not yet implemented"
-						description="Report a bran post, brand or item that is inacurate or inappropriate."
-						buttonText="Report // Not yet implemented"
-						handleClick={handleReportDialogOpen}
-					/>
-				</div>
-			)}
-			<CreateUpdateBrandDialog
-				open={brandDialogOpen}
-				handleDialogClose={handleBrandDialogClose}
-				handleSubmit={handleSubmitBrand}
-			/>
-			<CreateBrandPostDialog
-				open={brandPostDialogOpen}
-				handleDialogClose={handleBrandPostDialogClose}
-				handleSubmit={handleSubmitBrandPost}
-			/>
-			<CreateReportDialog
-				open={reportDialogOpen}
-				brandPostId={dummyBrandPostId}
-				handleClose={handleReportDialogClose}
-				handleSubmit={handleSubmitReport}
-			/>
-			<CreateItemDialog
-				open={itemDialogOpen}
-				handleDialogClose={handleItemDialogClose}
-				handleSubmit={handleSubmitItem}
-			/>
-		</div>
+		<>
+			<div className="contribute-page-container">
+				{!isUserLoggedIn && <NotLoggedInComponent />}
+				{isUserLoggedIn && (
+					<div className="contribute-components">
+						<ContributeComponent
+							icon={AddShoppingCartRoundedIcon}
+							title="Expand Brands"
+							description="Tell people about a company that is not on our platform yet"
+							buttonText="Add Brand"
+							handleClick={handleBrandDialogOpen}
+						/>
+						<ContributeComponent
+							icon={CelebrationRoundedIcon}
+							title="Spread The Truth"
+							description="Tell people more about a brand or a company"
+							buttonText="Create Brand Post"
+							handleClick={handleBrandPostDialogOpen}
+						/>
+						<ContributeComponent
+							icon={CheckroomRoundedIcon}
+							title="Add Items"
+							description="Add items to the platform, relate them to brands and topics. Share how it looks and help other people find it by scanning the barcode."
+							buttonText="Add Item"
+							handleClick={handleItemDialogOpen}
+						/>
+						<ContributeComponent
+							icon={FlagRoundedIcon}
+							title="Report"
+							description="Report a brand post, brand or item that is inacurate or inappropriate."
+							buttonText="Report "
+							handleClick={handleReportDialogOpen}
+						/>
+					</div>
+				)}
+				<CreateUpdateBrandDialog
+					open={brandDialogOpen}
+					handleDialogClose={handleBrandDialogClose}
+					handleSubmit={handleSubmitBrand}
+				/>
+				<CreateBrandPostDialog
+					open={brandPostDialogOpen}
+					handleDialogClose={handleBrandPostDialogClose}
+					handleSubmit={handleSubmitBrandPost}
+				/>
+				<CreateReportDialog
+					open={reportDialogOpen}
+					brandPostId={dummyBrandPostId}
+					handleClose={handleReportDialogClose}
+					handleSubmit={handleSubmitReport}
+				/>
+				<CreateItemDialog
+					open={itemDialogOpen}
+					handleDialogClose={handleItemDialogClose}
+					handleSubmit={handleSubmitItem}
+				/>
+			</div>
+			<div
+				style={{
+					display: "flex",
+					justifyContent: "center",
+					alignItems: "center",
+					width: "100%",
+				}}
+			>
+				{brandPost && <BrandPost brandPost={brandPost} />}
+			</div>
+		</>
 	);
 };
 

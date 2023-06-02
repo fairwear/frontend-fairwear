@@ -1,4 +1,4 @@
-import BrandPostComponent from "@components/brandpost/BrandPostComponent";
+import BrandPostComponent from "@components/brandpost/OldBrandPostComponent";
 import BrandPostResponse from "@models/brandpost/BrandPostResponse";
 import { Splide, SplideSlide, SplideTrack } from "@splidejs/react-splide";
 import { useEffect, useRef, useState } from "react";
