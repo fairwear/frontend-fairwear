@@ -13,18 +13,27 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Toolbar from "@mui/material/Toolbar";
 import { useAppSelector } from "@redux/store/hooks";
-import * as React from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../Components.css";
 import "./CommonComponents.css";
 import ContributeButton from "./ContributeButton";
+import CameraAltRoundedIcon from "@mui/icons-material/CameraAltRounded";
+import ItemScannerDialog from "@components/scanner/ItemScannerDialog";
+import { AlertValue } from "@redux/store/alert/AlertState";
+import alerts from "@redux/alerts";
 
 export default function PrimarySearchAppBar() {
-	const [loginDialog, setLoginDialog] = React.useState(false);
-	const [signUpDialog, setSignUpDialog] = React.useState(false);
-	const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+	const [loginDialog, setLoginDialog] = useState(false);
+	const [signUpDialog, setSignUpDialog] = useState(false);
+	const [barcodeScannerDialogOpen, setBarcodeScannerDialogOpen] =
+		useState(false);
+	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 	const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
-		React.useState<null | HTMLElement>(null);
+		useState<null | HTMLElement>(null);
+	const [isLoaded, setIsLoaded] = useState<boolean>(false);
+	const [hasPermission, setHasPermission] = useState<boolean>(false);
+	const [mediaStream, setMediaStream] = useState<MediaStream | undefined>();
 
 	const isMenuOpen = Boolean(anchorEl);
 	const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -70,6 +79,59 @@ export default function PrimarySearchAppBar() {
 		setMobileMoreAnchorEl(event.currentTarget);
 	};
 
+	const handleBarcodeScannerOpen = async () => {
+		setBarcodeScannerDialogOpen(true);
+		await handleAskCameraPermission();
+		setTimeout(() => {
+			setIsLoaded(true);
+		}, 150);
+	};
+
+	const handleBarcodeScannerClose = () => {
+		mediaStream?.getVideoTracks()[0].stop();
+		setTimeout(() => {
+			setIsLoaded(false);
+		}, 150);
+	};
+
+	const handleBarcodeDialogClose = () => {
+		setBarcodeScannerDialogOpen(false);
+		mediaStream?.getVideoTracks()[0].stop();
+		setTimeout(() => {
+			setIsLoaded(false);
+		}, 150);
+	};
+
+	const handleAskCameraPermission = async () => {
+		try {
+			const mediaStream: MediaStream =
+				await navigator.mediaDevices.getUserMedia({
+					video: true,
+				});
+			setHasPermission(true);
+			setMediaStream(mediaStream);
+
+			return mediaStream;
+		} catch (error: any) {
+			handlePermissionError();
+			setHasPermission(false);
+			setMediaStream(undefined);
+
+			throw error;
+		}
+	};
+
+	const handlePermissionError = () => {
+		const permissionAlert: AlertValue = {
+			isOpen: true,
+			message: "Please allow camera access to be able to scan barcodes.",
+			alertSeverity: "error",
+			alertType: "toast",
+		};
+		alerts.addAlert(permissionAlert);
+	};
+
+	// TODO: Export this to a separate component
 	const menuId = "primary-search-account-menu";
 	const renderMenu = (
 		<Menu
@@ -92,6 +154,7 @@ export default function PrimarySearchAppBar() {
 		</Menu>
 	);
 
+	// TODO: Export this to a separate component
 	const mobileMenuId = "primary-search-account-menu-mobile";
 	const renderMobileMenu = (
 		<Menu
@@ -188,6 +251,9 @@ export default function PrimarySearchAppBar() {
 					/>
 				</Search> */}
 				<SearchField />
+				<IconButton onClick={handleBarcodeScannerOpen}>
+					<CameraAltRoundedIcon />
+				</IconButton>
 				<Box
 					className="header-auth-button-container"
 					display={{ xs: "none", md: "flex" }}
@@ -244,6 +310,14 @@ export default function PrimarySearchAppBar() {
 				{renderMobileMenu}
 				{renderMenu}
 			</Toolbar>
+			<ItemScannerDialog
+				open={barcodeScannerDialogOpen}
+				hasPermission={hasPermission}
+				handleAskCameraPermission={handleAskCameraPermission}
+				handleScannerClose={handleBarcodeScannerClose}
+				handleClose={handleBarcodeDialogClose}
+				isLoaded={isLoaded}
+			/>
 		</AppBar>
 	);
 }

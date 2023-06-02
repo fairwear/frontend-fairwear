@@ -13,6 +13,8 @@ interface ScannerPaperComponentProps {
 	handleScannerClose: () => void;
 	handleAskCameraPermission: () => void;
 	closeOnSuccessfulScan?: boolean;
+	actionButtonIcon?: JSX.Element;
+	actionButtonAction?: () => void;
 	paperStyle?: React.CSSProperties;
 	containerStyle?: React.CSSProperties;
 	videoStyle?: React.CSSProperties;
@@ -25,7 +27,9 @@ const ScannerPaperComponent = (props: ScannerPaperComponentProps) => {
 		isLoaded,
 		hasPermission,
 		closeOnSuccessfulScan,
+		actionButtonIcon,
 		handleScannerClose,
+		actionButtonAction,
 		handleAskCameraPermission,
 	} = props;
 
@@ -65,17 +69,21 @@ const ScannerPaperComponent = (props: ScannerPaperComponentProps) => {
 			}}
 		>
 			<IconButton
-				onClick={handleScannerClose}
+				onClick={actionButtonAction ? actionButtonAction : handleScannerClose}
 				style={{
 					margin: "6px",
 				}}
 			>
-				<CloseRoundedIcon
-					style={{
-						height: "30px",
-						width: "30px",
-					}}
-				/>
+				{actionButtonIcon ? (
+					actionButtonIcon
+				) : (
+					<CloseRoundedIcon
+						style={{
+							height: "30px",
+							width: "30px",
+						}}
+					/>
+				)}
 			</IconButton>
 			{!isLoaded && <CircularProgress />}
 			{isLoaded && hasPermission && (
