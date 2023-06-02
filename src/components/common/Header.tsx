@@ -186,9 +186,6 @@ export default function PrimarySearchAppBar() {
 						</div>
 					) : (
 						<div className="header-auth-buttons logged-in">
-							<IconButton>
-								<AccountCircleIcon className="account-icon" />
-							</IconButton>
 							<ContributeButton
 								handleClick={() => {
 									navigate("/contribute");
