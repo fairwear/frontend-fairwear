@@ -8,21 +8,25 @@ export default function Topics() {
 			id: 1,
 			name: "Topic 1",
 			topicId: 1,
+			brands: [],
 		},
 		{
 			id: 2,
 			name: "Topic 2",
 			topicId: 2,
+			brands: [],
 		},
 		{
 			id: 3,
 			name: "Topic 3",
 			topicId: 3,
+			brands: [],
 		},
 		{
 			id: 4,
 			name: "Topic 4",
 			topicId: 4,
+			brands: [],
 		},
 	];
 
