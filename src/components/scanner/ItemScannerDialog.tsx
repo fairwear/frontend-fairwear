@@ -1,18 +1,21 @@
 import ItemAPI from "@api/ItemAPI";
 import DialogHeader from "@components/dialog/DialogHeader";
+import FormTextField from "@components/form/FormTextField";
+import ItemInfoComponent from "@components/item/ItemInfoComponent";
 import ScannerPaperComponent from "@components/scanner/ScannerPaperComponent";
 import ItemResponse from "@models/item/ItemResponse";
+import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
+import TextFieldsRoundedIcon from "@mui/icons-material/TextFieldsRounded";
 import {
 	ClickAwayListener,
 	Dialog,
 	Divider,
+	IconButton,
 	SwipeableDrawer,
 } from "@mui/material";
+import { Form, Formik, FormikProps } from "formik";
 import { useState } from "react";
-import TextFieldsRoundedIcon from "@mui/icons-material/TextFieldsRounded";
-import { Form, Formik } from "formik";
 import * as yup from "yup";
-import FormTextField from "@components/form/FormTextField";
 
 interface ItemScannerDialogProps {
 	open: boolean;
@@ -20,6 +23,7 @@ interface ItemScannerDialogProps {
 	handleClose: () => void;
 	handleAskCameraPermission: () => void;
 	handleScannerClose: () => void;
+	handleScannerOpen: () => void;
 	isLoaded: boolean;
 }
 
@@ -30,7 +34,8 @@ const ItemScannerDialog = (props: ItemScannerDialogProps) => {
 		hasPermission,
 		handleClose,
 		handleAskCameraPermission,
-		handleScannerClose: handleScannerDrawerClose,
+		handleScannerClose,
+		handleScannerOpen,
 	} = props;
 
 	const [textFieldDrawerOpen, setTextFieldDrawerOpen] = useState<boolean>(true);
@@ -53,6 +58,16 @@ const ItemScannerDialog = (props: ItemScannerDialogProps) => {
 
 	const toggleTextFieldDrawer = () => {
 		setTextFieldDrawerOpen(!textFieldDrawerOpen);
+	};
+
+	const handleItemDrawerOpen = async () => {
+		handleScannerClose();
+		setItemDrawerOpen(true);
+	};
+
+	const handleItemDrawerClose = () => {
+		setItemDrawerOpen(false);
+		handleScannerOpen();
 	};
 
 	const handleSubmit = async (values: BarcodeScanerValues) => {
@@ -89,71 +104,126 @@ const ItemScannerDialog = (props: ItemScannerDialogProps) => {
 				onSubmit={handleSubmit}
 				enableReinitialize
 			>
-				<Form>
-					<SwipeableDrawer
-						open={textFieldDrawerOpen}
-						anchor="bottom"
-						variant="persistent"
-						disableScrollLock
-						SlideProps={{
-							unmountOnExit: true,
-						}}
-						PaperProps={{
-							elevation: 12,
-							style: {
-								position: "absolute",
-								backgroundColor: "#FFFFFF",
-								borderTopRightRadius: "16px",
-								borderTopLeftRadius: "24px",
-								borderWidth: "2px",
-								padding: "24px",
-								paddingBottom: "64px",
-							},
-						}}
-						ModalProps={{
-							keepMounted: false,
-						}}
-						onClose={handleTextFieldDrawerClose}
-						onOpen={handleTextFieldDrawerOpen}
-					>
-						<Divider
-							style={{
-								marginBottom: "16px",
-								width: "10%",
-								alignSelf: "center",
-								borderWidth: "4px",
-								borderRadius: "4px",
+				{(formik: FormikProps<BarcodeScanerValues>) => (
+					<Form>
+						<SwipeableDrawer
+							open={textFieldDrawerOpen}
+							anchor="bottom"
+							variant="persistent"
+							disableScrollLock
+							SlideProps={{
+								unmountOnExit: true,
 							}}
-						/>
-						<ClickAwayListener onClickAway={handleTextFieldDrawerClose}>
-							<FormTextField
-								name="barcode"
-								label="Barcode"
-								fullWidth
-								// required
-								autoFocus
-							/>
-						</ClickAwayListener>
-					</SwipeableDrawer>
-					<ScannerPaperComponent
-						name="barcode"
-						isLoaded={isLoaded}
-						hasPermission={hasPermission}
-						handleScannerClose={handleScannerDrawerClose}
-						handleAskCameraPermission={handleAskCameraPermission}
-						closeOnSuccessfulScan
-						actionButtonAction={toggleTextFieldDrawer}
-						actionButtonIcon={
-							<TextFieldsRoundedIcon
+							PaperProps={{
+								elevation: 12,
+								style: {
+									position: "absolute",
+									backgroundColor: "#FFFFFF",
+									borderTopRightRadius: "16px",
+									borderTopLeftRadius: "24px",
+									borderWidth: "2px",
+									padding: "24px",
+									paddingBottom: "64px",
+								},
+							}}
+							ModalProps={{
+								keepMounted: false,
+							}}
+							onClose={handleTextFieldDrawerClose}
+							onOpen={handleTextFieldDrawerOpen}
+						>
+							<Divider
 								style={{
-									height: "30px",
-									width: "30px",
+									marginBottom: "16px",
+									width: "10%",
+									alignSelf: "center",
+									borderWidth: "4px",
+									borderRadius: "4px",
 								}}
 							/>
-						}
-					/>
-				</Form>
+							<ClickAwayListener onClickAway={handleTextFieldDrawerClose}>
+								<FormTextField
+									name="barcode"
+									label="Barcode"
+									fullWidth
+									autoFocus
+									endIcon={
+										<IconButton onClick={() => handleSubmit(formik.values)}>
+											<SearchRoundedIcon
+												style={{
+													width: "28px",
+													height: "28px",
+													color: "grey",
+												}}
+											/>
+										</IconButton>
+									}
+								/>
+							</ClickAwayListener>
+						</SwipeableDrawer>
+						<ScannerPaperComponent
+							name="barcode"
+							isLoaded={isLoaded}
+							hasPermission={hasPermission}
+							handleScannerClose={handleScannerClose}
+							handleAskCameraPermission={handleAskCameraPermission}
+							closeOnSuccessfulScan
+							actionButtonAction={toggleTextFieldDrawer}
+							actionButtonIcon={
+								<TextFieldsRoundedIcon
+									style={{
+										height: "30px",
+										width: "30px",
+									}}
+								/>
+							}
+						/>
+					</Form>
+				)}
 			</Formik>
+			<ClickAwayListener
+				onClickAway={itemDrawerOpen ? handleItemDrawerClose : () => {}}
+			>
+				<SwipeableDrawer
+					open={itemDrawerOpen}
+					anchor="bottom"
+					variant="persistent"
+					SlideProps={{
+						unmountOnExit: true,
+					}}
+					PaperProps={{
+						elevation: 12,
+						style: {
+							position: "absolute",
+							backgroundColor: "#FFFFFF",
+							borderTopRightRadius: "16px",
+							borderTopLeftRadius: "24px",
+							borderWidth: "2px",
+						},
+					}}
+					ModalProps={{
+						keepMounted: false,
+					}}
+					onClose={handleItemDrawerClose}
+					onOpen={handleItemDrawerOpen}
+				>
+					<Divider
+						style={{
+							marginTop: "8px",
+							width: "10%",
+							alignSelf: "center",
+							borderWidth: "4px",
+							borderRadius: "4px",
+						}}
+					/>
+					{item && (
+						<ItemInfoComponent
+							item={item}
+							handleClose={handleItemDrawerClose}
+						/>
+					)}
+				</SwipeableDrawer>
+			</ClickAwayListener>
 		</Dialog>
 	);
 };

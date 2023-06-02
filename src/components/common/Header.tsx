@@ -3,7 +3,9 @@ import fw from "@assets/svg/FW200.svg";
 import SearchField from "@components/common/SearchField";
 import LoginDialog from "@components/login/LoginDialog";
 import SignUpDialog from "@components/login/SignUpDialog";
+import ItemScannerDialog from "@components/scanner/ItemScannerDialog";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import CameraAltRoundedIcon from "@mui/icons-material/CameraAltRounded";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import { Button, Typography } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
@@ -12,16 +14,14 @@ import IconButton from "@mui/material/IconButton";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Toolbar from "@mui/material/Toolbar";
+import alerts from "@redux/alerts";
+import { AlertValue } from "@redux/store/alert/AlertState";
 import { useAppSelector } from "@redux/store/hooks";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../Components.css";
 import "./CommonComponents.css";
 import ContributeButton from "./ContributeButton";
-import CameraAltRoundedIcon from "@mui/icons-material/CameraAltRounded";
-import ItemScannerDialog from "@components/scanner/ItemScannerDialog";
-import { AlertValue } from "@redux/store/alert/AlertState";
-import alerts from "@redux/alerts";
 
 export default function PrimarySearchAppBar() {
 	const [loginDialog, setLoginDialog] = useState(false);
@@ -230,26 +230,6 @@ export default function PrimarySearchAppBar() {
 				>
 					<img width="100px" src={fw} />
 				</IconButton>
-
-				{/* <Search
-					style={{
-						flex: 1,
-						width: "100%",
-					}}
-				>
-					<SearchIconWrapper>
-						<SearchIcon sx={{ color: "#222222" }} />
-					</SearchIconWrapper>
-					<StyledInputBase
-						sx={{
-							color: "#222222",
-							width: "100%",
-							fontFamily: "Inter",
-						}}
-						placeholder="Search…"
-						inputProps={{ "aria-label": "search" }}
-					/>
-				</Search> */}
 				<SearchField />
 				<IconButton onClick={handleBarcodeScannerOpen}>
 					<CameraAltRoundedIcon />
@@ -314,6 +294,7 @@ export default function PrimarySearchAppBar() {
 				open={barcodeScannerDialogOpen}
 				hasPermission={hasPermission}
 				handleAskCameraPermission={handleAskCameraPermission}
+				handleScannerOpen={handleBarcodeScannerOpen}
 				handleScannerClose={handleBarcodeScannerClose}
 				handleClose={handleBarcodeDialogClose}
 				isLoaded={isLoaded}
