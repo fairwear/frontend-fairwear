@@ -1,3 +1,4 @@
+import ErrorBanner from "@components/form/ErrorBanner";
 import PermissionNotice from "@components/scanner/PermissionNotice";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import { CircularProgress, IconButton, Paper } from "@mui/material";
@@ -13,10 +14,14 @@ interface ScannerPaperComponentProps {
 	handleScannerClose: () => void;
 	handleAskCameraPermission: () => void;
 	closeOnSuccessfulScan?: boolean;
+	actionButtonIcon?: JSX.Element;
+	actionButtonAction?: () => void;
 	paperStyle?: React.CSSProperties;
 	containerStyle?: React.CSSProperties;
 	videoStyle?: React.CSSProperties;
 	scannerProps?: React.ComponentProps<typeof QrScanner>;
+	enableRepetitiveScanning?: boolean;
+	handleSuccessfulScan?: (result: string) => void;
 }
 
 const ScannerPaperComponent = (props: ScannerPaperComponentProps) => {
@@ -25,8 +30,11 @@ const ScannerPaperComponent = (props: ScannerPaperComponentProps) => {
 		isLoaded,
 		hasPermission,
 		closeOnSuccessfulScan,
+		actionButtonIcon,
 		handleScannerClose,
+		actionButtonAction,
 		handleAskCameraPermission,
+		enableRepetitiveScanning = false,
 	} = props;
 
 	const [scannerResult, setScannerResult] = useState<string | undefined>();
@@ -45,10 +53,15 @@ const ScannerPaperComponent = (props: ScannerPaperComponentProps) => {
 				handleScannerClose();
 			}, 1000);
 		}
+		if (props.handleSuccessfulScan) {
+			props.handleSuccessfulScan(result);
+			console.log("handleSuccessfulScan");
+		}
 	};
 
 	const handleScanError = (error: Error) => {
 		setErrorMessage(error.message);
+		console.log(error);
 		formikContext.setFieldError(name, errorMessage);
 		formikContext.setFieldTouched(name, true);
 	};
@@ -65,19 +78,25 @@ const ScannerPaperComponent = (props: ScannerPaperComponentProps) => {
 			}}
 		>
 			<IconButton
-				onClick={handleScannerClose}
+				onClick={actionButtonAction ? actionButtonAction : handleScannerClose}
 				style={{
 					margin: "6px",
+					marginRight: "12px",
 				}}
 			>
-				<CloseRoundedIcon
-					style={{
-						height: "30px",
-						width: "30px",
-					}}
-				/>
+				{actionButtonIcon ? (
+					actionButtonIcon
+				) : (
+					<CloseRoundedIcon
+						style={{
+							height: "30px",
+							width: "30px",
+						}}
+					/>
+				)}
 			</IconButton>
 			{!isLoaded && <CircularProgress />}
+			{errorMessage && <ErrorBanner errorMessage={errorMessage} />}
 			{isLoaded && hasPermission && (
 				<QrScanner
 					constraints={{
@@ -105,8 +124,12 @@ const ScannerPaperComponent = (props: ScannerPaperComponentProps) => {
 						}
 					}}
 					onResult={(result) => {
-						if (result && scannerResult !== result.getText()) {
+						if (enableRepetitiveScanning) {
 							handleSuccessfulScan(result.getText());
+						} else {
+							if (result && scannerResult !== result.getText()) {
+								handleSuccessfulScan(result.getText());
+							}
 						}
 					}}
 					scanDelay={400}

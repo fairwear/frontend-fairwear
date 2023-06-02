@@ -11,5 +11,8 @@ nginx/
 *.html
 *.yml
 
+# Problems with this file:
+CreateItemForm.tsx
+
 # Ignore all files with these names:
 README.md
