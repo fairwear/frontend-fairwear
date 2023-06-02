@@ -1,3 +1,4 @@
+import ErrorBanner from "@components/form/ErrorBanner";
 import PermissionNotice from "@components/scanner/PermissionNotice";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import { CircularProgress, IconButton, Paper } from "@mui/material";
@@ -19,6 +20,8 @@ interface ScannerPaperComponentProps {
 	containerStyle?: React.CSSProperties;
 	videoStyle?: React.CSSProperties;
 	scannerProps?: React.ComponentProps<typeof QrScanner>;
+	enableRepetitiveScanning?: boolean;
+	handleSuccessfulScan?: (result: string) => void;
 }
 
 const ScannerPaperComponent = (props: ScannerPaperComponentProps) => {
@@ -31,6 +34,7 @@ const ScannerPaperComponent = (props: ScannerPaperComponentProps) => {
 		handleScannerClose,
 		actionButtonAction,
 		handleAskCameraPermission,
+		enableRepetitiveScanning = false,
 	} = props;
 
 	const [scannerResult, setScannerResult] = useState<string | undefined>();
@@ -49,10 +53,15 @@ const ScannerPaperComponent = (props: ScannerPaperComponentProps) => {
 				handleScannerClose();
 			}, 1000);
 		}
+		if (props.handleSuccessfulScan) {
+			props.handleSuccessfulScan(result);
+			console.log("handleSuccessfulScan");
+		}
 	};
 
 	const handleScanError = (error: Error) => {
 		setErrorMessage(error.message);
+		console.log(error);
 		formikContext.setFieldError(name, errorMessage);
 		formikContext.setFieldTouched(name, true);
 	};
@@ -87,6 +96,7 @@ const ScannerPaperComponent = (props: ScannerPaperComponentProps) => {
 				)}
 			</IconButton>
 			{!isLoaded && <CircularProgress />}
+			{errorMessage && <ErrorBanner errorMessage={errorMessage} />}
 			{isLoaded && hasPermission && (
 				<QrScanner
 					constraints={{
@@ -114,8 +124,12 @@ const ScannerPaperComponent = (props: ScannerPaperComponentProps) => {
 						}
 					}}
 					onResult={(result) => {
-						if (result && scannerResult !== result.getText()) {
+						if (enableRepetitiveScanning) {
 							handleSuccessfulScan(result.getText());
+						} else {
+							if (result && scannerResult !== result.getText()) {
+								handleSuccessfulScan(result.getText());
+							}
 						}
 					}}
 					scanDelay={400}

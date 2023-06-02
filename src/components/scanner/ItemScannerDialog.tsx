@@ -1,6 +1,8 @@
 import ItemAPI from "@api/ItemAPI";
 import DialogHeader from "@components/dialog/DialogHeader";
+import ErrorBanner from "@components/form/ErrorBanner";
 import FormTextField from "@components/form/FormTextField";
+import FormikUseEffect from "@components/form/FormikUseEffect";
 import ItemInfoComponent from "@components/item/ItemInfoComponent";
 import ScannerPaperComponent from "@components/scanner/ScannerPaperComponent";
 import ItemResponse from "@models/item/ItemResponse";
@@ -13,8 +15,9 @@ import {
 	IconButton,
 	SwipeableDrawer,
 } from "@mui/material";
-import { Form, Formik, FormikProps } from "formik";
-import { useState } from "react";
+import alerts from "@redux/alerts";
+import { Form, Formik, FormikHelpers, FormikProps } from "formik";
+import { useEffect, useState } from "react";
 import * as yup from "yup";
 
 interface ItemScannerDialogProps {
@@ -45,15 +48,27 @@ const ItemScannerDialog = (props: ItemScannerDialogProps) => {
 	const [errorMessage, setErrorMessage] = useState<string | undefined>();
 	const [item, setItem] = useState<ItemResponse | undefined>();
 
-	const getItem = async (barcode: string) => {
+	const getItem = async (barcode: string, helpers?: FormikHelpers<any>) => {
 		try {
+			console.log("getItem");
 			let response = await ItemAPI.findByBarcode(barcode);
 			setItem(response);
+			helpers?.resetForm();
+			setErrorMessage(undefined);
 		} catch (error) {
-			console.log(error);
-			setErrorMessage((error as any).message);
+			setBarcode(undefined);
+			setErrorMessage("No item with such a barcode was found");
+			setItem(undefined);
+			helpers?.setErrors({ barcode: "No item with such a barcode was found" });
+			helpers?.resetForm();
+			console.log("ALERTS:", alerts.getAlerts());
+			console.log("ERROR:", error);
 		}
 	};
+
+	useEffect(() => {
+		console.log("error message:", errorMessage);
+	}, [errorMessage]);
 
 	const handleTextFieldDrawerOpen = async () => {
 		setTextFieldDrawerOpen(true);
@@ -77,10 +92,12 @@ const ItemScannerDialog = (props: ItemScannerDialogProps) => {
 		handleScannerOpen();
 	};
 
-	const handleSubmit = async (values: BarcodeScanerValues) => {
-		console.log(values);
+	const handleSubmit = async (
+		values: BarcodeScanerValues,
+		helpers: FormikHelpers<any>
+	) => {
 		setBarcode(values.barcode);
-		await getItem(values.barcode);
+		await getItem(values.barcode, helpers);
 		setItemDrawerOpen(true);
 	};
 
@@ -92,7 +109,6 @@ const ItemScannerDialog = (props: ItemScannerDialogProps) => {
 				style: {
 					width: "100%",
 					height: "100%",
-					//TODO: Fix this
 					overflow: "hidden",
 				},
 			}}
@@ -105,6 +121,15 @@ const ItemScannerDialog = (props: ItemScannerDialogProps) => {
 					width: "calc(100% - 48px)",
 				}}
 			/>
+			{errorMessage && (
+				<ErrorBanner
+					errorMessage={errorMessage}
+					errorContainerStyle={{
+						width: "calc(100% - 48px)",
+					}}
+				/>
+			)}
+			{/* TODO: Add no camera access banner */}
 			<Formik
 				initialValues={initialValues}
 				validationSchema={valdationSchema}
@@ -157,7 +182,7 @@ const ItemScannerDialog = (props: ItemScannerDialogProps) => {
 										endIcon={
 											<IconButton
 												onClick={() => {
-													handleSubmit(formik.values);
+													handleSubmit(formik.values, formik);
 													formik.resetForm();
 												}}
 											>
@@ -178,6 +203,7 @@ const ItemScannerDialog = (props: ItemScannerDialogProps) => {
 							name="barcode"
 							isLoaded={isLoaded}
 							hasPermission={hasPermission}
+							enableRepetitiveScanning
 							handleScannerClose={handleScannerClose}
 							handleAskCameraPermission={handleAskCameraPermission}
 							actionButtonAction={toggleTextFieldDrawer}
@@ -189,6 +215,17 @@ const ItemScannerDialog = (props: ItemScannerDialogProps) => {
 									}}
 								/>
 							}
+							handleSuccessfulScan={(barcode: string) => {
+								formik.setFieldValue("barcode", barcode);
+								handleSubmit(formik.values, formik);
+							}}
+						/>
+
+						<FormikUseEffect
+							value={formik.errors.barcode}
+							actionOnUpdate={() => {
+								setErrorMessage(formik.errors.barcode as string);
+							}}
 						/>
 					</Form>
 				)}

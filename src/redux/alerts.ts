@@ -37,6 +37,9 @@ const alerts = {
 	clearAll: (): void => {
 		store.dispatch(clearAllAlerts());
 	},
+	getAlerts: (): AlertValue[] => {
+		return store.getState().alerts.alerts;
+	},
 };
 
 export default alerts;
