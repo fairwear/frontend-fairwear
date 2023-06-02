@@ -127,7 +127,7 @@
 
 /* ------------------ Item Drawer Component ------------------ */
 
-.item-drawer-container {
+.item-info-container {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -138,14 +138,14 @@
 	width: 100%;
 }
 
-.item-drawer-container .header-container {
+.item-info-container .header-container {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 	width: 100%;
 }
 
-.item-drawer-container .item-title-container {
+.item-info-container .item-title-container {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -166,16 +166,36 @@
 	font-style: italic;
 }
 
-.item-drawer-container .item-image {
-	width: 80%;
+.item-info-container .item-image {
+	width: 100%;
 	height: 80%;
-	object-fit: scale-down;
-	aspect-ratio: 1/1;
+	object-fit: cover;
+	aspect-ratio: 4/3;
 	border-radius: 8px;
+	border: 1px solid rgb(32, 32, 32, 0.3);
 }
 
 .header-container .item-close-button {
 	padding: 8px;
 	margin-top: -72px;
 	margin-right: -12px;
+}
+
+.item-info-container .topic-container {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	width: 100%;
+	box-sizing: border-box;
+	gap: 8px;
+	border: 1px solid #202020;
+}
+
+.topic-container .score-container {
+	display: flex;
+	align-items: center;
+	box-sizing: border-box;
+	gap: 8px;
+	min-width: fit-content;
 }

@@ -14,7 +14,7 @@ import {
 	SwipeableDrawer,
 } from "@mui/material";
 import { Form, Formik, FormikProps } from "formik";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import * as yup from "yup";
 
 interface ItemScannerDialogProps {
@@ -42,13 +42,17 @@ const ItemScannerDialog = (props: ItemScannerDialogProps) => {
 		useState<boolean>(false);
 	const [itemDrawerOpen, setItemDrawerOpen] = useState<boolean>(false);
 	const [barcode, setBarcode] = useState<string | undefined>();
+	const [errorMessage, setErrorMessage] = useState<string | undefined>();
 	const [item, setItem] = useState<ItemResponse | undefined>();
 
-	const itemDrawerRef = useRef(null);
-
 	const getItem = async (barcode: string) => {
-		let response = await ItemAPI.findByBarcode(barcode);
-		setItem(response);
+		try {
+			let response = await ItemAPI.findByBarcode(barcode);
+			setItem(response);
+		} catch (error) {
+			console.log(error);
+			setErrorMessage((error as any).message);
+		}
 	};
 
 	const handleTextFieldDrawerOpen = async () => {
@@ -151,7 +155,12 @@ const ItemScannerDialog = (props: ItemScannerDialogProps) => {
 										fullWidth
 										autoFocus
 										endIcon={
-											<IconButton onClick={() => handleSubmit(formik.values)}>
+											<IconButton
+												onClick={() => {
+													handleSubmit(formik.values);
+													formik.resetForm();
+												}}
+											>
 												<SearchRoundedIcon
 													style={{
 														width: "28px",
@@ -171,7 +180,6 @@ const ItemScannerDialog = (props: ItemScannerDialogProps) => {
 							hasPermission={hasPermission}
 							handleScannerClose={handleScannerClose}
 							handleAskCameraPermission={handleAskCameraPermission}
-							closeOnSuccessfulScan
 							actionButtonAction={toggleTextFieldDrawer}
 							actionButtonIcon={
 								<TextFieldsRoundedIcon
@@ -189,7 +197,6 @@ const ItemScannerDialog = (props: ItemScannerDialogProps) => {
 				onClickAway={itemDrawerOpen ? handleItemDrawerClose : () => {}}
 			>
 				<SwipeableDrawer
-					ref={itemDrawerRef}
 					open={itemDrawerOpen}
 					anchor="bottom"
 					variant="persistent"
@@ -225,6 +232,7 @@ const ItemScannerDialog = (props: ItemScannerDialogProps) => {
 						<ItemInfoComponent
 							item={item}
 							handleClose={handleItemDrawerClose}
+							handleDialogClose={handleClose}
 						/>
 					)}
 				</SwipeableDrawer>
