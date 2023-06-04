@@ -5,5 +5,8 @@ interface TopicResponse {
 	name: string;
 	topicId: number | null;
 	brands: TopicToBrand[];
+	createdAt: Date;
+	updatedAt?: Date;
+	deletedAt?: Date;
 }
 export default TopicResponse;

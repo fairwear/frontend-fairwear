@@ -9,6 +9,7 @@ import UserPage from "@pages/user_page/UserPage";
 import RouteGroup from "../models/routes/RouteGroup";
 
 import AdminReportPanelPage from "@pages/admin/AdminReportPanelPage";
+import AdminTopicPanelPage from "@pages/admin/AdminTopicPanelPage";
 
 const routes: RouteGroup[] = [
 	{
@@ -59,6 +60,13 @@ const routes: RouteGroup[] = [
 				key: "admin-report",
 				pageTitle: "Admin Report Panel",
 				element: <AdminReportPanelPage />,
+				isForAdmins: true,
+			},
+			{
+				path: "/admin/topic",
+				key: "admin-topic",
+				pageTitle: "Admin Topic Panel",
+				element: <AdminTopicPanelPage />,
 				isForAdmins: true,
 			},
 		],
