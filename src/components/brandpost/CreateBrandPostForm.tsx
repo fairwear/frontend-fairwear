@@ -6,12 +6,12 @@ import FormTextField from "@components/form/FormTextField";
 import TopicFormComponent from "@components/topic/TopicFormComponent";
 import BrandResponse from "@models/brand/BrandResponse";
 import BrandPostToTopicEntry from "@models/brandpost/BrandPostToTopicEntry";
-import BrandPostReferenceCreateRequest from "@models/brandpostreference/BrandPostReferenceCreateRequest";
 import TopicResponse from "@models/topic/TopicResponse";
-import { HelpRounded } from "@mui/icons-material";
+import { ErrorRounded, HelpRounded } from "@mui/icons-material";
 import {
 	Autocomplete,
 	Box,
+	Button,
 	Chip,
 	DialogContent,
 	ListItemText,
@@ -31,16 +31,12 @@ interface CreateBrandPostFormProps {
 	handleDialogClose: () => void;
 }
 
-// TODO: Think about adding steps to this form (StepperComponent)
 const CreateBrandPostForm = (props: CreateBrandPostFormProps) => {
 	const { handleFormSubmit, handleDialogClose } = props;
 
 	const [brands, setBrands] = useState<BrandResponse[]>([]);
 	const [topics, setTopics] = useState<TopicResponse[]>([]);
 	const [chosenTopics, setChosenTopics] = useState<TopicResponse[]>([]);
-	const [references, setReferences] = useState<
-		BrandPostReferenceCreateRequest[]
-	>([]);
 	const [selectedTopics, setSelectedTopics] = useState<BrandPostToTopicEntry[]>(
 		[]
 	);
@@ -60,10 +56,6 @@ const CreateBrandPostForm = (props: CreateBrandPostFormProps) => {
 		setTopics(topics);
 	};
 
-	useEffect(() => {
-		console.log("Chosen topics: ", selectedTopics);
-	}, [selectedTopics]);
-
 	const handleTopicChange = (newValue: BrandPostToTopicEntry) => {
 		const existingTopic = selectedTopics.find(
 			(topic) => topic.topicId === newValue.topicId
@@ -79,13 +71,23 @@ const CreateBrandPostForm = (props: CreateBrandPostFormProps) => {
 		}
 	};
 
-	const handleRemoveTopic = (topicId: number, formik: FormikProps<any>) => {
+	const handleRemoveTopic = (
+		topicId: number,
+		formik: FormikProps<CreateBrandPostFormValues>
+	) => {
 		setChosenTopics(chosenTopics.filter((topic) => topic.id !== topicId));
 		formik.values.topics = formik.values.topics.filter(
 			(topic: TopicResponse) => topic.id !== topicId
 		);
-		setSelectedTopics(
-			selectedTopics.filter((topic) => topic.topicId !== topicId)
+
+		let newValue = selectedTopics.filter((topic) => topic.topicId !== topicId);
+		setSelectedTopics(newValue);
+
+		formik.setFieldValue(
+			"topicNames",
+			chosenTopics
+				.filter((topic) => topic.id !== topicId)
+				.map((topic) => topic.name)
 		);
 	};
 
@@ -110,21 +112,65 @@ const CreateBrandPostForm = (props: CreateBrandPostFormProps) => {
 
 	const handleSubmit = (
 		values: CreateBrandPostFormValues,
-		formik: FormikHelpers<any>
+		formik: FormikHelpers<CreateBrandPostFormValues>
 	) => {
 		let brand = brands.find((brand) => brand.name === values.brandName);
 		values.selectedTopics = selectedTopics;
-		values.references = [];
-
+		values.sourceUrls = [];
+		console.log("Values: ", values);
 		if (brand) {
 			values.brandId = brand.id;
 			handleFormSubmit(values);
 		} else {
+			formik.setSubmitting(false);
 			formik.setErrors({
 				brandName: "Brand does not exist",
 			});
 		}
 	};
+
+	const validationSchema = yup.object({
+		title: yup
+			.string()
+			.required("Title is required")
+			.min(5, "Title must be atleast 5 charachters long")
+			.max(100, "Title must be less than 100 charachters long"),
+		body: yup
+			.string()
+			.required("Body is required")
+			.min(10, "Body must be atleast 10 charachters long")
+			.max(1000, "Body must be less than 1000 charachters long"),
+		brandId: yup.number().nullable(),
+		brandName: yup
+			.string()
+			.required("Please choose a brand")
+			.oneOf(brandNames, "Please choose an existing brand"),
+		topics: yup
+			.array()
+			.of(yup.object())
+			.min(1, "Please choose at least one topic"),
+		selectedTopics: yup
+			.array()
+			.of(
+				yup.object().shape({
+					topicId: yup.number().required(),
+					isBad: yup.boolean().required(),
+				})
+			)
+			.optional(),
+		itemIds: yup.array().optional(),
+		topicNames: yup
+			.array()
+			.of(yup.string().required("lol"))
+			.required("Please choose at least one topic"),
+
+		sourceUrls: yup
+			.array()
+			.of(
+				yup.string().nullable().matches(urlRegex, "Please enter a valid link")
+			)
+			.optional(),
+	});
 
 	return (
 		<Formik
@@ -132,15 +178,17 @@ const CreateBrandPostForm = (props: CreateBrandPostFormProps) => {
 			validationSchema={validationSchema}
 			initialValues={initialValues}
 		>
-			{(formik: FormikProps<any>) => (
+			{(formik: FormikProps<CreateBrandPostFormValues>) => (
 				<Form className="create-brandpost-form">
 					<DialogContent className="dialog-content">
 						<FormTextField
+							required
 							title="Post Title"
 							name="title"
 							placeholder="What will be title of your post?"
 						/>
 						<FormTextField
+							required
 							title="Post Body"
 							name="body"
 							placeholder="What is your post about?"
@@ -148,6 +196,7 @@ const CreateBrandPostForm = (props: CreateBrandPostFormProps) => {
 							maxRows={6}
 						/>
 						<FormAutocomplete
+							required
 							name="brandName"
 							options={brandNames}
 							title="Brand"
@@ -155,7 +204,6 @@ const CreateBrandPostForm = (props: CreateBrandPostFormProps) => {
 							variant="outlined"
 						/>
 						<div
-							//TODO: Remove this temp styling
 							style={{
 								display: "flex",
 								flexDirection: "column",
@@ -164,25 +212,43 @@ const CreateBrandPostForm = (props: CreateBrandPostFormProps) => {
 						>
 							<div className="textfield-title-container">
 								<Typography color={AppTheme.palette.text.primary} variant="h5">
-									Topics
+									Topics*
 								</Typography>
 
 								<Tooltip title="Select which topics you'd like to hightlight and make a post about">
 									<HelpRounded className="textfield-tooltip" />
 								</Tooltip>
 							</div>
+							{/* TODO: Export this component to a separate file */}
 							<Autocomplete
-								//TODO: Handle backspace to remove topic
 								id="topics"
 								options={topics}
 								multiple={true}
+								componentName="topics"
 								value={formik.values.topics}
 								disableClearable
+								clearOnBlur
+								disableCloseOnSelect
 								autoHighlight
-								onChange={(event: any, newValue: TopicResponse[]) => {
-									handleChange(newValue);
-									formik.setFieldValue("topics", newValue);
+								getOptionDisabled={(option: TopicResponse) =>
+									chosenTopics.length > 4 ||
+									chosenTopics.some((topic) => topic.id === option.id)
+								}
+								onInputChange={(event: any, newValue: string) => {
+									formik.validateField("topics");
 								}}
+								onChange={(event: any, newValue: TopicResponse[]) => {
+									formik.setFieldValue("topics", newValue);
+									formik.setFieldTouched("topics", true);
+
+									formik.setFieldValue(
+										"topicNames",
+										newValue.map((topic) => topic.name)
+									);
+
+									handleChange(newValue);
+								}}
+								onBlur={() => formik.validateField("topics")}
 								renderTags={(value: TopicResponse[], getTagProps: any) =>
 									value.map((option: TopicResponse, index: number) => (
 										<Chip
@@ -214,13 +280,14 @@ const CreateBrandPostForm = (props: CreateBrandPostFormProps) => {
 								renderInput={(params) => (
 									<TextField
 										{...params}
+										name="topicNames"
 										value={formik.values.topicNames}
-										name="topics"
-										fullWidth
-										placeholder="What topics are you talking about?"
+										onChange={(event: any) => {
+											formik.validateField("topics");
+										}}
+										placeholder="What topics are relevant in your post?"
 										error={
-											formik.values.topicNames &&
-											Boolean(formik.values.topicNames.error)
+											formik.touched.topics && Boolean(formik.errors.topics)
 										}
 										InputLabelProps={{
 											...params.InputLabelProps,
@@ -231,6 +298,19 @@ const CreateBrandPostForm = (props: CreateBrandPostFormProps) => {
 									/>
 								)}
 							/>
+							{formik.touched.topics && Boolean(formik.errors.topics) && (
+								<Box className="textfield-error-container">
+									<ErrorRounded className="textfield-error-icon" />
+
+									<Typography
+										variant="subtitle1"
+										color={"#C62828"}
+										align="left"
+									>
+										{formik.getFieldMeta("topics").error}
+									</Typography>
+								</Box>
+							)}
 							{chosenTopics.length > 0 && (
 								<div className="selected-topics-container">
 									{chosenTopics.map((topic) => (
@@ -247,6 +327,22 @@ const CreateBrandPostForm = (props: CreateBrandPostFormProps) => {
 								</div>
 							)}
 						</div>
+						<Button
+							onClick={() => {
+								console.log("Formik", formik);
+								console.log("Formik Errors", formik.errors);
+								console.log("Formik Values", formik.values);
+							}}
+						>
+							Formik
+						</Button>
+						<Button
+							onClick={() => {
+								formik.validateField("topics");
+							}}
+						>
+							validate
+						</Button>
 					</DialogContent>
 					<DialogFooter
 						confirmButtonAction={() => console.log("Submitting...")}
@@ -274,8 +370,9 @@ export interface CreateBrandPostFormValues {
 	brandName: string;
 	topics: TopicResponse[];
 	selectedTopics: BrandPostToTopicEntry[];
-	references: BrandPostReferenceCreateRequest[];
 	itemIds: string[];
+	topicNames: string[];
+	sourceUrls?: string[];
 }
 
 const initialValues: CreateBrandPostFormValues = {
@@ -285,19 +382,12 @@ const initialValues: CreateBrandPostFormValues = {
 	brandName: "",
 	topics: [],
 	selectedTopics: [],
-	references: [],
 	itemIds: [],
+	topicNames: [],
+	sourceUrls: [],
 };
 
-const validationSchema = yup.object({
-	title: yup.string().required("Title is required"),
-	body: yup.string().required("Body is required"),
-	brandId: yup.number().nullable(),
-	brandName: yup.string().required("Please choose a brand"),
-	topics: yup.array().required("Please choose at least one topic"),
-	selectedTopics: yup.array().optional(),
-	references: yup.array().optional(),
-	itemIds: yup.array().optional(),
-});
+const urlRegex =
+	/^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&\/=]*)$/;
 
 export default CreateBrandPostForm;

@@ -95,6 +95,7 @@ function FormAutocomplete(prop: OtherProps & FieldHookConfig<string>) {
 						{...other.titleprops}
 					>
 						{title}
+						{other.required && "*"}
 					</Typography>
 					{tooltip && (
 						<Tooltip title={tooltip}>

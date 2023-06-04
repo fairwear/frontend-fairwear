@@ -1,10 +1,8 @@
 import BrandResponse from "@models/brand/BrandResponse";
+import BrandPostToItem from "@models/brandpost/BrandPostToItem";
 import BrandPostToTopic from "@models/brandpost/BrandPostToTopic";
-import BrandPostReferenceResponse from "@models/brandpostreference/BrandPostReferenceResponse";
-import ItemResponse from "@models/item/ItemResponse"; // deepscan-disable-line
 import UserInfoResponse from "@models/user/UserInfoResponse";
 import VoteEnum from "./VoteEnum";
-import BrandPostToItem from "@models/brandpost/BrandPostToItem";
 
 interface BrandPostResponse {
 	id: number;
@@ -16,7 +14,7 @@ interface BrandPostResponse {
 	votes: VoteEnum[];
 	topics: BrandPostToTopic[];
 	relatedItems: BrandPostToItem[];
-	references: BrandPostReferenceResponse[];
+	sourceUrls: string[];
 	author: UserInfoResponse;
 	createdAt: Date;
 	deletedAt: Date | null;

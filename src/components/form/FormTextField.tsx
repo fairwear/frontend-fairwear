@@ -66,6 +66,7 @@ function FormTextField(props: OtherProps & FieldHookConfig<string>) {
 							{...other.titleprops}
 						>
 							{title}
+							{other.required && "*"}
 						</Typography>
 
 						{titleButtonAction && (

@@ -131,26 +131,17 @@ const BrandPostComponent = (props: BrandPostComponentProps) => {
 							</div>
 						)}
 						<div className="reference-container">
-							{brandPost.references.length > 0 && (
+							{brandPost.sourceUrls.length > 0 && (
 								<>
-									{brandPost.references.map((reference) => (
-										<div key={reference.id} className="reference-item">
-											<Typography
-												align="left"
-												variant="subtitle1"
-												style={{
-													fontWeight: 600,
-												}}
-											>
-												{reference.title}
-											</Typography>
+									{brandPost.sourceUrls.map((sourceUrl) => (
+										<div key={sourceUrl} className="reference-item">
 											<Link
 												sx={{
 													cursor: "pointer",
 												}}
 											>
-												<Typography variant="subtitle2" align="left">
-													{reference.sourceUrl}
+												<Typography variant="subtitle1" align="left">
+													{sourceUrl}
 												</Typography>
 											</Link>
 										</div>
