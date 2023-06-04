@@ -1,9 +1,14 @@
+import { Table, TableContainer, TableHead } from "@mui/material";
 import "./AdminPanelPage.css";
 
 const AdminPanelPage = () => {
 	return (
-		<div>
-			<h1>Admin Panel</h1>
+		<div className="admin-panel-page-container">
+			<TableContainer>
+				<Table className="admin-panel-table" style={{}}>
+					<TableHead></TableHead>
+				</Table>
+			</TableContainer>
 		</div>
 	);
 };

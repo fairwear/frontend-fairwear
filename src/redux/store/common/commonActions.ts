@@ -10,10 +10,10 @@ const getStatus =
 	(): ThunkAction<void, RootState, unknown, AnyAction> => async (dispatch) => {
 		let status = await AuthAPI.getStatus();
 		if (status.isLoggedIn) {
-			let response = await AuthAPI.getProfile();
+			let userInfo = await AuthAPI.getProfile();
 			dispatch(commonActions.setStatus(status));
-			console.log(response);
-			dispatch(commonActions.setUserInfo({ userInfo: response }));
+			console.log(userInfo);
+			dispatch(commonActions.setUserInfo(userInfo));
 		} else {
 			dispatch(commonActions.setStatus(status));
 		}

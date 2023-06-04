@@ -8,6 +8,7 @@ import HomePage from "@pages/home/HomePage";
 import UserPage from "@pages/user_page/UserPage";
 import RouteGroup from "../models/routes/RouteGroup";
 import AdminPanelPage from "@pages/admin/AdminPanelPage";
+import AdminReportPanelPage from "@pages/admin/AdminReportPanelPage";
 
 const routes: RouteGroup[] = [
 	{
@@ -58,6 +59,14 @@ const routes: RouteGroup[] = [
 				key: "admin",
 				pageTitle: "Admin Panel",
 				element: <AdminPanelPage />,
+				isForAdmins: true,
+			},
+			{
+				path: "/admin/report",
+				key: "admin-report",
+				pageTitle: "Admin Report Panel",
+				element: <AdminReportPanelPage />,
+				isForAdmins: true,
 			},
 		],
 	},

@@ -8,12 +8,18 @@ const baseUrl = apiEndpoints.report;
 
 const ReportAPI = {
 	findAll: (): Promise<ReportResponse[]> => axios.get(baseUrl),
+	findAllFilteredBy: (): Promise<ReportResponse[]> =>
+		axios.get(baseUrl, {
+			params: {
+				filter: true,
+			},
+		}),
 	findById: (id: number): Promise<ReportResponse> =>
 		axios.get(`${baseUrl}/${id}`),
 	create: (request: CreateReportRequest): Promise<ReportResponse> =>
 		axios.post(baseUrl, request),
-	update: (request: UpdateReportRequest): Promise<ReportResponse> =>
-		axios.put(baseUrl, request),
+	update: (id: number, request: UpdateReportRequest): Promise<ReportResponse> =>
+		axios.put(`${baseUrl}/${id}`, request),
 };
 
 export default ReportAPI;

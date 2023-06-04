@@ -54,3 +54,36 @@
 	width: 80%;
 	align-self: center;
 }
+
+.no-data-main-container {
+	display: flex;
+	flex-direction: column;
+	border: 1px solid rgba(0, 0, 0, 0.5);
+	border-radius: 12px;
+	padding: 24px 48px;
+	box-sizing: border-box;
+	gap: 24px;
+}
+
+.no-data-picture {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.no-data-text {
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+	gap: 12px;
+}
+
+.one-flex {
+	display: flex;
+	flex: 1;
+}
+
+.three-flex {
+	display: flex;
+	flex: 3;
+}

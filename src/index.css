@@ -11,6 +11,32 @@
 	-webkit-text-size-adjust: 100%;
 }
 
+
+html {
+	height: 100%;
+}
+
+body {
+	margin: 0;
+	font-family: "Inter", sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	height: 100%;
+	width: 100%;
+}
+
+code {
+	font-family: "Inter", sans-serif;
+}
+
+p {
+	margin: 0;
+}
+
+#root {
+	height: 100%;
+}
+
 /* li {
   font-family: font "Inter", sans-serif !important;
 }
