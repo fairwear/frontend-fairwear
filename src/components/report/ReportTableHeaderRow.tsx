@@ -15,9 +15,9 @@ const ReportTableHeaderRow = () => {
 			<TableCell className="report-reason-cell">
 				<Typography variant="body1">Report reason</Typography>
 			</TableCell>
-            <TableCell className="report-status-cell">
-					<Typography variant="body1">Report status</Typography>
-				</TableCell>
+			<TableCell className="report-status-cell">
+				<Typography variant="body1">Report status</Typography>
+			</TableCell>
 			<TableCell className="report-created-by-cell">
 				<Typography variant="body1">Reported by</Typography>
 			</TableCell>

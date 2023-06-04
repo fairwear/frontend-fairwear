@@ -1,6 +1,6 @@
 import { List, ListItem, ListItemButton, Typography } from "@mui/material";
 import AppTheme from "../../AppTheme";
-import './TableComponents.css'
+import "./TableComponents.css";
 
 interface ItemProps {
 	handleClick: () => void;

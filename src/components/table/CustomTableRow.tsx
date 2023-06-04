@@ -2,7 +2,7 @@ import { KeyboardArrowDown, KeyboardArrowUp } from "@mui/icons-material";
 import { Box, Collapse, IconButton, TableCell, TableRow } from "@mui/material";
 import { useState } from "react";
 import "./AdminComponents.css";
-import './TableComponents.css'
+import "./TableComponents.css";
 
 interface CustomTableRowProps {
 	children: any;

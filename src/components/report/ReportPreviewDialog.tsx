@@ -21,7 +21,7 @@ interface ReportPreviewDialogProps {
 	handleClose: () => void;
 	handleRejectReport: (report: ReportResponse) => void;
 	handleDeleteBrandPost: (report: ReportResponse) => void;
-    handleReopenReport: (report: ReportResponse) => void;
+	handleReopenReport: (report: ReportResponse) => void;
 }
 
 const ReportPreviewDialog = (props: ReportPreviewDialogProps) => {
