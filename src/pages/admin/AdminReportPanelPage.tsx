@@ -1,9 +1,12 @@
 import BrandPostAPI from "@api/BrandPostAPI";
 import ReportAPI from "@api/ReportAPI";
+import NoDataFoundComponent from "@components/common/NoDataFoundComponent";
+import AdminReportFilterForm from "@components/report/AdminReportFilterForm";
 import ReportPreviewDialog from "@components/report/ReportPreviewDialog";
 import ReportTableHeaderRow from "@components/report/ReportTableHeaderRow";
 import AdminReportTableRow from "@components/report/ReportTableRow";
 import CustomTable from "@components/table/CustomTable";
+import ReportFilterRequest from "@models/report/ReportFilterRequest";
 import ReportResponse from "@models/report/ReportResponse";
 import ReportResultEnum from "@models/report/ReportResultEnum";
 import ReportStatusEnum from "@models/report/ReportStatusEnum";
@@ -11,7 +14,6 @@ import UpdateReportRequest from "@models/report/UpdateReportRequest";
 import { Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import "./AdminPanelPage.css";
-import NoDataFoundComponent from "@components/common/NoDataFoundComponent";
 
 const AdminReportPanelPage = () => {
 	const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -26,9 +28,9 @@ const AdminReportPanelPage = () => {
 		getReports();
 	}, []);
 
-	const getReports = async () => {
+	const getReports = async (filter?: ReportFilterRequest) => {
 		setIsLoading(true);
-		const response = await ReportAPI.findAll();
+		const response = await ReportAPI.findAllFilteredBy(filter);
 		setReports(response);
 		setIsLoading(false);
 	};
@@ -87,6 +89,9 @@ const AdminReportPanelPage = () => {
 				<Typography variant="h1" align="center">
 					Report Managment
 				</Typography>
+			</div>
+			<div className="report-filtering-container">
+				<AdminReportFilterForm handleFilter={getReports} />
 			</div>
 			{reports.length > 0 && (
 				<CustomTable

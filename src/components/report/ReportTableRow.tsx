@@ -21,20 +21,26 @@ const AdminReportTableRow = (props: AdminReportTableRowProps) => {
 
 	return (
 		<>
-			<TableRow className="report-table-row" onClick={handleClick}>
+			<TableRow
+				className="report-table-row"
+				onClick={handleClick}
+				style={{
+					minWidth: "max-content",
+				}}
+			>
 				<TableCell className="id-cell" align="left">
 					<Typography variant="body1" align="left">
 						{report.id}
 					</Typography>
 				</TableCell>
-				<TableCell className="brandpost-title-cell">
+				<TableCell className="brandpost-title-cell" align="center">
 					<Typography variant="body1">{report.post?.title}</Typography>
 				</TableCell>
-				<TableCell className="report-reason-cell">
+				<TableCell className="report-reason-cell" align="center">
 					<Typography variant="body1">{report.reportReason}</Typography>
 				</TableCell>
 				<TableCell className="report-status-cell">
-					<Typography variant="body1">{report.status}</Typography>
+					<Typography variant="body2">{report.status}</Typography>
 				</TableCell>
 				<TableCell className="report-created-by-cell">
 					<Typography variant="body1">{report.author?.username}</Typography>

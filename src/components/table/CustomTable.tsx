@@ -55,7 +55,9 @@ const CustomTable = (props: CustomTableProps) => {
 				maxWidth: "100%",
 				background: "transparent",
 				padding: "0px",
+				minWidth: "400px",
 				borderRadius: "50px",
+				overflow: "scroll",
 				...props.containerStyle,
 			}}
 			component={hasContainerComponent ? Container : Paper}
@@ -64,6 +66,8 @@ const CustomTable = (props: CustomTableProps) => {
 				className="custom-table"
 				style={{
 					...props.style,
+					minWidth: "fit-content",
+					overflow: "scroll",
 				}}
 			>
 				{HeaderRow !== undefined && (
@@ -72,9 +76,13 @@ const CustomTable = (props: CustomTableProps) => {
 					</TableHead>
 				)}
 
-				<TableBody className="custom-table-body" style={{ gap: "10px" }}>
+				<TableBody className="custom-table-body">
 					{isLoading ? (
-						<TableRow>
+						<TableRow
+							style={{
+								minWidth: "fit-content",
+							}}
+						>
 							<TableCell className={"loading-icon-style"}>
 								<CircularProgress
 									size={rowsPerPage}
