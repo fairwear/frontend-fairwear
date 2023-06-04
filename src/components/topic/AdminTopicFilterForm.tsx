@@ -1,5 +1,5 @@
 import TopicFilterRequest from "@models/topic/TopicFilterRequest";
-import './Topic.css'
+import "./Topic.css";
 
 interface AdminTopicFilterFormProps {
 	handleFilter: (filter: TopicFilterRequest) => void;
