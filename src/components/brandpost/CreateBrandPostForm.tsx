@@ -1,5 +1,6 @@
 import BrandAPI from "@api/BrandAPI";
 import TopicAPI from "@api/TopicAPI";
+import ReferenceComponent from "@components/brandpost/ReferenceComponent";
 import DialogFooter from "@components/dialog/DialogFooter";
 import FormAutocomplete from "@components/form/FormAutoComplete";
 import FormTextField from "@components/form/FormTextField";
@@ -14,6 +15,7 @@ import {
 	Button,
 	Chip,
 	DialogContent,
+	Divider,
 	ListItemText,
 	TextField,
 	Tooltip,
@@ -35,6 +37,7 @@ const CreateBrandPostForm = (props: CreateBrandPostFormProps) => {
 	const { handleFormSubmit, handleDialogClose } = props;
 
 	const [brands, setBrands] = useState<BrandResponse[]>([]);
+	const [sourceUrls, setSourceUrls] = useState<string[]>([]);
 	const [topics, setTopics] = useState<TopicResponse[]>([]);
 	const [chosenTopics, setChosenTopics] = useState<TopicResponse[]>([]);
 	const [selectedTopics, setSelectedTopics] = useState<BrandPostToTopicEntry[]>(
@@ -54,6 +57,10 @@ const CreateBrandPostForm = (props: CreateBrandPostFormProps) => {
 	const getTopics = async () => {
 		const topics = await TopicAPI.findAll();
 		setTopics(topics);
+	};
+
+	const handleReferenceChange = (newValue: string[]) => {
+		setSourceUrls(newValue);
 	};
 
 	const handleTopicChange = (newValue: BrandPostToTopicEntry) => {
@@ -116,7 +123,6 @@ const CreateBrandPostForm = (props: CreateBrandPostFormProps) => {
 	) => {
 		let brand = brands.find((brand) => brand.name === values.brandName);
 		values.selectedTopics = selectedTopics;
-		values.sourceUrls = [];
 		console.log("Values: ", values);
 		if (brand) {
 			values.brandId = brand.id;
@@ -203,6 +209,7 @@ const CreateBrandPostForm = (props: CreateBrandPostFormProps) => {
 							placeholder="What brand is this post about?"
 							variant="outlined"
 						/>
+						<Divider />
 						<div
 							style={{
 								display: "flex",
@@ -215,11 +222,12 @@ const CreateBrandPostForm = (props: CreateBrandPostFormProps) => {
 									Topics*
 								</Typography>
 
-								<Tooltip title="Select which topics you'd like to hightlight and make a post about">
+								<Tooltip title="Select which topics you'd like to highlight and make a post about">
 									<HelpRounded className="textfield-tooltip" />
 								</Tooltip>
 							</div>
 							{/* TODO: Export this component to a separate file */}
+
 							<Autocomplete
 								id="topics"
 								options={topics}
@@ -327,21 +335,18 @@ const CreateBrandPostForm = (props: CreateBrandPostFormProps) => {
 								</div>
 							)}
 						</div>
+						<Divider />
+						<ReferenceComponent
+							name="sourceUrls"
+							sourceUrls={sourceUrls}
+							handleChange={handleReferenceChange}
+						/>
 						<Button
 							onClick={() => {
-								console.log("Formik", formik);
-								console.log("Formik Errors", formik.errors);
-								console.log("Formik Values", formik.values);
+								console.log(formik.values);
 							}}
 						>
-							Formik
-						</Button>
-						<Button
-							onClick={() => {
-								formik.validateField("topics");
-							}}
-						>
-							validate
+							Fomrik
 						</Button>
 					</DialogContent>
 					<DialogFooter
