@@ -1,10 +1,9 @@
 import BrandPostToTopicEntry from "@models/brandpost/BrandPostToTopicEntry";
-import BrandPostReferenceCreateRequest from "@models/brandpostreference/BrandPostReferenceCreateRequest";
 
 interface BrandPostCreateRequest {
 	title: string;
 	body: string;
-	references: BrandPostReferenceCreateRequest[];
+	sourceUrls: string[];
 	brandId: number;
 	topics: BrandPostToTopicEntry[];
 	itemIds: number[];

@@ -63,10 +63,6 @@ const BrandPostComponent = (props: BrandPostComponentProps) => {
 		}
 	};
 
-	const url = props.brandPost.references.map((url) => {
-		return url.sourceUrl;
-	});
-
 	const getUserName = () => {
 		if (props.brandPost.author.name) {
 			return props.brandPost.author.name;
@@ -114,7 +110,7 @@ const BrandPostComponent = (props: BrandPostComponentProps) => {
 					</Typography>
 				</div>
 				<div className="brandpost-info-container">
-					{url.map((url) => (
+					{props.brandPost.sourceUrls.map((url) => (
 						<Typography key={url} variant="subtitle1">
 							Reference url:<a href={url}>{url}</a>
 						</Typography>

@@ -10,6 +10,7 @@ interface CreateBrandPostReferenceFormProps {
 	handleDialogClose: () => void;
 }
 
+//TODO: Delete or refactor this component
 const CreateBrandPostReferenceForm = (
 	props: CreateBrandPostReferenceFormProps
 ) => {
@@ -66,8 +67,8 @@ const initialValues: CreateBrandPostReferenceFormValues = {
 };
 
 const validationSchema = yup.object({
-	title: yup.string().required("Title is required"),
-	body: yup.string().required("Body is required"),
+	title: yup.string().required("Title is required").nullable().min(5).max(100),
+	body: yup.string().required("Body is required").min(20).max(1000),
 	sourceUrl: yup.string().optional(),
 });
 

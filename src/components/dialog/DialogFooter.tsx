@@ -44,6 +44,10 @@ const DialogFooter = (props: Props) => {
 						color="primary"
 						variant="grey"
 						onClick={cancelButtonAction}
+						style={{
+							padding: "7px 24px",
+							// width: 40%;
+						}}
 					>
 						{cancelButtonLabel}
 					</Button>

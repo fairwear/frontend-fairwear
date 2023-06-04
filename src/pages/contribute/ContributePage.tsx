@@ -95,14 +95,21 @@ const ContributePage = () => {
 			brandId: +values.brandId,
 			itemIds: values.itemIds.map((item) => +item),
 			topics: values.selectedTopics,
-			references: values.references,
+			sourceUrls: values.sourceUrls || [],
 			createdAt: new Date(),
 		};
 
 		await BrandPostAPI.create(request);
-		setTimeout(() => {
-			handleBrandDialogClose();
-		}, 350);
+		console.log("Submitted brand post");
+		handleBrandPostDialogClose();
+		alerts.addAlert({
+			isOpen: true,
+			message: `Brand post ${values.title} created`,
+			alertSeverity: "success",
+			alertType: "toast",
+		});
+
+		setTimeout(() => {}, 350);
 	};
 
 	const handleSubmitItem = async (values: CreateItemFormValues) => {
