@@ -102,11 +102,10 @@ const OldBrandPostComponent = (props: BrandPostComponentProps) => {
 					<Typography align="left" variant="body1">
 						{props.brandPost.body}
 						<br></br>
-						Lorem, ipsum dolor sit amet consectetur adipisicing elit. Mollitia
-						temporibus laboriosam soluta eum! Perspiciatis rerum, reiciendis
-						repellendus, fugit dignissimos numquam quasi in ab vel consectetur
-						eveniet dolorum consequuntur, error atque. Lorem ipsum dolor, sit
-						amet consectetur adipisicing elit. Consectetur ad veniam temporibus!
+						Profound co is a great example of a comapny that cares about their
+						workers, animal and the planet. With their transperent feedback
+						about manufacturing and labor practices, Profound co shows a lot of
+						marality within the business.
 					</Typography>
 				</div>
 				<div className="brandpost-info-container">
