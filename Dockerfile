@@ -17,7 +17,7 @@ COPY package*.json ./
 # COPY ./prod.front.env ./
 
 # Install all the dependencies
-RUN npm ci
+RUN npm install --force
 
 # Add the source code to app/frontend
 COPY . .
