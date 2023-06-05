@@ -308,11 +308,7 @@ const CreateBrandPostForm = (props: CreateBrandPostFormProps) => {
 								<Box className="textfield-error-container">
 									<ErrorRounded className="textfield-error-icon" />
 
-									<Typography
-										variant="subtitle1"
-										color="#C62828"
-										align="left"
-									>
+									<Typography variant="subtitle1" color="#C62828" align="left">
 										{formik.getFieldMeta("topics").error}
 									</Typography>
 								</Box>
