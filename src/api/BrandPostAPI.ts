@@ -26,6 +26,8 @@ const BrandPostAPI = {
 		axios.get(`${baseURL}/${id}/is-voted`),
 	search: (query: string): Promise<BrandPostResponse[]> =>
 		axios.get(`${baseURL}/search/${query}`),
+	isUserThePostOwner: (id: number): Promise<boolean> =>
+		axios.get(`${baseURL}/owner/${id}`),
 };
 
 export default BrandPostAPI;

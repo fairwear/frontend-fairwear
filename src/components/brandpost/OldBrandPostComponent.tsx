@@ -17,7 +17,7 @@ interface BrandPostComponentProps {
 	brandPost: BrandPostResponse;
 }
 
-const BrandPostComponent = (props: BrandPostComponentProps) => {
+const OldBrandPostComponent = (props: BrandPostComponentProps) => {
 	const [reportDialogOpen, setReportDialogOpen] = useState<boolean>(false);
 
 	const handleReportDialogOpen = () => {
@@ -134,4 +134,4 @@ const BrandPostComponent = (props: BrandPostComponentProps) => {
 	);
 };
 
-export default BrandPostComponent;
+export default OldBrandPostComponent;

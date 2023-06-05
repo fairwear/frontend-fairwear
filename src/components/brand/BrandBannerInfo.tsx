@@ -1,4 +1,3 @@
-import brandLogo from "@assets/images/versace_logo.png";
 import BrandResponse from "@models/brand/BrandResponse";
 import { Button, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
@@ -15,24 +14,30 @@ export default function BrandBannerInfo(props: BrandBannerInfoProps) {
 	const { brand } = props;
 	const navigate = useNavigate();
 
+	console.log(brand);
+
 	return (
-		<div className="brand-banner">
-			<div className="image-container">
-				<img className="image" src={brandLogo} />
-			</div>
-			<div className="info-container">
-				<Typography variant="h2">{brand.name}</Typography>
-				<Typography variant="h6" className="description">
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-					eiusmod tempor incididunt ut labore et dolore magna aliqua. Faucibus
-					ornare suspendisse sed nisi lacus sed viverra. Vitae justo eget magna
-					fermentum iaculis eu. Ultrices neque ornare aenean euismod elementum
-					nisi quis. Ac felis donec et odio. Consectetur adipiscing elit duis
-					tristique sollicitudin nibh sit amet. Pellentesque adipiscing commodo
-					elit at imperdiet. Eget est lorem ipsum dolor. Egestas erat imperdiet
-					sed euismod nisi porta lorem mollis aliquam. Mattis enim ut tellus
-					elementum sagittis.
-				</Typography>
+		<div
+			className="brand-banner"
+			style={{
+				padding: "36px",
+				boxSizing: "border-box",
+			}}
+		>
+			{brand.imageUrl && (
+				<div className="image-container">
+					<img className="image" src={brand.imageUrl} />
+				</div>
+			)}
+			<div
+				className="info-container"
+				style={{
+					padding: "12px 24px",
+					boxSizing: "border-box",
+				}}
+			>
+				<Typography variant="h1">{brand.name}</Typography>
+				<Typography variant="h6" className="description"></Typography>
 				<div className="button-container">
 					<Button
 						onClick={() => navigate("/contribute")}
@@ -52,7 +57,7 @@ export default function BrandBannerInfo(props: BrandBannerInfoProps) {
 						<Typography variant="h5">View Items</Typography>
 					</Button>
 				</div>
-				<Topics />
+				{brand.topics.length > 0 && <Topics topics={brand.topics} />}
 			</div>
 		</div>
 	);

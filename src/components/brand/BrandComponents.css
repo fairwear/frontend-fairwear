@@ -5,10 +5,11 @@
 	flex: 1 0 21%;
 	border: 1px solid #000000;
 	border-radius: 8px;
-	padding: 16px;
+	padding: 32px;
 	box-sizing: border-box;
 	min-width: 250px;
 	width: 100%;
+	background-color: #ffffff;
 }
 
 @media (max-width: 1048px) and (min-width: 768px) {
@@ -31,10 +32,20 @@
 	}
 }
 
-.brand-component-container .brand-component-image {
-	/* width: 100%; */
-	max-width: 200px;
-	min-width: 40%;
+.brand-component-container .brand-component-image-container {
+	width: 100%;
+
+	box-sizing: border-box;
+	margin-right: 16px;
+	padding: 16px 0px;
+}
+
+.brand-component-image-container .image {
+	max-width: 500px;
+	aspect-ratio: 1 / 1;
+	object-fit: cover;
+	border-radius: 12px;
+	width: 100%;
 }
 
 .brand-component-container .brand-component-text-container {
@@ -64,7 +75,11 @@
 }
 
 .image {
-	max-width: 400px;
+	max-width: 600px;
+	aspect-ratio: 1 / 1;
+	object-fit: cover;
+	border-radius: 12px;
+	width: 90%;
 }
 
 .brand-banner {
@@ -81,6 +96,9 @@
 .image-container {
 	display: flex;
 	justify-content: center;
+	box-sizing: border-box;
+	margin-right: 16px;
+	padding: 16px 0px;
 }
 
 .info-container {

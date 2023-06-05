@@ -4,11 +4,13 @@ import ErrorBanner from "@components/form/ErrorBanner";
 import FormTextField from "@components/form/FormTextField";
 import FormikUseEffect from "@components/form/FormikUseEffect";
 import ItemInfoComponent from "@components/item/ItemInfoComponent";
+import PermissionNotice from "@components/scanner/PermissionNotice";
 import ScannerPaperComponent from "@components/scanner/ScannerPaperComponent";
 import ItemResponse from "@models/item/ItemResponse";
 import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
 import TextFieldsRoundedIcon from "@mui/icons-material/TextFieldsRounded";
 import {
+	CircularProgress,
 	ClickAwayListener,
 	Dialog,
 	Divider,
@@ -197,28 +199,51 @@ const ItemScannerDialog = (props: ItemScannerDialogProps) => {
 								</div>
 							</ClickAwayListener>
 						</SwipeableDrawer>
-						<ScannerPaperComponent
-							name="barcode"
-							isLoaded={isLoaded}
-							hasPermission={hasPermission}
-							enableRepetitiveScanning
-							handleScannerClose={handleScannerClose}
-							handleAskCameraPermission={handleAskCameraPermission}
-							actionButtonAction={toggleTextFieldDrawer}
-							actionButtonIcon={
-								<TextFieldsRoundedIcon
+						{!isLoaded && (
+							<div
+								style={{
+									display: "flex",
+									justifyContent: "center",
+									marginTop: "48px",
+									width: "100%",
+								}}
+							>
+								<CircularProgress
 									style={{
-										height: "32px",
-										width: "32px",
+										width: "72px",
+										height: "72px",
 									}}
 								/>
-							}
-							handleSuccessfulScan={(barcode: string) => {
-								formik.setFieldValue("barcode", barcode);
-								handleSubmit(formik.values, formik);
-							}}
-						/>
-
+							</div>
+						)}
+						{isLoaded && open && hasPermission && (
+							<ScannerPaperComponent
+								name="barcode"
+								isLoaded={isLoaded}
+								hasPermission={hasPermission}
+								enableRepetitiveScanning
+								handleScannerClose={handleScannerClose}
+								handleAskCameraPermission={handleAskCameraPermission}
+								actionButtonAction={toggleTextFieldDrawer}
+								actionButtonIcon={
+									<TextFieldsRoundedIcon
+										style={{
+											height: "32px",
+											width: "32px",
+										}}
+									/>
+								}
+								handleSuccessfulScan={(barcode: string) => {
+									formik.setFieldValue("barcode", barcode);
+									handleSubmit(formik.values, formik);
+								}}
+							/>
+						)}
+						{!hasPermission && isLoaded && (
+							<PermissionNotice
+								handleAskCameraPermission={handleAskCameraPermission}
+							/>
+						)}
 						<FormikUseEffect
 							value={formik.errors.barcode}
 							actionOnUpdate={() => {

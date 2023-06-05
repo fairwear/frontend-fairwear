@@ -1,5 +1,4 @@
 import BrandAPI from "@api/BrandAPI";
-import brandLogo from "@assets/images/versace_logo.png";
 import BrandResponse from "@models/brand/BrandResponse";
 import React from "react";
 import "../home/HomeComponents.css";
@@ -19,11 +18,7 @@ export default function BrandList() {
 	const renderBrands = brands.map((brand) => {
 		return (
 			<div key={brand.id} className="brand-component-outer-container">
-				<BrandComponent
-					key={brand.id}
-					brand={brand}
-					imageUrl={brand.imageUrl || brandLogo}
-				/>
+				<BrandComponent key={brand.id} brand={brand} />
 			</div>
 		);
 	});

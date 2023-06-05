@@ -14,8 +14,11 @@ import UpdateReportRequest from "@models/report/UpdateReportRequest";
 import { Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import "./AdminPanelPage.css";
+import { useAppSelector } from "@redux/store/hooks";
 
 const AdminReportPanelPage = () => {
+	const isUserAdmin = useAppSelector((state) => state.common.userInfo?.isAdmin);
+
 	const [isLoading, setIsLoading] = useState<boolean>(true);
 	const [isPreviewDialogOpen, setIsPreviewDialogOpen] =
 		useState<boolean>(false);
@@ -84,53 +87,57 @@ const AdminReportPanelPage = () => {
 	};
 
 	return (
-		<div className="admin-panel-page-container">
-			<div className="title-container">
-				<Typography variant="h1" align="center">
-					Report Managment
-				</Typography>
-			</div>
-			<div className="report-filtering-container">
-				<AdminReportFilterForm handleFilter={getReports} />
-			</div>
-			{reports.length > 0 && (
-				<CustomTable
-					data={reports}
-					isLoading={isLoading}
-					containerStyle={{
-						boxShadow: "none",
-						width: "90%",
-						maxWidth: "1400px",
-						borderRadius: "5px !important",
-					}}
-					HeaderRow={() => <ReportTableHeaderRow />}
-					ContentRow={(row: ReportResponse) => (
-						<AdminReportTableRow
-							row={row}
-							handlePreviewDialogOpen={handlePreviewDialogOpen}
-							handleEditDialogOpen={() => {}}
+		<>
+			{isUserAdmin && (
+				<div className="admin-panel-page-container">
+					<div className="title-container">
+						<Typography variant="h1" align="center">
+							Report Managment
+						</Typography>
+					</div>
+					<div className="report-filtering-container">
+						<AdminReportFilterForm handleFilter={getReports} />
+					</div>
+					{reports.length > 0 && (
+						<CustomTable
+							data={reports}
+							isLoading={isLoading}
+							containerStyle={{
+								boxShadow: "none",
+								width: "90%",
+								maxWidth: "1400px",
+								borderRadius: "5px !important",
+							}}
+							HeaderRow={() => <ReportTableHeaderRow />}
+							ContentRow={(row: ReportResponse) => (
+								<AdminReportTableRow
+									row={row}
+									handlePreviewDialogOpen={handlePreviewDialogOpen}
+									handleEditDialogOpen={() => {}}
+								/>
+							)}
 						/>
 					)}
-				/>
+					{reports.length === 0 && (
+						<NoDataFoundComponent
+							title="No reports were found"
+							message="There are no reports to show. "
+							subMessage="Try changing the filtering options or try to again later"
+						/>
+					)}
+					{selectedReport && (
+						<ReportPreviewDialog
+							report={selectedReport}
+							open={isPreviewDialogOpen}
+							handleClose={handlePreviewDialogClose}
+							handleRejectReport={handleRejectReport}
+							handleDeleteBrandPost={handleDeleteBrandPost}
+							handleReopenReport={handleReopenReport}
+						/>
+					)}
+				</div>
 			)}
-			{reports.length === 0 && (
-				<NoDataFoundComponent
-					title="No reports were found"
-					message="There are no reports to show. "
-					subMessage="Try changing the filtering options or try to again later"
-				/>
-			)}
-			{selectedReport && (
-				<ReportPreviewDialog
-					report={selectedReport}
-					open={isPreviewDialogOpen}
-					handleClose={handlePreviewDialogClose}
-					handleRejectReport={handleRejectReport}
-					handleDeleteBrandPost={handleDeleteBrandPost}
-					handleReopenReport={handleReopenReport}
-				/>
-			)}
-		</div>
+		</>
 	);
 };
 
