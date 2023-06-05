@@ -11,6 +11,7 @@ const FormikUseEffect = (props: FormikGetStateUpdatesProps) => {
 
 	const formikContext = useFormikContext();
 	useEffect(() => {
+		console.log(formikContext.values);
 		actionOnUpdate();
 	}, [value]);
 
