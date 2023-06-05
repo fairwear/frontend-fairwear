@@ -28,7 +28,7 @@ const TopicTableRow = (props: AdminReportTableRowProps) => {
 
 	const handleDeleteDialogClose = () => {
 		setDeleteDialogOpen(false);
-		reloadTable()
+		reloadTable();
 	};
 
 	const handleDeleteTopic = async () => {

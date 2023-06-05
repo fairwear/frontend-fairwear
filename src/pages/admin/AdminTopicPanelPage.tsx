@@ -52,7 +52,7 @@ const AdminTopicPanelPage = () => {
 
 	const handleCreateDialogClose = () => {
 		setIsCreateDialogOpen(false);
-		getTopics()
+		getTopics();
 	};
 
 	return (
