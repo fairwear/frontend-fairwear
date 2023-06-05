@@ -100,7 +100,6 @@ const ContributePage = () => {
 		};
 
 		await BrandPostAPI.create(request);
-		console.log("Submitted brand post");
 		handleBrandPostDialogClose();
 		alerts.addAlert({
 			isOpen: true,
@@ -166,9 +165,7 @@ const ContributePage = () => {
 		};
 
 		try {
-			const response = await ReportAPI.create(request);
-			console.log(response);
-
+			await ReportAPI.create(request);
 			alerts.add("Report submitted", "success", undefined, undefined, "toast");
 			setTimeout(() => {
 				handleReportDialogClose();

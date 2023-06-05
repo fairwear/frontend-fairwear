@@ -32,15 +32,21 @@ const AlertUtils = {
 				message: message,
 			};
 			console.log(iError);
+
+			let alertType: AlertType =
+				iError.code === (409 || iError.code === 400) ? "toast" : "banner";
+
 			let newAlert = AlertUtils.createNewAlert(
 				true,
 				message,
 				"error",
-				"banner"
+				alertType
 			);
 			return newAlert;
 		}
 	},
 };
+
+type AlertType = "banner" | "toast";
 
 export default AlertUtils;

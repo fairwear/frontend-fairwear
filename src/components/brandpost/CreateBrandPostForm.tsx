@@ -12,7 +12,6 @@ import { ErrorRounded, HelpRounded } from "@mui/icons-material";
 import {
 	Autocomplete,
 	Box,
-	Button,
 	Chip,
 	DialogContent,
 	Divider,
@@ -123,7 +122,6 @@ const CreateBrandPostForm = (props: CreateBrandPostFormProps) => {
 	) => {
 		let brand = brands.find((brand) => brand.name === values.brandName);
 		values.selectedTopics = selectedTopics;
-		console.log("Values: ", values);
 		if (brand) {
 			values.brandId = brand.id;
 			handleFormSubmit(values);
@@ -310,11 +308,7 @@ const CreateBrandPostForm = (props: CreateBrandPostFormProps) => {
 								<Box className="textfield-error-container">
 									<ErrorRounded className="textfield-error-icon" />
 
-									<Typography
-										variant="subtitle1"
-										color={"#C62828"}
-										align="left"
-									>
+									<Typography variant="subtitle1" color="#C62828" align="left">
 										{formik.getFieldMeta("topics").error}
 									</Typography>
 								</Box>
@@ -341,13 +335,6 @@ const CreateBrandPostForm = (props: CreateBrandPostFormProps) => {
 							sourceUrls={sourceUrls}
 							handleChange={handleReferenceChange}
 						/>
-						<Button
-							onClick={() => {
-								console.log(formik.values);
-							}}
-						>
-							Fomrik
-						</Button>
 					</DialogContent>
 					<DialogFooter
 						confirmButtonAction={() => console.log("Submitting...")}

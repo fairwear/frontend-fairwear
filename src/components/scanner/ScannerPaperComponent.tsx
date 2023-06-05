@@ -55,13 +55,12 @@ const ScannerPaperComponent = (props: ScannerPaperComponentProps) => {
 		}
 		if (props.handleSuccessfulScan) {
 			props.handleSuccessfulScan(result);
-			console.log("handleSuccessfulScan");
 		}
 	};
 
 	const handleScanError = (error: Error) => {
 		setErrorMessage(error.message);
-		console.log(error);
+		console.error(error);
 		formikContext.setFieldError(name, errorMessage);
 		formikContext.setFieldTouched(name, true);
 	};
