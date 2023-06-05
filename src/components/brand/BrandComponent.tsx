@@ -5,10 +5,10 @@ import "./BrandComponents.css";
 
 interface BrandComponentProps {
 	brand: BrandResponse;
-	imageUrl: string;
 }
 
 const BrandComponent = (props: BrandComponentProps) => {
+	const { brand } = props;
 	const navigate = useNavigate();
 
 	const handleNavigateToBrand = () => {
@@ -17,15 +17,19 @@ const BrandComponent = (props: BrandComponentProps) => {
 
 	return (
 		<div className="brand-component-container">
-			<img
-				className="brand-component-image"
-				src={props.imageUrl}
-				alt={props.brand.name}
-				style={{
-					aspectRatio: "1/1 !important",
-					objectFit: "contain",
-				}}
-			/>
+			{brand.imageUrl && (
+				<div className="brand-component-image-container">
+					<img
+						className="image"
+						src={brand.imageUrl}
+						alt={brand.name}
+						style={{
+							aspectRatio: "1/1 !important",
+							objectFit: "contain",
+						}}
+					/>
+				</div>
+			)}
 			<div className="brand-component-text-container">
 				<div className="brand-component-text">
 					<Typography variant="h2">{props.brand.name}</Typography>

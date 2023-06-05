@@ -1,4 +1,3 @@
-import brandLogo from "@assets/images/versace_logo.png";
 import BrandResponse from "@models/brand/BrandResponse";
 import { Button, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
@@ -15,11 +14,15 @@ export default function BrandBannerInfo(props: BrandBannerInfoProps) {
 	const { brand } = props;
 	const navigate = useNavigate();
 
+	console.log(brand);
+
 	return (
 		<div className="brand-banner">
-			<div className="image-container">
-				<img className="image" src={brandLogo} />
-			</div>
+			{brand.imageUrl && (
+				<div className="image-container">
+					<img className="image" src={brand.imageUrl} />
+				</div>
+			)}
 			<div className="info-container">
 				<Typography variant="h2">{brand.name}</Typography>
 				<Typography variant="h6" className="description">

@@ -1,5 +1,4 @@
 import BrandAPI from "@api/BrandAPI";
-import brandLogo from "@assets/images/versace_logo.png";
 import BrandComponent from "@components/brand/BrandComponent";
 import BrandResponse from "@models/brand/BrandResponse";
 import { Button, Typography } from "@mui/material";
@@ -39,7 +38,7 @@ const BrandSection = () => {
 			<div className="brand-container">
 				{brands.map((brand) => (
 					<div key={brand.id} className="brand-component-outer-container">
-						<BrandComponent key={brand.id} brand={brand} imageUrl={brandLogo} />
+						<BrandComponent key={brand.id} brand={brand} />
 					</div>
 				))}
 			</div>

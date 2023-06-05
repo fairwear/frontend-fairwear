@@ -108,6 +108,7 @@ export default function PrimarySearchAppBar() {
 
 			return mediaStream;
 		} catch (error: any) {
+			setIsLoaded(true);
 			handlePermissionError();
 			setHasPermission(false);
 			setMediaStream(undefined);
