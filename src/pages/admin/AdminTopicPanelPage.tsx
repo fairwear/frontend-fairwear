@@ -7,9 +7,11 @@ import TopicTableHeaderRow from "@components/topic/TopicTableHeaderRow";
 import TopicTableRow from "@components/topic/TopicTableRow";
 import TopicFilterRequest from "@models/topic/TopicFilterRequest";
 import TopicResponse from "@models/topic/TopicResponse";
-import { Divider, Typography } from "@mui/material";
+import { Button, Divider, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import "./AdminPanelPage.css";
+import { AddCircleRounded } from "@mui/icons-material";
+import AppTheme from "../../AppTheme";
 
 const AdminTopicPanelPage = () => {
 	const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -40,6 +42,8 @@ const AdminTopicPanelPage = () => {
 
 	const handleEditDialogClose = () => {
 		setIsEditDialogOpen(false);
+		setSelectedTopic(undefined);
+		getTopics();
 	};
 
 	const handleCreateDialogOpen = () => {
@@ -48,6 +52,7 @@ const AdminTopicPanelPage = () => {
 
 	const handleCreateDialogClose = () => {
 		setIsCreateDialogOpen(false);
+		getTopics()
 	};
 
 	return (
@@ -56,15 +61,39 @@ const AdminTopicPanelPage = () => {
 				<Typography variant="h1" align="center">
 					Topic Managment
 				</Typography>
+				<Button
+					className="creation-button"
+					variant="outlined"
+					onClick={handleCreateDialogOpen}
+					style={{
+						display: "flex",
+						justifyContent: "center",
+						alignItems: "center",
+						gap: "8px",
+						textTransform: "none",
+						padding: "8px 16px",
+					}}
+				>
+					<AddCircleRounded
+						style={{
+							width: "24px",
+							height: "24px",
+						}}
+					/>
+					Create a Topic
+				</Button>
 			</div>
 			<div className="topic-admin-filter-container">
-				<AdminTopicFilterForm handleFilter={getTopics} />
 				<Divider
 					style={{
 						marginTop: "24px",
-						marginBottom: "12px",
+						marginBottom: "24px",
+						borderColor: AppTheme.palette.grey[500],
+						width: "calc(100% + 48px)",
+						marginLeft: "-24px",
 					}}
 				/>
+				<AdminTopicFilterForm handleFilter={getTopics} />
 			</div>
 			{topics.length > 0 && (
 				<CustomTable
@@ -80,7 +109,7 @@ const AdminTopicPanelPage = () => {
 						<TopicTableRow
 							row={row}
 							handleEditDialogOpen={handleEditDialogOpen}
-							handleCreateDialogOpen={handleCreateDialogOpen}
+							reloadTable={getTopics}
 						/>
 					)}
 					HeaderRow={() => <TopicTableHeaderRow />}

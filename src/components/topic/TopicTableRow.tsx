@@ -7,15 +7,16 @@ import { useState } from "react";
 import AppTheme from "../../AppTheme";
 import "./Topic.css";
 import DeleteConfirmationDialog from "@components/dialog/DeleteConfirmationDialog";
+import alerts from "@redux/alerts";
 
 interface AdminReportTableRowProps {
 	row: any;
-	handleCreateDialogOpen: (report: TopicResponse) => void;
 	handleEditDialogOpen: (report: TopicResponse) => void;
+	reloadTable: () => void;
 }
 
 const TopicTableRow = (props: AdminReportTableRowProps) => {
-	const { row, handleEditDialogOpen } = props;
+	const { row, handleEditDialogOpen, reloadTable } = props;
 
 	const topic = row.row as TopicResponse;
 
@@ -27,21 +28,25 @@ const TopicTableRow = (props: AdminReportTableRowProps) => {
 
 	const handleDeleteDialogClose = () => {
 		setDeleteDialogOpen(false);
+		reloadTable()
 	};
 
 	const handleDeleteTopic = async () => {
 		await TopicAPI.delete(row.row.id);
-	};
+		alerts.addAlert({
+			isOpen: true,
+			message: `Topic was successfully ${topic.name} deleted`,
+			alertSeverity: "success",
+			alertType: "toast",
+		});
 
-	const handleClick = () => {
-		props.handleEditDialogOpen(props.row);
+		handleDeleteDialogClose();
 	};
 
 	return (
 		<>
 			<TableRow
 				className="report-table-row"
-				onClick={handleClick}
 				style={{
 					minWidth: "max-content",
 				}}
@@ -81,7 +86,7 @@ const TopicTableRow = (props: AdminReportTableRowProps) => {
 					</Typography>
 				</TableCell>
 				<TableCell className="more-options-cell flex-in-row">
-					<IconButton onClick={() => handleEditDialogOpen(topic)}>
+					<IconButton onClick={() => handleEditDialogOpen(row)}>
 						<EditOutlined style={{ color: AppTheme.palette.grey[600] }} />
 					</IconButton>
 					<IconButton onClick={handleDeleteDialogOpen}>
@@ -95,16 +100,16 @@ const TopicTableRow = (props: AdminReportTableRowProps) => {
 				<DeleteConfirmationDialog
 					open={deleteDialogOpen}
 					handleClose={handleDeleteDialogClose}
-					objectToDelete={`topic`}
+					objectToDelete={`${topic.name}`}
 					nameToDelete={topic.name}
 					dialogSubtext={
 						"The topic with ID " +
 						topic.id +
 						" and name " +
 						topic.name +
-						"will be deleted. Are you sure?"
+						" will be deleted. Are you sure?"
 					}
-					buttonText={"apgyvendinimą"}
+					buttonText="Topic"
 					handleDelete={handleDeleteTopic}
 					reloadAfterDelete={false}
 				/>

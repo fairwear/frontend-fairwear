@@ -20,13 +20,15 @@ export interface CreateUpdateTopicFormValues {
 interface CreateUpdateTopicFormProps {
 	state: "edit" | "create";
 	topic?: TopicResponse;
+	handleClose: () => void;
 }
 
 const CreateUpdateTopicForm = (props: CreateUpdateTopicFormProps) => {
-	const { state, topic } = props;
+	const { state, topic, handleClose } = props;
 
 	const handleToggle = (formik: FormikProps<CreateUpdateTopicFormValues>) => {
 		formik.setFieldValue("isSubTopic", !formik.values.isSubTopic);
+		formik.validateForm();
 	};
 
 	const initialValues: CreateUpdateTopicFormValues = {
@@ -72,6 +74,8 @@ const CreateUpdateTopicForm = (props: CreateUpdateTopicFormProps) => {
 		setTimeout(() => {
 			formik.setSubmitting(false);
 		}, 300);
+
+		handleClose();
 	};
 
 	return (
@@ -99,7 +103,7 @@ const CreateUpdateTopicForm = (props: CreateUpdateTopicFormProps) => {
 						}}
 					>
 						<Checkbox
-							id="isDeleted"
+							id="isSubTopic"
 							checkedIcon={
 								<CheckBoxOutlined
 									style={{
@@ -144,7 +148,7 @@ const CreateUpdateTopicForm = (props: CreateUpdateTopicFormProps) => {
 								width: "70%",
 								alignSelf: "flex-end",
 							}}
-							disabled={formik.isSubmitting || !formik.isValid}
+							disabled={!formik.isValid}
 							variant="contained"
 							type="submit"
 						>
@@ -174,10 +178,11 @@ const validationSchema = yup.object({
 	isSubTopic: yup.boolean().optional(),
 	parentTopicId: yup
 		.number()
-		.when("isSubTopic", (isSubTopic, schema) => {
-			if (isSubTopic) return schema.required("Parent Topic id is required");
-			return schema;
-		})
+		// .when("isSubTopic", (isSubTopic, schema) => {
+		// 	if (isSubTopic)
+		// 		return schema.required("Parent Topic id is required");
+		// 	return schema;
+		// })
 		.typeError("Parent Topic id must be a number"),
 });
 

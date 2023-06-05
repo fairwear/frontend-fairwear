@@ -55,7 +55,7 @@ const AdminTopicFilterForm = (props: AdminTopicFilterFormProps) => {
 		>
 			{(formik: FormikProps<AdminTopicFilterFormValues>) => (
 				<Form className="topic-filter-form">
-					<FormTextField name="search" label="Search" title={"Search"} />
+					<FormTextField name="search" label="Search" />
 					<div className="topic-filter-checkbox-container">
 						<Checkbox
 							id="isSubtopic"

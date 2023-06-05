@@ -40,6 +40,7 @@ const CreateUpdateTopicDialog = (props: CreateUpdateTopicDialogProps) => {
 				<CreateUpdateTopicForm
 					state={state}
 					topic={topic ? ((topic as any).row as TopicResponse) : undefined}
+					handleClose={handleClose}
 				/>
 			</div>
 		</ClosableDialog>
