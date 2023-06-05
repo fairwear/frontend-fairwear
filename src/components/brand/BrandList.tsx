@@ -19,7 +19,11 @@ export default function BrandList() {
 	const renderBrands = brands.map((brand) => {
 		return (
 			<div key={brand.id} className="brand-component-outer-container">
-				<BrandComponent key={brand.id} brand={brand} imageUrl={brandLogo} />
+				<BrandComponent
+					key={brand.id}
+					brand={brand}
+					imageUrl={brand.imageUrl || brandLogo}
+				/>
 			</div>
 		);
 	});

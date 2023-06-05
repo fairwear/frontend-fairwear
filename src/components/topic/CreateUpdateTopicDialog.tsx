@@ -12,8 +12,6 @@ interface CreateUpdateTopicDialogProps {
 
 const CreateUpdateTopicDialog = (props: CreateUpdateTopicDialogProps) => {
 	const { open, state, topic, handleClose } = props;
-	console.log("topic:", topic);
-	console.log("state:", state);
 
 	return (
 		<ClosableDialog

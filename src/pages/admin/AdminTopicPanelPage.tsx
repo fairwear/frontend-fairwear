@@ -37,7 +37,6 @@ const AdminTopicPanelPage = () => {
 		setIsEditDialogOpen(true);
 		// let fixedValue = (report as any).row;
 		setSelectedTopic(newTopic);
-		console.log("newTopic", newTopic);
 	};
 
 	const handleEditDialogClose = () => {

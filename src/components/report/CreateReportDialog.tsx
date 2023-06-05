@@ -31,7 +31,6 @@ const CreateReportDialog = (props: CreateReportDialogProps) => {
 
 	const getBrandPost = async () => {
 		const brandPost = await BrandPostAPI.findById(brandPostId);
-		console.log(brandPost);
 		setBrandPost(brandPost);
 	};
 

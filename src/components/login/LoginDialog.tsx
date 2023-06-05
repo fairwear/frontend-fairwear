@@ -31,7 +31,6 @@ export default function LoginDialog(props: Props) {
 				window.location.reload();
 			}, 300);
 		} catch (error: any) {
-			console.log(error.response);
 			if (error.response.status === 404) {
 				setTimeout(() => {
 					setError("Username or password is incorrect");

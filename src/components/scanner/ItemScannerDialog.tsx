@@ -15,9 +15,8 @@ import {
 	IconButton,
 	SwipeableDrawer,
 } from "@mui/material";
-import alerts from "@redux/alerts";
 import { Form, Formik, FormikHelpers, FormikProps } from "formik";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import * as yup from "yup";
 
 interface ItemScannerDialogProps {
@@ -50,7 +49,6 @@ const ItemScannerDialog = (props: ItemScannerDialogProps) => {
 
 	const getItem = async (barcode: string, helpers?: FormikHelpers<any>) => {
 		try {
-			console.log("getItem");
 			let response = await ItemAPI.findByBarcode(barcode);
 			setItem(response);
 			helpers?.resetForm();
@@ -61,14 +59,14 @@ const ItemScannerDialog = (props: ItemScannerDialogProps) => {
 			setItem(undefined);
 			helpers?.setErrors({ barcode: "No item with such a barcode was found" });
 			helpers?.resetForm();
-			console.log("ALERTS:", alerts.getAlerts());
-			console.log("ERROR:", error);
+			// console.log("ALERTS:", alerts.getAlerts());
+			// console.log("ERROR:", error);
 		}
 	};
 
-	useEffect(() => {
-		console.log("error message:", errorMessage);
-	}, [errorMessage]);
+	// useEffect(() => {
+	// 	console.log("error message:", errorMessage);
+	// }, [errorMessage]);
 
 	const handleTextFieldDrawerOpen = async () => {
 		setTextFieldDrawerOpen(true);

@@ -36,7 +36,6 @@ const BrandPostComponent = (props: BrandPostComponentProps) => {
 		});
 
 		const items = await Promise.all(mappedItems);
-		console.log(items);
 		setRelatedItems(items);
 	};
 

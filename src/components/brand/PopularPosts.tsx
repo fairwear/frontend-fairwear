@@ -1,29 +1,14 @@
-import BrandPostAPI from "@api/BrandPostAPI";
 import BrandPostResponse from "@models/brandpost/BrandPostResponse";
 import { Typography } from "@mui/material";
-import { useEffect, useState } from "react";
 import BrandPostSlider from "../brandpost/BrandPostSlider";
 import "./BrandComponents.css";
 
 interface PopularPostsProps {
-	brandId: number;
+	posts: BrandPostResponse[];
 }
 
 export default function PopularPosts(props: PopularPostsProps) {
-	// TODO: Implement this, currently not used
-	// const { brandId } = props;
-
-	const [brandPosts, setBrandPosts] = useState<BrandPostResponse[]>([]);
-
-	useEffect(() => {
-		getBrandPosts();
-	}, []);
-
-	const getBrandPosts = async () => {
-		// TODO: Temp solution, Fix this
-		const response = await BrandPostAPI.findAll();
-		setBrandPosts(response);
-	};
+	const { posts } = props;
 
 	return (
 		<div className="posts-container">
@@ -36,7 +21,7 @@ export default function PopularPosts(props: PopularPostsProps) {
 				</Typography>
 			</div>
 			<div className="posts-inner-container">
-				<BrandPostSlider brandPosts={brandPosts} />
+				<BrandPostSlider brandPosts={posts} />
 			</div>
 		</div>
 	);
