@@ -9,24 +9,28 @@ export default function Topics() {
 			name: "Topic 1",
 			topicId: 1,
 			brands: [],
+			createdAt: new Date(),
 		},
 		{
 			id: 2,
 			name: "Topic 2",
 			topicId: 2,
 			brands: [],
+			createdAt: new Date(),
 		},
 		{
 			id: 3,
 			name: "Topic 3",
 			topicId: 3,
 			brands: [],
+			createdAt: new Date(),
 		},
 		{
 			id: 4,
 			name: "Topic 4",
 			topicId: 4,
 			brands: [],
+			createdAt: new Date(),
 		},
 	];
 

@@ -1,4 +1,5 @@
 import AlertComponent from "@components/alert/AlertComponent";
+import Footer from "@components/common/Footer";
 import common from "@redux/common";
 import { useAppSelector } from "@redux/store/hooks";
 import { useEffect } from "react";
@@ -7,7 +8,6 @@ import "./AppRouter.css";
 import Header from "./components/common/Header";
 import routes from "./constants/routes";
 import RouteItem from "./models/routes/RouteItem";
-import Footer from "@components/common/Footer";
 
 function App() {
 	const isLoggedIn = useAppSelector((state) => state.common.isLoggedIn);
@@ -25,11 +25,10 @@ function App() {
 		<div
 			style={{
 				width: "100%",
-				display: "flex",
 				height: "100%",
+				display: "flex",
 				flexDirection: "column",
 			}}
-			className="App"
 		>
 			<Header />
 			<>
@@ -44,11 +43,26 @@ function App() {
 					</>
 				)}
 			</>
-			<Routes>
-				{[...routes[0].items, ...routes[1].items].map((route: RouteItem) => (
-					<Route key={route.key} path={route.path} element={route.element} />
-				))}
-			</Routes>
+			<div className="app-container">
+				<Routes>
+					{[...routes[0].items, ...routes[1].items].map((route: RouteItem) => (
+						<Route
+							key={route.key}
+							path={route.path}
+							element={
+								route.element
+								// route.isForAdmins ? (
+								// 	<RequireAdminAccess isForAdmins={route.isForAdmins}>
+								// 		{route.element}
+								// 	</RequireAdminAccess>
+								// ) : (
+								// 	route.element
+								// )
+							}
+						/>
+					))}
+				</Routes>
+			</div>
 			<Footer />
 		</div>
 	);

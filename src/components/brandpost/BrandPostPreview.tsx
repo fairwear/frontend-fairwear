@@ -1,6 +1,7 @@
 import VoteComponent from "@components/brandpost/VoteComponent";
 import BrandPostResponse from "@models/brandpost/BrandPostResponse";
 import { Typography } from "@mui/material";
+import "./BrandPost.css";
 
 interface BrandPostPreviewProps {
 	brandPost: BrandPostResponse;

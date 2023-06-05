@@ -7,7 +7,9 @@ import ContributePage from "@pages/contribute/ContributePage";
 import HomePage from "@pages/home/HomePage";
 import UserPage from "@pages/user_page/UserPage";
 import RouteGroup from "../models/routes/RouteGroup";
-import AdminPanelPage from "@pages/admin/AdminPanelPage";
+
+import AdminReportPanelPage from "@pages/admin/AdminReportPanelPage";
+import AdminTopicPanelPage from "@pages/admin/AdminTopicPanelPage";
 
 const routes: RouteGroup[] = [
 	{
@@ -54,10 +56,18 @@ const routes: RouteGroup[] = [
 		group: "Admin",
 		items: [
 			{
-				path: "/admin",
-				key: "admin",
-				pageTitle: "Admin Panel",
-				element: <AdminPanelPage />,
+				path: "/admin/report",
+				key: "admin-report",
+				pageTitle: "Admin Report Panel",
+				element: <AdminReportPanelPage />,
+				isForAdmins: true,
+			},
+			{
+				path: "/admin/topic",
+				key: "admin-topic",
+				pageTitle: "Admin Topic Panel",
+				element: <AdminTopicPanelPage />,
+				isForAdmins: true,
 			},
 		],
 	},

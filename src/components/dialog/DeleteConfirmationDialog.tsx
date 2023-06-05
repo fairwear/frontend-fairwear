@@ -1,7 +1,7 @@
+import ConfirmDeleteIcon from "@assets/svg/deletion-confirmation-icon.svg";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Button, Card, Dialog, Typography } from "@mui/material";
 import AppTheme from "../../AppTheme";
-import ConfirmDeleteIcon from "assets/svg/deletion-confirmation-icon.svg";
 import "./Dialog.css";
 interface DeleteConfirmationDialogProps {
 	open: boolean;
@@ -19,7 +19,6 @@ const DeleteConfirmationDialog = (props: DeleteConfirmationDialogProps) => {
 	const {
 		handleClose,
 		objectToDelete,
-		nameToDelete,
 		buttonText,
 		dialogSubtext,
 		reloadAfterDelete = true,
@@ -63,7 +62,15 @@ const DeleteConfirmationDialog = (props: DeleteConfirmationDialogProps) => {
 						</Button>
 					</div>
 
-					<ConfirmDeleteIcon />
+					<img
+						src={ConfirmDeleteIcon}
+						alt="confirm-delete-icon"
+						style={{
+							width: "60%",
+							maxWidth: "480px",
+							marginBottom: "16px",
+						}}
+					/>
 					<div className="dialog-body-text">
 						<Typography
 							variant="h2"
@@ -75,7 +82,7 @@ const DeleteConfirmationDialog = (props: DeleteConfirmationDialogProps) => {
 								maxWidth: "480px",
 							}}
 						>
-							{`Ar tikrai norite ištrinti ${objectToDelete}?`}
+							{`Are you sure you want to delete ${objectToDelete}?`}
 						</Typography>
 						<Typography
 							variant="body1"
@@ -88,7 +95,7 @@ const DeleteConfirmationDialog = (props: DeleteConfirmationDialogProps) => {
 								color={AppTheme.palette.text.primary}
 								fontWeight={700}
 							>
-								{nameToDelete}
+								{/* {nameToDelete} */}
 							</Typography>
 							{dialogSubtext}
 						</Typography>
@@ -103,7 +110,7 @@ const DeleteConfirmationDialog = (props: DeleteConfirmationDialogProps) => {
 							}}
 						>
 							<Typography variant="h5" color={AppTheme.palette.text.primary}>
-								{simpleNaming ? "Palikti" : `Palikti ${buttonText}`}
+								{simpleNaming ? "Leave" : `Leave ${buttonText}`}
 							</Typography>
 						</Button>
 						<Button
@@ -123,7 +130,7 @@ const DeleteConfirmationDialog = (props: DeleteConfirmationDialogProps) => {
 								}}
 							/>
 							<Typography variant="h5" color="#ffffff">
-								{simpleNaming ? "Ištrinti" : `Ištrinti ${buttonText}`}
+								{simpleNaming ? "Delete" : `Delete ${buttonText}`}
 							</Typography>
 						</Button>
 					</div>

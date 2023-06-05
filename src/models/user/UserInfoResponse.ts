@@ -4,6 +4,7 @@ interface UserInfoResponse {
 	username: string;
 	email: string;
 	userTrustScore: number;
+	isAdmin: boolean;
 }
 
 export default UserInfoResponse;
