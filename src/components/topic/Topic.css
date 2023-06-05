@@ -175,3 +175,33 @@
 	flex-direction: row !important;
 	gap: 8px;
 }
+
+/* ------------------------ Topic Create/Update/Filter Components ------------------------ */
+
+.topic-filter-form {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+	width: 100%;
+}
+
+.topic-form {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	box-sizing: border-box;
+	padding: 24px;
+	gap: 20px;
+
+	margin: 0 auto;
+	height: 100%;
+	width: 100%;
+}
+
+.topic-filter-checkbox-container {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	width: 100%;
+}

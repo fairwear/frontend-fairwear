@@ -1,18 +1,20 @@
 import TopicAPI from "@api/TopicAPI";
+import NoDataFoundComponent from "@components/common/NoDataFoundComponent";
 import CustomTable from "@components/table/CustomTable";
 import AdminTopicFilterForm from "@components/topic/AdminTopicFilterForm";
+import CreateUpdateTopicDialog from "@components/topic/CreateUpdateTopicDialog";
 import TopicTableHeaderRow from "@components/topic/TopicTableHeaderRow";
 import TopicTableRow from "@components/topic/TopicTableRow";
 import TopicFilterRequest from "@models/topic/TopicFilterRequest";
 import TopicResponse from "@models/topic/TopicResponse";
-import { Typography } from "@mui/material";
+import { Divider, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import "./AdminPanelPage.css";
-import NoDataFoundComponent from "@components/common/NoDataFoundComponent";
 
 const AdminTopicPanelPage = () => {
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 	const [isEditDialogOpen, setIsEditDialogOpen] = useState<boolean>(false);
+	const [isCreateDialogOpen, setIsCreateDialogOpen] = useState<boolean>(false);
 	const [topics, setTopics] = useState<TopicResponse[]>([]);
 	const [selectedTopic, setSelectedTopic] = useState<TopicResponse | undefined>(
 		undefined
@@ -24,35 +26,45 @@ const AdminTopicPanelPage = () => {
 
 	const getTopics = async (filter?: TopicFilterRequest) => {
 		setIsLoading(true);
-		// const response = await TopicAPI.findAllFilteredBy(filter);
-		const response = await TopicAPI.findAll();
+		const response = await TopicAPI.findAllFilteredBy(filter);
 		setTopics(response);
 		setIsLoading(false);
 	};
 
-	const handleEditDialogOpen = (topic: TopicResponse) => {
+	const handleEditDialogOpen = (newTopic: TopicResponse) => {
 		setIsEditDialogOpen(true);
 		// let fixedValue = (report as any).row;
-		setSelectedTopic(topic);
+		setSelectedTopic(newTopic);
+		console.log("newTopic", newTopic);
 	};
 
 	const handleEditDialogClose = () => {
 		setIsEditDialogOpen(false);
 	};
 
-	const handleFilter = (filter?: TopicFilterRequest) => {
-		console.log(filter);
+	const handleCreateDialogOpen = () => {
+		setIsCreateDialogOpen(true);
+	};
+
+	const handleCreateDialogClose = () => {
+		setIsCreateDialogOpen(false);
 	};
 
 	return (
 		<div className="topic-admin-page-container">
 			<div className="topic-admin-page-title">
 				<Typography variant="h1" align="center">
-					Report Managment
+					Topic Managment
 				</Typography>
 			</div>
 			<div className="topic-admin-filter-container">
-				<AdminTopicFilterForm handleFilter={handleFilter} />
+				<AdminTopicFilterForm handleFilter={getTopics} />
+				<Divider
+					style={{
+						marginTop: "24px",
+						marginBottom: "12px",
+					}}
+				/>
 			</div>
 			{topics.length > 0 && (
 				<CustomTable
@@ -68,6 +80,7 @@ const AdminTopicPanelPage = () => {
 						<TopicTableRow
 							row={row}
 							handleEditDialogOpen={handleEditDialogOpen}
+							handleCreateDialogOpen={handleCreateDialogOpen}
 						/>
 					)}
 					HeaderRow={() => <TopicTableHeaderRow />}
@@ -80,6 +93,17 @@ const AdminTopicPanelPage = () => {
 					subMessage="Try changing the filtering options or try to again later"
 				/>
 			)}
+			<CreateUpdateTopicDialog
+				open={isEditDialogOpen}
+				state="edit"
+				handleClose={handleEditDialogClose}
+				topic={selectedTopic}
+			/>
+			<CreateUpdateTopicDialog
+				open={isCreateDialogOpen}
+				state="create"
+				handleClose={handleCreateDialogClose}
+			/>
 		</div>
 	);
 };

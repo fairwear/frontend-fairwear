@@ -19,6 +19,13 @@
 	margin-bottom: 24px;
 }
 
+.report-filtering-container {
+	width: 85%;
+	max-width: 1400px;
+	padding: 0px 16px;
+	box-sizing: border-box;
+}
+
 /* --------------- Topic --------------- */
 
 .topic-admin-page-container {
@@ -39,4 +46,11 @@
 	align-items: center;
 	width: 80%;
 	margin-bottom: 24px;
+}
+
+.topic-admin-filter-container {
+	width: 90%;
+	max-width: 1400px;
+	padding: 0px 16px;
+	box-sizing: border-box;
 }

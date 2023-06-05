@@ -10,6 +10,7 @@ import DeleteConfirmationDialog from "@components/dialog/DeleteConfirmationDialo
 
 interface AdminReportTableRowProps {
 	row: any;
+	handleCreateDialogOpen: (report: TopicResponse) => void;
 	handleEditDialogOpen: (report: TopicResponse) => void;
 }
 
@@ -17,8 +18,6 @@ const TopicTableRow = (props: AdminReportTableRowProps) => {
 	const { row, handleEditDialogOpen } = props;
 
 	const topic = row.row as TopicResponse;
-
-	console.log(topic);
 
 	const [deleteDialogOpen, setDeleteDialogOpen] = useState<boolean>(false);
 

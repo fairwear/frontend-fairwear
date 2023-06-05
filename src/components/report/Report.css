@@ -211,4 +211,5 @@
 
 .report-filtering-container {
 	width: 85%;
+	max-width: 1400px;
 }

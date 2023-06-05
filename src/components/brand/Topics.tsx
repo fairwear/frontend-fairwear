@@ -17,7 +17,6 @@ export default function Topics() {
 			topicId: 2,
 			brands: [],
 			createdAt: new Date(),
-
 		},
 		{
 			id: 3,
