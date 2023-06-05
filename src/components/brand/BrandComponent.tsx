@@ -33,9 +33,7 @@ const BrandComponent = (props: BrandComponentProps) => {
 			<div className="brand-component-text-container">
 				<div className="brand-component-text">
 					<Typography variant="h2">{props.brand.name}</Typography>
-					<Typography variant="subtitle1">
-						Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-					</Typography>
+					<Typography variant="subtitle1"></Typography>
 				</div>
 				<div className="brand-component-button-container">
 					<Button

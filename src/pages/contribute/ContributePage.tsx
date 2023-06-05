@@ -26,10 +26,10 @@ import FileAPI from "@api/FileAPI";
 import { CreateItemFormValues } from "@components/item/CreateItemForm";
 import ItemAPI from "@api/ItemAPI";
 import CreateItemDialog from "@components/item/CreateItemDialog";
-import BrandPost from "@components/brandpost/BrandPost";
+// import BrandPost from "@components/brandpost/BrandPost";
 import BrandPostResponse from "@models/brandpost/BrandPostResponse";
 
-const dummyBrandPostId = 3;
+const dummyBrandPostId = 1;
 
 const ContributePage = () => {
 	const isUserLoggedIn = useAppSelector((state) => state.common.isLoggedIn);
@@ -259,7 +259,7 @@ const ContributePage = () => {
 					handleSubmit={handleSubmitItem}
 				/>
 			</div>
-			<div
+			{/* <div
 				style={{
 					display: "flex",
 					justifyContent: "center",
@@ -268,7 +268,7 @@ const ContributePage = () => {
 				}}
 			>
 				{brandPost && <BrandPost brandPost={brandPost} />}
-			</div>
+			</div> */}
 		</>
 	);
 };

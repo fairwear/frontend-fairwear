@@ -46,20 +46,7 @@ function App() {
 			<div className="app-container">
 				<Routes>
 					{[...routes[0].items, ...routes[1].items].map((route: RouteItem) => (
-						<Route
-							key={route.key}
-							path={route.path}
-							element={
-								route.element
-								// route.isForAdmins ? (
-								// 	<RequireAdminAccess isForAdmins={route.isForAdmins}>
-								// 		{route.element}
-								// 	</RequireAdminAccess>
-								// ) : (
-								// 	route.element
-								// )
-							}
-						/>
+						<Route key={route.key} path={route.path} element={route.element} />
 					))}
 				</Routes>
 			</div>

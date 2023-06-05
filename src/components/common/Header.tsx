@@ -152,14 +152,28 @@ export default function PrimarySearchAppBar() {
 					</IconButton>
 				)}
 				<SearchField />
-				<IconButton
-					onClick={handleBarcodeScannerOpen}
+				<div
 					style={{
-						margin: "0 10px",
+						display: "flex",
+						width: "100%",
+						flex: 0.1,
 					}}
 				>
-					<CameraAltRoundedIcon className="header-camera-icon" />
-				</IconButton>
+					<IconButton
+						onClick={handleBarcodeScannerOpen}
+						style={{
+							margin: "0 10px",
+						}}
+					>
+						<CameraAltRoundedIcon
+							className="header-camera-icon"
+							style={{
+								width: "28px",
+								height: "28px",
+							}}
+						/>
+					</IconButton>
+				</div>
 				<Box
 					className="header-auth-button-container"
 					display={{ xs: "none", md: "flex" }}

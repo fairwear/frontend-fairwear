@@ -9,6 +9,7 @@ import "./Topic.css";
 
 interface TopicViewComponentProps {
 	postToTopic: BrandPostToTopic;
+	containerStyle?: React.CSSProperties;
 }
 
 const TopicViewComponent = (props: TopicViewComponentProps) => {
@@ -25,7 +26,10 @@ const TopicViewComponent = (props: TopicViewComponentProps) => {
 	};
 
 	return (
-		<div className="topic-view-component-outer-container">
+		<div
+			className="topic-view-component-outer-container"
+			style={props.containerStyle}
+		>
 			<div className="topic-view-component-container">
 				<div className="topic-name">
 					<Typography variant="body1" className="topic-name-text">
@@ -43,6 +47,8 @@ const getTopicIcon = (isBad: boolean) => {
 		return (
 			<CancelRounded
 				style={{
+					height: "28px !important",
+					width: "28px !important",
 					color: AppTheme.palette.red[400],
 				}}
 				className="rating-icon"
@@ -52,6 +58,8 @@ const getTopicIcon = (isBad: boolean) => {
 		return (
 			<CheckCircleOutlineRounded
 				style={{
+					height: "28px !important",
+					width: "28px !important",
 					color: AppTheme.palette.green[400],
 				}}
 				className="rating-icon"

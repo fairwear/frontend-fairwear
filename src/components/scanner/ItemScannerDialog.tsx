@@ -1,5 +1,6 @@
 import ItemAPI from "@api/ItemAPI";
 import DialogHeader from "@components/dialog/DialogHeader";
+import ErrorBanner from "@components/form/ErrorBanner";
 import FormTextField from "@components/form/FormTextField";
 import FormikUseEffect from "@components/form/FormikUseEffect";
 import ItemInfoComponent from "@components/item/ItemInfoComponent";
@@ -120,14 +121,14 @@ const ItemScannerDialog = (props: ItemScannerDialogProps) => {
 					width: "calc(100% - 48px)",
 				}}
 			/>
-			{/* {errorMessage && (
+			{errorMessage && (
 				<ErrorBanner
 					errorMessage={errorMessage}
 					errorContainerStyle={{
 						width: "calc(100% - 48px)",
 					}}
 				/>
-			)} */}
+			)}
 			{/* TODO: Add no camera access banner */}
 			<Formik
 				initialValues={initialValues}
