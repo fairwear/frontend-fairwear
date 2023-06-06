@@ -11,7 +11,7 @@ interface BrandResponse {
 	items: ItemResponse[];
 	posts: BrandPostResponse[];
 	topics: TopicResponse[];
-	topicsToBrands: TopicToBrand[];
+	topicsToBrand: TopicToBrand[];
 	createdAt: Date;
 	updatedAt: Date | null;
 	deletedAt: Date | null;

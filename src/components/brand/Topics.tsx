@@ -6,11 +6,11 @@ import TopicToBrand from "@models/topic/TopicToBrand";
 
 interface TopicProps {
 	topics: TopicResponse[];
-	topicsToBrands?: TopicToBrand[];
+	topicsToBrand?: TopicToBrand[];
 }
 
 export default function Topics(props: TopicProps) {
-	const { topics, topicsToBrands } = props;
+	const { topics, topicsToBrand } = props;
 
 	return (
 		<div className="topic-component">
@@ -24,7 +24,7 @@ export default function Topics(props: TopicProps) {
 				></Typography>
 			</div>
 			<div className="topic-container">
-				{!topicsToBrands &&
+				{!topicsToBrand &&
 					topics.map((topic) => (
 						<div key={topic.id} className="topic">
 							<Typography variant="body1" className="topic-name">
@@ -33,8 +33,8 @@ export default function Topics(props: TopicProps) {
 						</div>
 					))}
 
-				{topicsToBrands &&
-					topicsToBrands.map((topicToBrand) => (
+				{topicsToBrand &&
+					topicsToBrand.map((topicToBrand) => (
 						<TopicViewComponent
 							key={topicToBrand.topicId - topicToBrand.brandId}
 							topicToBrand={topicToBrand}

@@ -15,12 +15,13 @@ const BrandComponent = (props: BrandComponentProps) => {
 		navigate(`/brand/${props.brand.id}`);
 	};
 
-	console.log(brand);
-
 	return (
 		<div className="brand-component-container">
 			{brand.imageUrl && (
-				<div className="brand-component-image-container">
+				<div
+					className="brand-component-
+				image-container"
+				>
 					<img
 						className="image"
 						src={brand.imageUrl}
@@ -28,6 +29,9 @@ const BrandComponent = (props: BrandComponentProps) => {
 						style={{
 							aspectRatio: "1/1 !important",
 							objectFit: "contain",
+							borderRadius: "8px",
+							border: "1px solid rgb(34, 34, 34, 0.3) !important",
+							boxShadow: " 0px 0px 5px rgba(-2, -4, 1, 0.)",
 						}}
 					/>
 				</div>
@@ -35,9 +39,7 @@ const BrandComponent = (props: BrandComponentProps) => {
 			<div className="brand-component-text-container">
 				<div className="brand-component-text">
 					<Typography variant="h2">{props.brand.name}</Typography>
-					<Typography variant="subtitle1">
-						{props.brand.description}
-					</Typography>
+					<Typography variant="subtitle1">{props.brand.description}</Typography>
 				</div>
 				<div className="brand-component-button-container">
 					<Button

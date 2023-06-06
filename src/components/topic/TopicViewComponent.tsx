@@ -39,7 +39,12 @@ const TopicViewComponent = (props: TopicViewComponentProps) => {
 		>
 			<div className="topic-view-component-container">
 				<div className="topic-name">
-					<Typography variant="body1" className="topic-name-text">
+					<Typography
+						variant="h5"
+						fontWeight={700}
+						fontSize={16}
+						className="topic-name-text"
+					>
 						{topic?.name}
 					</Typography>
 				</div>
@@ -87,6 +92,8 @@ const getTopicScore = (score: number) => {
 			<Typography
 				variant="h5"
 				className="topic-score-text"
+				fontWeight={700}
+				fontSize={16}
 				style={{
 					color:
 						score >= 8
