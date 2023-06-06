@@ -126,7 +126,7 @@ const OldBrandPostComponent = (props: BrandPostComponentProps) => {
 			</div>
 			<CreateReportDialog
 				open={reportDialogOpen}
-				brandPostId={props.brandPost.id}
+				brandPost={props.brandPost}
 				handleClose={handleReportDialogClose}
 				handleSubmit={handleSubmitReport}
 			/>

@@ -69,11 +69,12 @@ const ContributePage = () => {
 			createdAt: new Date(),
 		};
 
-		await BrandAPI.create(request);
+		let res = await BrandAPI.create(request);
+
 		handleBrandDialogClose();
 		alerts.addAlert({
 			isOpen: true,
-			message: `Brand ${values.name} created`,
+			message: `Brand ${res.name} created`,
 			alertSeverity: "success",
 			alertType: "toast",
 		});

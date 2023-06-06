@@ -66,7 +66,15 @@ const ContributeSection = () => {
 			createdAt: new Date(),
 		};
 
-		await BrandAPI.create(request);
+		let res = await BrandAPI.create(request);
+
+		handleBrandDialogClose();
+		alerts.addAlert({
+			isOpen: true,
+			message: `Brand ${res.name} created`,
+			alertSeverity: "success",
+			alertType: "toast",
+		});
 	};
 
 	const handleSubmitBrandPost = async (values: CreateBrandPostFormValues) => {

@@ -426,7 +426,7 @@ const BrandPostComponent = (props: BrandPostComponentProps) => {
 
 				<CreateReportDialog
 					open={reportDialogOpen}
-					brandPostId={props.brandPost.id}
+					brandPost={brandPost}
 					handleClose={handleReportDialogClose}
 					handleSubmit={handleSubmitReport}
 				/>

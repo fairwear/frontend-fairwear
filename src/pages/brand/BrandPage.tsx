@@ -1,13 +1,13 @@
 import BrandAPI from "@api/BrandAPI";
+import BrandPostAPI from "@api/BrandPostAPI";
 import BrandBannerInfo from "@components/brand/BrandBannerInfo";
-import PopularPosts from "@components/brand/PopularPosts";
 import ProductList from "@components/brand/ProductList";
+import BrandPostComponent from "@components/brandpost/BrandPost";
 import BrandResponse from "@models/brand/BrandResponse";
+import BrandPostResponse from "@models/brandpost/BrandPostResponse";
 import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import "./BrandPage.css";
-import BrandPostResponse from "@models/brandpost/BrandPostResponse";
-import BrandPostAPI from "@api/BrandPostAPI";
 export default function BrandPage() {
 	const { brandId } = useParams();
 
@@ -22,7 +22,7 @@ export default function BrandPage() {
 
 	useEffect(() => {
 		getBrand();
-		getPostsByBrandId();
+		// getPostsByBrandId();
 	}, [brandId]);
 
 	const getBrand = async () => {
@@ -30,11 +30,11 @@ export default function BrandPage() {
 		let response = await BrandAPI.findById(+brandId);
 		setBrand(response);
 	};
-	const getPostsByBrandId = async () => {
-		if (!brandId) return;
-		let response = await BrandPostAPI.findAllByBrandId(+brandId);
-		setPosts(response);
-	};
+	// const getPostsByBrandId = async () => {
+	// 	if (!brandId) return;
+	// 	let response = await BrandPostAPI.findAllByBrandId(+brandId);
+	// 	setPosts(response);
+	// };
 
 	const handleScrollToItems = () => {
 		if (!itemListRef.current) return;
@@ -53,9 +53,15 @@ export default function BrandPage() {
 					brand={brand}
 				/>
 			)}
-			{posts.length > 0 && <PopularPosts posts={posts} />}
+			{brand?.posts && brand?.posts.length > 0 && (
+				<div>
+					{posts.splice(0, 3).map((post) => (
+						<BrandPostComponent key={post.id} brandPost={post} />
+					))}
+				</div>
+			)}
 			{brand?.items && brand?.items.length > 0 && (
-				<ProductList ref={itemListRef} products={brand?.items || []} />
+				<ProductList ref={itemListRef} products={brand.items} />
 			)}
 		</div>
 	);

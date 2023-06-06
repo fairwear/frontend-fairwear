@@ -14,7 +14,9 @@ const BrandComponent = (props: BrandComponentProps) => {
 	const handleNavigateToBrand = () => {
 		navigate(`/brand/${props.brand.id}`);
 	};
-	
+
+	console.log(brand);
+
 	return (
 		<div className="brand-component-container">
 			{brand.imageUrl && (
@@ -33,7 +35,9 @@ const BrandComponent = (props: BrandComponentProps) => {
 			<div className="brand-component-text-container">
 				<div className="brand-component-text">
 					<Typography variant="h2">{props.brand.name}</Typography>
-					<Typography variant="subtitle1"></Typography>
+					<Typography variant="subtitle1">
+						{props.brand.description}
+					</Typography>
 				</div>
 				<div className="brand-component-button-container">
 					<Button
