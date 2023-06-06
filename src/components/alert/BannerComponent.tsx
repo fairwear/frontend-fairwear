@@ -50,7 +50,7 @@ const BannerComponent = (props: BannerComponentProps) => {
 		<Alert
 			className="fairwear-banner"
 			{...other}
-			closeText="Uždaryti"
+			closeText="Close"
 			variant="filled"
 			iconMapping={{
 				error: <ErrorOutlineRoundedIcon />,
@@ -112,7 +112,7 @@ const BannerComponent = (props: BannerComponentProps) => {
 								onClick={() => (closeAlert ? closeAlert() : null)}
 								className="fairwear-banner-close-button"
 							>
-								<Typography variant="h6">Uždaryti</Typography>
+								<Typography variant="h6">Close</Typography>
 							</Button>
 						)}
 					</div>

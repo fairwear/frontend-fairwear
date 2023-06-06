@@ -25,13 +25,14 @@ const AlertUtils = {
 	mapAxiosErrorToIError: (error: AxiosError) => {
 		let errorData = error.response?.data as any;
 		if (errorData) {
+			console.log(errorData);
 			let errorArray = errorData.message.toString().split(":");
-			let message = errorArray[errorArray.length - 1];
+			let message = errorArray.slice(1, errorArray.length).join(" ");
+
 			let iError: IError = {
 				code: errorData.statusCode,
 				message: message,
 			};
-			console.log(iError);
 
 			let alertType: AlertType =
 				iError.code === (409 || iError.code === 400) ? "toast" : "banner";

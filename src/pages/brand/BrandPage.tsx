@@ -31,7 +31,6 @@ export default function BrandPage() {
 		setBrand(response);
 	};
 	const getPostsByBrandId = async () => {
-		console.log(brandId);
 		if (!brandId) return;
 		let response = await BrandPostAPI.findAllByBrandId(+brandId);
 		setPosts(response);

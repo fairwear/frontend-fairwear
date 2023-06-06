@@ -193,7 +193,7 @@ const SearchField = () => {
 						<List disablePadding>
 							<>
 								{!isLoading && brandSearchValues.length > 0 && (
-									<>
+									<div>
 										{brandSearchValues.splice(0, 4).map((brand, index) => (
 											<div key={index} onClick={handleClose}>
 												<SearchResultItem
@@ -204,10 +204,10 @@ const SearchField = () => {
 												{index !== 3 && <Divider sx={{ mt: 1, mb: 1 }} />}
 											</div>
 										))}
-									</>
+									</div>
 								)}
 								{!isLoading && brandpostSearchValues.length > 0 && (
-									<>
+									<div>
 										<Divider sx={{ mt: 1, mb: 1, borderWidth: "1.5px" }} />
 										{brandpostSearchValues
 											.splice(0, 4)
@@ -221,10 +221,10 @@ const SearchField = () => {
 													{index !== 3 && <Divider sx={{ mt: 1, mb: 1 }} />}
 												</div>
 											))}
-									</>
+									</div>
 								)}
 								{!isLoading && itemSearchValues.length > 0 && (
-									<>
+									<div>
 										<Divider sx={{ mt: 1, mb: 1, borderWidth: "1.5px" }} />
 										{itemSearchValues.splice(0, 4).map((item, index) => (
 											<div key={index} onClick={handleClose}>
@@ -236,7 +236,7 @@ const SearchField = () => {
 												{index !== 3 && <Divider sx={{ mt: 1, mb: 1 }} />}
 											</div>
 										))}
-									</>
+									</div>
 								)}
 							</>
 						</List>

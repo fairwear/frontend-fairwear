@@ -14,8 +14,6 @@ export default function BrandBannerInfo(props: BrandBannerInfoProps) {
 	const { brand } = props;
 	const navigate = useNavigate();
 
-	console.log(brand);
-
 	return (
 		<div
 			className="brand-banner"
@@ -57,7 +55,9 @@ export default function BrandBannerInfo(props: BrandBannerInfoProps) {
 						<Typography variant="h5">View Items</Typography>
 					</Button>
 				</div>
-				{brand.topics.length > 0 && <Topics topics={brand.topics} />}
+				{brand.topics.length > 0 && (
+					<Topics topics={brand.topics} topicsToBrands={brand.topicsToBrands} />
+				)}
 			</div>
 		</div>
 	);

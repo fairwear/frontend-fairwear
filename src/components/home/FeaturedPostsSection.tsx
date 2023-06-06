@@ -60,7 +60,7 @@ const FeaturedPostsSection = () => {
 								gap: "72px",
 							}}
 						>
-							{brandPosts.map((brandPost, index) => (
+							{brandPosts.splice(0, 4).map((brandPost, index) => (
 								<div
 									key={brandPost.id}
 									style={{

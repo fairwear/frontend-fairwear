@@ -58,15 +58,25 @@ const ContributePage = () => {
 		if (!logo) return;
 
 		let formData = new FormData();
-		formData.append("brandLogo", logo);
+		formData.append("file", logo);
+
+		let brandLogo = await FileAPI.upload(formData);
 
 		let request: BrandCreateRequest = {
 			name: values.name,
+			imageUrl: brandLogo.url,
 			description: values.description,
 			createdAt: new Date(),
 		};
 
 		await BrandAPI.create(request);
+		handleBrandDialogClose();
+		alerts.addAlert({
+			isOpen: true,
+			message: `Brand ${values.name} created`,
+			alertSeverity: "success",
+			alertType: "toast",
+		});
 	};
 
 	const handleSubmitBrandPost = async (values: CreateBrandPostFormValues) => {
@@ -88,8 +98,6 @@ const ContributePage = () => {
 			alertSeverity: "success",
 			alertType: "toast",
 		});
-
-		setTimeout(() => {}, 350);
 	};
 
 	const handleSubmitItem = async (values: CreateItemFormValues) => {

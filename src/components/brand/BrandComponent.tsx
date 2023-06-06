@@ -14,7 +14,7 @@ const BrandComponent = (props: BrandComponentProps) => {
 	const handleNavigateToBrand = () => {
 		navigate(`/brand/${props.brand.id}`);
 	};
-
+	
 	return (
 		<div className="brand-component-container">
 			{brand.imageUrl && (

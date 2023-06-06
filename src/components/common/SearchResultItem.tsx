@@ -24,9 +24,7 @@ const SearchResultItem = (props: SearchResultItemProps) => {
 		<>
 			<ListItemButton
 				onClick={() => {
-					setTimeout(() => {
-						navigate(props.path);
-					}, 100);
+					navigate(props.path);
 				}}
 			>
 				<Hidden smDown>
@@ -43,7 +41,7 @@ const SearchResultItem = (props: SearchResultItemProps) => {
 				<Box flex="1">
 					<Box display="flex" justifyContent="space-between">
 						<Link
-							href={props.path}
+							// href={props.path}
 							underline="hover"
 							sx={{ fontWeight: "bold" }}
 							variant="body2"

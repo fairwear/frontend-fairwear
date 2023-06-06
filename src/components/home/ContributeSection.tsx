@@ -55,10 +55,13 @@ const ContributeSection = () => {
 		if (!logo) return;
 
 		let formData = new FormData();
-		formData.append("brandLogo", logo);
+		formData.append("file", logo);
+
+		let response = await FileAPI.upload(formData);
 
 		let request: BrandCreateRequest = {
 			name: values.name,
+			imageUrl: response.url,
 			description: values.description,
 			createdAt: new Date(),
 		};
@@ -85,8 +88,6 @@ const ContributeSection = () => {
 			alertSeverity: "success",
 			alertType: "toast",
 		});
-
-		setTimeout(() => {}, 350);
 	};
 
 	const handleSubmitItem = async (values: CreateItemFormValues) => {
