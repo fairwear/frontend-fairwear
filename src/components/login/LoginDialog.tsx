@@ -22,16 +22,19 @@ export default function LoginDialog(props: Props) {
 
 	const handleSubmit = async (values: LoginRequest) => {
 		try {
-			setTimeout(() => {
-				setError(undefined);
-			}, 200);
-			await AuthAPI.login(values);
+			setError(undefined);
+			let request: LoginRequest = {
+				username: values.username.trim(),
+				password: values.password.trim(),
+			};
+			await AuthAPI.login(request);
+
 			handleClose();
 			setTimeout(() => {
 				window.location.reload();
 			}, 300);
 		} catch (error: any) {
-			if (error.response.status === 404) {
+			if (error.response.status === 400) {
 				setTimeout(() => {
 					setError("Username or password is incorrect");
 				}, 300);

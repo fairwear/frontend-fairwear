@@ -5,6 +5,7 @@ import TopicResponse from "@models/topic/TopicResponse";
 interface BrandResponse {
 	id: number;
 	name: string;
+	description?: string;
 	imageUrl: string | null;
 	items: ItemResponse[];
 	posts: BrandPostResponse[];

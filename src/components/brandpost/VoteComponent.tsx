@@ -8,8 +8,10 @@ import {
 	ThumbUpOutlined,
 } from "@mui/icons-material";
 import { Checkbox, Typography } from "@mui/material";
+import { useAppSelector } from "@redux/store/hooks";
 import { useEffect, useState } from "react";
 import "./BrandPost.css";
+import AppTheme from "../../AppTheme";
 
 interface VoteComponentProps {
 	brandPostId: number;
@@ -17,6 +19,8 @@ interface VoteComponentProps {
 
 const VoteComponent = (props: VoteComponentProps) => {
 	const { brandPostId } = props;
+
+	const isUserLoggedIn = useAppSelector((state) => state.common.isLoggedIn);
 
 	const [isVoted, setIsVoted] = useState<IsVoted>();
 	const [voteCount, setVoteCount] = useState<number>(0);
@@ -33,6 +37,7 @@ const VoteComponent = (props: VoteComponentProps) => {
 	}, []);
 
 	const getIsVoted = async () => {
+		if (!isUserLoggedIn) return;
 		const response = await BrandPostAPI.getIsVoted(brandPostId);
 		if (response.vote === VoteEnum.UPVOTE) setUpvote(true);
 		else if (response.vote === VoteEnum.DOWNVOTE) setDownvote(true);
@@ -66,55 +71,49 @@ const VoteComponent = (props: VoteComponentProps) => {
 	};
 
 	return (
-		<>
-			{isVoted && (
-				<div className="vote-count-container">
-					<Checkbox
-						icon={
-							<ThumbUpOutlined
-								style={{
-									color: "#000000",
-									opacity: 0.6,
-								}}
-							/>
-						}
-						checkedIcon={
-							<ThumbUp
-								style={{
-									color: "#000000",
-									opacity: 0.9,
-								}}
-							/>
-						}
-						checked={upvote}
-						inputProps={{ "aria-label": "controlled" }}
-						onChange={handleUpvote}
+		<div className="vote-count-container">
+			<Checkbox
+				disabled={!isUserLoggedIn}
+				icon={
+					<ThumbUpOutlined
+						style={{
+							color: AppTheme.palette.grey[700],
+						}}
 					/>
-					<Typography variant="h6">{voteCount}</Typography>
-					<Checkbox
-						icon={
-							<ThumbDownOutlined
-								style={{
-									color: "#000000",
-									opacity: 0.6,
-								}}
-							/>
-						}
-						checkedIcon={
-							<ThumbDown
-								style={{
-									color: "#000000",
-									opacity: 0.9,
-								}}
-							/>
-						}
-						checked={downvote}
-						inputProps={{ "aria-label": "controlled" }}
-						onChange={handleDownvote}
+				}
+				checkedIcon={
+					<ThumbUp
+						style={{
+							color: AppTheme.palette.grey[900],
+						}}
 					/>
-				</div>
-			)}
-		</>
+				}
+				checked={upvote}
+				inputProps={{ "aria-label": "controlled" }}
+				onChange={handleUpvote}
+			/>
+			<Typography variant="h6">{voteCount}</Typography>
+			<Checkbox
+				disabled={!isUserLoggedIn}
+				icon={
+					<ThumbDownOutlined
+						style={{
+							color: AppTheme.palette.grey[700],
+						}}
+					/>
+				}
+				checkedIcon={
+					<ThumbDown
+						style={{
+							color: AppTheme.palette.grey[900],
+						}}
+					/>
+				}
+				checked={downvote}
+				inputProps={{ "aria-label": "controlled" }}
+				onChange={handleDownvote}
+			/>
+		</div>
 	);
 };
 

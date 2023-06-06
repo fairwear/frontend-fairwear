@@ -17,8 +17,16 @@ export default function SignUpDialog(props: Props) {
 	const { open, handleClose } = props;
 
 	const handleSubmit = async (values: SignUpRequest) => {
-		let res = await AuthAPI.signup(values);
-		console.log(res);
+		let req: SignUpRequest = {
+			username: values.username.trim(),
+			email: values.email.trim(),
+			name: values.name.trim(),
+			surname: values.surname.trim(),
+			password: values.password.trim(),
+			reEnterPassword: values.reEnterPassword.trim(),
+		};
+
+		await AuthAPI.signup(req);
 
 		handleClose();
 		setTimeout(() => {

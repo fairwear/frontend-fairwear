@@ -50,13 +50,13 @@ const DialogHeader = (props: DialogHeaderProps) => {
 				</div>
 			)}
 			<div className="dialog-header-button-or-state">
-				{returnButtonAction === undefined ? (
+				{!returnButtonAction ? (
 					<Typography variant="h6" color={AppTheme.palette.text.secondary}>
 						{stateText}
 					</Typography>
 				) : (
 					<Button
-						onClick={() => returnButtonAction()}
+						onClick={() => returnButtonAction}
 						style={{
 							border: "1px solid rgba(34, 34, 34, 0.7)",
 							borderRadius: "5px",

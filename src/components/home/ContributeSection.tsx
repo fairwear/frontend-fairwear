@@ -9,23 +9,20 @@ import { CreateBrandPostFormValues } from "@components/brandpost/CreateBrandPost
 import ContributeComponent from "@components/common/ContributeComponent";
 import CreateItemDialog from "@components/item/CreateItemDialog";
 import { CreateItemFormValues } from "@components/item/CreateItemForm";
-import NotLoggedInComponent from "@components/login/NotLoggedInComponent";
 import BrandCreateRequest from "@models/brand/BrandCreateRequest";
 import BrandPostCreateRequest from "@models/brandpost/BrandPostCreateRequest";
 import ItemCreateRequest from "@models/item/ItemCreateRequest";
 import AddShoppingCartRoundedIcon from "@mui/icons-material/AddShoppingCartRounded";
 import CelebrationRoundedIcon from "@mui/icons-material/CelebrationRounded";
 import CheckroomRoundedIcon from "@mui/icons-material/CheckroomRounded";
+import { Typography } from "@mui/material";
 import alerts from "@redux/alerts";
-import { useAppSelector } from "@redux/store/hooks";
 import { useState } from "react";
-import "./ContributePage.css";
-
-const ContributePage = () => {
-	const isUserLoggedIn = useAppSelector((state) => state.common.isLoggedIn);
-
+import "./HomeComponents.css";
+const ContributeSection = () => {
 	const [brandDialogOpen, setBrandDialogOpen] = useState<boolean>(false);
 	const [itemDialogOpen, setItemDialogOpen] = useState<boolean>(false);
+
 	const [brandPostDialogOpen, setBrandPostDialogOpen] =
 		useState<boolean>(false);
 
@@ -135,41 +132,55 @@ const ContributePage = () => {
 	};
 
 	return (
-		<>
-			<div className="contribute-page-container">
-				{!isUserLoggedIn && <NotLoggedInComponent />}
-				{isUserLoggedIn && (
-					<div className="contribute-components">
-						<ContributeComponent
-							icon={AddShoppingCartRoundedIcon}
-							title="Expand Brands"
-							description="Tell people about a company that is not on our platform yet"
-							buttonText="Add Brand"
-							handleClick={handleBrandDialogOpen}
-						/>
-						<ContributeComponent
-							icon={CelebrationRoundedIcon}
-							title="Spread The Truth"
-							description="Tell people more about a brand or a company"
-							buttonText="Create Brand Post"
-							handleClick={handleBrandPostDialogOpen}
-						/>
-						<ContributeComponent
-							icon={CheckroomRoundedIcon}
-							title="Add Items"
-							description="Add items to the platform, relate them to brands and topics. Share how it looks and help other people find it by scanning the barcode."
-							buttonText="Add Item"
-							handleClick={handleItemDialogOpen}
-						/>
-						{/* <ContributeComponent
-							icon={FlagRoundedIcon}
-							title="Report"
-							description="Report a brand post, brand or item that is inacurate or inappropriate."
-							buttonText="Report "
-							handleClick={handleReportDialogOpen}
-						/> */}
-					</div>
-				)}
+		<div
+			style={{
+				display: "flex",
+				flexDirection: "column",
+				alignItems: "center",
+				marginTop: "112px",
+			}}
+		>
+			<div
+				style={{
+					display: "flex",
+					flexDirection: "column",
+					alignItems: "center",
+					gap: "12px",
+				}}
+			>
+				<Typography variant="h1">Contribute</Typography>
+				<Typography
+					variant="subtitle1"
+					style={{
+						width: "50%",
+					}}
+				>
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+					eiusmod tempor incididunt ut labore et dolore magna aliqua.
+				</Typography>
+			</div>
+			<div className="contribute-section-container">
+				<ContributeComponent
+					icon={AddShoppingCartRoundedIcon}
+					title="Expand Brands"
+					description="Tell people about a company that is not on our platform yet. Help others find it and make better decisions."
+					buttonText="Add Brand"
+					handleClick={handleBrandDialogOpen}
+				/>
+				<ContributeComponent
+					icon={CelebrationRoundedIcon}
+					title="Spread The Truth"
+					description="Tell people more about a brand or a company. Share your experience and help others make better decisions."
+					buttonText="Create Brand Post"
+					handleClick={handleBrandPostDialogOpen}
+				/>
+				<ContributeComponent
+					icon={CheckroomRoundedIcon}
+					title="Add Items"
+					description="Add items to the platform, relate them to brands and topics. Share how it looks and help other people find it."
+					buttonText="Add Item"
+					handleClick={handleItemDialogOpen}
+				/>
 				<CreateUpdateBrandDialog
 					open={brandDialogOpen}
 					handleDialogClose={handleBrandDialogClose}
@@ -186,8 +197,8 @@ const ContributePage = () => {
 					handleSubmit={handleSubmitItem}
 				/>
 			</div>
-		</>
+		</div>
 	);
 };
 
-export default ContributePage;
+export default ContributeSection;

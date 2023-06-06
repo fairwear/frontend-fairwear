@@ -2,27 +2,41 @@ import { Button, Tooltip, Typography } from "@mui/material";
 import "../Components.css";
 import "./BrandComponents.css";
 import { CheckroomOutlined } from "@mui/icons-material";
-interface Props {
-	name: string;
-	imageUrl?: string;
+import ItemResponse from "@models/item/ItemResponse";
+interface ItemComponentProps {
+	item: ItemResponse;
 }
 
-export default function Product(props: Props) {
+const ItemComponent = (props: ItemComponentProps) => {
+	const { item } = props;
 	return (
-		<div>
-			{props.imageUrl && (
-				<img className="product-image" src={props.imageUrl} alt={props.name} />
+		<div
+			style={{
+				overflow: "hidden",
+				padding: "8px",
+				boxSizing: "border-box",
+				display: "flex",
+				flexDirection: "column",
+				justifyContent: "center",
+			}}
+		>
+			{item.imageUrl && (
+				<img className="product-image" src={item.imageUrl} alt={item.name} />
 			)}
-			{!props.imageUrl && <CheckroomOutlined />}
-			<div className="product-name-container">
-				<Typography variant="h3">{props.name}</Typography>
+			{!item.imageUrl && <CheckroomOutlined />}
+			<div
+				className="product-name-container"
+				style={{
+					margin: "16px 0px 8px 0px",
+				}}
+			>
+				<Typography variant="h3">{item.name}</Typography>
 			</div>
 			<Tooltip title="Not implemented yet" placement="bottom">
 				<div>
 					<Button
 						variant="outlined"
 						className="signup-button extended"
-						// TEMPORARY DISABLED
 						disabled={true}
 						sx={{
 							"&:hover": {
@@ -36,4 +50,6 @@ export default function Product(props: Props) {
 			</Tooltip>
 		</div>
 	);
-}
+};
+
+export default ItemComponent;

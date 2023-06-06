@@ -7,6 +7,7 @@ import VoteEntry from "@models/brandpost/VoteEntry";
 import axios from "axios";
 
 const baseURL = apiEndpoints.brandPost;
+const uninterceptedAxios = axios.create();
 
 const BrandPostAPI = {
 	create: (brandPost: BrandPostCreateRequest): Promise<BrandPostResponse> =>
@@ -23,7 +24,13 @@ const BrandPostAPI = {
 	getVotes: (id: number): Promise<VoteCountResponse> =>
 		axios.get(`${baseURL}/${id}/votes`),
 	getIsVoted: (id: number): Promise<IsVoted> =>
-		axios.get(`${baseURL}/${id}/is-voted`),
+		uninterceptedAxios.get(`${baseURL}/${id}/is-voted`, {
+			headers: {
+				Authorization: localStorage.getItem("token")
+					? `Bearer ${localStorage.getItem("token")}`
+					: "",
+			},
+		}),
 	search: (query: string): Promise<BrandPostResponse[]> =>
 		axios.get(`${baseURL}/search/${query}`),
 	isUserThePostOwner: (id: number): Promise<boolean> =>

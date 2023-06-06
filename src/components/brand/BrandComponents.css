@@ -34,14 +34,13 @@
 
 .brand-component-container .brand-component-image-container {
 	width: 100%;
-
+	max-width: 240px;
 	box-sizing: border-box;
 	margin-right: 16px;
 	padding: 16px 0px;
 }
 
 .brand-component-image-container .image {
-	max-width: 500px;
 	aspect-ratio: 1 / 1;
 	object-fit: cover;
 	border-radius: 12px;

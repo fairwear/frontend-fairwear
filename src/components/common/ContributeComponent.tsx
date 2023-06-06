@@ -1,5 +1,6 @@
-import { Button, SvgIcon, Typography } from "@mui/material";
+import { Button, SvgIcon, Tooltip, Typography } from "@mui/material";
 import "./CommonComponents.css";
+import { useAppSelector } from "@redux/store/hooks";
 
 interface ContributeComponentProps {
 	icon: typeof SvgIcon;
@@ -7,13 +8,21 @@ interface ContributeComponentProps {
 	description: string;
 	buttonText: string;
 	handleClick: () => void;
+	containerStyle?: React.CSSProperties;
 }
 
 const ContributeComponent = (props: ContributeComponentProps) => {
 	const { title, description, buttonText, handleClick } = props;
 
+	const isUserLoggedIn = useAppSelector((state) => state.common.isLoggedIn);
+
 	return (
-		<div className="contribute-component-container">
+		<div
+			className="contribute-component-container"
+			style={{
+				...props.containerStyle,
+			}}
+		>
 			<div className="contribute-component-icon-container">
 				<SvgIcon
 					style={{
@@ -29,13 +38,20 @@ const ContributeComponent = (props: ContributeComponentProps) => {
 				<Typography variant="body1">{description}</Typography>
 			</div>
 
-			<Button
-				variant="outlined"
-				onClick={handleClick}
-				className="contribute-component-button"
+			<Tooltip
+				title={isUserLoggedIn ? "" : "Please log in order to contribute"}
 			>
-				<Typography variant="h5">{buttonText}</Typography>
-			</Button>
+				<div>
+					<Button
+						variant="outlined"
+						disabled={!isUserLoggedIn}
+						onClick={handleClick}
+						className="contribute-component-button"
+					>
+						<Typography variant="h5">{buttonText}</Typography>
+					</Button>
+				</div>
+			</Tooltip>
 		</div>
 	);
 };

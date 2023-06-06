@@ -2,7 +2,7 @@ import ItemResponse from "@models/item/ItemResponse";
 import { Typography } from "@mui/material";
 import { ForwardedRef, forwardRef } from "react";
 import "./BrandComponents.css";
-import Product from "./Product";
+import ItemComponent from "./Product";
 
 interface ProductListProps {
 	products: ItemResponse[];
@@ -19,11 +19,7 @@ const ProductList = forwardRef(
 				</div>
 				<div className="grid-container">
 					{products.map((product) => (
-						<Product
-							key={product.id}
-							imageUrl={product.imageUrl}
-							name={product.name}
-						/>
+						<ItemComponent key={product.id} item={product} />
 					))}
 				</div>
 			</div>

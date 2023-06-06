@@ -38,6 +38,8 @@ const CreateReportDialog = (props: CreateReportDialogProps) => {
 		<Dialog
 			open={open}
 			fullWidth
+			disablePortal
+			onBackdropClick={handleClose}
 			className="report-dialog"
 			style={{
 				backdropFilter: "blur(2px)",
@@ -48,6 +50,7 @@ const CreateReportDialog = (props: CreateReportDialogProps) => {
 					width: "70%",
 				},
 			}}
+			keepMounted={false}
 		>
 			<DialogHeader
 				title="Report a Post"

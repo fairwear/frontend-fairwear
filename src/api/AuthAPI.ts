@@ -5,20 +5,17 @@ import StatusResponse from "@models/auth/StatusResponse";
 import axios from "axios";
 
 const baseUrl = apiEndpoints.auth;
+const uninterceptedAxios = axios.create({});
 
 const AuthAPI = {
 	login: async (request: LoginRequest) => {
-		let res: {
-			accessToken: string;
-			refreshToken: string;
-		} = await axios.post(`${baseUrl}/login`, request);
+		let res = await uninterceptedAxios.post(`${baseUrl}/login`, request);
+		let token = res.data.accessToken;
 
-		let access_token = res.accessToken;
-
-		if (access_token) {
-			localStorage.setItem("token", access_token);
-
-			axios.defaults.headers.common["Authorization"] = `Bearer ${access_token}`;
+		if (token) {
+			localStorage.setItem("token", token);
+			axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+			axios.defaults.headers.common.Authorization = `Bearer ${token}`;
 		}
 
 		return res;
