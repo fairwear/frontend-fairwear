@@ -56,7 +56,7 @@ const DialogHeader = (props: DialogHeaderProps) => {
 					</Typography>
 				) : (
 					<Button
-						onClick={() => returnButtonAction}
+						onClick={() => returnButtonAction()}
 						style={{
 							border: "1px solid rgba(34, 34, 34, 0.7)",
 							borderRadius: "5px",

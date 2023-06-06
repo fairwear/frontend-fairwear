@@ -19,7 +19,6 @@ interface VoteComponentProps {
 
 const VoteComponent = (props: VoteComponentProps) => {
 	const { brandPostId } = props;
-
 	const isUserLoggedIn = useAppSelector((state) => state.common.isLoggedIn);
 
 	const [isVoted, setIsVoted] = useState<IsVoted>();

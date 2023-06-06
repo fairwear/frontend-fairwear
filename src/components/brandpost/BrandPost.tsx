@@ -55,6 +55,12 @@ const BrandPostComponent = (props: BrandPostComponentProps) => {
 		getIsThePostOwner();
 	}, []);
 
+	useEffect(() => {
+		getRelatedItems();
+		getIsReported();
+		getIsThePostOwner();
+	}, [isBrandPostDialogOpen]);
+
 	const getRelatedItems = async () => {
 		const mappedItems = brandPost.relatedItems.map(async (item) => {
 			const response = await ItemAPI.findById(item.itemId);
@@ -125,8 +131,9 @@ const BrandPostComponent = (props: BrandPostComponentProps) => {
 			}, 350);
 		} catch (error: any) {
 			formikHelpers.setSubmitting(false);
-			if (error.response.data.statusCode) {
-				if (error.response.data.statusCode === 409) {
+			if (error.response.statusCode) {
+				console.log(error.response.data.statusCode);
+				if (error.response.statusCode === 409) {
 					alerts.add(
 						"You have already reported this post",
 						"error",
@@ -191,7 +198,7 @@ const BrandPostComponent = (props: BrandPostComponentProps) => {
 							</div>
 							<div className="button-container">
 								{isUserLoggedIn && !isPreview && (
-									<>
+									<div>
 										{!isReported && !isThePostOwner && (
 											<Tooltip title="Report post">
 												<div>
@@ -239,7 +246,7 @@ const BrandPostComponent = (props: BrandPostComponentProps) => {
 												</div>
 											</Tooltip>
 										)}
-									</>
+									</div>
 								)}
 							</div>
 						</div>

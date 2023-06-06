@@ -25,6 +25,13 @@
 	min-width: 500px;
 }
 
+@media (max-width: 768px) {
+	.brandpost-container.preview {
+		min-width: fit-content;
+		overflow-x: scroll;
+	}
+}
+
 .brandpost-container {
 	display: flex;
 	flex-direction: column;

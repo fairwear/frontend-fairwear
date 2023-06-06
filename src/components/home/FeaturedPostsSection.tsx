@@ -15,7 +15,6 @@ const FeaturedPostsSection = () => {
 
 	const getBrandPosts = async () => {
 		const response = await BrandPostAPI.findAll();
-		console.log(response);
 		setBrandPosts(response);
 	};
 
@@ -49,15 +48,14 @@ const FeaturedPostsSection = () => {
 							style={{
 								display: "flex",
 								flexWrap: "wrap",
-
 								justifyContent: "space-evenly",
 								alignItems: "center",
-
 								boxSizing: "border-box",
 								padding: "24px",
 								width: "100%",
 								maxWidth: "1400px",
 								gap: "72px",
+								overflowX: "scroll",
 							}}
 						>
 							{brandPosts.splice(0, 4).map((brandPost, index) => (

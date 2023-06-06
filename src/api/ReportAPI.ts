@@ -26,13 +26,15 @@ const ReportAPI = {
 	update: (id: number, request: UpdateReportRequest): Promise<ReportResponse> =>
 		axios.put(`${baseUrl}/${id}`, request),
 	getIfUserAlreadyReportedPost: (postId: number): Promise<boolean> =>
-		uninterceptedAxios.get(`${baseUrl}/post/${postId}/is-reported`, {
-			headers: {
-				Authorization: localStorage.getItem("token")
-					? `Bearer ${localStorage.getItem("token")}`
-					: "",
-			},
-		}),
+		uninterceptedAxios
+			.get(`${baseUrl}/post/${postId}/is-reported`, {
+				headers: {
+					Authorization: localStorage.getItem("token")
+						? `Bearer ${localStorage.getItem("token")}`
+						: "",
+				},
+			})
+			.then((response) => response.data),
 };
 
 export default ReportAPI;

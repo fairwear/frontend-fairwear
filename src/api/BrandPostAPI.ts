@@ -24,13 +24,15 @@ const BrandPostAPI = {
 	getVotes: (id: number): Promise<VoteCountResponse> =>
 		axios.get(`${baseURL}/${id}/votes`),
 	getIsVoted: (id: number): Promise<IsVoted> =>
-		uninterceptedAxios.get(`${baseURL}/${id}/is-voted`, {
-			headers: {
-				Authorization: localStorage.getItem("token")
-					? `Bearer ${localStorage.getItem("token")}`
-					: "",
-			},
-		}),
+		uninterceptedAxios
+			.get(`${baseURL}/${id}/is-voted`, {
+				headers: {
+					Authorization: localStorage.getItem("token")
+						? `Bearer ${localStorage.getItem("token")}`
+						: "",
+				},
+			})
+			.then((response) => response.data),
 	search: (query: string): Promise<BrandPostResponse[]> =>
 		axios.get(`${baseURL}/search/${query}`),
 	isUserThePostOwner: (id: number): Promise<boolean> =>

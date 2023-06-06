@@ -35,7 +35,7 @@ const CreateReportDialog = (props: CreateReportDialogProps) => {
 					width: "70%",
 				},
 			}}
-			keepMounted={false}
+			keepMounted
 		>
 			<DialogHeader
 				title="Report a Post"
