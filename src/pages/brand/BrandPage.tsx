@@ -8,6 +8,7 @@ import BrandPostResponse from "@models/brandpost/BrandPostResponse";
 import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import "./BrandPage.css";
+import { Typography } from "@mui/material";
 export default function BrandPage() {
 	const { brandId } = useParams();
 
@@ -53,10 +54,42 @@ export default function BrandPage() {
 					brand={brand}
 				/>
 			)}
+			<div
+				style={{
+					display: "flex",
+					flexDirection: "column",
+					alignItems: "center",
+					gap: "12px",
+					marginTop: "64px",
+				}}
+			>
+				<Typography variant="h1">Popular posts</Typography>
+				<Typography
+					variant="subtitle1"
+					style={{
+						width: "50%",
+					}}
+				>
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+					eiusmod tempor incididunt ut labore et dolore magna aliqua.
+				</Typography>
+			</div>
 			{brand?.posts && brand?.posts.length > 0 && (
-				<div>
-					{posts.splice(0, 3).map((post) => (
-						<BrandPostComponent key={post.id} brandPost={post} />
+				<div
+					style={{
+						display: "flex",
+						justifyContent: "space-evenly",
+						alignItems: "flex-start",
+						width: "100%",
+						padding: "24px",
+						flexWrap: "wrap",
+						boxSizing: "border-box",
+						gap: "72px",
+						maxWidth: "1600px",
+					}}
+				>
+					{brand.posts.splice(0, 4).map((post) => (
+						<BrandPostComponent isPreview key={post.id} brandPost={post} />
 					))}
 				</div>
 			)}

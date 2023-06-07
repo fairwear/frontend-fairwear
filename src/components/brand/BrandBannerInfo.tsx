@@ -21,6 +21,9 @@ export default function BrandBannerInfo(props: BrandBannerInfoProps) {
 			style={{
 				padding: "36px",
 				boxSizing: "border-box",
+				overflowX: "scroll",
+				maxWidth: "1400px",
+				borderRadius: "8px",
 			}}
 		>
 			{brand.imageUrl && (
@@ -82,32 +85,33 @@ export default function BrandBannerInfo(props: BrandBannerInfoProps) {
 				{brand.topicsToBrand.length <= 0 && brand.topics.length > 0 && (
 					<Topics topics={brand.topics} topicsToBrand={brand.topicsToBrand} />
 				)}
-			</div>
-			<div className="button-container">
-				<Button
-					onClick={props.handleScrollToItems}
-					className="contribute-button"
-					variant="contained"
-					style={{
-						padding: "8px 16px",
-					}}
-				>
-					<Typography variant="h4">View Items</Typography>
-				</Button>
-				<Button
-					onClick={() => navigate("/contribute")}
-					className="signup-button"
-					variant="outlined"
-					style={{
-						padding: "7px 20px",
 
-						minWidth: "fit-content",
-					}}
-				>
-					<Typography fontWeight={600} variant="h4">
-						Contribute
-					</Typography>
-				</Button>
+				<div className="button-container">
+					<Button
+						onClick={props.handleScrollToItems}
+						className="contribute-button"
+						variant="contained"
+						style={{
+							padding: "8px 16px",
+						}}
+					>
+						<Typography variant="h4">View Items</Typography>
+					</Button>
+					<Button
+						onClick={() => navigate("/contribute")}
+						className="signup-button"
+						variant="outlined"
+						style={{
+							padding: "7px 20px",
+
+							minWidth: "fit-content",
+						}}
+					>
+						<Typography fontWeight={600} variant="h4">
+							Contribute
+						</Typography>
+					</Button>
+				</div>
 			</div>
 		</div>
 	);

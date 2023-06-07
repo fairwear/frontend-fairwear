@@ -64,6 +64,16 @@
 	box-shadow: 0px 0px 5px rgba(-2, -4, 1, 0.1);
 
 	border: 1px solid rgba(0, 0, 0, 0.3);
+	min-width: 150px;
+}
+
+@media (max-width: 400px) {
+	.topic-view-component-container {
+		flex-direction: column;
+		padding: 8px 0px;
+		gap: 8px;
+		box-sizing: border-box;
+	}
 }
 
 .topic-view-component-container .topic-name {

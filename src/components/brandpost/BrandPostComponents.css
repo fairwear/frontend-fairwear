@@ -95,6 +95,17 @@
 	width: 100%;
 }
 
+@media (max-width: 768px) {
+	.primary-section-outter-container {
+		flex-direction: column;
+	}
+
+	.primary-section-outter-container > * {
+		border: none;
+		border-color: none;
+	}
+}
+
 .primary-section-outter-container .primary-section {
 	display: flex;
 

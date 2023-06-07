@@ -26,16 +26,19 @@ import "./BrandPostComponents.css";
 interface BrandPostComponentProps {
 	brandPost: BrandPostResponse;
 	isPreview?: boolean;
+	fullView?: boolean;
+	containerStyle?: React.CSSProperties;
 }
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
 const BrandPostComponent = (props: BrandPostComponentProps) => {
-	const { brandPost, isPreview } = props;
+	const { brandPost, isPreview, fullView, containerStyle } = props;
 
 	const isUserAdmin = useAppSelector((state) => state.common.userInfo?.isAdmin);
 	const isUserLoggedIn = useAppSelector((state) => state.common.isLoggedIn);
 
+	const [width, setWidth] = useState<number>(window.innerWidth);
 	const [reportDialogOpen, setReportDialogOpen] = useState<boolean>(false);
 	const [relatedItems, setRelatedItems] = useState<ItemResponse[]>([]);
 	const [isThePostOwner, setIsThePostOwner] = useState<boolean>(false);
@@ -44,6 +47,10 @@ const BrandPostComponent = (props: BrandPostComponentProps) => {
 	const [deleteDialogOpen, setDeleteDialogOpen] = useState<boolean>(false);
 	const [isBrandPostDialogOpen, setIsBrandPostDialogOpen] =
 		useState<boolean>(false);
+
+	window.addEventListener("resize", () => {
+		setWidth(window.innerWidth);
+	});
 
 	const handleIndexChange = (index: number) => {
 		setActiveStep(index);
@@ -150,6 +157,9 @@ const BrandPostComponent = (props: BrandPostComponentProps) => {
 	return (
 		<div
 			className={"brandpost-outer-container" + (isPreview ? " preview" : "")}
+			style={{
+				...containerStyle,
+			}}
 		>
 			<div
 				className={"brandpost-container" + (isPreview ? " preview" : "")}
@@ -163,21 +173,26 @@ const BrandPostComponent = (props: BrandPostComponentProps) => {
 						handleBrandPostDialogOpen();
 					}
 				}}
+				style={{
+					border: fullView ? "1px solid " + AppTheme.palette.grey[600] : "",
+				}}
 			>
 				<div className="primary-section-outter-container">
 					<div className="vote-section">
 						<VoteComponent brandPostId={brandPost.id} />
-						<Divider
-							orientation="vertical"
-							style={{
-								borderColor: AppTheme.palette.grey[600],
-								borderRightWidth: 0,
-								borderLeftWidth: 1,
-								marginLeft: "12px",
-								marginTop: "-16px",
-								height: "140px",
-							}}
-						/>
+						{width > 768 && (
+							<Divider
+								orientation="vertical"
+								style={{
+									borderColor: AppTheme.palette.grey[600],
+									borderRightWidth: 0,
+									borderLeftWidth: 1,
+									marginLeft: "12px",
+									marginTop: "-16px",
+									height: "140px",
+								}}
+							/>
+						)}
 					</div>
 					<div className="primary-section">
 						<div className="brandpost-header-container">
