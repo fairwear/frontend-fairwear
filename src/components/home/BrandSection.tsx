@@ -26,8 +26,6 @@ const BrandSection = () => {
 	};
 
 	return (
-		//TODO: Fix or remove brand-section-container class
-		// (it's not used as it doesn't exist)
 		<div className="brand-section-container">
 			<div className="title-container">
 				<Typography variant="h1">Top Brands</Typography>
@@ -48,7 +46,7 @@ const BrandSection = () => {
 					className="view-all-brands-button"
 					onClick={handleNavigateToBrandList}
 				>
-					<Typography variant="h6">View All Brands</Typography>
+					<Typography variant="h4">View All Brands</Typography>
 				</Button>
 			</div>
 		</div>

@@ -1,7 +1,6 @@
 interface BrandCreateRequest {
 	name: string;
-
-	// TODO: Add description in backend
+	imageUrl: string;
 	description: string;
 	createdAt: Date;
 }

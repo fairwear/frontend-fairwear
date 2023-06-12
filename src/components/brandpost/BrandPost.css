@@ -1,4 +1,4 @@
-.brandpost-container {
+/* .brandpost-container {
 	display: flex;
 	padding: 16px;
 	box-sizing: border-box;
@@ -8,7 +8,7 @@
 	max-width: 560px;
 
 	align-self: flex-end;
-}
+} */
 
 .voted {
 	background-color: #f2f2f2;
@@ -73,9 +73,9 @@
 }
 
 @media (max-width: 768px) {
-	.brandpost-container {
+	/* .brandpost-container {
 		flex-direction: column !important;
-	}
+	} */
 
 	.vote-count-container {
 		margin: 0px;

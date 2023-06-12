@@ -73,6 +73,8 @@ const CreateBrandForm = (props: CreateBrandFormProps) => {
 						/>
 						<DragOnFileInput
 							name="brandLogo"
+							singleImage
+							buttonText="Upload Logo"
 							images={images}
 							hiddenInputRef={hiddenInputRef}
 							handleClick={handleClick}
@@ -110,7 +112,6 @@ const CreateBrandForm = (props: CreateBrandFormProps) => {
 
 export interface CreateBrandFormValues {
 	name: string;
-	// TODO: Add description in Backend
 	description: string;
 	brandLogo: File | null;
 }

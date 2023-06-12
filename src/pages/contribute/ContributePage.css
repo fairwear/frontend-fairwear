@@ -18,8 +18,8 @@
 }
 
 .contribute-components > * {
-	flex: 0 0 30%;
-	margin: 8px;
+	flex: 1 1 30%;
+	min-height: 500px;
 }
 
 .contribute-page-container .add-brand-button {

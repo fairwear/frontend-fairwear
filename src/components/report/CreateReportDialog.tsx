@@ -1,4 +1,3 @@
-import BrandPostAPI from "@api/BrandPostAPI";
 import BrandPostPreview from "@components/brandpost/BrandPostPreview";
 import DialogHeader from "@components/dialog/DialogHeader";
 import CreateReportForm, {
@@ -7,12 +6,11 @@ import CreateReportForm, {
 import BrandPostResponse from "@models/brandpost/BrandPostResponse";
 import { CircularProgress, Dialog } from "@mui/material";
 import { FormikHelpers } from "formik";
-import { useEffect, useState } from "react";
 import "./Report.css";
 
 interface CreateReportDialogProps {
 	open: boolean;
-	brandPostId: number;
+	brandPost: BrandPostResponse;
 	handleSubmit: (
 		values: CreateReportFormValues,
 		formikHelpers: FormikHelpers<any>
@@ -21,18 +19,7 @@ interface CreateReportDialogProps {
 }
 
 const CreateReportDialog = (props: CreateReportDialogProps) => {
-	const { open, brandPostId, handleSubmit, handleClose } = props;
-
-	const [brandPost, setBrandPost] = useState<BrandPostResponse | undefined>();
-
-	useEffect(() => {
-		getBrandPost();
-	}, []);
-
-	const getBrandPost = async () => {
-		const brandPost = await BrandPostAPI.findById(brandPostId);
-		setBrandPost(brandPost);
-	};
+	const { open, brandPost, handleSubmit, handleClose } = props;
 
 	return (
 		<Dialog
@@ -48,6 +35,7 @@ const CreateReportDialog = (props: CreateReportDialogProps) => {
 					width: "70%",
 				},
 			}}
+			keepMounted
 		>
 			<DialogHeader
 				title="Report a Post"

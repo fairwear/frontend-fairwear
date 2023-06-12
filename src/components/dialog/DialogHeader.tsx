@@ -50,7 +50,7 @@ const DialogHeader = (props: DialogHeaderProps) => {
 				</div>
 			)}
 			<div className="dialog-header-button-or-state">
-				{returnButtonAction === undefined ? (
+				{!returnButtonAction ? (
 					<Typography variant="h6" color={AppTheme.palette.text.secondary}>
 						{stateText}
 					</Typography>
